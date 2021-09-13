@@ -1,0 +1,15 @@
+package com.toyou.project.model;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+public class Community_board_replyVO {
+
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int community_board_reply_no;
+	
+	
+}

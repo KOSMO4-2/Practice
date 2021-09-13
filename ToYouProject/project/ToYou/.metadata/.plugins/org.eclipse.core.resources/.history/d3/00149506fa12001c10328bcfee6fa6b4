@@ -1,0 +1,25 @@
+package com.toyou.project.model;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+public class Community_board_replyVO {
+
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int community_board_reply_no;
+	
+	@Column(nullable = false)
+	public int community_board_no;
+	
+	@Column(nullable = false)
+	public int user_no;
+	
+	@Column(nullable = false,length = 2048)
+	public String community_board_reply_content;
+	
+	
+}

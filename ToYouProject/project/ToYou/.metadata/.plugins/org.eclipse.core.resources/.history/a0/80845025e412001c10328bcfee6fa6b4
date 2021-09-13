@@ -1,0 +1,5 @@
+package com.toyou.project.model;
+
+public class Admin {
+
+}

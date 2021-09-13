@@ -1,0 +1,18 @@
+package com.toyou.project.model;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity(name = "admin")
+public class AdminVO {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int admin_no;
+
+}
