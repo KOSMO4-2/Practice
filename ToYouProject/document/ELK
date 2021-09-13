@@ -1,0 +1,123 @@
+---------------------------
+===========================
+filebeat => Logstash => Elasticsearch => Kibana
+===========================
+---------------------------
+
+
+===========================
+[ 엘라스틱서치 설치와 실행 ]
+===========================
+
+pwd
+mkdir elastic
+cd elastic
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.14.1-x86_64.rpm
+sudo rpm --install elasticsearch-7.14.1-x86_64.rpm
+sudo chkconfig --add elasticsearch
+sudo -i service elasticsearch start
+
+
+http://localhost:9200/
+
+===========================
+[ 키바나 설치와 실행 ]
+===========================
+wget https://artifacts.elastic.co/downloads/kibana/kibana-7.14.1-x86_64.rpm
+shasum -a 512 kibana-7.14.1-x86_64.rpm 
+sudo rpm --install kibana-7.14.1-x86_64.rpm
+sudo chkconfig --add kibana
+sudo systemctl start kibana.service
+sudo -i service kibana start
+
+
+http://localhost:5601/
+
+
+===========================
+[ 로그스테이시 설치와 실행 ]
+===========================
+
+pwd
+wget https://artifacts.elastic.co/downloads/logstash/logstash-7.12.0-linux-x86_64.tar.gz
+tar xvfz logstash-7.12.0-linux-x86_64.tar.gz
+cd logstash-7.12.0
+bin/logstash -e 'input { stdin { } } output { stdout {} }'
+(시간 좀 걸림)
+(마지막에 Pipelines running 이라는 문구가 나오면 정상적으로 실행 된것)
+(아무 문자열이나 입력하고 enter!)
+(나갈때는 ctrl C)
+
+
+===========================
+[ 로그스테이시와 데이터베이스 연결 ]
+[ mysql-connector-java-5.1.36.jar 다운받기 ]
+===========================
+https://mvnrepository.com/artifact/mysql/mysql-connector-java/5.1.36
+(jar파일 다운로드 받고)
+ls ~/다운로드
+(jar파일 확인)
+[root@localhost logstash-7.12.0]# cp ~/다운로드/mysql-connector-java-5.1.36.jar lib
+ls lib
+
+
+
+===========================
+Logstash 를 활용하려면 기본적으로 로그를 옮겨줄 무언가가 필요합니다. 
+이때 사용하는것이 ElasticSearch 에서 제공하는 filebeat 입니다.
+물론 filebeat 가 아니여도 Logstash에서 직접 로그파일을 지정하거나 소켓을 열어서
+로그를 받을수도 있지만 엘라스틱서치에서 제공하는만큼 한번 활용해봅시다.
+===========================
+
+[ filebeat 설치 ]
+wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.12.0-x86_64.rpm
+sudo rpm -vi filebeat-7.12.0-x86_64.rpm
+
+[ 설치가 잘 되었는지 확인 ]
+rpm -qa | grep filebeat
+systemctl status filebeat
+
+===========================
+설정
+===========================
+cd /etc/filebeat
+sudo vi filebeat.yml
+===========================
+esc :set nu
+
+24라인 
+enabled: true
+
+esc /Kibana
+151 라인 
+host 부분 주석 해제
+
+esc /Output
+185, 186 라인
+username, password 부분 주석 해제
+하고 
+  username: "elastic"
+  password: "elastic"
+상태 만들어놓음
+
+===========================
+filebeat 로드
+===========================
+filebeat setup -e
+
+===========================
+filebeat 실행
+===========================
+systemctl start filebeat
+systemctl status filebeat
+
+
+
+===========================
+
+[ Logstash 에서 Elasticsearch 로 데이터 전송하기 ]
+cd ../
+wget https://download.elastic.co/demos/logstash/gettingstarted/logstash-tutorial.log.gz
+gzip -d logstash-tutorial.log.gz
+
+...ing..
