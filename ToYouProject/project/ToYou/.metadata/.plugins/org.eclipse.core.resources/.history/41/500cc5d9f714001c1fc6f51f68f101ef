@@ -1,0 +1,8 @@
+package com.toyou.project.service.user;
+
+import com.toyou.project.model.UserVO;
+
+public interface UserService {
+	
+	public int userJoin(UserVO vo);
+}

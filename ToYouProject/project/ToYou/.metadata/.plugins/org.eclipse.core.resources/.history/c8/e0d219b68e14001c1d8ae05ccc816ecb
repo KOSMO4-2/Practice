@@ -1,0 +1,8 @@
+package com.toyou.project.config.auth;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class PrincipalDetailService implements UserDetailsService{
+
+}

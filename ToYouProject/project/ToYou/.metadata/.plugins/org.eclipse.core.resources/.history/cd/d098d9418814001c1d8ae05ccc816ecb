@@ -1,0 +1,33 @@
+package com.toyou.project.service.user;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.toyou.project.dao.user.UserDAO;
+import com.toyou.project.handler.GlobalExceptionHandler;
+import com.toyou.project.model.UserVO;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserDAO userDAO;
+	
+	
+	@Override
+	@Transactional
+	public int userJoin(UserVO vo){
+		try {
+			userDAO.userJoin(vo);
+			return 1;
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("userService 회원가입 :" + e.getMessage());
+		}
+		
+		return -1;
+	}
+
+}

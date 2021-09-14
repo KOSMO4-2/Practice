@@ -1,0 +1,30 @@
+package com.toyou.project.controller.user;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
+//인증이 안된 사용자들이 출입할 수 있는 경로는 /auth/* 으로만 설정함
+//그냥 주소가 / 이면 index.jsp 까지 허용
+//static 이하에 있는 /js/*, /css/* , /image/* 허용
+@Controller
+public class UserController {
+
+	// 회원가입 페이지 이동
+	@GetMapping("/joinForm")
+	public String joinForm() {
+		return "user/joinForm";
+	}
+	
+	// 로그인 페이지 이동
+	@GetMapping("/loginFrom")
+	public String loginForm() {
+		System.out.println("controller 확인");
+		return "/user/loginForm";
+	}
+	
+	
+	
+	
+	
+}

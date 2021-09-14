@@ -1,0 +1,18 @@
+package com.toyou.project.dao.user;
+
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.toyou.project.model.User;
+
+
+public interface UserRepository extends JpaRepository<User, Integer>{
+	
+	// SELECT * FROM user WHERE user_id  = ?;
+//	@Query(value = "SELECT * FROM ")
+//	Optional<User> findByUser_id(String user_id);
+	
+	
+}

@@ -1,0 +1,33 @@
+package com.toyou.project.service.user;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.toyou.project.dao.user.UserRepository;
+import com.toyou.project.model.User;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepository userDAO;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
+	
+	// 수정할거
+	@Override
+	@Transactional
+	public void userJoin(User vo){
+		String rawPassword = vo.getUser_password(); 
+		String encPassword = encoder.encode(rawPassword);
+		vo.setUser_password(encPassword);
+		System.out.println(vo.getUser_password());
+		userDAO.save(vo);
+	}
+
+}
