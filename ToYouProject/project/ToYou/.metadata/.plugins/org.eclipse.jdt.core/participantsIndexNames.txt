@@ -1,9 +1,3 @@
 INDEX VERSION 1.131
 C:\workTOYOU\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1872494602.index
 \ToYou\src\main\java
-C:\Users\kosmo_\Documents\GitHub\Practice\ToYouProject\project\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\555934966.index
-\ToYou\src\main\java
-C:\Users\kosmo_\Documents\GitHub\Practice\ToYouProject\project\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3419075295.index
-\ToYou\src\main\java
-C:\Users\kosmo_\Documents\GitHub\Practice\ToYouProject\project\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1872494602.index
-\ToYou\src\main\java

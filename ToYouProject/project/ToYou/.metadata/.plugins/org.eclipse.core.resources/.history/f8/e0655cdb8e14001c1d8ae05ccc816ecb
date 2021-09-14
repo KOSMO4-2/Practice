@@ -1,5 +1,0 @@
-package com.toyou.project.config.auth;
-
-public class PrincipalDetailService {
-
-}

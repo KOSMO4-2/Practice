@@ -1,11 +1,13 @@
 server:
   port: 8003     # 톰캣 포트
   servlet:
-    context-path: /
+    context-path: /ToYou
     encoding:
       charset: UTF-8
-      
-      
+      enabled: true
+      force: true
+    
+
 spring:
   mvc:
     view:
@@ -21,7 +23,7 @@ spring:
   jpa:
     open-in-view: true	
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false
