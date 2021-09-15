@@ -1,0 +1,14 @@
+package com.toyou.project.service.user;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.toyou.project.dao.user.UserDAO;
+import com.toyou.project.model.UserVO;
+
+public interface UserService {
+	
+	@Autowired
+	private UserDAO userDAO;
+	
+	
+}
