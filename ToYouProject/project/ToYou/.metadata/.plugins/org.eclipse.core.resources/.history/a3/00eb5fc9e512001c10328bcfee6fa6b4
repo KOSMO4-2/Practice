@@ -1,0 +1,33 @@
+package com.toyou.project.model;
+
+import java.sql.Timestamp;
+
+import javax.persistence.Entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity(name = "community")
+public class CommunityVO {
+	
+	
+	private int community_no;
+	
+	private int community_hostno;
+	
+	private String community_title;
+	
+	private String community_description;
+	
+	private Timestamp community_createdate;
+	
+	private int community_ispublic;
+	
+	private String community_tag;
+}

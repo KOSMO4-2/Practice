@@ -1,0 +1,7 @@
+package com.toyou.project.dao.user;
+
+public class UserDAOImpl implements UserDAO {
+
+
+
+}

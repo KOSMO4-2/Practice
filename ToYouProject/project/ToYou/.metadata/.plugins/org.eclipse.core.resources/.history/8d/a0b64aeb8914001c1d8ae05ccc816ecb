@@ -1,0 +1,13 @@
+package com.toyou.project.dao.user;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.toyou.project.model.UserVO;
+
+
+public interface UserDAO extends JpaRepository<UserVO, Integer>{
+	
+	 UserVO save(UserVO vo);
+	
+	
+}

@@ -1,0 +1,10 @@
+package com.toyou.project.model;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity(name = "admin")
+public class AdminVO {
+
+}

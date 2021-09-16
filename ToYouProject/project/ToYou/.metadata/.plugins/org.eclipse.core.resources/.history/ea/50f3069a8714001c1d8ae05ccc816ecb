@@ -1,0 +1,6 @@
+package com.toyou.project.dto;
+
+public class ResponseDTO<T> {
+	int status;
+	T data;
+}

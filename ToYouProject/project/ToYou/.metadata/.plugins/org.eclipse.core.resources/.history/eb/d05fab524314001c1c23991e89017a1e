@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ToYou index 페이지</title>
+</head>
+<body>
+<h1>/ToYou/index.html</h1>
+
+<a href="/auth/loginForm">로그인</a>
+
+<a href="/auth/joinForm">회원가입</a>
+
+</body>
+</html>

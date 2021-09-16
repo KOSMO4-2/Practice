@@ -1,0 +1,19 @@
+package com.toyou.project.model;
+
+import java.sql.Timestamp;
+
+import javax.persistence.Entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity(name = "community_board")
+public class Community_boardVO {
+
+}
