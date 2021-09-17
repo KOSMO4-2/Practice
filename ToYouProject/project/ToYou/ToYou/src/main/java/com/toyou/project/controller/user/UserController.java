@@ -1,7 +1,5 @@
 package com.toyou.project.controller.user;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -52,6 +49,13 @@ public class UserController {
 	public String loginForm() {	
 		return "user/loginForm";
 	}
+	
+	@GetMapping("/auth/loginForm2")
+	public String loginForm2() {	
+		return "login/loginForm";
+	}
+	
+
 	
 	// 카카오 로그인 구현
 	@GetMapping("/auth/kakao/callback")
@@ -121,7 +125,7 @@ public class UserController {
 		System.out.println("카카오이메일"+kakaoProfile.getKakao_account().getProfile().getNickname());
 
 //	    인증받은 카카오 유저 정보를 User(import 조심 VO로 임포트해야함)에 저장 
-		String kakaoLoginId = kakaoProfile.getId().toString();
+		String kakaoLoginId = "kakao"+kakaoProfile.getId().toString();
 		
 		User kakaoUser = User.builder()
 				.userId(kakaoLoginId) // 아이디는 email+kakaoID

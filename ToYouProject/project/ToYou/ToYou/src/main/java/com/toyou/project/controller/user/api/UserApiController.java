@@ -26,6 +26,21 @@ public class UserApiController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
+	@PostMapping("/auth/user/idCheck")
+	public String idCheck(String userId) {
+//		String userId = request.getParameter("userId");
+		System.out.println("중복확인 할 아이디 :"+userId);
+		int result = 0; 
+		if(userService.userFind(userId).getUserId() != null) {
+			result = 1;
+		}
+		System.out.println("아이디 조회 결과 : "+result);
+		System.out.println(result);
+		return Integer.toString(result);
+	}
+	
+
+	
 	@PostMapping("/joinProc")
 	public ResponseDTO<Integer> save(@RequestBody User user) { // username, password, email
 		

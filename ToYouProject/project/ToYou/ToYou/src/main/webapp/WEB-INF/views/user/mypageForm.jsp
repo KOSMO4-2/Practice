@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="../layout/header.jsp"%>
 
 <div class="container">
@@ -18,7 +17,7 @@
 	</c:if>
 	<div class="form-group">
 	    <label for="userName">name:</label>
-		<input type="text" value="${ principal.user.userName }"  class="form-control" placeholder="Enter name" id="userName" name="userName" readonly>
+		<input type="text" value="${ principal.user.userName }"  class="form-control" placeholder="Enter name" id="userName" name="userName">
 	</div>
 	<div class="form-group">
 	    <label for="userEmail">Email:</label>

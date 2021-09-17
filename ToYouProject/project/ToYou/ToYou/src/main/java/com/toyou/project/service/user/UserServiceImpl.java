@@ -1,5 +1,7 @@
 package com.toyou.project.service.user;
 
+import java.util.Optional;
+
 //import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	
+	
 	// 회원가입
 	@Transactional
 	public void userJoin(User user) {
@@ -31,10 +35,11 @@ public class UserServiceImpl implements UserService {
 	
 	// 회원 찾기
 	@Transactional(readOnly=true)
-	public User userFind(String username) {
-		User user = userRepository.findByUserId(username).orElseGet(()->{
+	public User userFind(String userId) {
+		User user = userRepository.findByUserId(userId).orElseGet(()->{
 			return new User();
 		});
+		System.out.println("userService - userFind : "+user.getUserId());
 		return user;
 	}
 	
@@ -59,7 +64,7 @@ public class UserServiceImpl implements UserService {
 //		영속화 된 persistance객체의 변화가 감지되면 더티체킹이 되어 update문을 날려줌
 		
 	}
-	
+
 	
 	
 }
