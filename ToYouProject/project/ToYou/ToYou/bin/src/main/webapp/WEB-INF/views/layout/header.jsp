@@ -26,7 +26,7 @@
 			<c:choose>
 				<c:when test="${empty principal}">		
           			<li class="nav-item"><a href="/auth/loginForm2" class="nav-link">로그인</a></li>
-          			<li class="nav-item"><a href="/auth/mypage" class="nav-link">마이페이지</a></li>
+          			<li class="nav-item"><a href="/mypage" class="nav-link">마이페이지</a></li>
           		</c:when>
           		<c:otherwise>
           			<li class="nav-item"><a href="/mypage" class="nav-link">${principal.user.userName}</a></li>
@@ -56,9 +56,9 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form> -->
     <!-- 검색창 ---------------------------------------------------------------------------------->
-        <form action="/auth/mypage" method="get" class="form-inline my-2 my-lg-0" role="search">
+        <form class="form-inline my-2 my-lg-0" role="search">
          <div class="form-group">
-         <input type="text" class="form-control mr-2" name="keyword" placeholder="채널명을 입력하세요">
+         <input type="text" class="form-control mr-2" placeholder="채널명을 입력하세요">
          <button type="submit" class="btn btn-default">검색</button>
          </div>
         </form>     

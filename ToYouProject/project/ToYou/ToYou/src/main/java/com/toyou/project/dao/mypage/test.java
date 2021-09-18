@@ -1,4 +1,4 @@
-package com.toyou.project.controller;
+package com.toyou.project.dao.mypage;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,59 +7,25 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
-
-@Controller
-public class MainController {
-	
-	
-
-	// 
-	@GetMapping({"/",""})
-	public String home() {
+public class test {
+	public void sockets(String link) {
 		
-		return "index";
 	}
 	
 	
-	@GetMapping("/auth/searchChannel")
-	public String searchChannel() {
-		return "index";
-	}
 	
-	@GetMapping("/auth/trend")
-	public String trend() {
-		return "index";
-	}
 	
-	@GetMapping("/auth/community")
-	public String community() {
-		return "community";
-	}
 	
-	@GetMapping("/auth/magazine")
-	public String magazine() {
-		
-		return "index2";
-	}
 	
-	@GetMapping("/payinfo")
-	public String payinfo() {
-		return "payinfo";
-	}
 	
-	@GetMapping("auth/loginFrom2")
-	public String login() {
-		
-		return "login/loginFrom";
-	}
 	
-	@GetMapping("/auth/mypage")
-	public String myPage(String keyword, Model model) {
+	
+	
+	
+	
+	
+	
+	public static void main(String... args) {
 		System.out.println("시작");
 		try (Socket client = new Socket()) {
 			
@@ -73,7 +39,7 @@ public class MainController {
 			// 소켓이 접속이 완료되면 inputstream과 outputstream을 받는다.
 			try (OutputStream sender = client.getOutputStream(); InputStream receiver = client.getInputStream();) {
 				// 메시지는 for 문을 통해 10번 메시지를 전송한다.
-				String msg = keyword;
+				String msg = "채널링크";
 				// string을 byte배열 형식으로 변환한다.
 				byte[] data = msg.getBytes();
 				// ByteBuffer를 통해 데이터 길이를 byte형식으로 변환한다.
@@ -90,7 +56,7 @@ public class MainController {
 				
 				// 데이터 길이를 받는다.
 				receiver.read(data, 0, 4);
-				
+				System.out.println("시작");
 				// ByteBuffer를 통해 little 엔디언 형식으로 데이터 길이를 구한다.
 				b = ByteBuffer.wrap(data);
 				b.order(ByteOrder.LITTLE_ENDIAN);
@@ -103,32 +69,11 @@ public class MainController {
 				msg = new String(data, "UTF-8");
 				// 콘솔에 출력한다.
 				System.out.println(msg);
-				try {
-					String[] info = msg.split("!@#");
-					
-					model.addAttribute("title",info[0]);
-					model.addAttribute("movie",info[1]);
-					model.addAttribute("link",info[2]);
-					model.addAttribute("banner",info[3]);
-					model.addAttribute("profile",info[4]);
-					model.addAttribute("explain",info[5]);
-					model.addAttribute("birth",info[6]);
-					model.addAttribute("sub",info[7]);
-				}catch(Throwable e){
-					
-				}
-				
-				
-				System.out.println("end");
 			}
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 		
-		
-		
-		return "mypage";
 	}
-	
-	
 }
+
