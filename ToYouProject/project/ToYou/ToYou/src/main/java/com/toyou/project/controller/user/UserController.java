@@ -1,5 +1,7 @@
 package com.toyou.project.controller.user;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -42,16 +44,12 @@ public class UserController {
 	
 	@GetMapping("/auth/joinForm")
 	public String joinForm() {	
-		return "user/joinForm";
+		return "login/joinForm";
 	}
+	
 	
 	@GetMapping("/auth/loginForm")
 	public String loginForm() {	
-		return "user/loginForm";
-	}
-	
-	@GetMapping("/auth/loginForm2")
-	public String loginForm2() {	
 		return "login/loginForm";
 	}
 	
@@ -159,6 +157,13 @@ public class UserController {
 		
 
 		
+	}
+	
+	// 카카오 로그아웃
+	@GetMapping("kakao/logout/callback")
+	public String kakaoLogoutCallBack( ) {
+		
+		return "redirect:/logout";
 	}
 	
 	

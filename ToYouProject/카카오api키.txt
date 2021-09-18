@@ -47,6 +47,11 @@ Content-type : application/x-www-form-urlencoded;charset=utf-8
 
 
 
+로그아웃 
+로그아웃 콜백 주소 : http://localhost:8003/kakao/logout/callback
+
+로그아웃 요청 주소 (GET) :
+https://kauth.kakao.com/oauth/logout?client_id=9678b56f9afb8f96a880f7b1bdaee036&logout_redirect_uri=http://localhost:8003/kakao/logout/callback
 
 
 

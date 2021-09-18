@@ -7,7 +7,6 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 	
-	
-
 	// 
 	@GetMapping({"/",""})
 	public String home() {
@@ -43,20 +40,17 @@ public class MainController {
 	
 	@GetMapping("/auth/magazine")
 	public String magazine() {
-		
 		return "index2";
 	}
 	
-	@GetMapping("/payinfo")
+	@GetMapping("/auth/payinfo")
 	public String payinfo() {
 		return "payinfo";
 	}
 	
-	@GetMapping("auth/loginFrom2")
-	public String login() {
-		
-		return "login/loginFrom";
-	}
+
+
+	
 	
 	@GetMapping("/auth/mypage")
 	public String myPage(String keyword, Model model) {
@@ -64,7 +58,7 @@ public class MainController {
 		try (Socket client = new Socket()) {
 			
 			// 소켓에 접속하기 위한 접속 정보를 선언한다.
-			InetSocketAddress ipep = new InetSocketAddress("13.209.5.251", 9999);
+			InetSocketAddress ipep = new InetSocketAddress("15.164.228.178", 9999);
 			// 소켓 접속!
 			
 			client.connect(ipep);
@@ -116,16 +110,12 @@ public class MainController {
 					model.addAttribute("sub",info[7]);
 				}catch(Throwable e){
 					
-				}
-				
-				
+				}		
 				System.out.println("end");
 			}
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		
-		
 		
 		return "mypage";
 	}

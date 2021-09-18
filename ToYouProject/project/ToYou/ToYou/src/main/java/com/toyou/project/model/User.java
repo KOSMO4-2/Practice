@@ -55,6 +55,8 @@ public class User {
 	@CreationTimestamp
 	private Timestamp userJoindate;
 	
+	
+	// 초기 구독자 수
 	@Column
 	private int userSubscriber;
 	

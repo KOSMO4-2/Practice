@@ -25,12 +25,12 @@
 <!--      <li class="box"><a href="#"><img class="profile" src="#">로그인</a></li> -->
 			<c:choose>
 				<c:when test="${empty principal}">		
-          			<li class="nav-item"><a href="/auth/loginForm2" class="nav-link">로그인</a></li>
-          			<li class="nav-item"><a href="/auth/mypage" class="nav-link">마이페이지</a></li>
+          			<li class="nav-item"><a href="/auth/loginForm" class="nav-link">로그인</a></li>
+          			<li class="nav-item"><a href="/auth/joinForm" class="nav-link">회원가입</a></li>
           		</c:when>
           		<c:otherwise>
           			<li class="nav-item"><a href="/mypage" class="nav-link">${principal.user.userName}</a></li>
-          			<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>
+          			<li class="nav-item"><a href="https://kauth.kakao.com/oauth/logout?client_id=9678b56f9afb8f96a880f7b1bdaee036&logout_redirect_uri=http://localhost:8003/kakao/logout/callback" class="nav-link">로그아웃</a></li>
           		</c:otherwise>
           	</c:choose>
           </ul>
@@ -56,18 +56,18 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form> -->
     <!-- 검색창 ---------------------------------------------------------------------------------->
-        <form action="/auth/mypage" method="get" class="form-inline my-2 my-lg-0" role="search">
+     	<form action="/auth/mypage" method="get" class="form-inline my-2 my-lg-0" role="search">
          <div class="form-group">
          <input type="text" class="form-control mr-2" name="keyword" placeholder="채널명을 입력하세요">
          <button type="submit" class="btn btn-default">검색</button>
          </div>
-        </form>     
+        </form>        
         <ul class="navbar-nav ml-auto"> 
           <li class="nav-item"><a href="/auth/searchChannel" class="nav-link">채널검색</a></li>
           <li class="nav-item"><a href="/auth/trend" class="nav-link">트랜드 분석</a></li>
           <li class="nav-item"><a href="/auth/magazine" class="nav-link">매거진</a></li>
           <li class="nav-item"><a href="/auth/community" class="nav-link">커뮤니티</a></li>
-          <li class="nav-item"><a href="/payinfo" class="nav-link">요금안내</a></li>
+          <li class="nav-item"><a href="/auth/payinfo" class="nav-link">요금안내</a></li>
 <!--           <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
           <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> -->
         </ul>
