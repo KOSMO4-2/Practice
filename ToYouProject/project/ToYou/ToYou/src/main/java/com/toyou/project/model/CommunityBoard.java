@@ -25,35 +25,35 @@ public class CommunityBoard {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int community_board_no;
+	private int communityBoardNo;
 	
 	@Column(nullable = false)
-	private int community_no;
+	private int communityNo;
 	
 	@Column(nullable = false)
-	private int user_no;
+	private int userNo;
 	
 	@Column(nullable = false,length = 100)
-	private String community_board_title;
+	private String communityBoardTitle;
 
 	@Column(nullable = false,length = 2048)
-	private String community_board_content;
+	private String communityBoardContent;
 	
 	@ColumnDefault("0")
 	@Column(nullable = false)
-	private int community_board_viewcnt;
+	private int communityBoardViewcnt;
 	
 	@ColumnDefault("0")
 	@Column(nullable = false)
-	private int community_board_likecnt;
+	private int communityBoardLikecnt;
 	
 	@CreationTimestamp
-	private Timestamp community_board_writedate;
+	private Timestamp communityBoardWritedate;
 	
 	@ColumnDefault("1")
 	@Column(nullable = false)
-	private int community_board_ispublic;
+	private int communityBoardIspublic;
 	
 	@Column
-	private String community_board_imgname;
+	private String communityBoardImgname;
 }

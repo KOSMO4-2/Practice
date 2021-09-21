@@ -21,28 +21,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Community {
+public class MychannelSns {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int communityNo;
+	private int mychannelSnsNo;
 	
 	@Column(nullable = false)
-	private int communityHostno;
+	private int mychannelNo;
 	
-	@Column(nullable = false,length = 100)
-	private String communityTitle;
+	@Column(nullable = false, length = 300)
+	private String mychannelSnsLink;
 	
-	@Column(nullable = false,length = 2048)	
-	private String communityDescription;
+	@Column(nullable = false, length = 300)
+	private String mychannelSnsIcon;
 	
-	@CreationTimestamp
-	private Timestamp communityCreatedate;
-	
-	@ColumnDefault("1")
-	@Column(nullable = false)
-	private int communityIspublic;
-	
-	@Column
-	private String communityTag;
+
 }

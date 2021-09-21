@@ -56,7 +56,7 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form> -->
     <!-- 검색창 ---------------------------------------------------------------------------------->
-     	<form action="/auth/mypage" method="get" class="form-inline my-2 my-lg-0" role="search">
+     	<form action="/auth/channelSearch" method="get" class="form-inline my-2 my-lg-0" role="search">
          <div class="form-group">
          <input type="text" class="form-control mr-2" name="keyword" placeholder="채널명을 입력하세요">
          <button type="submit" class="btn btn-default">검색</button>

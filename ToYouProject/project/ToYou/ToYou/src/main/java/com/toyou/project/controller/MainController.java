@@ -49,11 +49,17 @@ public class MainController {
 	}
 	
 
-
-	
-	
 	@GetMapping("/auth/mypage")
-	public String myPage(String keyword, Model model) {
+	public String myPage() {
+		
+		
+		
+		return "mypage";
+	}
+	
+	
+	@GetMapping("/auth/channelSearch")
+	public String channelSearch(String keyword, Model model) {
 		System.out.println("시작");
 		try (Socket client = new Socket()) {
 			
@@ -79,9 +85,9 @@ public class MainController {
 				sender.write(b.array(), 0, 4);
 				// 데이터 전송
 				sender.write(data);
-				
+
 				data = new byte[4];
-				
+		
 				// 데이터 길이를 받는다.
 				receiver.read(data, 0, 4);
 				
@@ -117,7 +123,7 @@ public class MainController {
 			e.printStackTrace();
 		}
 		
-		return "mypage";
+		return "channelSearch";
 	}
 	
 	

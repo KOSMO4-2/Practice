@@ -25,22 +25,22 @@ public class Admin {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int admin_no;
+	private int adminNo;
 	
 	@Column(nullable = false, length = 30, unique=true)
-	private String admin_id;
+	private String adminId;
 	
 	@Column(nullable = false, length = 100) // 암호화예정이라 길게 설정
-	private String admin_password;
+	private String adminPassword;
 	
 	@CreationTimestamp
-	private Timestamp admin_lastdate;
+	private Timestamp adminLastdate;
 	
 	@ColumnDefault("1")
 	@Column(nullable = false)
-	private int admin_level;
+	private int adminLevel;
 	
 	@ColumnDefault("1")
 	@Column(nullable = false)
-	private int admin_available;
+	private int adminAvailable;
 }

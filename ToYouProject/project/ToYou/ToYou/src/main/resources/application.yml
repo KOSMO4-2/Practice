@@ -16,14 +16,14 @@ spring:
       
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/toyou?serverTimezone=Asia/Seoul
-    username: root
-    password: 1234
+    url: jdbc:mysql://kic.cj7mov3fe2u4.ap-northeast-2.rds.amazonaws.com:3306/toyou?serverTimezone=Asia/Seoul
+    username: admin
+    password: rladlscjf00!
     
   jpa:
     open-in-view: true  
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false

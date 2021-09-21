@@ -21,28 +21,33 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Community {
+public class MychannelLastmovie {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int communityNo;
+	private int mychannelLastmovieNo;
 	
 	@Column(nullable = false)
-	private int communityHostno;
+	private int mychannelNo;
 	
-	@Column(nullable = false,length = 100)
-	private String communityTitle;
+	@Column(nullable = false, length = 200)
+	private String mychannelLastmovieTitle;
 	
-	@Column(nullable = false,length = 2048)	
-	private String communityDescription;
+	@Column(nullable = false, length = 300)
+	private String mychannelLastmovieThumnail;
 	
-	@CreationTimestamp
-	private Timestamp communityCreatedate;
+	@Column(nullable = false, length = 50)
+	private String mychannelLastmovieView;
 	
-	@ColumnDefault("1")
-	@Column(nullable = false)
-	private int communityIspublic;
+	@Column(nullable = false, length = 50)
+	private String mychannelLastmovieUpload;
 	
-	@Column
-	private String communityTag;
+	@Column(nullable = false, length = 20)
+	private String mychannelLastmovieTime;
+	
+	@Column(nullable = false, length = 50)
+	private String mychannelLastmovieComment;
+	
+
+
 }

@@ -15,29 +15,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Data
 @Entity
-public class CommunityBoardReply {
+public class ProductBuyLog {
 
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int communityBoardReplyNo;
-	
-	@Column(nullable = false)
-	public int communityBoardNo;
-	
-	@Column(nullable = false)
-	public int userNo;
-	
-	@Column(nullable = false,length = 2048)
-	public String communityBoardReplyContent;
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private int productBuyLogNo;
 
-	@CreationTimestamp
-	private Timestamp communityBoardReplyWritedate;
-	
+@Column(nullable = false)
+private int productNo;	// fk => product.productNo
+
+@CreationTimestamp
+private Timestamp productBuyLogDate; // 상품 결제일 !
+
+@Column(nullable = false)
+private int userNo;
 }

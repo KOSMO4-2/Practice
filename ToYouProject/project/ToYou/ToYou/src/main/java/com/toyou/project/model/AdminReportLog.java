@@ -25,26 +25,26 @@ public class AdminReportLog {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int report_log_no;
+	private int reportLogNo;
 	
 	@Column(nullable = false)
-	public int user_no;
+	public int userNo;
 	
 	@Column(nullable = false,length = 100)
-	private String report_log_title;
+	private String reportLogTitle;
 
 	@Column(nullable = false,length = 2048)
-	private String report_log_content;
+	private String reportLogContent;
 	
 	@CreationTimestamp
-	private Timestamp report_log_date;
+	private Timestamp reportLogDate;
 	
 	@ColumnDefault("1")
 	@Column(nullable = false)
-	private int report_log_isclear;
+	private int reportLogIsclear;
 	
 	
 	@Column
-	private Timestamp report_log_cleardate;
+	private Timestamp reportLogCleardate;
 	
 }

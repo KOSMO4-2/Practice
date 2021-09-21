@@ -25,19 +25,19 @@ public class CommunityUserInfo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int community_userinfo_no;
+	private int communityUserinfoNo;
 	
 	@Column(nullable = false)
-	private int community_no;
+	private int communityNo;
 	
 	@Column(nullable = false)
-	private int user_no;
+	private int userNo;
 
 	@ColumnDefault("0")
 	@Column(nullable = false)
-	private int community_userinfo_authority;
+	private int communityUserinfoAuthority;
 	
 	
 	@CreationTimestamp
-	private Timestamp community_userinfo_joindate;
+	private Timestamp communityUserinfoJoindate;
 }
