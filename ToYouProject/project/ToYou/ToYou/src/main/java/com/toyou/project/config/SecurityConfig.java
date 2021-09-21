@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,7 +17,7 @@ import com.toyou.project.config.auth.PrincipalDetailService;
 
 @Configuration // 빈 등록 (객체 생성)
 @EnableWebSecurity // 필터 체인에 등록 (스프링 시큐리티 활성화)
- // 특정 주소 접근시 권한 및 인증을 pre(미리) 체크하겠다.
+@EnableGlobalMethodSecurity(prePostEnabled = true)  // 특정 주소 접근시 권한 및 인증을 pre(미리) 체크하겠다.
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
@@ -56,15 +57,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and()
 				.formLogin()
 				.loginPage("/auth/loginForm")
-				.loginProcessingUrl("/auth/loginProc")
+				.loginProcessingUrl("/auth/user/loginProc")
 				.usernameParameter("userId")
+				.passwordParameter("userPassword")
 				.defaultSuccessUrl("/")
 			.and()
 				.logout()
 				.logoutUrl("/logout")
 				.logoutSuccessUrl("/auth/loginForm")
-				.invalidateHttpSession(true).deleteCookies("JSESSIONID")
-
-; // 스프링 시큐리티가 해당 주소로 요청오는 로그인을 가로채서 대신 로그인 해준다.
+				.invalidateHttpSession(true).deleteCookies("JSESSIONID"); // 스프링 시큐리티가 해당 주소로 요청오는 로그인을 가로채서 대신 로그인 해준다.
 	}
 }

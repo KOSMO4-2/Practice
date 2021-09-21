@@ -1,9 +1,0 @@
-package com.toyou.project.dao.user;
-
-import com.toyou.project.model.UserVO;
-
-public class UserDAOImpl implements UserDAO {
-
-
-
-}

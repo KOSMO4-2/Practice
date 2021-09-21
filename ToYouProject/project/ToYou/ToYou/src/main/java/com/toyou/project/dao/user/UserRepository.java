@@ -14,6 +14,7 @@ import com.toyou.project.model.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	// SELECT * FROM user WHERE user_id  = ?;
+	// SELECT * FROM user WHERE userNo = ?;
 //	@Query(value = "SELECT * FROM ")
 	Optional<User> findByUserId(String userId);
 	

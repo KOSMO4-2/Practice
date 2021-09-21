@@ -29,8 +29,15 @@
           			<li class="nav-item"><a href="/auth/joinForm" class="nav-link">회원가입</a></li>
           		</c:when>
           		<c:otherwise>
-          			<li class="nav-item"><a href="/mypage" class="nav-link">${principal.user.userName}</a></li>
-          			<li class="nav-item"><a href="https://kauth.kakao.com/oauth/logout?client_id=9678b56f9afb8f96a880f7b1bdaee036&logout_redirect_uri=http://localhost:8003/kakao/logout/callback" class="nav-link">로그아웃</a></li>
+          			<li class="nav-item"><a href="/auth/mypage" class="nav-link">${principal.user.userName}</a></li>
+          			<c:choose>
+	          			<c:when test="${principal.user.oauth == 'kakao' }">
+		          			<li class="nav-item"><a href="https://kauth.kakao.com/oauth/logout?client_id=9678b56f9afb8f96a880f7b1bdaee036&logout_redirect_uri=http://localhost:8003/kakao/logout/callback" class="nav-link">로그아웃</a></li>
+	          			</c:when>
+	          			<c:otherwise>
+		          			<li class="nav-item"><a href="/logout" class="nav-link">로그아웃</a></li>          			
+	          			</c:otherwise>
+          			</c:choose>
           		</c:otherwise>
           	</c:choose>
           </ul>

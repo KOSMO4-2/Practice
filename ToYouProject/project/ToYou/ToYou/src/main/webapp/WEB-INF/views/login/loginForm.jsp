@@ -74,27 +74,24 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" role="form" style="display: block;">
+								<form role="form" style="display: block;" action="/auth/user/loginProc" method="post" id="loginFrm">
 									<div class="form-group">
-										<input type="text" name="userId" id="userId" tabindex="1" class="form-control" placeholder="UserId" value="">
+										<input type="text" name="userId" id="userId" tabindex="1" class="form-control" placeholder="UserId">
 									</div>
 									<div class="form-group">
 										<input type="password" name="userPassword" id="userPassword" tabindex="2" class="form-control" placeholder="Password">
 									</div>
-<!-- 								<div class="form-group text-center">
-										<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-										<label for="remember"> Remember Me</label>
-									</div> -->
 									<div class="form-group">
 										<div class="row">
 											<div class="col-lg-12 col-sm-offset-3">
-												<input type="button" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="로그인">
+												<button name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" >로그인</button>
 											</div>
 										</div>
 									</div>
 										<div class="form-group">
 										<div class="row">
 											<div class="col-lg-12 col-sm-offset-3">
+											<!-- 카카오 로그인 버튼 -->
 												<a href="https://kauth.kakao.com/oauth/authorize?client_id=9678b56f9afb8f96a880f7b1bdaee036&redirect_uri=http://localhost:8003/auth/kakao/callback&response_type=code"><img src = "/image/kakao_login_medium_wide.png" height="38px" width="330px"></a>
 											</div>
 										</div>
@@ -108,7 +105,14 @@
 											</div>
 										</div>
 									</div>
+<!-- 								<div class="form-group text-center">
+										<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+										<label for="remember"> Remember Me</label>
+									</div> -->
+									
 								</form>
+								
+						
 <!-- 								<form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
@@ -129,7 +133,6 @@
 											</div>
 										</div>
 									</div> -->
-								</form>
 							</div>
 						</div>
 					</div>
@@ -208,6 +211,47 @@
 <%-- 
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="true"></jsp:include> --%>
 <!------Header-------->
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$("#login-submit").click(function(){
+			userId = $("#userId").val().trim();
+			userPassword = $("#userPassword").val().trim();
+		
+			if(userId == null || userId =="" ){
+				alert("아이디를 입력해주세요")
+			}else if(userPassword==null || userPassword==""){
+				alert("비밀번호를 입력해주세요")
+			}else{
+				$("#loginFrm").submit();
+			}
+		})
 
+	function loginSubmit(){
+		let data = $("#loginFrm").serialize()
+		alert(JSON.stringify(data))
+		$.ajax({
+			url : "/auth/user/loginProc",
+			type: "post",
+			contentType: "application/json; charset=utf-8",
+			data : data,
+			dataType:"json",
+			success: function(result){
+				alert("뭘까")
+					location.href = "/";					
+			},
+			error: function(){
+				alert("서버에러");
+			}		
+		})
+			
+		
+		}
+
+
+
+	
+})
+</script>
   </body>
 </html>

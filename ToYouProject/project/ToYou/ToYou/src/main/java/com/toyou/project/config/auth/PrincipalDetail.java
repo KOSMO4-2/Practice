@@ -20,7 +20,7 @@ public class PrincipalDetail implements UserDetails{
 	
 	public PrincipalDetail(User user) {
 		this.user=user;
-		System.out.println(user.getUserName());
+//		System.out.println(user.getUserName());
 	}
 	
 

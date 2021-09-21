@@ -49,11 +49,11 @@ public class MainController {
 	}
 	
 
+	
+	
 	@GetMapping("/auth/mypage")
 	public String myPage() {
-		
-		
-		
+		// 개발 마무리 단계에서 /auth 삭제할 예정
 		return "mypage";
 	}
 	

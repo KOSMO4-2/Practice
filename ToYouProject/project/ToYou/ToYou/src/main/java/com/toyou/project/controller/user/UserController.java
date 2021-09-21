@@ -1,7 +1,5 @@
 package com.toyou.project.controller.user;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -23,6 +21,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.toyou.project.model.KakaoProfile;
 import com.toyou.project.model.OAuthToken;
+import com.toyou.project.model.RoleType;
 import com.toyou.project.model.User;
 import com.toyou.project.service.user.UserService;
 
@@ -131,6 +130,7 @@ public class UserController {
 				.userPassword(toyouKey) // 패스워드는 yml파일에서 설정해준 고유 값
 				.userEmail(kakaoProfile.getKakao_account().getEmail())
 				.oauth("kakao")
+				.userRole(RoleType.USER)
 				.build();
 		
 //		카카오유저의 아이디로 회원가입정보 조회

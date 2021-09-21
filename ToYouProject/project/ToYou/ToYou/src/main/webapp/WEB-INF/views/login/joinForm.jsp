@@ -95,6 +95,12 @@
 	    </div> <!-- form-group// -->                                      
 	    <div class="form-group input-group">
 	    	<div class="input-group-prepend">
+			    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+			</div>
+	        <input class="form-control" name="userName" id="userName"  placeholder="Name" type="text">
+	    </div> <!-- form-group// -->                                      
+	    <div class="form-group input-group">
+	    	<div class="input-group-prepend">
 			    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 			 </div>
 	        <input class="form-control" name="userEmail" id="userEmail" placeholder="Email address" type="email">
@@ -105,14 +111,14 @@
 			    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 			 </div>
 	        <input class="form-control" name="userChannelLink" id="userChannelLink" placeholder="Your Youtube" type="text">
-	        <input type="button" class="btn btn-primary btn-block" value="검색" id="idCheck"  style="width: 50px;"/>
+	        <input type="button" class="btn btn-primary btn-block" value="검색" id="searchMyChennel"  style="width: 50px;"/>
 	    </div>
 	    <div class="form-group input-group">
 	    	<div class="input-group-prepend">
 			    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 			 </div>
 	        <input class="form-control" name="userRolemodelLink" id="userRolemodelLink" placeholder="Your Role Model" type="text">
-	        <input type="button" class="btn btn-primary btn-block" value="검색" id="idCheck"  style="width: 50px;"/>
+	        <input type="button" class="btn btn-primary btn-block" value="검색" id="searchRoleChennel"  style="width: 50px;"/>
 	    </div>
 	    
 
@@ -180,21 +186,31 @@ and product landing pages</p>   <br>
 $(document).ready(function(){  
 
 	function checkform(){
+			var userIdCheck = RegExp(/^[A-Za-z0-9]{8,20}$/);	
 			var userIdCheck = RegExp(/^[A-Za-z0-9]{8,20}$/);
 			var userPwCheck = RegExp(/^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/);
-			var userNameCheck = RegExp(/^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/);
+			var userNameCheck = RegExp(/^[ㄱ-ㅎ가-힣a-zA-Z]{1,10}$/);
+			/*  RegExp(/^[A-Za-z0-9]{8,20}$/); */
+			var userId = $('#userId').val();
 			var userPassword = $("#userPassword").val();
 			var passwdCheck = $("#passwdCheck").val();
 			var userName = $("#userName").val();
 			var userEmail = $("#userEmail").val();
 			
-
+			if(userId==""){
+				alert("아이디을 입력해주세요");
+				return false;
+			}
+			if(!userIdCheck.test(userId)){
+				alert("(아이디 양식 오류) [아이디는 영문, 숫자로만 입력해주세요],[8~20 자리]")
+				return false;
+			}
 			if(userPassword==""){
 				alert("패스워드를 입력해주세요");
 				return false;
 			}
 			if(!userPwCheck.test(userPassword)){
-				alert("(패스워드 양식 오류) - [영어 대문자 시작+소문자],[영어 소문자, 숫자와 특수기호 필히 입력],[8~20 자리]")
+				alert("(패스워드 양식 오류) - [영어 소문자, 숫자와 특수기호 필히 입력],[8~20 자리]")
 				return false;
 			}
 			
@@ -228,7 +244,7 @@ $(document).ready(function(){
 		}
 
 	
-	
+	var idx=false
 	$("#idCheck").click(function(){
 		var userIdCheck = RegExp(/^[A-Za-z0-9]{8,20}$/);	
 		var userId = $('#userId').val();
@@ -246,6 +262,7 @@ $(document).ready(function(){
 				success: function(result){
 					if(result == "0"){
 						$('#idCheck').attr("readonly",true);
+						idx=true
 						alert('사용가능한 아이디입니다!');
 					}else{
 						alert('중복된 아이디입니다.');
@@ -258,6 +275,50 @@ $(document).ready(function(){
 		}
 	});
 
+//  회원가입 버튼 클릭시 이벤트
+	$("#signupBtn").click(function(){				
+		var userId = $("#userId").val();
+		var userPassword = $("#userPassword").val();
+		var passwdCheck = $("#passwdCheck").val();
+		var userName = $("#userName").val();
+		var userEmail = $("#userEmail").val();
+		var userChannelLink = $("#userChannelLink").val();
+		var userRolemodelLink = $("#userRolemodelLink").val();
+		// 위의 조건을 다 만족했다면 ajax 로 회원가입 실행
+		if(checkform()){
+			alert(userId)
+			$.ajax({
+					url: "/auth/user/joinProc",
+					type: "post",
+					contentType: "application/json; charset=utf-8",
+					data: JSON.stringify({
+							"userId":userId,
+							"userPassword":userPassword,
+							"passwdCheck":passwdCheck,
+							"userName":userName,
+							"userEmail":userEmail,
+							"userChannelLink":userChannelLink,
+							"userRolemodelLink":userRolemodelLink
+						}),
+					dataType:"json", 
+					success: function(result){
+						if(result.status ==500 ){
+							alert("회원가입에 실패하셨습니다.");					
+						}else{
+							alert("회원가입이 완료되었습니다.");					
+							location.href = "/auth/loginForm";					
+						}
+					},
+					error: function(){
+						alert("서버에러");
+					}
+
+				
+				})
+			
+			}
+		})
+//	회원가입 이벤트 종료
 
 	
 })

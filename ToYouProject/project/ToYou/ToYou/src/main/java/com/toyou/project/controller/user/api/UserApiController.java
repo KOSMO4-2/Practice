@@ -41,9 +41,8 @@ public class UserApiController {
 	
 
 	
-	@PostMapping("/joinProc")
+	@PostMapping("/auth/user/joinProc")
 	public ResponseDTO<Integer> save(@RequestBody User user) { // username, password, email
-		
 		user.setUserRole(RoleType.USER);
 		userService.userJoin(user);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1); // 자바오브젝트를 JSON으로 변환해서 리턴 (Jackson)
