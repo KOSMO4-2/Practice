@@ -88,6 +88,11 @@ public class MainController {
 		return "payinfo";
 	}
 	
+	@GetMapping("/auth/communityTotal")
+	public String communityTotal() {
+		return "communityTotal";
+	}
+	
 
 	
 	
