@@ -1,0 +1,58 @@
+
+================================================================
+웹서버 주소 : http://localhost:8003
+클라이언트 키 : 9678b56f9afb8f96a880f7b1bdaee036
+로그인요청 콜백 주소 : http://localhost:8003/auth/kakao/callback
+================================================================
+
+카카오로부터 받을 정보 :  profile정보(닉네임,프사//필수), email(선택)
+
+================================================================
+
+로그인 요청 주소 (GET) :
+https://kauth.kakao.com/oauth/authorize?client_id=9678b56f9afb8f96a880f7b1bdaee036&redirect_uri=http://localhost:8003/auth/kakao/callback&response_type=code
+
+호스트 : kauth.kakao.com
+
+========================================================================
+
+사용자 정보를 받기위한 토큰발급 요청 주소 (POST) : http body 에 데이터 전달(필수 4가지).
+https://kauth.kakao.com/oauth/token
+MIME 타입설정 : 
+Content-type: application/x-www-form-urlencoded;charset=utf-8
+4가지 필수 데이터 :
+grant_type : authorization_code
+client_id : 9678b56f9afb8f96a880f7b1bdaee036
+redirect_uri : http://localhost:8003/auth/kakao/callback
+code : 로그인요청 후 응답받을때 받은 코드 {동적임.}
+
+
+private String grant_type = "authorization_code";
+private String client_id = "9678b56f9afb8f96a880f7b1bdaee036";
+private String redirect_uri = "http://localhost:8003/auth/kakao/callback";
+
+==========================================================================
+
+카카오에서 보내는 data타입은 json
+
+토큰 사용해서 유저 정보 얻어오기
+요청 주소 : 
+https://kapi.kakao.com/v2/user/me
+header :
+Authorization: Bearer {ACCESS_TOKEN}   // 위에서 발급받은 토큰 authToken.getAccess_token()
+Content-type : application/x-www-form-urlencoded;charset=utf-8
+
+
+===========================================================================
+
+
+
+로그아웃 
+로그아웃 콜백 주소 : http://localhost:8003/kakao/logout/callback
+
+로그아웃 요청 주소 (GET) :
+https://kauth.kakao.com/oauth/logout?client_id=9678b56f9afb8f96a880f7b1bdaee036&logout_redirect_uri=http://localhost:8003/kakao/logout/callback
+
+
+
+
