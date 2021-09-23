@@ -204,7 +204,7 @@
 		<div class="container">
 			<div class="row mb-3 justify-content-center">
 				<div class="col-md-8 text-center cate_rec_title">
-					<h2 class="title_m">인기 유튜버의 차트 [조회수]</h2>
+					<h2 class="title_m"> 한 눈에 확인하는 SNS 트렌드</h2>
 					<!--      <p class="lead">오늘 가입한 유튜버 채널</p>
           <p class="mb-5"><a href="#" class="link-underline">View All Donations</a></p> -->
 				</div>
@@ -216,45 +216,173 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-4 text-center">
-					<div class="table title"><h4 class="mid-title-thin">인기 유튜버의 차트[조회수]</h4></div>									
-				</div>
-
-
-				<div class="col-sm-4 text-center">
-		     		<div class="table title"><h4 class="mid-title-thin">유명 유튜버의 경쟁현황[구독자수]</h4></div>
-				</div>
+			
+			<div class="col-sm-5 text-center">
 				
-				
-				
-				<div class="col-sm-4 text-center">
-				<div class="table title"><h4 class="mid-title-thin">실시간 인기 키워드</h4></div>
+				<div class="table title"><h4 class="mid-title-thin"><b>틱톡 인기 해시태그</b></h4></div>
 					<table class="table table-sm col-md-3">
 						<thead class="thead-light">
 							<tr>
-								<th scope="col">순위</th>
-								<th scope="col">채널명</th>
-								<th scope="col">구독자수</th>
+							
+								<th style="text-overflow:ellipsis; overflow:visible; white-space:pre;" scope="col">순위</th>
+								<th scope="col">해시 태그</th>
+								<th scope="col">조회 수</th>
+								
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
-							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>Larry</td>
-								<td>the Bird</td>
-							</tr>
+							<c:forEach items="${tiktokList}" var="list">
+							   
+							   <tr>
+								<th scope="row">${list.keywordTiktokNo }</th>
+								
+
+								<td style="text-overflow:ellipsis; overflow:visible; white-space:pre;"><a href="${list.keywordTiktokLink}">${list.keywordTiktokName }</a></td>
+								<td style="text-overflow:ellipsis; overflow:visible; white-space:pre;">${list.keywordTiktokView }</td>
+								</tr>
+							 </c:forEach>
+							
+
 						</tbody>
 					</table>
+					
+				</div>
+			
+			
+				<div class="col-sm-2 text-center">
+													
+				</div>
+
+
+				
+				
+				
+
+				<div class="col-sm-5 text-center">
+				
+				<div class="table title"><h4 class="mid-title-thin"><b>트위치 인기 스트리머</b></h4></div>
+					<table class="table table-sm col-md-3">
+						<thead class="thead-light">
+							<tr>
+							
+								<th style="text-overflow:ellipsis; overflow:visible; white-space:pre;" scope="col">순위</th>
+								<th style="text-overflow:ellipsis; overflow:visible; white-space:pre;" scope="col">프로필</th>
+								<th scope="col">스트리머</th>
+								<th scope="col">카테고리</th>
+								
+								
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${twitchList}" var="list">
+							   
+							   <tr>
+							   
+								<th scope="row">${list.keywordTwitchNo }</th>
+								<td style="text-overflow:ellipsis; overflow:visible; white-space:pre;"><a href="${list.keywordTwitchLink}"><img style="width:30px;height:30px;" src="${list.keywordTwitchImage}" alt="profile" class="img-responsive img-circle"></a></td>
+								<td style="text-overflow:ellipsis; overflow:visible; white-space:pre;"><a href="${list.keywordTwitchLink}">${list.keywordTwitchName }</a></td>
+								<td style="text-overflow:ellipsis; overflow:visible; white-space:pre;">${list.keywordTwitchCategory }</td>
+								</tr>
+							 </c:forEach>
+							
+
+						</tbody>
+					</table>
+					
+				</div>
+				
+				<br>
+				<br>
+				<br>
+				
+				<div class="col-sm-3 text-center">
+				
+				<div class="table title"><h4 class="mid-title-thin"><b>트위터 종합 인기 검색어</b></h4></div>
+					<table class="table table-sm col-md-3">
+						<thead class="thead-light">
+							<tr>
+							
+
+								<th style="text-overflow:ellipsis; overflow:visible; white-space:pre;" scope="col">순위</th>
+								<th scope="col">검색어</th>
+								
+								
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${twitterTotalList}" var="list">
+							   
+							   <tr>
+								<th scope="row">${list.keywordTwitterNo }</th>
+								<td style="text-overflow:ellipsis; overflow:visible; white-space:pre;"><a href="${list.keywordTwitterLink}">${list.keywordTwitterName }</a></td>
+								
+								</tr>
+							 </c:forEach>
+							
+
+						</tbody>
+					</table>
+					
+				</div>
+				
+				<div class="col-sm-5 text-center">
+				
+				<div class="table title"><h4 class="mid-title-thin"><b>트위터 최신 인기 검색어</b></h4></div>
+					<table class="table table-sm col-md-3">
+						<thead class="thead-light">
+							<tr>
+							
+
+								<th style="text-overflow:ellipsis; overflow:visible; white-space:pre;" scope="col">순위</th>
+								<th scope="col">검색어</th>
+								
+								
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${twitterFamousList}" var="list">
+							   
+							   <tr>
+								<th scope="row">${list.keywordTwitterNo }</th>
+								<td style="text-overflow:ellipsis; overflow:visible; white-space:pre;"><a href="${list.keywordTwitterLink}">${list.keywordTwitterName }</a></td>
+								
+								</tr>
+							 </c:forEach>
+							
+
+						</tbody>
+					</table>
+					
+				</div>
+				
+				<div class="col-sm-4 text-center">
+				
+				<div class="table title"><h4 class="mid-title-thin"><b>트위터 꾸준한 인기 검색어</b></h4></div>
+					<table class="table table-sm col-md-3">
+						<thead class="thead-light">
+							<tr>
+							
+
+								<th style="text-overflow:ellipsis; overflow:visible; white-space:pre;" scope="col">순위</th>
+								<th scope="col">검색어</th>
+								
+								
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${twitterDurationList}" var="list">
+							   
+							   <tr>
+								<th scope="row">${list.keywordTwitterNo }</th>
+								<td style="text-overflow:ellipsis; overflow:visible; white-space:pre;"><a href="${list.keywordTwitterLink}">${list.keywordTwitterName }</a></td>
+								
+								</tr>
+							 </c:forEach>
+							
+
+						</tbody>
+					</table>
+					
 				</div>
 				
 				

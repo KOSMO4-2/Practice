@@ -6,14 +6,36 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.toyou.project.dao.loginmain.keyword.KeywordGoogleRepository;
+import com.toyou.project.model.keywordGoogle;
+import com.toyou.project.model.keywordTiktok;
+import com.toyou.project.model.keywordTwitch;
+import com.toyou.project.model.keywordTwitter;
+import com.toyou.project.service.loginmain.keyword.KeywordGoogleService;
+import com.toyou.project.service.loginmain.keyword.KeywordTiktokService;
+import com.toyou.project.service.loginmain.keyword.KeywordTwitchService;
+import com.toyou.project.service.loginmain.keyword.KeywordTwitterService;
+
 
 @Controller
 public class MainController {
+	
+	@Autowired
+	private KeywordGoogleService keywordGoogleService;
+	@Autowired
+	private KeywordTiktokService keywordTiktokService;
+	@Autowired
+	private KeywordTwitchService keywordTwitchService;
+	@Autowired
+	private KeywordTwitterService keywordTwitterService;
+	
 	
 	// 
 	@GetMapping({"/",""})
@@ -39,7 +61,25 @@ public class MainController {
 	}
 	
 	@GetMapping("/auth/magazine")
-	public String magazine() {
+	public String magazine(Model model) {
+		List<keywordGoogle> googleList = keywordGoogleService.SelectAllKeywordGoogle();
+		List<keywordTiktok> tiktokList = keywordTiktokService.SelectAllKeywordTiktok();
+		List<keywordTwitch> twitchList = keywordTwitchService.SelectAllKeywordTwitch();
+		List<keywordTwitter> twitterList = keywordTwitterService.SelectAllKeywordTwitter();
+		
+		List<keywordTwitter> twitterTotalList = keywordTwitterService.SelectAllKeywordTwitterKind("total");
+		List<keywordTwitter> twitterFamousList = keywordTwitterService.SelectAllKeywordTwitterKind("famous");
+		List<keywordTwitter> twitterDurationList = keywordTwitterService.SelectAllKeywordTwitterKind("duration");
+		
+		model.addAttribute("googleList", googleList);
+		model.addAttribute("tiktokList", tiktokList);
+		model.addAttribute("twitchList", twitchList);
+		model.addAttribute("twitterList", twitterList);
+		
+		model.addAttribute("twitterTotalList", twitterTotalList);
+		model.addAttribute("twitterFamousList", twitterFamousList);
+		model.addAttribute("twitterDurationList", twitterDurationList);
+		
 		return "index2";
 	}
 	
@@ -64,7 +104,7 @@ public class MainController {
 		try (Socket client = new Socket()) {
 			
 			// 소켓에 접속하기 위한 접속 정보를 선언한다.
-			InetSocketAddress ipep = new InetSocketAddress("15.164.228.178", 9999);
+			InetSocketAddress ipep = new InetSocketAddress("15.164.170.187", 9999);
 			// 소켓 접속!
 			
 			client.connect(ipep);
