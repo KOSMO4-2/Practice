@@ -57,8 +57,8 @@ public class User {
 	
 	
 	// 초기 구독자 수
-	@Column
-	private int userSubscriber;
+	@Column(length=50)
+	private String userSubscriber;
 	
 	
 	@Column(length = 200)

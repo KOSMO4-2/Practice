@@ -217,36 +217,37 @@ $(document).ready(function(){
 	$("#login-submit").click(function(){
 			userId = $("#userId").val().trim();
 			userPassword = $("#userPassword").val().trim();
-		
 			if(userId == null || userId =="" ){
 				alert("아이디를 입력해주세요")
 			}else if(userPassword==null || userPassword==""){
 				alert("비밀번호를 입력해주세요")
 			}else{
+				$("#loginFrm").attr("action","/auth/user/loginProc")
 				$("#loginFrm").submit();
 			}
 		})
 
-	function loginSubmit(){
-		let data = $("#loginFrm").serialize()
-		alert(JSON.stringify(data))
-		$.ajax({
-			url : "/auth/user/loginProc",
-			type: "post",
-			contentType: "application/json; charset=utf-8",
-			data : data,
-			dataType:"json",
-			success: function(result){
-				alert("뭘까")
-					location.href = "/";					
-			},
-			error: function(){
-				alert("서버에러");
-			}		
-		})
+// 	function loginSubmit(){
+// 		let data = $("#loginFrm").serialize()
+// 		alert(JSON.stringify(data))
+// 		$.ajax({
+// 			url : "/auth/user/loginProc",
+// 			type: "post",
+// 			contentType: "application/json; charset=utf-8",
+// 			data : data,
+// 			dataType:"text",
+// 			success: function(result){
+// 				$.('#loginFrm').attr("action","/auth/user/loginProc")
+// 				alert("뭘까")
+// 					location.href = "/";					
+// 			},
+// 			error: function(){
+// 				alert("서버에러");
+// 			}		
+// 		})
 			
 		
-		}
+// 		}
 
 
 

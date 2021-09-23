@@ -11,10 +11,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -56,7 +58,7 @@ public class UserController {
 	
 	// 카카오 로그인 구현
 	@GetMapping("/auth/kakao/callback")
-	public  String kakaoCallback(String code) { // DATA를 리턴해주는 컨트롤러
+	public  String kakaoCallback(String code, Model model) { // DATA를 리턴해주는 컨트롤러
 		// 토큰 가져오기 ==========================================================
 		// POST 방식으로 key=value 데이터를 요청 (카카오서버로)
 		// 1. Retrofit2
@@ -139,24 +141,24 @@ public class UserController {
 //		가입이안되어 있다면 카카오 유저 정보로 회원가입 진행
 		if(originUser.getUserId() == null) {
 			System.out.println("카카오정보로 회원가입 진행");
-			userService.userJoin(kakaoUser);
-			System.out.println("신규회원 자동 로그인 진행");
-			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(kakaoUser.getUserId(),toyouKey));
-			SecurityContextHolder.getContext().setAuthentication(authentication);
+			System.out.println("카카오정보로 회원가입할 아이디 :" + kakaoUser.getUserId());
+			model.addAttribute("kakaoUser", kakaoUser);
 			
-			return "redirect:/user/mypageForm";
+//			userService.userJoin(kakaoUser);
+//			System.out.println("신규회원 자동 로그인 진행");
+//			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(kakaoUser.getUserId(),toyouKey));
+//			SecurityContextHolder.getContext().setAuthentication(authentication);
+			// 모델에 들어간 객체는 리다리렉트하면 없어집니다.
+			return "/login/joinForm";
 
 		}else {
 			System.out.println("기존회원 자동 로그인 진행");
 //			기존 회원이라면 가져온 회원정보로 로그인 처리
 			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(originUser.getUserId(), toyouKey));
 			SecurityContextHolder.getContext().setAuthentication(authentication);
-			
+
 			return "redirect:/";
 		}
-		
-
-		
 	}
 	
 	// 카카오 로그아웃
@@ -166,6 +168,7 @@ public class UserController {
 		return "redirect:/logout";
 	}
 	
+
 	
 	
 	

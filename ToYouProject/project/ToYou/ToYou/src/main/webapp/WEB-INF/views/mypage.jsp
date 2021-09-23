@@ -95,15 +95,15 @@
 					<ul class="nav nav-tabs">
 						<!-- tab.start -->
 						<li class="nav-item"><a class="nav-link active"
-							data-toggle="tab" href="#">채널관리</a></li>
+							data-toggle="tab" href="#comm01">채널관리</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#">커뮤니티관리</a></li>
+							href="#comm02">커뮤니티관리</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#">친구관리</a></li>
+							href="#comm03">친구관리</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#">개인정보관리</a></li>
+							href="#comm04">개인정보관리</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#">결제 대시보드</a></li>
+							href="#comm05">결제 대시보드</a></li>
 					</ul>
 					<!-- tab.end -->
 

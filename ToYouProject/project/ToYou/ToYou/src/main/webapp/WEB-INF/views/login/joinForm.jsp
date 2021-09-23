@@ -73,87 +73,218 @@
 	<p class="divider-text">
         <span class="bg-light">OR</span>
     </p>
-	<form>
-		<div class="form-group input-group">
-			<div class="input-group-prepend">
-			    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-			</div>
-	  	    	<input class="form-control" name="userId" id="userId"  placeholder="ID" type="text">
-	        	<input type="button" class="btn btn-primary btn-block" value="확인" id="idCheck"  style="width: 50px;"/>
-	    </div> <!-- form-group// -->
-	    <div class="form-group input-group">
-	    	<div class="input-group-prepend">
-			    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-			</div>
-	        <input class="form-control" name="userPassword" id="userPassword"  placeholder="Create password" type="password">
-	    </div> <!-- form-group// -->
-	    <div class="form-group input-group">
-	    	<div class="input-group-prepend">
-			    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-			</div>
-	        <input class="form-control" name="passwdCheck" id="passwdCheck"  placeholder="Repeat password" type="password">
-	    </div> <!-- form-group// -->                                      
-	    <div class="form-group input-group">
-	    	<div class="input-group-prepend">
-			    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-			</div>
-	        <input class="form-control" name="userName" id="userName"  placeholder="Name" type="text">
-	    </div> <!-- form-group// -->                                      
-	    <div class="form-group input-group">
-	    	<div class="input-group-prepend">
-			    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-			 </div>
-	        <input class="form-control" name="userEmail" id="userEmail" placeholder="Email address" type="email">
-	    </div>
-	    <!-- form-group// -->
-	    <div class="form-group input-group">
-	    	<div class="input-group-prepend">
-			    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-			 </div>
-	        <input class="form-control" name="userChannelLink" id="userChannelLink" placeholder="Your Youtube" type="text">
-	        <input type="button" class="btn btn-primary btn-block" value="검색" id="searchMyChennel"  style="width: 50px;"/>
-	    </div>
-	    <div class="form-group input-group">
-	    	<div class="input-group-prepend">
-			    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-			 </div>
-	        <input class="form-control" name="userRolemodelLink" id="userRolemodelLink" placeholder="Your Role Model" type="text">
-	        <input type="button" class="btn btn-primary btn-block" value="검색" id="searchRoleChennel"  style="width: 50px;"/>
-	    </div>
-	    
+    <c:choose>
+    <c:when test="${empty kakaoUser}">
+		<form>
+			<div class="form-group input-group">
+				<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+				</div>
+		  	    	<input class="form-control" name="userId" id="userId"  placeholder="ID" type="text">
+		        	<input type="button" class="btn btn-primary btn-block" value="확인" id="idCheck"  style="width: 50px;"/>
+		    </div> <!-- form-group// -->
+		    <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+				</div>
+		        <input class="form-control" name="userPassword" id="userPassword"  placeholder="Create password" type="password">
+		    </div> <!-- form-group// -->
+		    <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+				</div>
+		        <input class="form-control" name="passwdCheck" id="passwdCheck"  placeholder="Repeat password" type="password">
+		    </div> <!-- form-group// -->                                      
+		    <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+				</div>
+		        <input class="form-control" name="userName" id="userName"  placeholder="Name" type="text">
+		    </div> <!-- form-group// -->                                      
+		    <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+				 </div>
+		        <input class="form-control" name="userEmail" id="userEmail" placeholder="Email address" type="email">
+		    </div>
+		    <!-- form-group// -->
+		    <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+				 </div>
+		        <input class="form-control" name="userChannelLink" id="userChannelLink" placeholder="Your Youtube" type="search">
+		        <input type="button" class="btn btn-primary btn-block" id="searchMyChennel"  style="width: 50px;" value="검색" />
+		    </div>
+		    <div id="chResult">
+		    </div>
+		     <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+				</div>
+		        <select id="userChannelCategory">
+		        	<option value="0">select category</option>
+		        	<option value="1">영화 & 애니메이션</option>
+		        	<option value="2">자동차 & 오토바이</option>
+		        	<option value="10">음악</option>
+		        	<option value="17">스포츠</option>
+		        	<option value="19">여행 & 이벤트</option>
+		        	<option value="20">게임</option>	        
+		        	<option value="22">인물 & 블로그</option>	        
+		        	<option value="23">유머</option>	        
+		        	<option value="24">가족 엔터테이먼트</option>	        
+		        	<option value="25">뉴스 & 정치</option>	        
+		        	<option value="26">노하우 & 스타일</option>	        
+		        	<option value="27">교육</option>	        
+		        	<option value="28">과학 & 기술</option>	        
+		        	<option value="29">비영리 & 사회운동</option>	             
+		        </select>
+		    </div> <!-- form-group// -->  
+		    <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+				 </div>
+		        <input class="form-control" name="userRolemodelLink" id="userRolemodelLink" placeholder="Your Role Model" type="text">
+		        <input type="button" class="btn btn-primary btn-block" id="searchRoleChennel"  style="width: 50px;" value="검색" />
+		    </div>
+		    <div id="chRoleResult">
+		    </div>
+		    
+	
+		    <!--  <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+				</div>
+				<select class="custom-select" style="max-width: 120px;">
+				    <option selected="">+971</option>
+				    <option value="1">+972</option>
+				    <option value="2">+198</option>
+				    <option value="3">+701</option>
+				</select>
+		    	<input name="" class="form-control" placeholder="Phone number" type="text">
+		    </div> --> 
+		    <!-- form-group// -->
+		    <!--
+		    <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+				</div>
+				<select class="form-control">
+					<option selected=""> Select job type</option>
+					<option>Designer</option>
+					<option>Manager</option>
+					<option>Accaunting</option>
+				</select>
+			</div>--> 
+			<!-- form-group end.// --> 
+		    
+		    <div class="form-group">
+		        <input type="button" id="signupBtn" class="btn btn-primary btn-block" value="Create Account"> 
+		    </div> <!-- form-group// -->      
+		    <p class="text-center">Have an account? <a href="">Log In</a> </p>                                                                 
+		</form>
+	</c:when>
+	
+	<c:otherwise>
+		<form>
+			<div class="form-group input-group">
+				<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+				</div>
+		  	    	<input class="form-control" name="userId" id="userId"  placeholder="ID" type="text" value="${kakaoUser.userId }" disabled="disabled">
+		        	<input type="button" class="btn btn-primary btn-block" value="확인" id="idCheck"  style="width: 50px;"/>
+		    </div> <!-- form-group// -->
+		        <input class="form-control" name="userPassword" id="userPassword"  placeholder="Create password" type="hidden" value ="${kakaoUser.userPassword }">
+		        <input class="form-control" name="passwdCheck" id="passwdCheck"  placeholder="Repeat password" type="hidden" value ="${kakaoUser.userPassword }">             
+		    <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+				</div>
+		        <input class="form-control" name="userName" id="userName"  placeholder="Name" type="text" value="${kakaoUser.userName }">
+		    </div> <!-- form-group// -->                                      
+		    <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+				 </div>
+		        <input class="form-control" name="userEmail" id="userEmail" placeholder="Email address" type="email" value="${kakaoUser.userEmail}">
+		    </div>
+		    <!-- form-group// -->
+		    <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+				 </div>
+		        <input class="form-control" name="userChannelLink" id="userChannelLink" placeholder="Your Youtube" type="text">
+		        <input type="button" class="btn btn-primary btn-block" id="searchMyChennel"  style="width: 50px;" value="검색" />
+		    </div>
+		    <div id="chResult">
+		    </div>
+		     <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+				</div>
+		        <select id="userChannelCategory">
+		        	<option value="0">select category</option>
+		        	<option value="1">영화 & 애니메이션</option>
+		        	<option value="2">자동차 & 오토바이</option>
+		        	<option value="10">음악</option>
+		        	<option value="17">스포츠</option>
+		        	<option value="19">여행 & 이벤트</option>
+		        	<option value="20">게임</option>	        
+		        	<option value="22">인물 & 블로그</option>	        
+		        	<option value="23">유머</option>	        
+		        	<option value="24">가족 엔터테이먼트</option>	        
+		        	<option value="25">뉴스 & 정치</option>	        
+		        	<option value="26">노하우 & 스타일</option>	        
+		        	<option value="27">교육</option>	        
+		        	<option value="28">과학 & 기술</option>	        
+		        	<option value="29">비영리 & 사회운동</option>	             
+		        </select>
+		    </div> <!-- form-group// -->  
+		    <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+				 </div>
+		        <input class="form-control" name="userRolemodelLink" id="userRolemodelLink" placeholder="Your Role Model" type="text">
+		        <input type="button" class="btn btn-primary btn-block" id="searchRoleChennel"  style="width: 50px;" value="검색" />
+		    </div>
+		    <div id="chRoleResult">
+		    </div>
+		    
+	
+		    <!--  <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+				</div>
+				<select class="custom-select" style="max-width: 120px;">
+				    <option selected="">+971</option>
+				    <option value="1">+972</option>
+				    <option value="2">+198</option>
+				    <option value="3">+701</option>
+				</select>
+		    	<input name="" class="form-control" placeholder="Phone number" type="text">
+		    </div> --> 
+		    <!-- form-group// -->
+		    <!--
+		    <div class="form-group input-group">
+		    	<div class="input-group-prepend">
+				    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+				</div>
+				<select class="form-control">
+					<option selected=""> Select job type</option>
+					<option>Designer</option>
+					<option>Manager</option>
+					<option>Accaunting</option>
+				</select>
+			</div>--> 
+			<!-- form-group end.// --> 
+		    
+		    <div class="form-group">
+		        <input type="button" id="signupBtn" class="btn btn-primary btn-block" value="Create Account"> 
+		    </div> <!-- form-group// -->      
+		    <p class="text-center">Have an account? <a href="">Log In</a> </p>                                                                 
+		</form>
+	</c:otherwise>
 
-	    <!--  <div class="form-group input-group">
-	    	<div class="input-group-prepend">
-			    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-			</div>
-			<select class="custom-select" style="max-width: 120px;">
-			    <option selected="">+971</option>
-			    <option value="1">+972</option>
-			    <option value="2">+198</option>
-			    <option value="3">+701</option>
-			</select>
-	    	<input name="" class="form-control" placeholder="Phone number" type="text">
-	    </div> --> 
-	    <!-- form-group// -->
-	    <!--
-	    <div class="form-group input-group">
-	    	<div class="input-group-prepend">
-			    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
-			</div>
-			<select class="form-control">
-				<option selected=""> Select job type</option>
-				<option>Designer</option>
-				<option>Manager</option>
-				<option>Accaunting</option>
-			</select>
-		</div>--> 
-		<!-- form-group end.// --> 
-	    
-	    <div class="form-group">
-	        <input type="button" id="signupBtn" class="btn btn-primary btn-block" value="Create Account"> 
-	    </div> <!-- form-group// -->      
-	    <p class="text-center">Have an account? <a href="">Log In</a> </p>                                                                 
-</form>
+	</c:choose>
 </article>
 </div> <!-- card.// -->
 
@@ -184,7 +315,10 @@ and product landing pages</p>   <br>
  
  <script type="text/javascript">
 $(document).ready(function(){  
-
+	var tmpId = "";
+	var idCheck=0;
+	var chSearchCheck=1;
+	var chRoleSelectCheck=1;
 	function checkform(){
 			var userIdCheck = RegExp(/^[A-Za-z0-9]{8,20}$/);	
 			var userIdCheck = RegExp(/^[A-Za-z0-9]{8,20}$/);
@@ -196,6 +330,8 @@ $(document).ready(function(){
 			var passwdCheck = $("#passwdCheck").val();
 			var userName = $("#userName").val();
 			var userEmail = $("#userEmail").val();
+			var userChannelLink = $(".chSelect").attr("data");
+			var userRolemodelLink = $(".chRoleSelect").attr("data");
 			
 			if(userId==""){
 				alert("아이디을 입력해주세요");
@@ -234,17 +370,143 @@ $(document).ready(function(){
 				alert("이메일을 입력해주세요")
 				return false;
 			}
+			if(chSearchCheck!=1){
+				alert("채널을 선택해주세요")
+				return false;
+			}
+			if(chRoleSelectCheck!=1){
+				alert("롤모델을 선택해주세요")
+				return false;
+			}
+			if(userChannelLink==userRolemodelLink){
+				alert("본인 채널과 롤모델을 다르게 선택하세요")
+				chRoleSelectCheck=0
+				return false;
+			}
 			
 
-			else if (idx == false) {
-				alert("아이디 중복체크를 해주세요.");
-				return;
+			if (idCheck>0) {
+				if(tmpId != userId){
+					alert("아이디 중복체크를 해주세요.");
+					return false;
+				}
 			}
 			return true;	
 		}
 
 	
-	var idx=false
+	
+//	유튜브 채널 검색 메소드
+	$("#searchMyChennel").click(function(){
+		var userChannelLink = $("#userChannelLink").val()
+		$("#chResult").empty()
+		if(userChannelLink == "" || userChannelLink == null){
+			alert("검색어를 입력해주세요")
+		}else{
+			$.ajax({
+				url: "/auth/user/searchChannel",
+				type: "get",
+				data: {keyword:userChannelLink}, 
+				success: function(contents){ // 채널을 리스트로 받아옴
+					chSearchCheck = 0;
+					if(contents != null){
+						var str='<table class="table table-bordered">';
+						for(var i=0; i<contents.length; i++){
+								var content = contents[i].split("!@#");
+								str += '<tr class="chSelect" data="'+content[2]+'">';
+								str += '<td><img style="width:40px;height:40px;" src="'+content[0]+'"/></td>';
+								str += '<td>'+content[1]+"</td>";
+								str += '<td>'+content[3]+"</td>";
+								str += '</tr>';
+						}
+						str +='</table>';
+						$('#chResult').append(str);
+					}else{
+						alert('검색결과가 없습니다.');
+					}
+				},
+				error: function(){
+					alert("서버에러");
+				}
+			});
+		}
+	})
+	
+	
+	// 롤모델! 
+	$("#searchRoleChennel").click(function(){
+		var userRolemodelLink = $("#userRolemodelLink").val()
+		$("#chRoleResult").empty()
+		if(userRolemodelLink == "" || userRolemodelLink == null){
+			alert("검색어를 입력해주세요")
+		}else{
+			$.ajax({
+				url: "/auth/user/searchChannel",
+				type: "get",
+				data: {keyword:userRolemodelLink}, 
+				success: function(contents){ // 채널을 리스트로 받아옴
+					chRoleSelectCheck = 0;
+					if(contents != null){
+						var str='<table class="table table-bordered">';
+						for(var i=0; i<contents.length; i++){
+								var content = contents[i].split("!@#");
+								str += '<tr class="chRoleSelect" data="'+content[2]+'">';
+								str += '<td><img style="width:40px;height:40px;" src="'+content[0]+'"/></td>';
+								str += '<td>'+content[1]+"</td>";
+								str += '<td>'+content[3]+"</td>";
+								str += '</tr>';
+						}
+						str +='</table>';
+						$('#chRoleResult').append(str);
+					}else{
+						alert('검색결과가 없습니다.');
+					}
+				},
+				error: function(){
+					alert("서버에러");
+				}
+			});
+		}
+	})
+	
+	$(document).on("click",".chSelect",function(){
+			var link = $(this).attr("data")
+			var img = $(this).find("img").attr("src")
+			var title = $(this).find("td").eq(1).text()
+			var subscriber = $(this).find("td").eq(2).text()
+
+			$("#chResult").empty()
+			var str='<table class="table table-bordered">'
+				str += '<tr class="chSelect" data="'+link+'">';
+				str += '<td><img style="width:40px;height:40px;" src="'+img+'"/></td>';
+				str += '<td>'+title+"</td>";
+				str += '<td id="userSubscriber">'+subscriber+"</td>";
+				str += '</tr>';
+				str += '</table>'
+			$('#chResult').append(str);
+				chSearchCheck=1;							
+		})
+		
+	// 롤모델 리스트 클릭시
+	$(document).on("click",".chRoleSelect",function(){
+			var link = $(this).attr("data")
+			var img = $(this).find("img").attr("src")
+			var title = $(this).find("td").eq(1).text()
+			var subscriber = $(this).find("td").eq(2).text()
+
+			$("#chRoleResult").empty()
+			var str='<table class="table table-bordered">'
+				str += '<tr class="chRoleSelect" data="'+link+'">';
+				str += '<td><img style="width:40px;height:40px;" src="'+img+'"/></td>';
+				str += '<td>'+title+"</td>";
+				str += '<td>'+subscriber+"</td>";
+				str += '</tr>';
+				str += '</table>'
+			$('#chRoleResult').append(str);
+				chRoleSelectCheck=1;							
+		})
+	
+	
 	$("#idCheck").click(function(){
 		var userIdCheck = RegExp(/^[A-Za-z0-9]{8,20}$/);	
 		var userId = $('#userId').val();
@@ -262,7 +524,8 @@ $(document).ready(function(){
 				success: function(result){
 					if(result == "0"){
 						$('#idCheck').attr("readonly",true);
-						idx=true
+						idCheck++
+						tmpId = userId;
 						alert('사용가능한 아이디입니다!');
 					}else{
 						alert('중복된 아이디입니다.');
@@ -276,14 +539,17 @@ $(document).ready(function(){
 	});
 
 //  회원가입 버튼 클릭시 이벤트
-	$("#signupBtn").click(function(){				
+	$(document).on("click","#signupBtn",function(){				
 		var userId = $("#userId").val();
 		var userPassword = $("#userPassword").val();
 		var passwdCheck = $("#passwdCheck").val();
 		var userName = $("#userName").val();
 		var userEmail = $("#userEmail").val();
-		var userChannelLink = $("#userChannelLink").val();
-		var userRolemodelLink = $("#userRolemodelLink").val();
+		var userChannelLink = $(".chSelect").attr("data");
+		var userSubscriber = $("#userSubscriber").text();
+		var userChannelCategory = $("#userChannelCategory").val();
+		var userRolemodelLink = $(".chRoleSelect").attr("data");
+		
 		// 위의 조건을 다 만족했다면 ajax 로 회원가입 실행
 		if(checkform()){
 			alert(userId)
@@ -298,6 +564,8 @@ $(document).ready(function(){
 							"userName":userName,
 							"userEmail":userEmail,
 							"userChannelLink":userChannelLink,
+							"userChannelCategory": userChannelCategory,
+							"userSubscriber":userSubscriber,
 							"userRolemodelLink":userRolemodelLink
 						}),
 					dataType:"json", 
