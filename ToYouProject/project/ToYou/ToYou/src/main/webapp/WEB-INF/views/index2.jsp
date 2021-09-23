@@ -295,7 +295,7 @@
 				<br>
 				<br>
 				
-				<div class="col-sm-3 text-center">
+				<div class="col-sm-4 text-center">
 				
 				<div class="table title"><h4 class="mid-title-thin"><b>트위터 종합 인기 검색어</b></h4></div>
 					<table class="table table-sm col-md-3">
@@ -325,7 +325,7 @@
 					
 				</div>
 				
-				<div class="col-sm-5 text-center">
+				<div class="col-sm-4 text-center">
 				
 				<div class="table title"><h4 class="mid-title-thin"><b>트위터 최신 인기 검색어</b></h4></div>
 					<table class="table table-sm col-md-3">
