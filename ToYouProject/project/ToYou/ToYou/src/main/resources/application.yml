@@ -16,9 +16,9 @@ spring:
       
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://kic.cj7mov3fe2u4.ap-northeast-2.rds.amazonaws.com:3306/toyou?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://minju.cuv7xlg7mith.ap-northeast-2.rds.amazonaws.com/toyou?serverTimezone=Asia/Seoul
     username: admin
-    password: rladlscjf00!
+    password: Alswn9813!!
     hikari:
       connection-timeout: 20000
       minimum-idle: 10
