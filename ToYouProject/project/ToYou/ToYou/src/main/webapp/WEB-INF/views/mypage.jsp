@@ -138,9 +138,9 @@
 								<div class="row">
 									<div class="col-md-12 text-center cate_rec_title">
 									
-										<h4 class="title_m_tx text-left">커뮤니티관리 <div class="form-row float-right">
-										<button type="button" class="btn btn-default" onclick="location.href='/auth/community/communityForm'">커뮤니티 생성</button>
-										</div></h4>
+										<h4 class="title_m_tx text-left">커뮤니티관리
+										<button type="button" class="btn btn-default">커뮤니티 생성</button>
+										</h4>
 										<div class="container">
 										<hr><br>
 										<h5>내가 만든 커뮤니티 목록</h5>
@@ -170,7 +170,7 @@
 																<br>
 																<hr>
 																오늘 올라온 글<br> - 개
-															</p>
+															<p>
 															
 														</div>
 													</div>
@@ -201,7 +201,7 @@
 																<br>
 																<hr>
 																오늘 올라온 글<br> - 개
-															</p>
+															
 															
 														</div>
 													</div>
@@ -237,7 +237,7 @@
 																<br>
 																<hr>
 																오늘 올라온 글<br> - 개
-															</p>
+														
 															
 														</div>
 													</div>
@@ -250,6 +250,7 @@
 										</div>
 									</div>
 								</div>
+							</div>
 							</div>
 						<!-- -- 02 커뮤니티관리 탭 컨텐츠.end -->
 
@@ -303,26 +304,120 @@
 
 
 						<!-- -- 05 결제 대시보드 탭 컨텐츠.start -->
+						<!-- -- 05 결제 대시보드 탭 컨텐츠.start -->
 						<div class="tab-pane fade" id="comm05">
 							<div class="container">
 								<div class="row">
 									<div class="col-md-12 text-center cate_rec_title">
-										<h4 class="title_m_tx text-left">결제 대시보드</h4>
+									<!-- 성연추가 -->
+									
+									
+										<br>
+										
+										<h4 class="title_m_tx text-center">${principal.user.userName}님의 결제 대시보드</h4>
+										
+										<br>
 										<div class="container">
+										
 											<div class="row">
-												<div class="col-md-6">그래프1</div>
-												<div class="col-md-6">그래프2</div>
+												<!-- 사용중인 등급 / 전체 유저의 사용 서비스 조회 시작 -->
+												
+												<!-- 사용중인 등급 시작-->
+												<div class="col-sm-6">
+													<table class="table table-sm col-md-1 text-center">
+														<thead class="thead-light">
+															<tr>
+																<th scope="col">사용중인 등급</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td scope="row">
+																	<c:if test="${principal.user.userIspayment == 0}">
+																		<h1>BASIC</h1>
+																	</c:if>
+																	<c:if test="${principal.user.userIspayment == 1}">
+																		<h1>STANDARD</h1>
+																	</c:if>
+																	<c:if test="${principal.user.userIspayment == 2}">
+																		<h1>STARTUP</h1>
+																	</c:if>
+																	<c:if test="${principal.user.userIspayment == 3}">
+																		<h1>PROFESSIONAL</h1>
+																	</c:if>
+																</td>														
+															</tr>
+														</tbody>
+													</table>
+												</div>					
+												<!-- 사용중인 등급 종료 -->
+												
+												<!-- 전체 유저의 사용 서비스 조회 시작 -->
+												<div class="col-sm-6">
+													<table class="table table-sm col-md-1 text-center">
+														<thead class="thead-light">
+															<tr>
+																<th scope="col">전체 회원의 구독 현황</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td scope="row">
+																	<iframe src="http://192.168.56.101:5601/app/dashboards#/create?embed=true&_g=(filters:!(),query:(language:kuery,query:'usersubscriber%20'),refreshInterval:(pause:!t,value:0),time:(from:now%2Fd,to:now%2Fd))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!f),panels:!((embeddableConfig:(),gridData:(h:13,i:'940bb64c-c56d-42de-b81a-02d94366c871',w:50,x:0,y:0),id:'1f2019f0-1923-11ec-b24b-29703c6ca598',panelIndex:'940bb64c-c56d-42de-b81a-02d94366c871',type:lens,version:'7.10.2')),query:(language:kuery,query:''),timeRestore:!f,title:'',viewMode:edit)" height="300" width="300" frameborder="0"></iframe>
+																</td>														
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<!-- 전체 유저의 사용 서비스 조회 종료 -->
 											</div>
+											<!-- 사용중인 등급 / 전체 유저의 사용 서비스 조회 종료 -->
 
+											<!-- 결제내역조회 시작 -->
 											<div class="row">
-												<div class="col-md-6">그래프1</div>
-												<div class="col-md-6">그래프2</div>
+												<div class="col-sm-12 text-center">
+													<div class="table title"><h4 class="mid-title-thin">결제내역조회</h4></div>
+														<table class="table table-sm col-md-7">
+															<thead class="thead-light">
+																<tr>
+																	<th scope="col">no</th>
+																	<th scope="col">결제정보</th>
+																	<th scope="col">결제금액</th>
+																	<th scope="col">청구일시</th>
+																	<th scope="col">납부확인</th>
+																	<th scope="col">납부일시</th>
+																	<th scope="col">비고</th>
+																</tr>
+															</thead>
+															<tbody>
+																<c:forEach items="${payList}" var="list">
+																	<tr>
+																		<th scope="row">청구번호숫자시퀀스${list.productBuyLogNo}</th>
+																		<td>21-07 서비스 청구</td>
+																		<td>10,840</td>
+																		<td>2021-09-02</td>
+																		<td>Done</td>
+																		<td>2021-09-03</td>
+																		<td>카드종류</td>																	
+																	</tr>
+																</c:forEach>
+															</tbody>
+														</table>
+													</div>
+												</div>
+												<!-- 결제내역조회 종료 -->
 											</div>
 										</div>
+										
+										
+										
+										
+									<!-- 성연추가 -->
 									</div>
 								</div>
 							</div>
 						</div>
+						<!-- -- 05 결제 대시보드 탭 컨텐츠.end -->
 						<!-- -- 05 결제 대시보드 탭 컨텐츠.end -->
 
 
@@ -333,6 +428,7 @@
 
 			</div>
 		</div>
+		
 	</div>
 
 

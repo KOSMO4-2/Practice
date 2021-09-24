@@ -30,6 +30,13 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="true"></jsp:include> --%>
 <!------Header-------->
 
+
+
+
+
+
+<!-- ==================================================================================== -->
+<!-- 배너 시작 -->
 	<div class="block-31" style="position: relative;">
 		<div class="owl-carousel loop-block-31">
 			<div class="block-30 block-30-sm item"
@@ -55,67 +62,215 @@
 
 		</div>
 	</div>
-	
+<!-- 배너 종료 -->	
+<!-- ==================================================================================== -->
 
-	<div class="container">
-		<div class="row commu">
-			<div class="col-md-8 col-lg-6 mb-5">
-				<div class="commu_title_1">
-					<h3>요금안내</h3>
-				</div>
-				<div class="person-donate text-left">
-					<div class="donate-info">
-						<p>
-							요금안내
-							<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-						</p>
-					</div>
-				</div>
-			</div>
 
-			<div class="col-md-4 col-lg-6 mb-5">
-				<div class="person-donate text-left">
-					<div class="donate-info">
-						<h2>요금안내합시다</h2>
-						<!--<span class="time d-block mb-3">구독자수</span>
-						<p>
-							채널소개 <span class="text-success">$252</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a>
-						</p> -->
-					</div>
-				</div>
-			</div>
 
-			<div class="col-md-12 col-lg-12 md-5">
-				<div class="person-donate text-left"></div>
-			</div>
 
-		</div>
+
+
+
+
+
+	<div class="site-section border-top text-center col-lg-12">	
+		<br>
+		<br>		
+		
+		<h2>ToYou에서 이루세요, ${principal.user.userName}님의 꿈!</h2>
+		<br>
+		
+		<h5>더 많은 기능이 필요하신가요?<br><br>
+			적합한 요즘으로 효율적인 마케팅을 시작해보세요!<br><br>
+			구독해지는 언제든지 가능합니다.
+		</h5>
 	</div>
 
 
+							
 
+		
 
-	<div class="site-section border-top">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="commu_title_2">
-						<h3>여기에 메인페이지 최하단 멤버십 넣을까요</h3>
-					</div>
-<!-- 					<div class="person-donate2">
-						<img src="image/person_1.jpg" alt="Image placeholder"
-							class="img-left">
-						<div class="text_ch">
-							<a href="#">[채널명]</a>
-						</div> -->
+		
+<!-- ==================================================================================== -->
+<!-- 멤버쉽 요금안내 시작 -->
+
+	<div class="container">
+		<div class="row commu">
+			<div class="container cate_rank">
+				<div class="container">
+					<div class="row">
+						<!-- BASIC 시작 -->
+						<div class="col-sm-3 text-center">	
+							<div class="person-donate2">
+								<img src="/image/person_1.jpg" alt="Image placeholder"class="img-left">
+							</div>
+							<table class="table table-sm col-md-1 text-center">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">BASIC</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">FREE</th>
+									</tr>
+									<tr>
+										<td>
+											채널분석 <b>5</b>회<br>
+											관련채널분석 <b>5</b>회<br>
+											광고 제안 <b>5</b>회<br>
+											트랜드 키워드 조회<br>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center">
+										<%---------------------------------%>
+										<!---------------------------------->
+										<!---------------------------------->
+										<!-----------/auth 지우기----------->
+										<!---------------------------------->
+											<form action="/auth/mypage">
+										<!---------------------------------->
+										<!-----------/auth 지우기----------->
+										<!---------------------------------->
+										<!---------------------------------->
+										<%---------------------------------%>
+		         								<div class="form-group">
+		         									<button type="submit" class="btn btn-default">&#x2764;FREE&#x2764;</button>
+		         								</div>
+		        							</form>     
+		        						</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- BASIC 종료 -->
+						<!-- STANDARD 시작 -->
+						<div class="col-sm-3 text-center">	
+							<div class="person-donate2">
+								<img src="/image/person_2.jpg" alt="Image placeholder"class="img-left">
+							</div>		
+							<table class="table table-sm col-md-1 text-center">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">STANDARD</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">월 29,000원</th>
+									</tr>
+									<tr>
+										<td>
+											채널분석 <b>15</b>회<br>
+											관련채널분석 <b>15</b>회<br>
+											광고 제안 <b>15</b>회<br>
+											트랜드 키워드 조회<br>
+											시청자 분석 <b>10</b>회<br>
+											커뮤니티 보유 <b>1</b>개<br>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center">
+											<form action="/payMembershipForm">
+												<input type="hidden" value="STANDARD" name="gradeOfSubscriber">
+		         								<div class="form-group">
+		         									<button type="submit" class="btn btn-default">구독신청!</button>
+		         								</div>
+		        							</form>     
+		        						</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- STANDARD 종료 -->
+						<!-- STARTUP 시작 -->
+						<div class="col-sm-3 text-center">
+							<div class="person-donate2">
+								<img src="/image/person_3.jpg" alt="Image placeholder"class="img-left">
+							</div>
+							<table class="table table-sm col-md-1 text-center">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">STARTUP</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">월 59,000원</th>
+									</tr>
+									<tr>
+										<td>
+											채널분석 <b>30</b>회<br>
+											관련채널분석 <b>30</b>회<br>
+											광고 제안 <b>30</b>회<br>
+											트랜드 키워드 조회<br>
+											시청자 분석 <b>50</b>회<br>
+											커뮤니티 보유 <b>3</b>개<br>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center">
+											<form action="/payMembershipForm">
+												<input type="hidden" value="STARTUP" name="gradeOfSubscriber">
+		         								<div class="form-group">
+		         									<button type="submit" class="btn btn-default">구독신청!</button>
+		         								</div>
+		        							</form>     
+		        						</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- STARTUP 종료 -->
+						<!-- PROFESSIONAL 시작 -->
+						<div class="col-sm-3 text-center">
+							<div class="person-donate2">
+								<img src="/image/person_4.jpg" alt="Image placeholder"class="img-left">
+							</div>		
+							<table class="table table-sm col-md-1 text-center">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">PROFESSIONAL</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">월 99,000원</th>
+									</tr>
+									<tr>
+										<td>
+											채널분석 <b>무제한</b><br>
+											관련채널분석 <b>무제한</b><br>
+											광고 제안 <b>100</b>회<br>
+											트랜드 키워드 조회<br>
+											시청자 분석 <b>무제한</b><br>
+											커뮤니티 보유 <b>5</b>개<br>
+											<b>경쟁 유튜버 비교</b><br>
+										</td>
+									</tr>
+									<tr>
+										<td class="text-center">
+											<form action="/payMembershipForm">
+												<input type="hidden" value="PROFESSIONAL" name="gradeOfSubscriber">
+		         								<div class="form-group">
+		         									<button type="submit" class="btn btn-default">구독신청!</button>
+		         								</div>
+		        							</form>     
+		        						</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- PROFESSIONAL 종료 -->
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+<!-- 멤버쉽 요금안내 종료 -->
+<!-- ==================================================================================== -->
 
 
 
