@@ -378,10 +378,12 @@ $(document).ready(function(){
 				alert("롤모델을 선택해주세요")
 				return false;
 			}
-			if(userChannelLink==userRolemodelLink){
-				alert("본인 채널과 롤모델을 다르게 선택하세요")
-				chRoleSelectCheck=0
-				return false;
+			if((userChannelLink!=null && userRolemodelLink!=null)||(userChannelLink!="" && userRolemodelLink!="")){
+				if(userChannelLink==userRolemodelLink){
+					alert("본인 채널과 롤모델을 다르게 선택하세요")
+					chRoleSelectCheck=0
+					return false;
+				}
 			}
 			
 
@@ -478,8 +480,8 @@ $(document).ready(function(){
 			$("#chResult").empty()
 			var str='<table class="table table-bordered">'
 				str += '<tr class="chSelect" data="'+link+'">';
-				str += '<td><img style="width:40px;height:40px;" src="'+img+'"/></td>';
-				str += '<td>'+title+"</td>";
+				str += '<td><img id="userChannelImg" style="width:40px;height:40px;" src="'+img+'"/></td>';
+				str += '<td  id="userChannelName">'+title+"</td>";
 				str += '<td id="userSubscriber">'+subscriber+"</td>";
 				str += '</tr>';
 				str += '</table>'
@@ -549,6 +551,8 @@ $(document).ready(function(){
 		var userSubscriber = $("#userSubscriber").text();
 		var userChannelCategory = $("#userChannelCategory").val();
 		var userRolemodelLink = $(".chRoleSelect").attr("data");
+		var userChannelImg = $("#userChannelImg").attr("src")
+		var userChannelName = $("#userChannelName").text();
 		
 		// 위의 조건을 다 만족했다면 ajax 로 회원가입 실행
 		if(checkform()){
@@ -563,8 +567,10 @@ $(document).ready(function(){
 							"passwdCheck":passwdCheck,
 							"userName":userName,
 							"userEmail":userEmail,
+							"userChannelName":userChannelName,
 							"userChannelLink":userChannelLink,
 							"userChannelCategory": userChannelCategory,
+							"userChannelImg":userChannelImg,
 							"userSubscriber":userSubscriber,
 							"userRolemodelLink":userRolemodelLink
 						}),

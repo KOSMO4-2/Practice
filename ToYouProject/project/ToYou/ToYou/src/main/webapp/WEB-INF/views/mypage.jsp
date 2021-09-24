@@ -138,8 +138,9 @@
 								<div class="row">
 									<div class="col-md-12 text-center cate_rec_title">
 									
-										<h4 class="title_m_tx text-left">커뮤니티관리 <div class="form-row float-right"><button type="button" class="btn btn-default">커뮤니티 생성</button></h4>
-										</div>
+										<h4 class="title_m_tx text-left">커뮤니티관리 <div class="form-row float-right">
+										<button type="button" class="btn btn-default" onclick="location.href='/auth/community/communityForm'">커뮤니티 생성</button>
+										</div></h4>
 										<div class="container">
 										<hr><br>
 										<h5>내가 만든 커뮤니티 목록</h5>
@@ -376,6 +377,6 @@
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%><!-- Footer -->
-
+ 
 </body>
 </html>

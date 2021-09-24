@@ -95,15 +95,15 @@
 					<ul class="nav nav-tabs">
 						<!-- tab.start -->
 						<li class="nav-item"><a class="nav-link active"
-							data-toggle="tab" href="#">채널관리</a></li>
+							data-toggle="tab" href="#comm01">채널관리</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#">커뮤니티관리</a></li>
+							href="#comm02">커뮤니티관리</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#">친구관리</a></li>
+							href="#comm03">친구관리</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#">개인정보관리</a></li>
+							href="#comm04">개인정보관리</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#">결제 대시보드</a></li>
+							href="#comm05">결제 대시보드</a></li>
 					</ul>
 					<!-- tab.end -->
 
@@ -137,22 +137,119 @@
 							<div class="container">
 								<div class="row">
 									<div class="col-md-12 text-center cate_rec_title">
-										<h4 class="title_m_tx text-left">커뮤니티관리</h4>
+									
+										<h4 class="title_m_tx text-left">커뮤니티관리 <div class="form-row float-right"><button type="button" class="btn btn-default">커뮤니티 생성</button></h4>
+										</div>
 										<div class="container">
+										<hr><br>
+										<h5>내가 만든 커뮤니티 목록</h5>
 											<div class="row">
-												<div class="col-md-6">그래프1</div>
-												<div class="col-md-6">그래프2</div>
+											
+											<!-- jstl 반복할 곳                  -->
+												<div class="col-md-3" style="border: 2px solid black;background-color:#fcffb0;">
+													<div class="person-donate text-center">
+														<img src="${profile}" alt="Image placeholder"
+															class="img-fluid">
+														<div class="donate-info">
+															<p>
+																<br> <a href="#"
+																	class="link-underline fundraise-item"> 커뮤니티명 </a>
+																<br>500 명
+															</p>
+															<span class="time d-block mb-3">호스트명</span>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-2" style="border: 2px solid black">
+													<div class="person-donate">
+														
+														<div class="donate-info">
+															<p>
+																<br>  오늘 올라온 공지<br> - 개
+																<br>
+																<hr>
+																오늘 올라온 글<br> - 개
+															</p>
+															
+														</div>
+													</div>
+												</div>
+												<div class="col-md-1">
+												</div>
+												
+												<div class="col-md-3" style="border: 2px solid black;background-color:#fcffb0;">
+													<div class="person-donate text-center">
+														<img src="${profile}" alt="Image placeholder"
+															class="img-fluid">
+														<div class="donate-info">
+															<p>
+																<br> <a href="#"
+																	class="link-underline fundraise-item"> 커뮤니티명 </a>
+																<br>500 명
+															</p>
+															<span class="time d-block mb-3">호스트명</span>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-2" style="border: 2px solid black">
+													<div class="person-donate">
+														
+														<div class="donate-info">
+															<p>
+																<br>  오늘 올라온 공지<br> - 개
+																<br>
+																<hr>
+																오늘 올라온 글<br> - 개
+															</p>
+															
+														</div>
+													</div>
+												</div>
+											<!-- jstl 반복할 곳                  -->
+											
+											</div>
+											<hr><br>
+											<h5>내가 가입한 커뮤니티 목록</h5>
+											<div class="row">
+											
+											<!-- jstl 반복할 곳                  -->
+												<div class="col-md-3" style="border: 2px solid black;background-color:#fcffb0;">
+													<div class="person-donate text-center">
+														<img src="${profile}" alt="Image placeholder"
+															class="img-fluid">
+														<div class="donate-info">
+															<p>
+																<br> <a href="#"
+																	class="link-underline fundraise-item"> 커뮤니티명 </a>
+																<br>500 명
+															</p>
+															<span class="time d-block mb-3">호스트명</span>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-2" style="border: 2px solid black">
+													<div class="person-donate">
+														
+														<div class="donate-info">
+															<p>
+																<br>  오늘 올라온 공지<br> - 개
+																<br>
+																<hr>
+																오늘 올라온 글<br> - 개
+															</p>
+															
+														</div>
+													</div>
+												</div>
+											<!-- jstl 반복할 곳                  -->
+											
 											</div>
 
-											<div class="row">
-												<div class="col-md-6">그래프1</div>
-												<div class="col-md-6">그래프2</div>
-											</div>
+											
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 						<!-- -- 02 커뮤니티관리 탭 컨텐츠.end -->
 
 						<!-- -- 03 친구관리 탭 컨텐츠.start -->

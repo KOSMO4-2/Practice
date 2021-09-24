@@ -43,11 +43,18 @@ public class User {
 	@Column(nullable = false, length = 20)
 	private String userName;
 	
+	@Column(length = 100)
+	private String userChannelName;
+	
+	
 	@Column(length = 200)
 	private String userChannelLink;
 	
 	@Column(length = 400)
 	private String userChannelCategory;
+	
+	@Column(length=400)
+	private String userChannelImg;
 	
 
 	private String oauth; // 로그인 방식 ( 카카오 구글 )

@@ -58,8 +58,14 @@ public class UserApiController {
 	@PostMapping("/auth/user/joinProc")
 	public ResponseDTO<Integer> save(@RequestBody User user) { // username, password, email
 		
+		if(user.getUserChannelName()==""||user.getUserChannelName()==null) {
+			user.setUserChannelName(null);
+		}
 		if(user.getUserChannelLink()==""||user.getUserChannelLink()==null) {
 			user.setUserChannelLink(null);
+		}
+		if(user.getUserChannelImg()==""||user.getUserChannelImg()==null) {
+			user.setUserChannelImg(null);
 		}
 		if(user.getUserChannelCategory()=="" || user.getUserChannelCategory()==null) {
 			user.setUserChannelCategory(null);
