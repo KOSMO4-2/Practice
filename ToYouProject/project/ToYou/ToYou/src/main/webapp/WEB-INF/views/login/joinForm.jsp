@@ -332,6 +332,8 @@ $(document).ready(function(){
 			var userEmail = $("#userEmail").val();
 			var userChannelLink = $(".chSelect").attr("data");
 			var userRolemodelLink = $(".chRoleSelect").attr("data");
+
+			
 			
 			if(userId==""){
 				alert("아이디을 입력해주세요");
@@ -378,13 +380,16 @@ $(document).ready(function(){
 				alert("롤모델을 선택해주세요")
 				return false;
 			}
-			if((userChannelLink!=null && userRolemodelLink!=null)||(userChannelLink!="" && userRolemodelLink!="")){
+			
+			
+			if(!(typeof userChannelLink=="undefined"&& typeof userRolemodelLink=="undefined")){
 				if(userChannelLink==userRolemodelLink){
-					alert("본인 채널과 롤모델을 다르게 선택하세요")
-					chRoleSelectCheck=0
-					return false;
+					alert("본인 채널과 롤모델을 다르게 선택하세요");
+					chRoleSelectCheck=0;
+					return false
 				}
 			}
+			
 			
 
 			if (idCheck>0) {
@@ -394,6 +399,7 @@ $(document).ready(function(){
 				}
 			}
 			return true;	
+			
 		}
 
 	

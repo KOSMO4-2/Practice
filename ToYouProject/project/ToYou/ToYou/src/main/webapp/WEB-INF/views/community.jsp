@@ -151,6 +151,7 @@
 				<div class="col-lg-12">
 					<div class="commu_title_3">
 						<h3>커뮤니티 게시판</h3>
+						<button onclick="location.href='/auth/community/cmBoardWriteForm'">게시글 작성</button>
 					</div>
 					<form>
 						<table class="table table-striped commu_board">
