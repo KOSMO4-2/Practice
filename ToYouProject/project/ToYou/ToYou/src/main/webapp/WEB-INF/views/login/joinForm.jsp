@@ -409,6 +409,11 @@ $(document).ready(function(){
 				url: "/auth/user/searchChannel",
 				type: "get",
 				data: {keyword:userChannelLink}, 
+				beforeSend: function() {
+					$('#chResult').empty();
+					$('#chResult').append('<p class="text-warning">중복 검사 체크중입니다...</p>')
+						
+             },
 				success: function(contents){ // 채널을 리스트로 받아옴
 					chSearchCheck = 0;
 					if(contents != null){

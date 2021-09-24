@@ -109,7 +109,7 @@
 
 <!------------------------------- Tab contents START------------------------------->
 					<div class="tab-content">
-<!-- -- 01 채널관리 탭 컨텐츠.start -->
+						<!-- -- 01 채널관리 탭 컨텐츠.start -->
 						<div class="tab-pane fade show active" id="comm01">
 							<div class="container">
 								<div class="row">
@@ -137,10 +137,11 @@
 							<div class="container">
 								<div class="row">
 									<div class="col-md-12 text-center cate_rec_title">
-									
-										<h4 class="title_m_tx text-left">커뮤니티관리
-										<button type="button" class="btn btn-default">커뮤니티 생성</button>
-										</h4>
+
+
+										<h4 class="title_m_tx text-left">커뮤니티관리 <div class="form-row float-right"><a href='/auth/communityCreate'><button type="button" class="btn btn-default">커뮤니티 생성</button></a></h4>
+										</div>
+
 										<div class="container">
 										<hr><br>
 										<h5>내가 만든 커뮤니티 목록</h5>
@@ -251,7 +252,7 @@
 									</div>
 								</div>
 							</div>
-							</div>
+						
 						<!-- -- 02 커뮤니티관리 탭 컨텐츠.end -->
 
 						<!-- -- 03 친구관리 탭 컨텐츠.start -->
@@ -300,10 +301,8 @@
 							</div>
 						</div>
 						<!-- -- 04 개인정보관리 탭 컨텐츠.end -->
-
-
-
-						<!-- -- 05 결제 대시보드 탭 컨텐츠.start -->
+		
+		
 						<!-- -- 05 결제 대시보드 탭 컨텐츠.start -->
 						<div class="tab-pane fade" id="comm05">
 							<div class="container">
@@ -416,13 +415,9 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						
 						<!-- -- 05 결제 대시보드 탭 컨텐츠.end -->
 						<!-- -- 05 결제 대시보드 탭 컨텐츠.end -->
-
-
-
-
 					</div>
 				</div>
 
