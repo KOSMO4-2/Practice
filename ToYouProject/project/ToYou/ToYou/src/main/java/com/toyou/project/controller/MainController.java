@@ -13,11 +13,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.toyou.project.dao.loginmain.keyword.KeywordGoogleRepository;
+import com.toyou.project.model.CategoryAsmr;
+import com.toyou.project.model.CategoryBeauti;
+import com.toyou.project.model.CategoryCar;
+import com.toyou.project.model.CategoryFitness;
+import com.toyou.project.model.CategoryGame;
+import com.toyou.project.model.CategoryMukbang;
 import com.toyou.project.model.keywordGoogle;
 import com.toyou.project.model.keywordTiktok;
 import com.toyou.project.model.keywordTwitch;
 import com.toyou.project.model.keywordTwitter;
+import com.toyou.project.service.loginmain.category.CategoryAsmrService;
+import com.toyou.project.service.loginmain.category.CategoryBeautiService;
+import com.toyou.project.service.loginmain.category.CategoryCarService;
+import com.toyou.project.service.loginmain.category.CategoryFitnessService;
+import com.toyou.project.service.loginmain.category.CategoryGameService;
+import com.toyou.project.service.loginmain.category.CategoryMukbangService;
 import com.toyou.project.service.loginmain.keyword.KeywordGoogleService;
 import com.toyou.project.service.loginmain.keyword.KeywordTiktokService;
 import com.toyou.project.service.loginmain.keyword.KeywordTwitchService;
@@ -35,6 +46,19 @@ public class MainController {
 	private KeywordTwitchService keywordTwitchService;
 	@Autowired
 	private KeywordTwitterService keywordTwitterService;
+	@Autowired
+	private CategoryAsmrService categoryAsmrService;
+	@Autowired
+	private CategoryBeautiService categoryBeautiService;
+	@Autowired
+	private CategoryCarService categoryCarService;
+	@Autowired
+	private CategoryFitnessService categoryFitnessService;
+	@Autowired
+	private CategoryGameService categoryGameService;
+	@Autowired
+	private CategoryMukbangService categoryMukbangService;
+	
 	
 	
 	// 
@@ -71,6 +95,14 @@ public class MainController {
 		List<keywordTwitter> twitterFamousList = keywordTwitterService.SelectAllKeywordTwitterKind("famous");
 		List<keywordTwitter> twitterDurationList = keywordTwitterService.SelectAllKeywordTwitterKind("duration");
 		
+		List<CategoryAsmr> AsmrList = categoryAsmrService.SelectAllCategoryAsmr();
+		List<CategoryBeauti> BeautiList = categoryBeautiService.SelectAllCategoryBeauti();
+		List<CategoryCar> CarList = categoryCarService.SelectAllCategoryCar();
+		List<CategoryFitness> FitnessList = categoryFitnessService.SelectAllCategoryFitness();
+		List<CategoryGame> GameList = categoryGameService.SelectAllCategoryGame();
+		List<CategoryMukbang> MukbangList = categoryMukbangService.SelectAllCategoryMukbang();
+		
+		
 		model.addAttribute("googleList", googleList);
 		model.addAttribute("tiktokList", tiktokList);
 		model.addAttribute("twitchList", twitchList);
@@ -80,11 +112,22 @@ public class MainController {
 		model.addAttribute("twitterFamousList", twitterFamousList);
 		model.addAttribute("twitterDurationList", twitterDurationList);
 		
+		model.addAttribute("AsmrList", AsmrList);
+		model.addAttribute("BeautiList",BeautiList);
+		model.addAttribute("CarList",CarList);
+		model.addAttribute("FitnessList",FitnessList);
+		model.addAttribute("GameList",GameList);
+		model.addAttribute("MukbangList",MukbangList);
+		
+		
+		
 		return "index2";
 	}
 	
 	@GetMapping("/auth/payinfo")
 	public String payinfo() {
+		
+		
 		return "payinfo";
 	}
 	

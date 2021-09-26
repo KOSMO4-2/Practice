@@ -4,6 +4,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $(".col-sm-6").hide();
+
+    var elements = $(".col-sm-6");
+    var elementCount = elements.size();
+    var elementsToShow = 4;
+    var alreadyChoosen = ",";
+    var i = 0;
+    while (i < elementsToShow) {
+        var rand = Math.floor(Math.random() * elementCount);
+        if (alreadyChoosen.indexOf("," + rand + ",") < 0) {
+            alreadyChoosen += rand + ",";
+            elements.eq(rand).show();
+            ++i;
+        }
+    }
+});
+</script>
 <title>You To You &mdash; Youtuber Management</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -135,7 +155,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<div class="table title"><h3 class="mid-title-thin">카테고리1</h3></div>				
+					<div class="table title"><h3 class="mid-title-thin">ASMR</h3></div>				
 					<table class="table table-sm col-md-3 text-center">
 						<thead class="thead-dark">
 							<tr>
@@ -145,28 +165,21 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach items="${AsmrList}" var="list">
 							<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
+								<th scope="row">${list.categoryAsmrId}</th>
+								<td>${list.categoryAsmrName}</td>
+								<td>${list.categoryAsmrSubscribe}</td>
 							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>Larry</td>
-								<td>the Bird</td>
-							</tr>
+							</c:forEach>			
 						</tbody>
+						
 					</table>
 				</div>
 
 
 				<div class="col-sm-6">
-				<div class="table title"><h3 class="mid-title-thin">카테고리2</h3></div>
+				<div class="table title"><h3 class="mid-title-thin">뷰티</h3></div>
 					<table class="table table-sm col-md-3 text-center">
 						<thead class="thead-dark">
 							<tr>
@@ -176,21 +189,13 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:forEach items="${BeautiList}" var="list">
 							<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
+								<th scope="row">${list.categoryBeautiId}</th>
+								<td>${list.categoryBeautiName}</td>
+								<td>${list.categoryBeautiSubscribe}</td>
 							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>Larry</td>
-								<td>the Bird</td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 
@@ -198,7 +203,110 @@
 			</div>
 		</div>
 </div>
+<div class="container cate_rank">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6"> 
+					<div class="table title"><h3 class="mid-title-thin">게임</h3></div>				
+					<table class="table table-sm col-md-3 text-center">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">순위</th>
+								<th scope="col">채널명</th>
+								<th scope="col">구독자수</th>
+							</tr>
+						</thead>
+						<tbody>
+						<c:forEach items="${GameList}" var="list">
+							<tr>
+								<th scope="row">${list.categoryGameId}</th>
+								<td>${list.categoryGameName}</td>
+								<td>${list.categoryGameSubscribe}</td>
+							</tr>
+							</c:forEach>			
+						</tbody>
+						
+					</table>
+				</div>
 
+
+				<div class="col-sm-6">
+				<div class="table title"><h3 class="mid-title-thin">먹방</h3></div>
+					<table class="table table-sm col-md-3 text-center">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">순위</th>
+								<th scope="col">채널명</th>
+								<th scope="col">구독자수</th>
+							</tr>
+						</thead>
+						<tbody>
+						<c:forEach items="${MukbangList}" var="list">
+							<tr>
+								<th scope="row">${list.categoryMukbangId}</th>
+								<td>${list.categoryMukbangName}</td>
+								<td>${list.categoryMukbangSubscribe}</td>
+							</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+</div>
+<div class="container cate_rank">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="table title"><h3 class="mid-title-thin">운동</h3></div>				
+					<table class="table table-sm col-md-3 text-center">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">순위</th>
+								<th scope="col">채널명</th>
+								<th scope="col">구독자수</th>
+							</tr>
+						</thead>
+						<tbody>
+						<c:forEach items="${FitnessList}" var="list">
+							<tr>
+								<th scope="row">${list.categoryFitnessId}</th>
+								<td>${list.categoryFitnessName}</td>
+								<td>${list.categoryFitnessSubscribe}</td>
+							</tr>
+							</c:forEach>			
+						</tbody>
+						
+					</table>
+				</div>
+
+
+				<div class="col-sm-6">
+				<div class="table title"><h3 class="mid-title-thin">자동차</h3></div>
+					<table class="table table-sm col-md-3 text-center">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">순위</th>
+								<th scope="col">채널명</th>
+								<th scope="col">구독자수</th>
+							</tr>
+						</thead>
+						<tbody>
+						<c:forEach items="${CarList}" var="list">
+							<tr>
+								<th scope="row">${list.categoryCarId}</th>
+								<td>${list.categoryCarName}</td>
+								<td>${list.categoryCarSubscribe}</td>
+							</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+</div>
 
 	<div class="site-section border-top ssbt_text02">
 		<div class="container">
@@ -422,7 +530,7 @@
       </div>
 
       <div class="row">
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
+        <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
           <div class="post-entry">
             <a href="blog-single.html" class="mb-3 img-wrap">
               <img src="/image/img_4.jpg" alt="Image placeholder" class="img-fluid">
@@ -432,7 +540,7 @@
 <!--             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>-->            <p><a href="#" class="link-underline">Read More</a></p>
           </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
+        <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
           <div class="post-entry">
             <a href="blog-single.html" class="mb-3 img-wrap">
               <img src="/image/img_4.jpg" alt="Image placeholder" class="img-fluid">
@@ -442,7 +550,7 @@
 <!--             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>-->            <p><a href="#" class="link-underline">Read More</a></p>
           </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
+        <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
           <div class="post-entry">
             <a href="blog-single.html" class="mb-3 img-wrap">
               <img src="/image/img_4.jpg" alt="Image placeholder" class="img-fluid">
