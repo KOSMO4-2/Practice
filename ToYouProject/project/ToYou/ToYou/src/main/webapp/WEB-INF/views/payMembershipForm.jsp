@@ -68,7 +68,7 @@
 
 
 
-<form action="/paySuccess" method="get">
+<form action="/payGoGO" method="post">
 	<div class="site-section section-counter">
 		<div class="container">
 			<div class="block-48">			   			    
@@ -156,7 +156,8 @@
 								<tbody>
 									<tr>
 										<th scope="row">
-											<select style="width:120px;height:35px;text-align:center;">
+											<select style="width:120px;height:35px;text-align:center;" required>
+												<option selected disabled hidden value="">&nbsp;</option>
 												<option>현대카드</option>
 												<option>국민카드</option>
 												<option>롯데카드</option>
@@ -180,10 +181,12 @@
 								<tbody>
 									<tr>
 										<th scope="row">
-											<input type="text" maxlength="4" size="3" style = "text-align:center;">-
-											<input type="text" maxlength="4" size="3" style = "text-align:center;">-
-											<input type="password" maxlength="4" size="3" style = "text-align:center;" autocomplete="new-password">-
-											<input type="text" maxlength="4" size="3" style = "text-align:center;">
+											<!-- 숫자만 입력가능한 옵션 추가 -->
+											<input type="text" required maxlength="4" size="3.5" style = "text-align:center;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">-
+											<input type="text" required maxlength="4" size="3.5" style = "text-align:center;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">-
+											<!-- 비밀번호 자동 완성기능 해제 옵션 추가 -->
+											<input type="password" required maxlength="4" size="3.5" style = "text-align:center;" autocomplete="new-password" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">-
+											<input type="text" required maxlength="4" size="3.5" style = "text-align:center;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
 										</th>
 									</tr>
 								</tbody>
@@ -201,8 +204,35 @@
 								<tbody>
 									<tr>
 										<th scope="row">
-											MM&nbsp;:&nbsp;<input type="text" maxlength="2" size="2" style = "text-align:center;">&nbsp;&nbsp;/&nbsp;&nbsp; 
-											YY&nbsp;:&nbsp;<input type="text" maxlength="2" size="2" style = "text-align:center;">
+											MM&nbsp;:&nbsp;
+											<select style="width:50px;height:35px;text-align:center;" required>
+												<option selected disabled hidden value="">&nbsp;</option>
+												<option>01</option>
+												<option>02</option>
+												<option>03</option>
+												<option>04</option>
+												<option>05</option>
+												<option>06</option>
+												<option>07</option>
+												<option>08</option>
+												<option>09</option>
+												<option>10</option>
+												<option>11</option>
+												<option>12</option>
+											</select>
+											&nbsp;&nbsp;/&nbsp;&nbsp; 
+											YY&nbsp;:&nbsp;
+											<select style="width:50px;height:35px;text-align:center;" required>
+												<option selected disabled hidden value="">&nbsp;</option>
+												<option>21</option>
+												<option>22</option>
+												<option>23</option>
+												<option>24</option>
+												<option>25</option>
+												<option>26</option>
+												<option>27</option>
+												<option>28</option>
+											</select>
 										</th>
 									</tr>
 								</tbody>
@@ -220,7 +250,8 @@
 								<tbody>
 									<tr>
 										<th scope="row">
-											<input type="password" maxlength="3" size="3" style = "text-align:center;" autocomplete="new-password">
+											<!-- 숫자만 입력가능 + 비밀번호 자동완성기능 해제 -->
+											<input type="password" required maxlength="3" size="3" style = "text-align:center;" autocomplete="new-password" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
 										</th>
 									</tr>
 								</tbody>
@@ -235,9 +266,19 @@
 			 					<tbody>
 			 						<tr>
 										<td class="text-center">
-			        								<div class="form-group">
-			        									<button type="submit" class="btn btn-default">결제하기</button>
-			        								</div>
+	        								<div class="form-group">
+		        								<c:if test='${gradeOfSubscriber == "STANDARD"}'>
+		        									<input type="hidden" name="productNo" value="1" onchange="this.value = parseInt(this.value);">
+		        								</c:if>
+												<c:if test='${gradeOfSubscriber == "STARTUP"}'>
+													<input type="hidden" name="productNo" value="2" onchange="this.value = parseInt(this.value);">
+												</c:if>
+												<c:if test='${gradeOfSubscriber == "PROFESSIONAL"}'>
+													<input type="hidden" name="productNo" value="3" onchange="this.value = parseInt(this.value);">
+												</c:if>
+	        									<input type="hidden" name="userNo" value="${principal.user.userNo}" onchange="this.value = parseInt(this.value);">
+	        									<button type="submit" class="btn btn-default">결제하기</button>
+	        								</div>
 			       						</td>
 									</tr>
 								</tbody>
@@ -249,34 +290,6 @@
 		</div>
 	</div>
 </form>     
-
-
-   
-   
-	    <%-- 
-	    
-		[ 주문내역조회 ]
-	
-		이름
-		
-		주문번호
-		
-		결제날자
-	
-		결제정보
-		
-		결제금액
-		
-		결제수단 : 카드
-	
-		구독기간
-		
-		다음 결제일
-		
-		상품명
-		
-		--%>	
-
 
         
 <!-- Footer -->

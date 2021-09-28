@@ -9,6 +9,8 @@ import java.nio.ByteOrder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,8 @@ import com.toyou.project.model.CategoryCar;
 import com.toyou.project.model.CategoryFitness;
 import com.toyou.project.model.CategoryGame;
 import com.toyou.project.model.CategoryMukbang;
+import com.toyou.project.model.ProductBuyLog;
+import com.toyou.project.model.User;
 import com.toyou.project.model.keywordGoogle;
 import com.toyou.project.model.keywordTiktok;
 import com.toyou.project.model.keywordTwitch;
@@ -33,6 +37,8 @@ import com.toyou.project.service.loginmain.keyword.KeywordGoogleService;
 import com.toyou.project.service.loginmain.keyword.KeywordTiktokService;
 import com.toyou.project.service.loginmain.keyword.KeywordTwitchService;
 import com.toyou.project.service.loginmain.keyword.KeywordTwitterService;
+import com.toyou.project.service.pay.PayService;
+import com.toyou.project.service.user.UserService;
 
 
 @Controller
@@ -58,6 +64,10 @@ public class MainController {
 	private CategoryGameService categoryGameService;
 	@Autowired
 	private CategoryMukbangService categoryMukbangService;
+	@Autowired
+	private PayService payService;
+	@Autowired
+	private UserService userService;
 	
 	
 	
@@ -139,11 +149,27 @@ public class MainController {
 
 	
 	
+	// 개발 마무리 단계에서 /auth 삭제할 예정
 	@GetMapping("/auth/mypage")
-	public String myPage() {
-		// 개발 마무리 단계에서 /auth 삭제할 예정
+	public String myPage(ProductBuyLog productBuyLog, Authentication authentication, Model model) {
+		
+		UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+	    String username = userDetails.getUsername();
+	    User user = userService.userFind(username);
+	    int userNo = user.getUserNo();	    
+	    
+	    //--------------------------------------------------------------------
+	    // 성연 마이페이지 시작
+	    // ▼ 결제정보 불러오는 부분
+	    List<ProductBuyLog> productBuyLogList = payService.SelectAllProductBuyLogUserNo(userNo);		
+	    model.addAttribute("payInfo", user.getUserIspayment());
+		model.addAttribute("productBuyLogList", productBuyLogList);
+		// 성연 마이페이지 종료
+		//--------------------------------------------------------------------
+		
 		return "mypage";
 	}
+	
 	
 	
 	@GetMapping("/auth/channelSearch")

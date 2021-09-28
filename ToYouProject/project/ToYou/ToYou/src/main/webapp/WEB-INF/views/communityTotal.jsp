@@ -48,12 +48,19 @@
 							
 							<!-- <p style="display: inline-block;"><a href="https://vimeo.com/channels/staffpicks/93951774"  data-fancybox class="ftco-play-video d-flex"><span class="play-icon-wrap align-self-center mr-4"><span class="ion-ios-play"></span></span> <span class="align-self-center">Watch Video</span></a></p> -->
 							
+			<!-- 성연추가 ELK 자동완성검색-->		
+			<form action="/elasticSearchPrefix" method="post">		
                <div class="input-group">
-                   <input type="text" class="form-control" placeholder="커뮤니티 검색">
+                   <input type="text" id="searchKeyword" name="searhValue" list="elastielist" class="form-control" placeholder="커뮤니티 검색">
+						<datalist id="elastielist" class="searchResult">
+							<!-- ajax -->
+						</datalist>
                    <span class="input-group-btn">
                    <button class="btn btn-secondary" type="button">검색</button>
                    </span>
-              </div> 
+               </div> 
+            </form>
+			<!-- 성연추가 ELK 자동완성검색-->				
 						</div>
 					</div>
 				</div>
@@ -430,6 +437,44 @@
 <%-- <%@ include file="layout/footer.jsp"%> --%>
 
 <jsp:include page="layout/footer.jsp" flush="true"></jsp:include>
- 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function() {
+
+	// 성연추가 ELK 커뮤니티 검색 자동완성
+	// Ajax 커뮤티니목록 검색
+	$('#searchKeyword').keyup(function(event){
+
+		$.ajax({
+             url: "/elasticSearchPrefix",
+             type: "POST",
+             dataType: "JSON",
+             data: { "searhValue" : $('#searchKeyword').val()},
+             success: function(data) {                 
+
+              	test = data['hits']
+             	test2 = test['hits']
+             	
+             	event.preventDefault();
+         		event.stopPropagation();
+
+          		$('.communitytitle').remove();
+          		
+            	for(var i=0; i<test2.length; i++){
+             		$(".searchResult").append("<option class ='communitytitle'>" + test2[i]['_source']['communitytitle'] +"</option>" );
+             	}
+             }
+		});
+	});
+
+	
+});
+
+
+</script>
+
+
   </body>
 </html>

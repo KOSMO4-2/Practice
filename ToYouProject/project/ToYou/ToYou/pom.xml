@@ -16,6 +16,9 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
+		<!-- 성연추가 -->
+		<elasticsearch.version>7.6.2</elasticsearch.version>
+		<!-- 성연추가 -->
 	</properties>
 	<dependencies>
 	<!-- 추가 라이브러리 시작 -->
@@ -40,7 +43,22 @@
 	  <artifactId>jstl</artifactId>
 	</dependency>
 	
-		<!-- 추가 라이브러리 종료 -->
+	<!-- 엘라스틱 - 성연 -->
+	<dependency>
+	  <groupId>org.elasticsearch.client</groupId>
+	  <artifactId>elasticsearch-rest-high-level-client</artifactId>
+	</dependency>
+	
+	<!-- json - 성연 -->
+	<dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20180813</version>
+	</dependency>
+
+	
+	
+	<!-- 추가 라이브러리 종료 -->
 		
 		<dependency>
   			<groupId>org.springframework.boot</groupId>

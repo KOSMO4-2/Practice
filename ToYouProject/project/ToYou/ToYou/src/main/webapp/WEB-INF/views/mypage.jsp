@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- 성연추가) jstl 문자열 자르기 -->
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!-- 성연추가) jstl 문자열 자르기 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -332,16 +335,16 @@
 														<tbody>
 															<tr>
 																<td scope="row">
-																	<c:if test="${principal.user.userIspayment == 0}">
+																	<c:if test="${payInfo == 0}">
 																		<h1>BASIC</h1>
 																	</c:if>
-																	<c:if test="${principal.user.userIspayment == 1}">
+																	<c:if test="${payInfo == 1}">
 																		<h1>STANDARD</h1>
 																	</c:if>
-																	<c:if test="${principal.user.userIspayment == 2}">
+																	<c:if test="${payInfo == 2}">
 																		<h1>STARTUP</h1>
 																	</c:if>
-																	<c:if test="${principal.user.userIspayment == 3}">
+																	<c:if test="${payInfo == 3}">
 																		<h1>PROFESSIONAL</h1>
 																	</c:if>
 																</td>														
@@ -362,7 +365,7 @@
 														<tbody>
 															<tr>
 																<td scope="row">
-																	<iframe src="http://192.168.56.101:5601/app/dashboards#/create?embed=true&_g=(filters:!(),query:(language:kuery,query:'usersubscriber%20'),refreshInterval:(pause:!t,value:0),time:(from:now%2Fd,to:now%2Fd))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!f),panels:!((embeddableConfig:(),gridData:(h:13,i:'940bb64c-c56d-42de-b81a-02d94366c871',w:50,x:0,y:0),id:'1f2019f0-1923-11ec-b24b-29703c6ca598',panelIndex:'940bb64c-c56d-42de-b81a-02d94366c871',type:lens,version:'7.10.2')),query:(language:kuery,query:''),timeRestore:!f,title:'',viewMode:edit)" height="300" width="300" frameborder="0"></iframe>
+																	<iframe src="http://192.168.56.101:5601/app/dashboards#/create?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now%2Fd,to:now%2Fd))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:true,useMargins:!t),panels:!((embeddableConfig:(),gridData:(h:10,i:'4c0778d7-22bb-42e9-b988-2b328793030c',w:50,x:0,y:0),id:dd8a20f0-2037-11ec-86b0-d73776e2cdf4,panelIndex:'4c0778d7-22bb-42e9-b988-2b328793030c',type:lens,version:'7.10.2')),query:(language:kuery,query:''),timeRestore:!f,title:'',viewMode:edit)&hide-filter-bar=true" height="300" width="300" frameborder="0"></iframe>
 																</td>														
 															</tr>
 														</tbody>
@@ -379,27 +382,42 @@
 														<table class="table table-sm col-md-7">
 															<thead class="thead-light">
 																<tr>
-																	<th scope="col">no</th>
-																	<th scope="col">결제정보</th>
+																	<th scope="col">승인번호</th>
+																	<th scope="col">구매정보</th>
 																	<th scope="col">결제금액</th>
-																	<th scope="col">청구일시</th>
+																	<th scope="col">결제시간</th>
 																	<th scope="col">납부확인</th>
-																	<th scope="col">납부일시</th>
-																	<th scope="col">비고</th>
 																</tr>
 															</thead>
-															<tbody>
-																<c:forEach items="${payList}" var="list">
-																	<tr>
-																		<th scope="row">청구번호숫자시퀀스${list.productBuyLogNo}</th>
-																		<td>21-07 서비스 청구</td>
-																		<td>10,840</td>
-																		<td>2021-09-02</td>
-																		<td>Done</td>
-																		<td>2021-09-03</td>
-																		<td>카드종류</td>																	
-																	</tr>
-																</c:forEach>
+															<tbody id="hungryList">
+															
+
+															<c:forEach items="${productBuyLogList}" var="list">
+															
+																<tr>
+																	<th scope="row">${list.productBuyLogNo}</th>
+																	<td>
+																		<c:set var="TextValue" value="${list.productBuyLogDate }"/>
+																		${fn:substring(TextValue,2,4) }년
+																		${fn:substring(TextValue,5,7) }월&nbsp;
+																		<span style="color:red">
+																		<c:if test='${list.productNo == "1"}'>STANDARD</c:if>
+																		<c:if test='${list.productNo == "2"}'>STARTUP</c:if>
+																		<c:if test='${list.productNo == "3"}'>PROFESSIONAL</c:if>
+																		</span>&nbsp;
+																		1개월																	
+																	</td>
+																	<td>
+																		<c:if test='${list.productNo == "1"}'>29,000원</c:if>
+																		<c:if test='${list.productNo == "2"}'>59,000원</c:if>
+																		<c:if test='${list.productNo == "3"}'>99,000원</c:if>																	
+																	</td>
+																	<td>${list.productBuyLogDate}</td>
+																	<td>Done</td>															
+																</tr>
+															</c:forEach>
+															
+															
 															</tbody>
 														</table>
 													</div>
@@ -407,8 +425,6 @@
 												<!-- 결제내역조회 종료 -->
 											</div>
 										</div>
-										
-										
 										
 										
 									<!-- 성연추가 -->
@@ -425,40 +441,6 @@
 		</div>
 		
 	</div>
-
-
-
-	<!--         <div class="col-md-6 pl-md-5">
-
-          <div class="form-volunteer">
-            
-            <h2>Be A Volunteer Today</h2>
-            <form action="#" method="post">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control py-2" id="name" placeholder="Enter your name">
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control py-2" id="email" placeholder="Enter your email">
-              </div>
-              <div class="form-group">
-                <label for="v_message">Email</label>
-                <textarea name="v_message" id="" cols="30" rows="3" class="form-control py-2" placeholder="Write your message"></textarea>
-                <input type="text" class="form-control py-2" id="email">
-              </div>
-              <div class="form-group">
-                <input type="submit" class="btn btn-white px-5 py-2" value="Send">
-              </div>
-            </form>
-          </div>
-        </div> -->
-
-	<!--       </div>
-    </div>
-
-  </div> -->
-	<!-- .featured-donate -->
 
 
 
