@@ -282,22 +282,319 @@
 						<!-- -- 03 친구관리 탭 컨텐츠.end -->
 
 
-						<!-- -- 04 개인정보관리 탭 컨텐츠.start -->
-						<div class="tab-pane fade" id="comm04">
+	<!-- -- 04 개인정보관리 탭 컨텐츠.start -->
+						<div class="tab-pane fade show " id="comm04">
+
 							<div class="container">
+
 								<div class="row">
 									<div class="col-md-12 text-center cate_rec_title">
 										<h4 class="title_m_tx text-left">개인정보관리</h4>
+
 										<div class="container">
 											<div class="row">
-												<div class="col-md-6">그래프1</div>
+												<div class="col-md-6 idpw">
+													<div class="card bg-light ">
+														<article class="card-body mx-auto"
+															style="max-width: 1000px;">
+															<h5 class="card-title mt-3 text-left">회원정보 수정</h5>
+															<!-- 																<p class="text-center">Get started with your free
+																	account</p> -->
+															<!-- 																<p>
+																	<a
+																		href="https://kauth.kakao.com/oauth/authorize?client_id=9678b56f9afb8f96a880f7b1bdaee036&redirect_uri=http://localhost:8003/auth/kakao/callback&response_type=code"
+																		class="btn btn-block btn-twitter"> <i
+																		class="fab fa-twitter"></i>   Login via kakao
+																	</a>
+																</p> -->
+															<!-- 																<p class="divider-text">
+																	<span class="bg-light">OR</span>
+																</p> -->
+															<c:choose>
+																<c:when test="${principal.user.oauth != 'kakao' }">
+																	<form>
+																		<div class="form-group input-group">
+																			<div class="input-group-prepend">
+																				<span class="input-group-text"> <i
+																					class="fa fa-user"><h5 class="mypageinfotext">ID</h5></i>
+																				</span>
+																			</div>
+																			<input class="form-control" name="userNo" id="userNo"
+																				placeholder="ID" type="hidden" value="${principal.user.userNo }" disabled="disabled">
+																			<input class="form-control" name="userId" id="userId"
+																				placeholder="ID" type="text" value="${principal.user.userId }" disabled="disabled">
+																		</div>
+																		<!-- form-group// -->
+																		<div class="form-group input-group">
+																			<div class="input-group-prepend">
+																				<span class="input-group-text"> <i
+																					class="fa fa-lock"><h5 class="mypageinfotext">새로운 비밀번호</h5></i>
+																				</span>
+																			</div>
+																			<input class="form-control" name="userPassword"
+																				id="userPassword" placeholder="Create password"
+																				type="password">
+																		</div>
+																		<!-- form-group// -->
+																		<div class="form-group input-group">
+																			<div class="input-group-prepend">
+																				<span class="input-group-text"> <i
+																					class="fa fa-lock"><h5 class="mypageinfotext">새로운 비밀번호 확인</h5></i>
+																				</span>
+																			</div>
+																			<input class="form-control" name="passwdCheck"
+																				id="passwdCheck" placeholder="Repeat password"
+																				type="password">
+																		</div>
+																		<!-- form-group// -->
+																		<div class="form-group input-group">
+																			<div class="input-group-prepend">
+																				<span class="input-group-text"><i
+																					class="fa fa-lock"><h5 class="mypageinfotext">이름</h5></i>
+																				</span>
+																			</div>	
+																			<input class="form-control" name="userName"
+																				id="userName" placeholder="Name" value="${principal.user.userName }" type="text">
+																		</div>
+																		<!-- form-group// -->
+																		<div class="form-group input-group">
+																			<div class="input-group-prepend">
+																				<span class="input-group-text"> <i
+																					class="fa fa-envelope"><h5 class="mypageinfotext">이메일</h5></i>
+																				</span>
+																			</div>
+																			<input class="form-control" name="userEmail"
+																				id="userEmail" placeholder="Email address" value="${principal.user.userEmail }"
+																				type="email">
+																		</div>
+																		<!-- form-group// -->
+																		<div class="form-group input-group">
+																			<div class="input-group-prepend">
+																				<span class="input-group-text"> <i
+																					class="fa fa-envelope"><h5 class="mypageinfotext">나의 유튜브 채널</h5></i>
+																				</span>
+																			</div>
+																			<input class="form-control" name="userChannelName" value="${userChannelName }" type="text" disabled="disabled">
+																				</div>
+																		<div class="form-group input-group">
+																			<div class="input-group-prepend">
+																				<span class="input-group-text"> <i
+																					class="fa fa-envelope"><h5 class="mypageinfotext">내 채널 변경</h5></i>
+																				</span>
+																			</div>
+																			<input class="form-control" name="userChannelLink"
+																				id="userChannelLink" placeholder="Your Youtube"
+																				type="search"> 
+																				
+																				<input type="button"
+																				class="btn btn-primary btn-block"
+																				id="searchMyChennel" style="width: 50px;" value="검색" />
+																		</div>
+																		
+																		<div id="chResult">	</div>
+																	
+																		<div class="form-group input-group">
+																			<div class="input-group-prepend">
+																				<span class="input-group-text"> <i
+																					class="fa fa-lock"><h5 class="mypageinfotext">유튜브 카테고리</h5></i>
+																				</span>
+																			</div>
+																			<select id="userChannelCategory">
+																				<option value="0" >select category</option>
+																				<option value="1" <c:if test="${principal.user.userChannelCategory == 1}">selected</c:if>>영화 & 애니메이션</option>
+																				<option value="2" <c:if test="${principal.user.userChannelCategory == 2}">selected</c:if>>자동차 & 오토바이</option>
+																				<option value="10"<c:if test="${principal.user.userChannelCategory == 10}">selected</c:if>>음악</option>
+																				<option value="17"<c:if test="${principal.user.userChannelCategory == 17}">selected</c:if>>스포츠</option>
+																				<option value="19"<c:if test="${principal.user.userChannelCategory == 19}">selected</c:if>>여행 & 이벤트</option>
+																				<option value="20"<c:if test="${principal.user.userChannelCategory == 20}">selected</c:if>>게임</option>
+																				<option value="22"<c:if test="${principal.user.userChannelCategory == 22}">selected</c:if>>인물 & 블로그</option>
+																				<option value="23"<c:if test="${principal.user.userChannelCategory == 23}">selected</c:if>>유머</option>
+																				<option value="24"<c:if test="${principal.user.userChannelCategory == 24}">selected</c:if>>가족 엔터테이먼트</option>
+																				<option value="25"<c:if test="${principal.user.userChannelCategory == 25}">selected</c:if>>뉴스 & 정치</option>
+																				<option value="26"<c:if test="${principal.user.userChannelCategory == 26}">selected</c:if>>노하우 & 스타일</option>
+																				<option value="27"<c:if test="${principal.user.userChannelCategory == 27}">selected</c:if>>교육</option>
+																				<option value="28"<c:if test="${principal.user.userChannelCategory == 28}">selected</c:if>>과학 & 기술</option>
+																				<option value="29"<c:if test="${principal.user.userChannelCategory == 29}">selected</c:if>>비영리 & 사회운동</option>
+																			</select>
+
+																		</div>
+
+																		
+																																				<!-- form-group// -->
+										 								<div class="form-group input-group">
+																			<div class="input-group-prepend">
+																				<span class="input-group-text"> <i
+																					class="fa fa-envelope"><h5 class="mypageinfotext">나의 롤모델</h5></i>
+																				</span>
+																			</div>
+																			
+																			<input class="form-control"
+																				type="text" disabled="disabled" value="${principal.user.userRolemodelLink }">
+																		</div>
+																		
+																		
+																		<!-- form-group// -->
+																		<div class="form-group input-group">
+																			<div class="input-group-prepend">
+																				<span class="input-group-text"> <i
+																					class="fa fa-envelope"><h5 class="mypageinfotext">롤모델 변경</h5></i>
+																				</span>
+																			</div>
+																			
+																			<input class="form-control" name="userRolemodelLink"
+																				id="userRolemodelLink" placeholder="Your Role Model"
+																				type="text"> 
+																				
+																				<input type="button"
+																				class="btn btn-primary btn-block"
+																				id="searchRoleChennel" style="width: 50px;"
+																				value="검색" />
+																		</div>
+																		
+																		
+																		<div id="chRoleResult"></div>
+
+																	</form>
+																		<div class="form-group">
+																			<input type="button" id="mypageInfoModify"
+																				class="btn btn-primary btn-block"
+																				value="수정하기">
+																		</div>
+																		
+																</c:when>
+																<c:otherwise>
+																			<form>
+																				<div class="form-group input-group">
+																					<div class="input-group-prepend">
+																					    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+																					</div>
+																			  	    	<input class="form-control" name="userId" id="userId"  placeholder="ID" type="text">
+																			        	<input type="button" class="btn btn-primary btn-block" value="확인" id="idCheck"  style="width: 50px;"/>
+																			    </div> <!-- form-group// -->
+																			    <div class="form-group input-group">
+																			    	<div class="input-group-prepend">
+																					    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+																					</div>
+																			        <input class="form-control" name="userPassword" id="userPassword"  placeholder="Create password" type="password">
+																			    </div> <!-- form-group// -->
+																			    <div class="form-group input-group">
+																			    	<div class="input-group-prepend">
+																					    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+																					</div>
+																			        <input class="form-control" name="passwdCheck" id="passwdCheck"  placeholder="Repeat password" type="password">
+																			    </div> <!-- form-group// -->                                      
+																			    <div class="form-group input-group">
+																			    	<div class="input-group-prepend">
+																					    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+																					</div>
+																			        <input class="form-control" name="userName" id="userName"  placeholder="Name" type="text">
+																			    </div> <!-- form-group// -->                                      
+																			    <div class="form-group input-group">
+																			    	<div class="input-group-prepend">
+																					    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+																					 </div>
+																			        <input class="form-control" name="userEmail" id="userEmail" placeholder="Email address" type="email">
+																			    </div>
+																			    <!-- form-group// -->
+																			    <div class="form-group input-group">
+																			    	<div class="input-group-prepend">
+																					    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+																					 </div>
+																			        <input class="form-control" name="userChannelLink" id="userChannelLink" placeholder="Your Youtube" type="search">
+																			        <input type="button" class="btn btn-primary btn-block" id="searchMyChennel"  style="width: 50px;" value="검색" />
+																			    </div>
+																			    <div id="chResult">
+																			    </div>
+																			     <div class="form-group input-group">
+																			    	<div class="input-group-prepend">
+																					    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+																					</div>
+																			        <select id="userChannelCategory" name="userChannelCategory">
+																			        	<option value="0">select category</option>
+																			        	<option value="1">영화 & 애니메이션</option>
+																			        	<option value="2">자동차 & 오토바이</option>
+																			        	<option value="10">음악</option>
+																			        	<option value="17">스포츠</option>
+																			        	<option value="19">여행 & 이벤트</option>
+																			        	<option value="20">게임</option>	        
+																			        	<option value="22">인물 & 블로그</option>	        
+																			        	<option value="23">유머</option>	        
+																			        	<option value="24">가족 엔터테이먼트</option>	        
+																			        	<option value="25">뉴스 & 정치</option>	        
+																			        	<option value="26">노하우 & 스타일</option>	        
+																			        	<option value="27">교육</option>	        
+																			        	<option value="28">과학 & 기술</option>	        
+																			        	<option value="29">비영리 & 사회운동</option>	             
+																			        </select>
+																			    </div> <!-- form-group// -->  
+																			    <div class="form-group input-group">
+																			    	<div class="input-group-prepend">
+																					    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+																					 </div>
+																			        <input class="form-control" name="userRolemodelLink" id="userRolemodelLink" placeholder="Your Role Model" type="text">
+																			        <input type="button" class="btn btn-primary btn-block" id="searchRoleChennel"  style="width: 50px;" value="검색" />
+																			    </div>
+																			    <div id="chRoleResult">
+																			    </div>
+																			    
+																		
+																			    <!--  <div class="form-group input-group">
+																			    	<div class="input-group-prepend">
+																					    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+																					</div>
+																					<select class="custom-select" style="max-width: 120px;">
+																					    <option selected="">+971</option>
+																					    <option value="1">+972</option>
+																					    <option value="2">+198</option>
+																					    <option value="3">+701</option>
+																					</select>
+																			    	<input name="" class="form-control" placeholder="Phone number" type="text">
+																			    </div> --> 
+																			    <!-- form-group// -->
+																			    <!--
+																			    <div class="form-group input-group">
+																			    	<div class="input-group-prepend">
+																					    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+																					</div>
+																					<select class="form-control">
+																						<option selected=""> Select job type</option>
+																						<option>Designer</option>
+																						<option>Manager</option>
+																						<option>Accaunting</option>
+																					</select>
+																				</div>--> 
+																				<!-- form-group end.// --> 
+																			    
+																			</form>																	
+																			    <div class="form-group">
+																			        <input type="button" id="mypageInfoModify" class="btn btn-primary btn-block" value="Create Account"> 
+																			    </div> <!-- form-group// -->      
+																			    <p class="text-center">Have an account? <a href="">Log In</a> </p>                                                                 
+																</c:otherwise>
+															</c:choose>
+														</article>
+													</div>
+													<!-- card.// -->
+
+
+													<!--container end.//-->
+
+												</div>
+												<!-- 	<div class="col-md-6">그래프2</div> -->
+											</div>
+
+<!-- 											<div class="row">
+												<div class="col-md-6 idpw"></div>
 												<div class="col-md-6">그래프2</div>
 											</div>
 
-											<div class="row">
-												<div class="col-md-6">그래프1</div>
-												<div class="col-md-6">그래프2</div>
+ -->
+											<div class="row float-right">
+												<p>
+													<button type="button" id="deleteBtn" class="btn btn-danger btn-block bte">회원탈퇴</button>
+												</p>
 											</div>
+											
 										</div>
 									</div>
 								</div>
@@ -433,7 +730,6 @@
 							</div>
 						
 						<!-- -- 05 결제 대시보드 탭 컨텐츠.end -->
-						<!-- -- 05 결제 대시보드 탭 컨텐츠.end -->
 					</div>
 				</div>
 
@@ -450,6 +746,300 @@
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%><!-- Footer -->
+  	<script type="text/javascript">
+		$(document).ready(function() {
+
+							var idCheck = 0;
+							var chSearchCheck = 1;
+							var chRoleSelectCheck = 1;
+
+							function checkform() {
+								var userPwCheck = RegExp(/^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/);
+								var userNameCheck = RegExp(/^[ㄱ-ㅎ가-힣a-zA-Z]{1,10}$/);
+								/*  RegExp(/^[A-Za-z0-9]{8,20}$/); */
+								var userPassword = $("#userPassword").val();
+								var passwdCheck = $("#passwdCheck").val();
+								var userName = $("#userName").val();
+								var userEmail = $("#userEmail").val();
+								var userChannelLink = $(".chSelect").attr(
+										"data");
+								var userRolemodelLink = $(".chRoleSelect").attr("data");
+
+								if (userPassword == "") {
+									alert("패스워드를 입력해주세요");
+									return false;
+								}
+								if (!userPwCheck.test(userPassword)) {
+									alert("(패스워드 양식 오류) - [영어 소문자, 숫자와 특수기호 필히 입력],[8~20 자리]")
+									return false;
+								}
+
+								if (passwdCheck == "") {
+									alert("패스워드 확인을 입력해주세요");
+									return false;
+								}
+								if (passwdCheck != userPassword) {
+									alert("(패스워드가 동일하지 않습니다.")
+									return false;
+								}
+								if (userName == "") {
+									alert("이름을 입력하세요");
+									return false;
+								}
+								if (!userNameCheck.test(userName)) {
+									alert("(이름 양식 오류) - [한글/영어로 된 이름을 입력하세요]");
+									return false;
+								}
+								if (userEmail == "") {
+									alert("이메일을 입력해주세요")
+									return false;
+								}
+								if (chSearchCheck != 1) {
+									alert("채널을 선택해주세요")
+									return false;
+								}
+								if (chRoleSelectCheck != 1) {
+									alert("롤모델을 선택해주세요")
+									return false;
+								}
+
+								if (!(typeof userChannelLink == "undefined" && typeof userRolemodelLink == "undefined")) {
+									if (userChannelLink == userRolemodelLink) {
+										alert("본인 채널과 롤모델을 다르게 선택하세요");
+										chRoleSelectCheck = 0;
+										return false
+									}
+								}
+
+								return true;
+
+							}
+
+							//	유튜브 채널 검색 메소드
+							$("#searchMyChennel")
+									.click(
+											function() {
+												var userChannelLink = $("#userChannelLink").val()
+												$("#chResult").empty()
+												if (userChannelLink == ""
+														|| userChannelLink == null) {
+													alert("검색어를 입력해주세요")
+												} else {
+													$.ajax({
+														url : "/auth/user/searchChannel",
+														type : "get",
+														data : {
+														keyword : userChannelLink
+														},
+														beforeSend : function() {
+																	$('#chResult').empty();
+																	$('#chResult').append();
+														},
+														success : function(contents) { // 채널을 리스트로 받아옴
+																	chSearchCheck = 0;
+																	if (contents != null) {
+																		var str = '<table class="table table-bordered">';
+																		for (var i = 0; i < contents.length; i++) {
+																			var content = contents[i]
+																					.split("!@#");
+																			str += '<tr class="chSelect" data="'+content[2]+'">';
+																			str += '<td><img style="width:40px;height:40px;" src="'+content[0]+'"/></td>';
+																			str += '<td>'
+																					+ content[1]
+																					+ "</td>";
+																			str += '<td>'
+																					+ content[3]
+																					+ "</td>";
+																			str += '</tr>';
+																		}
+																		str += '</table>';
+																		$('#chResult')
+																				.append(str);
+																	} else {
+																		alert('검색결과가 없습니다.');
+																	}
+																},
+																error : function() {
+																	alert("서버에러");
+																}
+															});
+												}
+											})
+													
+										
+											
+
+							// 롤모델! 
+							$("#searchRoleChennel").click(
+											function() {
+												var userRolemodelLink = $("#userRolemodelLink").val()
+												$("#chRoleResult").empty()
+												if (userRolemodelLink == "" || userRolemodelLink == null) {
+													alert("검색어를 입력해주세요")
+												} else {
+													$.ajax({
+														url : "/auth/user/searchChannel",
+														type : "get",
+														data : {
+														keyword : userRolemodelLink
+														},
+
+														success : function(contents) { // 채널을 리스트로 받아옴
+																	chRoleSelectCheck = 0;
+																	if (contents != null) {
+																		var str = '<table class="table table-bordered">';
+																		for (var i = 0; i < contents.length; i++) {
+																			var content = contents[i]
+																					.split("!@#");
+																			str += '<tr class="chRoleSelect" data="'+content[2]+'">';
+																			str += '<td><img style="width:40px;height:40px;" src="'+content[0]+'"/></td>';
+																			str += '<td>'
+																					+ content[1]
+																					+ "</td>";
+																			str += '<td>'
+																					+ content[3]
+																					+ "</td>";
+																			str += '</tr>';
+																		}
+																		str += '</table>';
+																		$(
+																				'#chRoleResult')
+																				.append(
+																						str);
+																	} else {
+																		alert('검색결과가 없습니다.');
+																	}
+																},
+																error : function() {
+																	alert("서버에러");
+																}
+															});
+												}
+											})
+
+							$(document).on("click",".chSelect",	function() {
+												var link = $(this).attr("data")
+												var img = $(this).find("img").attr("src")
+												var title = $(this).find("td").eq(1).text()
+												var subscriber = $(this).find("td").eq(2).text()
+
+												$("#chResult").empty()
+												var str = '<table class="table table-bordered">'
+												str += '<tr class="chSelect" data="'+link+'">';
+												str += '<td><img id="userChannelImg" style="width:40px;height:40px;" src="'+img+'"/></td>';
+												str += '<td  id="userChannelName">'
+														+ title + "</td>";
+												str += '<td id="userSubscriber">'
+														+ subscriber + "</td>";
+												str += '</tr>';
+												str += '</table>'
+												$('#chResult').append(str);
+												chSearchCheck = 1;
+											})
+
+							// 롤모델 리스트 클릭시
+							$(document).on("click",".chRoleSelect",function() {
+												var link = $(this).attr("data")
+												var img = $(this).find("img")
+														.attr("src")
+												var title = $(this).find("td")
+														.eq(1).text()
+												var subscriber = $(this).find(
+														"td").eq(2).text()
+
+												$("#chRoleResult").empty()
+												var str = '<table class="table table-bordered">'
+												str += '<tr class="chRoleSelect" data="'+link+'">';
+												str += '<td><img style="width:40px;height:40px;" src="'+img+'"/></td>';
+												str += '<td>' + title + "</td>";
+												str += '<td>' + subscriber
+														+ "</td>";
+												str += '</tr>';
+												str += '</table>'
+												$('#chRoleResult').append(str);
+												chRoleSelectCheck = 1;
+											})
+
+							
+
+							//  회원정보수정 버튼 #mypageInfoModify 클릭시 이벤트
+							$(document).on("click","#mypageInfoModify",function() {
+												var userNo = $("#userNo").val();
+												var userId = $("#userId").val();
+												var userPassword = $("#userPassword").val();
+												var passwdCheck = $("#passwdCheck").val();
+												var userName = $("#userName").val();
+												var userEmail = $("#userEmail").val();
+												var userChannelLink = $(".chSelect").attr("data");
+												var userSubscriber = $("#userSubscriber").text();
+												var userChannelCategory = $("#userChannelCategory").val();
+												var userRolemodelLink = $(".chRoleSelect").attr("data");
+												var userChannelImg = $("#userChannelImg").attr("src")
+												var userChannelName = $("#userChannelName").text();
+
+												// 위의 조건을 다 만족했다면 ajax 회원정보수정 실행
+												if (checkform()) {
+													$.ajax({
+																url : "/mypage/userUpdateProc",
+																type : "put",
+																contentType : "application/json; charset=utf-8",
+																data : JSON.stringify({
+																			"userNo" : userNo,
+																			"userId" : userId,
+																			"userPassword" : userPassword,
+																			"userName" : userName,
+																			"userEmail" : userEmail,
+																			"userChannelName" : userChannelName,
+																			"userChannelLink" : userChannelLink,
+																			"userChannelCategory" : userChannelCategory,
+																			"userChannelImg" : userChannelImg,
+																			"userSubscriber" : userSubscriber,
+																			"userRolemodelLink" : userRolemodelLink
+																		}),
+																dataType : "json",
+																success : function(result) {
+																	if(result.status ==500 ){
+																		alert("회원정보수정에 실패하셨습니다.");					
+																	}else{
+																		alert("회원정보수정이 완료되었습니다.");					
+																		location.href = "/auth/mypage";					
+																	}
+																},
+																error: function(request,status,error){
+													            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+																}
+
+															})
+
+												}
+											})
+							//	회원가입 이벤트 종료
+
+
+								// 회원탈퇴
+								$(document).on("click","#deleteBtn",function() {
+									$.ajax({
+										url : "/auth/mypage/deleteUser",
+										type : "delete",
+										success : function(result) {
+											if(result.status ==500 ){
+												alert("회원탈퇴에 실패하셨습니다.");					
+											}else{
+												alert("회원탈퇴가 완료되었습니다.");					
+												location.href = "/logout";					
+											}
+										},
+										error: function(request,status,error){
+							            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+										}
+
+									})
+						
+								})
+											
+
+						})
+	</script>
  
 </body>
 </html>
