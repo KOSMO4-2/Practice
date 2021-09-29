@@ -8,4 +8,7 @@ public interface CommunityService {
 	public List<Community> SelectAllCommunitybyCommunityTitle(String communityTitle);
 	
 	public void communityJoin(Community community);
+	
+	public List<Community> SelectAllCommunitybyCommunityHostno(int communityHostno);
+
 }

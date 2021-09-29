@@ -1,5 +1,7 @@
 package com.toyou.project.service.mypage;
 
+import java.util.List;
+
 //import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.toyou.project.dao.mypage.MypageRepository;
 import com.toyou.project.dao.user.UserRepository;
 import com.toyou.project.dto.ResponseDTO;
+import com.toyou.project.model.ChannelOwner;
 import com.toyou.project.model.RoleType;
 import com.toyou.project.model.User;
 
@@ -22,6 +26,9 @@ public class MypageServiceImpl implements MypageService {
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
+	@Autowired
+	private MypageRepository mypageRepository;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -82,6 +89,16 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public void deleteUser(User user) {
 		userRepository.delete(user);
+	}
+	
+	public List<ChannelOwner> channelOwner(){
+		List<ChannelOwner> channelOwnerList = mypageRepository.findAll();
+		return channelOwnerList;
+	}
+	
+	public ChannelOwner findMyChannel(int userNo) {
+		ChannelOwner channelOwner = mypageRepository.findByChannelOwnerUserNoAll(userNo);
+		return channelOwner;
 	}
 
 }

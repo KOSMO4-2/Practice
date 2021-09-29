@@ -23,4 +23,11 @@ public class CommunityServiceImpl implements CommunityService{
 	public void communityJoin(Community community) {
 		communityRepository.save(community);
 	}
+	
+	public List<Community> SelectAllCommunitybyCommunityHostno(int communityHostno){
+		List<Community> communityList = communityRepository.findByCommunityHostNoAll(communityHostno);
+		return communityList;
+	}
+	
+	
 }

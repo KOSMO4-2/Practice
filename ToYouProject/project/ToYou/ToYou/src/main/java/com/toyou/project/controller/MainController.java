@@ -6,6 +6,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +16,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
 import com.toyou.project.model.CategoryAsmr;
 import com.toyou.project.model.CategoryBeauti;
 import com.toyou.project.model.CategoryCar;
 import com.toyou.project.model.CategoryFitness;
 import com.toyou.project.model.CategoryGame;
 import com.toyou.project.model.CategoryMukbang;
+import com.toyou.project.model.ChannelOwner;
+import com.toyou.project.model.Community;
 import com.toyou.project.model.ProductBuyLog;
 import com.toyou.project.model.User;
 import com.toyou.project.model.keywordGoogle;
 import com.toyou.project.model.keywordTiktok;
 import com.toyou.project.model.keywordTwitch;
 import com.toyou.project.model.keywordTwitter;
+import com.toyou.project.service.community.CommunityService;
 import com.toyou.project.service.loginmain.category.CategoryAsmrService;
 import com.toyou.project.service.loginmain.category.CategoryBeautiService;
 import com.toyou.project.service.loginmain.category.CategoryCarService;
@@ -37,13 +42,18 @@ import com.toyou.project.service.loginmain.keyword.KeywordGoogleService;
 import com.toyou.project.service.loginmain.keyword.KeywordTiktokService;
 import com.toyou.project.service.loginmain.keyword.KeywordTwitchService;
 import com.toyou.project.service.loginmain.keyword.KeywordTwitterService;
+import com.toyou.project.service.mypage.MypageService;
 import com.toyou.project.service.pay.PayService;
 import com.toyou.project.service.user.UserService;
 
 
 @Controller
 public class MainController {
+	@Autowired
+	private CommunityService communityService;
 	
+	@Autowired
+	private UserService userService;
 	@Autowired
 	private KeywordGoogleService keywordGoogleService;
 	@Autowired
@@ -67,7 +77,7 @@ public class MainController {
 	@Autowired
 	private PayService payService;
 	@Autowired
-	private UserService userService;
+	private MypageService mypageService;
 	
 	
 	
@@ -147,7 +157,15 @@ public class MainController {
 	}
 	
 
+	@GetMapping("/auth/test/magazine")
+	public String testmagazine() {
+		return "magazine";
+	}
 	
+	@GetMapping("/auth/mypageLoading")
+	public String mypageLoading() {
+		return "mypageLoading";
+	}
 	
 	// 개발 마무리 단계에서 /auth 삭제할 예정
 	@GetMapping("/auth/mypage")
@@ -157,6 +175,170 @@ public class MainController {
 	    String username = userDetails.getUsername();
 	    User user = userService.userFind(username);
 	    int userNo = user.getUserNo();	    
+	    
+	    if(user.getUserChannelLink() != null) {
+	    	String checkChannel = user.getUserChannelLink();
+	    	model.addAttribute("checkChannel", checkChannel);
+	    }
+	    
+	    //--------------------------------------------------------------------
+	    // 인철 마이페이지 시작
+	    // ▼ 채널정보 불러오는 부분
+	   
+		try {
+		String userNos = Integer.toString(user.getUserNo());
+		String userChannelCategory = user.getUserChannelCategory();
+		String userChannelImg = user.getUserChannelImg();
+		String userChannelLink = user.getUserChannelLink();
+		String userChannelName = user.getUserChannelName();
+		String userEmail = user.getUserEmail();
+		String userId = user.getUserId();
+		String userIspayment = Integer.toString(user.getUserIspayment());
+		String userJoindate = user.getUserJoindate().toString();
+		String userName = user.getUserName();
+		String userRolemodelLink = user.getUserRolemodelLink();
+		String userSubscriber = user.getUserSubscriber();
+		
+		
+		int Hostno = user.getUserNo();
+		
+		ChannelOwner userInfo = mypageService.findMyChannel(Hostno);
+		System.out.println(userInfo.getChExplain());
+		model.addAttribute("userInfo", userInfo);
+		
+		
+		String[] snsList = userInfo.getChSns().split("#@!");
+		ArrayList<String> iconLinkList = new ArrayList<String>();
+		ArrayList<String> snsLinkList = new ArrayList<String>();
+		// sns 스플릿
+		for(int i=0;i<snsList.length;i++) {
+			try {
+			String[] temp = snsList[i].split("!@#");
+			iconLinkList.add(temp[1]);
+			snsLinkList.add(temp[0]);
+			}
+			catch(Exception e){
+				
+			}
+		}
+		model.addAttribute("iconLinkList", iconLinkList);
+		model.addAttribute("snsLinkList", snsLinkList);
+		
+		String[] lastmovieList = userInfo.getChLastmovie().split("#@!");
+		ArrayList<String> lastmovieTitle = new ArrayList<String>();
+		ArrayList<String> lastmovieThumnail = new ArrayList<String>();
+		ArrayList<String> lastmovieView = new ArrayList<String>();
+		ArrayList<String> lastmovieLink = new ArrayList<String>();
+		ArrayList<String> lastmovieTime = new ArrayList<String>();
+		ArrayList<String> lastmovieDuration = new ArrayList<String>();
+		ArrayList<Integer> lastmovieCommentAnalysis = new ArrayList<Integer>();
+		String tempLink ="";
+		for(int i=0;i<lastmovieList.length;i++) {
+			try {
+			String[] temp = lastmovieList[i].split("!@#");
+			
+				lastmovieTitle.add(temp[0]);
+				lastmovieThumnail.add(temp[1]);
+				lastmovieView.add(temp[2]);
+				System.out.println("링크 테스트1 " +temp[3]);
+				
+				tempLink = temp[3].replaceAll("\\?", "");
+				tempLink = tempLink.replaceAll("watchv=", "embed/");
+				System.out.println("링크 테스트2 " +tempLink);
+				lastmovieLink.add(tempLink);
+				lastmovieTime.add(temp[4]);
+				lastmovieDuration.add(temp[5]);
+				
+				float tempComment = Float.parseFloat(temp[6]);
+				int tmp = Math.round(tempComment);
+				lastmovieCommentAnalysis.add(tmp);
+			}
+			
+			
+			catch(Exception e){
+				
+			}
+		}
+		model.addAttribute("lastmovieTitle", lastmovieTitle);
+		model.addAttribute("lastmovieThumnail", lastmovieThumnail);
+		model.addAttribute("lastmovieView", lastmovieView);
+		model.addAttribute("lastmovieLink", lastmovieLink);
+		model.addAttribute("lastmovieTime", lastmovieTime);
+		model.addAttribute("lastmovieDuration", lastmovieDuration);
+		model.addAttribute("lastmovieCommentAnalysis", lastmovieCommentAnalysis);
+		///////////////////////////
+		
+		String[] famousmovieList = userInfo.getChFamousmovie().split("#@!");
+		ArrayList<String> famousmovieTitle = new ArrayList<String>();
+		ArrayList<String> famousmovieThumnail = new ArrayList<String>();
+		ArrayList<String> famousmovieView = new ArrayList<String>();
+		ArrayList<String> famousmovieLink = new ArrayList<String>();
+		ArrayList<String> famousmovieTime = new ArrayList<String>();
+		ArrayList<String> famousmovieDuration = new ArrayList<String>();
+		ArrayList<Integer> famousmovieCommentAnalysis = new ArrayList<Integer>();
+		tempLink ="";
+		for(int i=0;i<famousmovieList.length;i++) {
+			try {
+			String[] temp = famousmovieList[i].split("!@#");
+			
+				famousmovieTitle.add(temp[0]);
+				famousmovieThumnail.add(temp[1]);
+				famousmovieView.add(temp[2]);
+				System.out.println("링크 테스트1 " +temp[3]);
+				
+				tempLink = temp[3].replaceAll("\\?", "");
+				tempLink = tempLink.replaceAll("watchv=", "embed/");
+				System.out.println("링크 테스트2 " +tempLink);
+				famousmovieLink.add(tempLink);
+				famousmovieTime.add(temp[4]);
+				famousmovieDuration.add(temp[5]);
+				
+				float tempComment = Float.parseFloat(temp[6]);
+				int tmp = Math.round(tempComment);
+				famousmovieCommentAnalysis.add(tmp);
+			}
+			
+			
+			catch(Exception e){
+				
+			}
+		}
+		model.addAttribute("famousmovieTitle", famousmovieTitle);
+		model.addAttribute("famousmovieThumnail", famousmovieThumnail);
+		model.addAttribute("famousmovieView", famousmovieView);
+		model.addAttribute("famousmovieLink", famousmovieLink);
+		model.addAttribute("famousmovieTime", famousmovieTime);
+		model.addAttribute("famousmovieDuration", famousmovieDuration);
+		model.addAttribute("famousmovieCommentAnalysis", famousmovieCommentAnalysis);
+		
+		
+		
+		
+		List<Community> communityList = communityService.SelectAllCommunitybyCommunityHostno(Hostno);
+		
+		model.addAttribute("userNo",userNo);
+		model.addAttribute("userChannelCategory",userChannelCategory);
+		model.addAttribute("userChannelImg",userChannelImg);
+		model.addAttribute("userChannelLink",userChannelLink);
+		model.addAttribute("userChannelName",userChannelName);
+		model.addAttribute("userEmail",userEmail);
+		model.addAttribute("userId",userId);
+		model.addAttribute("userIspayment",userIspayment);
+		model.addAttribute("userJoindate",userJoindate);
+		model.addAttribute("userName",userName);
+		model.addAttribute("userRolemodelLink",userRolemodelLink);
+		model.addAttribute("userSubscriber",userSubscriber);
+		
+		
+		model.addAttribute("communityList",communityList);
+		}
+		catch(Exception e) {
+			
+		}
+	    
+	    
+	    // 인철 마이페이지 종료
+	 	//--------------------------------------------------------------------
 	    
 	    //--------------------------------------------------------------------
 	    // 성연 마이페이지 시작

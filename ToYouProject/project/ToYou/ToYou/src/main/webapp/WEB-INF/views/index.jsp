@@ -52,7 +52,6 @@
       
     </div>
   </div>
-  
   <div class="site-section section-counter">
     <div class="container">
       <div class="row">
