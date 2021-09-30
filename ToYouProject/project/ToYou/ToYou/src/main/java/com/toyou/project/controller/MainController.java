@@ -25,6 +25,7 @@ import com.toyou.project.model.CategoryGame;
 import com.toyou.project.model.CategoryMukbang;
 import com.toyou.project.model.ChannelOwner;
 import com.toyou.project.model.Community;
+import com.toyou.project.model.Magazine;
 import com.toyou.project.model.ProductBuyLog;
 import com.toyou.project.model.User;
 import com.toyou.project.model.keywordGoogle;
@@ -42,6 +43,7 @@ import com.toyou.project.service.loginmain.keyword.KeywordGoogleService;
 import com.toyou.project.service.loginmain.keyword.KeywordTiktokService;
 import com.toyou.project.service.loginmain.keyword.KeywordTwitchService;
 import com.toyou.project.service.loginmain.keyword.KeywordTwitterService;
+import com.toyou.project.service.magazine.MagazineService;
 import com.toyou.project.service.mypage.MypageService;
 import com.toyou.project.service.pay.PayService;
 import com.toyou.project.service.user.UserService;
@@ -78,6 +80,9 @@ public class MainController {
 	private PayService payService;
 	@Autowired
 	private MypageService mypageService;
+	
+	@Autowired
+	private MagazineService magazineService;
 	
 	
 	
@@ -158,8 +163,27 @@ public class MainController {
 	
 
 	@GetMapping("/auth/test/magazine")
-	public String testmagazine() {
-		return "magazine";
+	public String testmagazine(Model model) {
+		List<Magazine> EnterNews = magazineService.SelectMagazineListBySc("최신 뉴스");
+		model.addAttribute("EnterNews", EnterNews);
+		
+		List<Magazine> EnterMovie = magazineService.SelectMagazineListBySc("영화");
+		model.addAttribute("EnterMovie", EnterMovie);
+		
+		List<Magazine> EnterMusic = magazineService.SelectMagazineListBySc("음악");
+		model.addAttribute("EnterMusic", EnterMusic);
+		
+		List<Magazine> EnterTV = magazineService.SelectMagazineListBySc("TV");
+		model.addAttribute("EnterTV", EnterTV);
+		
+		List<Magazine> EnterHealth = magazineService.SelectMagazineListBySc("건강");
+		model.addAttribute("EnterHealth", EnterHealth);
+		
+		
+		
+		
+		
+		return "magazineTest";
 	}
 	
 	@GetMapping("/auth/mypageLoading")
