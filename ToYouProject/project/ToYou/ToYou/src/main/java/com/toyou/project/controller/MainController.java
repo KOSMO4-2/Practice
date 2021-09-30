@@ -98,19 +98,15 @@ public class MainController {
 	public String searchChannel() {
 		return "index";
 	}
-	
-	@GetMapping("/auth/trend")
-	public String trend() {
-		return "index";
-	}
+
 	
 	@GetMapping("/auth/community")
 	public String community() {
 		return "community";
 	}
 	
-	@GetMapping("/auth/magazine")
-	public String magazine(Model model) {
+	@GetMapping("/auth/trend")
+	public String trend(Model model) {
 		List<keywordGoogle> googleList = keywordGoogleService.SelectAllKeywordGoogle();
 		List<keywordTiktok> tiktokList = keywordTiktokService.SelectAllKeywordTiktok();
 		List<keywordTwitch> twitchList = keywordTwitchService.SelectAllKeywordTwitch();
@@ -146,7 +142,7 @@ public class MainController {
 		
 		
 		
-		return "index2";
+		return "trend";
 	}
 	
 	@GetMapping("/auth/payinfo")
@@ -162,7 +158,7 @@ public class MainController {
 	}
 	
 
-	@GetMapping("/auth/test/magazine")
+	@GetMapping("/auth/magazine")
 	public String testmagazine(Model model) {
 		List<Magazine> EnterNews = magazineService.SelectMagazineListBySc("최신 뉴스");
 		model.addAttribute("EnterNews", EnterNews);
@@ -176,20 +172,36 @@ public class MainController {
 		List<Magazine> EnterTV = magazineService.SelectMagazineListBySc("TV");
 		model.addAttribute("EnterTV", EnterTV);
 		
-		List<Magazine> EnterHealth = magazineService.SelectMagazineListBySc("건강");
-		model.addAttribute("EnterHealth", EnterHealth);
+		List<Magazine> EnterBook = magazineService.SelectMagazineListBySc("도서");
+		model.addAttribute("EnterBook", EnterBook);
 		
+		List<Magazine> EnterArt = magazineService.SelectMagazineListBySc("예술");
+		model.addAttribute("EnterArt", EnterArt);
 		
+		List<Magazine> EnterIdol = magazineService.SelectMagazineListBySc("연예");
+		model.addAttribute("EnterIdol", EnterIdol);
 		
+		List<Magazine> Health = magazineService.SelectMagazineListBySc("건강");
+		model.addAttribute("Health", Health);
 		
+		List<Magazine> Science = magazineService.SelectMagazineListBySc("과학기술");
+		model.addAttribute("Science", Science);
 		
-		return "magazineTest";
+		List<Magazine> Business = magazineService.SelectMagazineListBySc("비지니스");
+		model.addAttribute("Business", Business);
+		
+		List<Magazine> World = magazineService.SelectMagazineListBySc("세계");
+		model.addAttribute("World", World);
+		
+	
+		return "magazine";
 	}
 	
 	@GetMapping("/auth/mypageLoading")
 	public String mypageLoading() {
 		return "mypageLoading";
 	}
+	
 	
 	// 개발 마무리 단계에서 /auth 삭제할 예정
 	@GetMapping("/auth/mypage")
