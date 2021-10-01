@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html>
@@ -48,19 +49,12 @@
 							
 							<!-- <p style="display: inline-block;"><a href="https://vimeo.com/channels/staffpicks/93951774"  data-fancybox class="ftco-play-video d-flex"><span class="play-icon-wrap align-self-center mr-4"><span class="ion-ios-play"></span></span> <span class="align-self-center">Watch Video</span></a></p> -->
 							
-			<!-- 성연추가 ELK 자동완성검색-->		
-			<form action="/elasticSearchPrefix" method="post">		
                <div class="input-group">
-                   <input type="text" id="searchKeyword" name="searhValue" list="elastielist" class="form-control" placeholder="커뮤니티 검색">
-						<datalist id="elastielist" class="searchResult">
-							<!-- ajax -->
-						</datalist>
+                   <input type="text" class="form-control" placeholder="커뮤니티 검색">
                    <span class="input-group-btn">
                    <button class="btn btn-secondary" type="button">검색</button>
                    </span>
-               </div> 
-            </form>
-			<!-- 성연추가 ELK 자동완성검색-->				
+              </div> 
 						</div>
 					</div>
 				</div>
@@ -71,363 +65,126 @@
 	
 
 	<div class="container">
-
-
-<!-- Big Community ############################################# -->
-		<div class="row commu">
-		<h3 class="col-12">Big 커뮤니티</h3>
-		<br><br><br>
-			<div class="col-md-3 col-lg-3 mb-3">
-				
-				<div class="person-donate text-center">
-							<img src="/image/person_1.jpg" alt="Image placeholder"
-								class="img-left">
-							<div class="donate-info">
-								<h2>호스트 채널명</h2>
-								<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-								<p>
-									커뮤니티 설명
-									<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-								</p>
+			<!-- New Community ############################################# -->
+			<div class="row commu">
+				<h3 class="col-12">New 커뮤니티</h3>
+				<br><br><br>
+					<c:choose>
+						<c:when test="${!empty communityNo}">
+							<c:forEach var="i" begin="0" end="${fn:length(communityNo)-1}">
+								<div class="col-md-3 col-lg-3 mb-3">
+									<div class="person-donate text-center">
+									<a href="/auth/community/community?communityNo=${communityNo.get(i)}">
+												<img src="${channelImg.get(i)}" alt="Image placeholder"
+													class="img-left">
+												<div class="donate-info">
+													<span>${channelName.get(i)}</span>
+													<span class="time d-block mb-3 text-danger">가입자 : ${userJoinCnt.get(i)}명</span>
+													<h2>${cmTitle.get(i)}</h2>
+													<p>
+														${cmDescription.get(i)}
+													</p>
+												</div>
+									</a>
+									</div>
+								</div>
+							</c:forEach>
+							<div class="col-md-12 col-lg-12 md-5">
+								<ul class="pagination justify-content-center">
+							    <li class="page-item"><a class="page-link" href="?page=${previous}">Previous</a></li>
+							    <li class="page-item"><a class="page-link" href="?page=${next}">Next</a></li>           
+							</ul>
 							</div>
-				</div>
-			</div>
-			
-			
-			
-			<div class="col-md-3 col-lg-3 mb-3">
-				
-				<div class="person-donate text-center">
-							<img src="/image/person_1.jpg" alt="Image placeholder"
-								class="img-left">
-							<div class="donate-info">
-								<h2>호스트 채널명</h2>
-								<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-								<p>
-									커뮤니티 설명
-									<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-								</p>
-							</div>
-				</div>
-			</div>
-			
-			<div class="col-md-3 col-lg-3 mb-3">
-				
-				<div class="person-donate text-center">
-							<img src="/image/person_1.jpg" alt="Image placeholder"
-								class="img-left">
-							<div class="donate-info">
-								<h2>호스트 채널명</h2>
-								<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-								<p>
-									커뮤니티 설명
-									<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-								</p>
-							</div>
-				</div>
-			</div>
-			
-			<div class="col-md-3 col-lg-3 mb-3">
-				
-				<div class="person-donate text-center">
-							<img src="/image/person_1.jpg" alt="Image placeholder"
-								class="img-left">
-							<div class="donate-info">
-								<h2>호스트 채널명</h2>
-								<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-								<p>
-									커뮤니티 설명
-									<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-								</p>
-							</div>
-				</div>
-			</div>
-			
-			
-
-			
-
-			<div class="col-md-12 col-lg-12 md-5">
-				<div class="person-donate text-left"></div>
+					</c:when>
+					<c:otherwise>
+						<div><span><strong>새로 등록된 커뮤니티가 없습니다</strong></span></div>
+					</c:otherwise>
+				 </c:choose>
 			</div>
 
-		</div>
+		<!-- Big Community ############################################# -->
+			<div class="row commu">
+			<h3 class="col-12">Big 커뮤니티</h3>
+			<br><br><br>
+			<c:choose>
+				<c:when test="${!empty bigcommunityNo}">	
+					<c:forEach var="i" begin="0" end="${fn:length(bigcommunityNo)-1}">
+						<div class="col-md-3 col-lg-3 mb-3">
+							<div class="person-donate text-center">
+							<a href="/auth/community/community?communityNo=${bigcommunityNo.get(i)}">
+										<img src="${bigchannelImg.get(i)}" alt="Image placeholder"
+											class="img-left">
+										<div class="donate-info">
+											<span>${bigchannelName.get(i)}</span>
+											<span class="time d-block mb-3 text-danger">가입자 : ${biguserJoinCnt.get(i)}명</span>
+											<h2>${bigcmTitle.get(i)}</h2>
+											<p>
+												${bigcmDescription.get(i)}
+											</p>
+										</div>
+							</a>
+							</div>
+						</div>
+					</c:forEach>
+						<div class="col-md-12 col-lg-12 md-5">
+							<div class="person-donate text-left"></div>
+						</div>
+				</c:when>
+				<c:otherwise>
+					<div><span><strong>활동중인 커뮤니티가 없습니다</strong></span></div>
+				</c:otherwise>
+			 </c:choose>
+			 </div>
 		
 		
 		
 		<!-- Hot Community ############################################# -->
 		
-		<div class="row commu">
-		<h3 class="col-12">Hot 커뮤니티</h3>
-		<br><br><br>
-			<div class="col-md-3 col-lg-3 mb-3">
-				
-				<div class="person-donate text-center">
-							<img src="/image/person_1.jpg" alt="Image placeholder"
-								class="img-left">
-							<div class="donate-info">
-								<h2>호스트 채널명</h2>
-								<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-								<p>
-									커뮤니티 설명
-									<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-								</p>
+			<div class="row commu">
+				<h3 class="col-12">Hot 커뮤니티</h3>
+				<br><br><br>
+					<c:choose>
+						<c:when test="${!empty hotcommunityNo}">									
+							<c:forEach var="i" begin="0" end="${fn:length(hotcommunityNo)-1}">
+								<div class="col-md-3 col-lg-3 mb-3">
+									<div class="person-donate text-center">
+									<a href="/auth/community/community?communityNo=${hotcommunityNo.get(i)}">
+												<img src="${hotchannelImg.get(i)}" alt="Image placeholder"
+													class="img-left">
+												<div class="donate-info">
+													<span>${hotchannelName.get(i)}</span>
+													<span class="time d-block mb-3 text-danger">가입자 : ${hotuserJoinCnt.get(i)}명</span>
+													<h2>${hotcmTitle.get(i)}</h2>
+													<p>
+														${hotcmDescription.get(i)}
+													</p>
+												</div>
+									</a>
+									</div>
+								</div>
+							</c:forEach>
+							<div class="col-md-12 col-lg-12 md-5">
+								<div class="person-donate text-left"></div>
 							</div>
-				</div>
+					</c:when>
+					<c:otherwise>
+						<div><span><strong>활동중인 커뮤니티가 없습니다</strong></span></div>
+					</c:otherwise>
+				 </c:choose>
 			</div>
 			
-			
-			
-			<div class="col-md-3 col-lg-3 mb-3">
-				
-				<div class="person-donate text-center">
-							<img src="/image/person_1.jpg" alt="Image placeholder"
-								class="img-left">
-							<div class="donate-info">
-								<h2>호스트 채널명</h2>
-								<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-								<p>
-									커뮤니티 설명
-									<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-								</p>
-							</div>
-				</div>
-			</div>
-			
-			<div class="col-md-3 col-lg-3 mb-3">
-				
-				<div class="person-donate text-center">
-							<img src="/image/person_1.jpg" alt="Image placeholder"
-								class="img-left">
-							<div class="donate-info">
-								<h2>호스트 채널명</h2>
-								<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-								<p>
-									커뮤니티 설명
-									<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-								</p>
-							</div>
-				</div>
-			</div>
-			
-			<div class="col-md-3 col-lg-3 mb-3">
-				
-				<div class="person-donate text-center">
-							<img src="/image/person_1.jpg" alt="Image placeholder"
-								class="img-left">
-							<div class="donate-info">
-								<h2>호스트 채널명</h2>
-								<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-								<p>
-									커뮤니티 설명
-									<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-								</p>
-							</div>
-				</div>
-				
-				
-				
-				
-			</div>
-			
-			
-
-			
+		
 
 			<div class="col-md-12 col-lg-12 md-5">
 				<div class="person-donate text-left"></div>
 			</div>
 
-		</div>
 		
-		<!-- New Community ############################################# -->
 		
-		<div class="row commu">
-		<h3 class="col-12">New 커뮤니티</h3>
-		<br><br><br>
-			<div class="col-md-3 col-lg-3 mb-3">
-				
-				<div class="person-donate text-center">
-							<img src="/image/person_1.jpg" alt="Image placeholder"
-								class="img-left">
-							<div class="donate-info">
-								<h2>호스트 채널명</h2>
-								<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-								<p>
-									커뮤니티 설명
-									<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-								</p>
-							</div>
-				</div>
-			</div>
+
 			
 			
 			
-			<div class="col-md-3 col-lg-3 mb-3">
-				
-				<div class="person-donate text-center">
-							<img src="/image/person_1.jpg" alt="Image placeholder"
-								class="img-left">
-							<div class="donate-info">
-								<h2>호스트 채널명</h2>
-								<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-								<p>
-									커뮤니티 설명
-									<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-								</p>
-							</div>
-				</div>
-			</div>
-			
-			<div class="col-md-3 col-lg-3 mb-3">
-				
-				<div class="person-donate text-center">
-							<img src="/image/person_1.jpg" alt="Image placeholder"
-								class="img-left">
-							<div class="donate-info">
-								<h2>호스트 채널명</h2>
-								<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-								<p>
-									커뮤니티 설명
-									<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-								</p>
-							</div>
-				</div>
-				</div>
-			</div>
-			
-			<div class="col-md-3 col-lg-3 mb-3">
-				
-				<div class="person-donate text-center">
-							<img src="/image/person_1.jpg" alt="Image placeholder"
-								class="img-left">
-							<div class="donate-info">
-								<h2>호스트 채널명</h2>
-								<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-								<p>
-									커뮤니티 설명
-									<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-								</p>
-							</div>
-				</div>
-	</div>
-
-
-
-
-	<div class="site-section border-top">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="commu_title_2">
-						<h3>커뮤니티 가입 채널</h3>
-					</div>
-					<div class="person-donate2">
-						<img src="/image/person_1.jpg" alt="Image placeholder"
-							class="img-left">
-						<div class="text_ch">
-							<a href="#">[채널명]</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="site-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="commu_title_3">
-						<h3>커뮤니티 가입 신청 채널</h3>
-					</div>
-					<div class="person-donate2">
-						<img src="/image/person_1.jpg" alt="Image placeholder"
-							class="img-left">
-						<div class="text_ch">
-							<a href="#">[채널명]</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="site-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="commu_title_3">
-						<h3>커뮤니티 게시판</h3>
-					</div>
-					<form>
-						<table class="table table-striped commu_board">
-						<thead>
-							<tr class="text-center">
-								<th>번호</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>조회수</th>
-								<th>좋아요</th>
-								<th>날짜</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="text-center">
-								<td>1</td>
-								<td>안녕하세요</td>
-								<td>김떙떙</td>
-								<td>300</td>
-								<td>10</td>
-								<td>2021-05-21</td>
-							<tr class="text-center" >
-								<td>2</td>
-								<td>안녕하세요</td>
-								<td>김떙떙</td>
-								<td>300</td>
-								<td>10</td>
-								<td>2021-05-21</td>
-							</tr>
-							<tr class="text-center">
-								<td>3</td>
-								<td>안녕하세요</td>
-								<td>이불</td>
-								<td>300</td>
-								<td>10</td>
-								<td>2021-05-21</td>
-							</tr>
-						</tbody>
-						</table>
-					</form>
-				</div>
-			</div>
-		</div>
 	</div>
 
 
@@ -437,44 +194,6 @@
 <%-- <%@ include file="layout/footer.jsp"%> --%>
 
 <jsp:include page="layout/footer.jsp" flush="true"></jsp:include>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-
-$(function() {
-
-	// 성연추가 ELK 커뮤니티 검색 자동완성
-	// Ajax 커뮤티니목록 검색
-	$('#searchKeyword').keyup(function(event){
-
-		$.ajax({
-             url: "/elasticSearchPrefix",
-             type: "POST",
-             dataType: "JSON",
-             data: { "searhValue" : $('#searchKeyword').val()},
-             success: function(data) {                 
-
-              	test = data['hits']
-             	test2 = test['hits']
-             	
-             	event.preventDefault();
-         		event.stopPropagation();
-
-          		$('.communitytitle').remove();
-          		
-            	for(var i=0; i<test2.length; i++){
-             		$(".searchResult").append("<option class ='communitytitle'>" + test2[i]['_source']['communitytitle'] +"</option>" );
-             	}
-             }
-		});
-	});
-
-	
-});
-
-
-</script>
-
-
+ 
   </body>
 </html>

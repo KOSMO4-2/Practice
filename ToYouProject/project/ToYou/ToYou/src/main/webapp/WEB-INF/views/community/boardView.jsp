@@ -36,7 +36,7 @@
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-7">
-              <h2 class="heading mb-5">커뮤니티 생성</h2>
+              <h2 class="heading mb-5">게시글</h2>
         <!-- <p style="display: inline-block;"><a href="https://vimeo.com/channels/staffpicks/93951774"  data-fancybox class="ftco-play-video d-flex"><span class="play-icon-wrap align-self-center mr-4"><span class="ion-ios-play"></span></span> <span class="align-self-center">Watch Video</span></a></p> -->           
         <!-- 메인 중앙 검색창
                <div class="input-group">
@@ -60,15 +60,12 @@
 <div class="card bg-light">
 <article class="card-body mx-auto" style="width: 1000px;">
 		 <form>
-		    <h4 class="text-left">커뮤니티 게시판 등록</h4>
-		    <br>
-		    <input class="form-control" name="communityNo" id="communityNo" type="hidden" value="${communityNo}">
-			<input class="form-control" name="userNo" id="userNo" type="hidden" value="${principal.user.userNo}">
+		    <input class="form-control" name="communityNo" id="communityNo" type="hidden" value="${community.communityNo}">
 					<div class="form-group input-group" style="width: 500px;">
 						<div class="input-group-prepend">
 						    <span class="input-group-text"><strong>Title</strong><i class="fa fa-user"></i> </span>
 						</div>
-				  	    	<input class="form-control" name="communityBoardTitle" id="communityBoardTitle"  placeholder="Title" type="text">
+				  	    	<input class="form-control" name="communityBoardTitle" id="communityBoardTitle" value="${board.communityBoardTitle}"  placeholder="Title" type="text" disabled="disabled">
 				  	</div>
 				  	 <div id="titleWarning">
 		    		 </div>
@@ -77,11 +74,9 @@
 						<div class="input-group-prepend">
 						    <span class="input-group-text"><strong>Writer</strong><i class="fa fa-user"></i> </span>
 						</div>
-				  	    	<input class="form-control" value="${principal.user.userName}" type="text" disabled="disabled">
-				  	    	<select id="communityBoardIspublic">
-				  						<option value="1">공개</option>
-				  						<option value="0">비공개</option>
-				  			</select>
+				  	    	<input class="form-control" value="${user.userNo}" type="hidden" disabled="disabled" id="userNo" name="userNo">
+				  	    	<input class="form-control" value="${board.communityBoardNo}" type="hidden" disabled="disabled" id="boardNo" name="boardNo">
+				  	    	<input class="form-control" value="${user.userName}" type="text" disabled="disabled" id="userName" name="userName">
 				  	</div>
 				  	
 				  	
@@ -89,23 +84,30 @@
 				    	<div class="input-group-prepend">
 						    <span class="input-group-text"><strong>Content</strong><i class="fa fa-lock"></i> </span>
 						</div>
-				        <textarea class="form-control" name="communityBoardContent" id="communityBoardContent"  placeholder="Content"  rows="10"></textarea>
+				        <textarea class="form-control" name="communityBoardContent" id="communityBoardContent" disabled="disabled" rows="15">${board.communityBoardContent }</textarea>
 				    </div> <!-- form-group// -->
-				    <span id="byteInfo">0</span> / 2048bytes
-				     <div id="contentWarning">
-		    		 </div>
 				    <hr>
-				    <div class="form-group input-group">
-						<div class="input-group-prepend">
-						    <span class="input-group-text"><strong>file upload</strong><i class="fa fa-user"></i> </span>
-						</div>
-				  	    	<input class="form-control" name="communityBoardImgname" id="communityBoardImgname" type="file">
-				  	</div>
 				    
-				    <div class="form-group">
-				        <input type="button" id="createBtn" class="btn btn-primary btn-block" value="Create Board"> 
-				    </div> <!-- form-group// -->      
-		                                                                    
+				    <c:choose>
+				    	<c:when test="${user.userNo == principal.user.userNo}">
+						    <div class="form-row float-right">
+						        <input type="button" id="modifyBtn" class="btn btn-default" value="Modify Board" > 
+						        <input type="button" id="deleteBtn" class="btn btn-danger" value="Delete Board"> 
+						        <input type="button" id="returnBtn" class="btn btn-default" value="return"> 
+						    </div> <!-- form-group// -->      
+					    </c:when>
+					    <c:when test="${community.communityHostno == principal.user.userNo}">
+					    	<div class="form-row float-right">
+						        <input type="button" id="deleteBtn" class="btn btn-danger" value="Delete Board">
+						        <input type="button" id="returnBtn" class="btn btn-default" value="return">  
+						    </div> <!-- form-group// --> 
+					    </c:when>
+					    <c:otherwise>
+					    	<div class="form-row float-right">
+						        <input type="button" id="returnBtn" class="btn btn-default" value="return">  
+						    </div> <!-- form-group// --> 
+					    </c:otherwise>      
+		            </c:choose>                                                        
 		</form>
 		
 </article>
@@ -177,41 +179,46 @@ $(document).ready(function(){
 	}
 
 
-	
-	$(document).on("click","#createBtn",function(){
-		var userNo = $("#userNo").val();
+	// 수정버튼 클릭 시 수정페이지로 넘어감
+	$(document).on("click","#modifyBtn",function(){
+		var boardNo = $("#boardNo").val();
 		var communityNo = $("#communityNo").val();
-		var communityBoardTitle = $("#communityBoardTitle").val().replace(/&/gi, '&amp;').replace(/</gi, '&lt;').replace(/>/gi, '&gt;').replace(/"/gi, '&quot;').replace(/'/gi, '&apos;');
-		var communityBoardContent = $("#communityBoardContent").val().replace(/&/gi, '&amp;').replace(/</gi, '&lt;').replace(/>/gi, '&gt;').replace(/"/gi, '&quot;').replace(/'/gi, '&apos;');
-		var communityBoardIspublic = $("#communityBoardIspublic").val();
-		if(checkFrm()){
-			$.ajax({
-				url: "/auth/community/boardWrite",
-				type: "post",
-				contentType: "application/json; charset=utf-8",
-				data: JSON.stringify({
-						"userNo":userNo,
-						"communityNo":communityNo,
-						"communityBoardTitle":communityBoardTitle,
-						"communityBoardContent":communityBoardContent,
-						"communityBoardIspublic":communityBoardIspublic
-					}),
-				dataType:"json", 
-				success: function(result){
-					if(result.status == 500 ){
-						alert("게시글 등록에 실패하셨습니다.");					
-					}else{
-						alert("게시글이 등록되었습니다.");					
-						history.back();					
-					}
-				},
-				error: function(){
-					alert("서버에러");
-				}
-
-			})
-		}
+		location.href="/auth/community/boardModifyForm?communityBoardNo="+boardNo+"&communityNo="+communityNo
+				
 	})
+
+	// 다시 커뮤니티로 돌아가기
+	$(document).on("click","#returnBtn",function(){
+		var communityNo = $("#communityNo").val();
+		location.href="/auth/community/community?communityNo="+communityNo
+				
+	})
+	
+	// 게시글 삭제
+	$(document).on("click","#deleteBtn",function(){
+		var boardNo = $("#boardNo").val();
+		var communityNo = $("#communityNo").val();
+		$.ajax({
+			url:"/auth/community/boardDelete/"+boardNo,
+			type:"delete",
+			contentType: "application/json; charset=utf-8",
+			dataType:"json",
+			success: function(result){
+				if(result.status == 500 ){
+					alert("게시글 삭제에 실패하셨습니다.");					
+				}else{
+					alert("게시글이 삭제되었습니다.");					
+					location.href="/auth/community/community?communityNo="+communityNo
+				}
+			},
+			error: function(){
+				alert("서버에러");
+			}
+		})
+		
+	})
+
+	
 	
 })
 </script>

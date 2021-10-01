@@ -100,10 +100,7 @@ public class MainController {
 	}
 
 	
-	@GetMapping("/auth/community")
-	public String community() {
-		return "community";
-	}
+
 	
 	@GetMapping("/auth/trend")
 	public String trend(Model model) {
@@ -152,10 +149,7 @@ public class MainController {
 		return "payinfo";
 	}
 	
-	@GetMapping("/auth/communityTotal")
-	public String communityTotal() {
-		return "communityTotal";
-	}
+
 	
 
 	@GetMapping("/auth/magazine")

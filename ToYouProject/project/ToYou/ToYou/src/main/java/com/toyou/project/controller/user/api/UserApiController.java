@@ -6,19 +6,13 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -83,23 +77,10 @@ public class UserApiController {
 	}
 	
 	
-//	// 회원정보 수정
-//	@PutMapping("/user/userUpdateProc")
-//	public ResponseDTO<Integer> userUpdate(@RequestBody User user){
-//		userService.userUpdate(user);
-////		트랜젝션 종료시점이기 때문에 DB값은 변경된 후
-////		하지만 세션값 변경 X
-////		세션정보도 다시 업데이트 해줘야함
-//		// 세션 등록
-//		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserId(), user.getUserPassword()));
-//		SecurityContextHolder.getContext().setAuthentication(authentication);
-//		return new ResponseDTO<Integer>(HttpStatus.OK.value(),1);
-//	}
-	
+
 	
 	@GetMapping("/auth/user/searchChannel")
 	public String[] channelSearch(String keyword, Model model) {
-		System.out.println(keyword);
 		String[] contents = null;
 		try (Socket client = new Socket()) {
 			
@@ -108,7 +89,7 @@ public class UserApiController {
 			// 소켓 접속!
 			
 			client.connect(ipep);
-			System.out.println("시작");
+			System.out.println("채널 검색 시작");
 
 			// 소켓이 접속이 완료되면 inputstream과 outputstream을 받는다.
 			try (OutputStream sender = client.getOutputStream(); InputStream receiver = client.getInputStream();) {
@@ -135,7 +116,7 @@ public class UserApiController {
 				b = ByteBuffer.wrap(data);
 				b.order(ByteOrder.LITTLE_ENDIAN);
 				int length = b.getInt();
-				// 데이터를 받을 버퍼를 선언한다.
+				// 데이터를 받을 버퍼를 선언한다.v
 				data = new byte[length];
 				// 데이터를 받는다.
 				receiver.read(data, 0, length);

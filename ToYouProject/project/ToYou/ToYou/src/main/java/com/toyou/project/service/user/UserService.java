@@ -7,7 +7,8 @@ public interface UserService {
 	
 	public void userJoin(User user);
 	
-	public void userUpdate(User user);
-	
+
 	public User userFind(String username);
+	
+	public User userfindById(int id);
 }

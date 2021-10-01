@@ -44,10 +44,6 @@ public class CommunityBoard {
 	@Column(nullable = false)
 	private int communityBoardViewcnt;
 	
-	@ColumnDefault("0")
-	@Column(nullable = false)
-	private int communityBoardLikecnt;
-	
 	@CreationTimestamp
 	private Timestamp communityBoardWritedate;
 	

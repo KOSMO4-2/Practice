@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html>
@@ -27,13 +28,14 @@
 </head>
 <body>
 <!------Header-------->
-<%@ include file="layout/header.jsp"%>
+<%@ include file="../layout/header.jsp"%>
 <%-- 
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="true"></jsp:include> --%>
 <!------Header-------->
 
 	<div class="block-31" style="position: relative;">
 		<div class="owl-carousel loop-block-31">
+			<!-- 추후 배너는 ChannelOwners 에서 가져올 예정 -->
 			<div class="block-30 block-30-sm item"
 				style="background-image: url('/image/bg_1.jpg');"
 				data-stellar-background-ratio="0.5">
@@ -61,44 +63,39 @@
 
 	<div class="container">
 		<div class="row commu">
-			<div class="col-md-8 col-lg-6 mb-5">
-				<div class="commu_title_1">
-					<h3>커뮤니티[커뮤니티명]</h3>
+			<div class="col-md-8 col-lg-12 mb-5">
+				<div class="commu_title_1 text-center">
+				<input type="hidden" id="communityNo" value="${community.communityNo}">
+					<h2>${community.communityTitle}</h2>
+					<hr>
 				</div>
-				<div class="person-donate text-left">
-					<img src="/image/person_1.jpg" alt="Image placeholder"
-						class="img-left">
-					<div class="donate-info">
-						<h2>호스트 채널명</h2>
-						<span class="time d-block mb-3 text-danger">커뮤니티 가입자수</span>
-						<p>
-							커뮤니티 설명
-							<!-- <span class="text-success">호호</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a> -->
-						</p>
+				<div class="row">
+				<div class="col-2"></div>
+					<div class="person-donate text-left col-3">
+						<img src="${user.userChannelImg}" alt="Image placeholder"
+							class="img-left">
+						<div class="donate-info">
+							<h4>${user.userChannelName }</h4>
+							<span class="time d-block mb-3 text-danger">가입자 : ${JoinCnt} 명</span>
+						</div>
+					</div>
+					<div class="person-donate text-left col-7">
+					<div class="commu_title_1">
+						<h2>커뮤니티 소개</h2>
+					</div>
+						<div class="donate-info">
+							<p>
+								${community.communityDescription}
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="col-md-4 col-lg-6 mb-5">
-				<div class="person-donate text-left">
-					<div class="donate-info">
-						<h2>커뮤니티 정보수정과 해체 등의 설정 메뉴</h2>
-						<!--<span class="time d-block mb-3">구독자수</span>
-						<p>
-							채널소개 <span class="text-success">$252</span> <br> <em>for</em>
-							<a href="#" class="link-underline fundraise-item">Water Is
-								Life. Clean Water In Urban Area</a>
-						</p> -->
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-12 col-lg-12 md-5">
-				<div class="person-donate text-left"></div>
-			</div>
-
+			<div class="float-right">
+				<button class="btn btn-warning" id="modifyCmBtn">커뮤니티 수정</button>
+				<button class="btn btn-warning" id="deleteCmBtn">커뮤니티 삭제</button>
+				<button class="btn btn-warning" id="memberMgtBtn">멤버 관리</button>
+			</div>		
 		</div>
 	</div>
 
@@ -124,7 +121,6 @@
 		</div>
 	</div>
 
-
 	<div class="site-section">
 		<div class="container">
 			<div class="row">
@@ -149,11 +145,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="commu_title_3">
+					<div class="title_m_tx text-left ">
 						<h3>커뮤니티 게시판</h3>
-						<button onclick="location.href='/auth/community/cmBoardWriteForm'">게시글 작성</button>
+				
 					</div>
-					<form>
 						<table class="table table-striped commu_board">
 						<thead>
 							<tr class="text-center">
@@ -161,37 +156,42 @@
 								<th>제목</th>
 								<th>작성자</th>
 								<th>조회수</th>
-								<th>좋아요</th>
 								<th>날짜</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr class="text-center">
-								<td>1</td>
-								<td>안녕하세요</td>
-								<td>김떙떙</td>
-								<td>300</td>
-								<td>10</td>
-								<td>2021-05-21</td>
-							<tr class="text-center" >
-								<td>2</td>
-								<td>안녕하세요</td>
-								<td>김떙떙</td>
-								<td>300</td>
-								<td>10</td>
-								<td>2021-05-21</td>
-							</tr>
-							<tr class="text-center">
-								<td>3</td>
-								<td>안녕하세요</td>
-								<td>이불</td>
-								<td>300</td>
-								<td>10</td>
-								<td>2021-05-21</td>
-							</tr>
+						<tbody id="boardList" class="text-center">
+						<c:if test="${fn:length(boards)-1 >= 0}">
+							<c:forEach var="i" begin="0" end="${fn:length(boards)-1}">
+								<tr>
+									<!-- 작성자, 커뮤니티 호스트 가 아니면 공개글만 노출 -->
+									<c:choose>
+										<c:when test="${principal.user.userNo != boardWriter.get(i).userNo && principal.user.userNo != community.communityHostno}">
+											<c:if test="${boards.get(i).communityBoardIspublic == 1 }">
+												<td>${i}</td>
+												<td><a style="color:black" href='/auth/community/boardView?communityBoardNo=${boards.get(i).communityBoardNo}&communityNo=${community.communityNo}'>${boards.get(i).communityBoardTitle}</a></td>
+												<td>${boardWriter.get(i).userName}</td>
+												<td>${boards.get(i).communityBoardViewcnt}</td>
+												<td>${boards.get(i).communityBoardWritedate}</td>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+												<td>${i}</td>
+												<td><a style="color:black" href='/auth/community/boardView?communityBoardNo=${boards.get(i).communityBoardNo}&communityNo=${community.communityNo}'>${boards.get(i).communityBoardTitle}</a></td>
+												<td>${boardWriter.get(i).userName}</td>
+												<td>${boards.get(i).communityBoardViewcnt}</td>
+												<td>${boards.get(i).communityBoardWritedate}</td>
+										</c:otherwise>
+									</c:choose>
+								</tr>
+							</c:forEach>
+						</c:if>
 						</tbody>
 						</table>
-					</form>
+						<c:if test="${!empty principal}">
+						<div class="form-row float-right">
+							<button class="btn btn-default" onclick="location.href='/auth/community/cmBoardWriteForm?communityNo=${community.communityNo}'">게시글 작성</button>
+						</div>
+						</c:if>
 				</div>
 			</div>
 		</div>
@@ -203,7 +203,14 @@
 <!-- Footer -->
 <%-- <%@ include file="layout/footer.jsp"%> --%>
 
-<jsp:include page="layout/footer.jsp" flush="true"></jsp:include>
- 
+<jsp:include page="../layout/footer.jsp" flush="true"></jsp:include>
+ <script type="text/javascript">
+	$(document).ready(function(){
+		$(document).on("click","#modifyCmBtn",function(){
+			var communityNo = $("#communityNo").val();
+			location.href="/auth/community/cmModifyForm?communityNo="+communityNo
+		})
+	})
+ </script>
   </body>
 </html>

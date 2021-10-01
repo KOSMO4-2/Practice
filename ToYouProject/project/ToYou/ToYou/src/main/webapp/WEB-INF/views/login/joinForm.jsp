@@ -433,6 +433,7 @@ $(document).ready(function(){
 								str += '</tr>';
 						}
 						str +='</table>';
+						$('#chResult').empty();
 						$('#chResult').append(str);
 					}else{
 						alert('검색결과가 없습니다.');
@@ -459,6 +460,7 @@ $(document).ready(function(){
 				data: {keyword:userRolemodelLink}, 
 				success: function(contents){ // 채널을 리스트로 받아옴
 					chRoleSelectCheck = 0;
+					
 					if(contents != null){
 						var str='<table class="table table-bordered">';
 						for(var i=0; i<contents.length; i++){
@@ -487,7 +489,7 @@ $(document).ready(function(){
 			var img = $(this).find("img").attr("src")
 			var title = $(this).find("td").eq(1).text()
 			var subscriber = $(this).find("td").eq(2).text()
-
+			
 			$("#chResult").empty()
 			var str='<table class="table table-bordered">'
 				str += '<tr class="chSelect" data="'+link+'">';
@@ -567,7 +569,6 @@ $(document).ready(function(){
 		
 		// 위의 조건을 다 만족했다면 ajax 로 회원가입 실행
 		if(checkform()){
-			alert(userId)
 			$.ajax({
 					url: "/auth/user/joinProc",
 					type: "post",
@@ -597,8 +598,6 @@ $(document).ready(function(){
 					error: function(){
 						alert("서버에러");
 					}
-
-				
 				})
 			
 			}
