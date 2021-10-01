@@ -4,26 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-    $(".col-sm-6").hide();
-
-    var elements = $(".col-sm-6");
-    var elementCount = elements.size();
-    var elementsToShow = 4;
-    var alreadyChoosen = ",";
-    var i = 0;
-    while (i < elementsToShow) {
-        var rand = Math.floor(Math.random() * elementCount);
-        if (alreadyChoosen.indexOf("," + rand + ",") < 0) {
-            alreadyChoosen += rand + ",";
-            elements.eq(rand).show();
-            ++i;
-        }
-    }
-});
-</script>
 <title>You To You &mdash; Youtuber Management</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -81,62 +61,26 @@ $(document).ready(function() {
 					<h2 class="title_m">신규가입 유튜버</h2>
 					<!--      <p class="lead">오늘 가입한 유튜버 채널</p>
           <p class="mb-5"><a href="#" class="link-underline">View All Donations</a></p> -->
-          </div>
-          
+          </div>    
  <div class="container">
       <div class="row">
+      <c:forEach var="list" items="${NewUserList}" begin="0" end="3" step="1" varStatus="status">
         <div class="col-md-6 col-lg-3 mb-5">
           <div class="person-donate text-center">
-            <img src="/image/person_1.jpg" alt="Image placeholder" class="img-fluid">
+            <img src=${list.userChannelImg } alt="Image placeholder" class="img-fluid">
             <div class="donate-info">
-              <h2>채널명</h2>
-              <span class="time d-block mb-3">구독자수</span>
-              <p>Donated <span class="text-success">$252</span> <br> 
-              <em></em> <a href="#" class="link-underline fundraise-item"> 채널바로가기</a></p>
+              <h2>${list.userChannelName}</h2>
+              <span class="time d-block mb-3">${list.userSubscriber}</span>
+              <a href="${list.userChannelLink}" class="link-underline fundraise-item"> 채널바로가기</a>
             </div>
+            
           </div>    
         </div>
-
-        <div class="col-md-6 col-lg-3 mb-5">
-          <div class="person-donate text-center">
-            <img src="/image/person_2.jpg" alt="Image placeholder" class="img-fluid">
-            <div class="donate-info">
-              <h2>Christine Charles</h2>
-              <span class="time d-block mb-3">Donated 1 hour ago</span>
-              <p>Donated <span class="text-success">$400</span> <br> <em>for</em> <a href="#" class="link-underline fundraise-item">Children Needs Education</a></p>
-            </div>
-          </div>    
-        </div>
-
-        <div class="col-md-6 col-lg-3 mb-5">
-          <div class="person-donate text-center">
-            <img src="/image/person_3.jpg" alt="Image placeholder" class="img-fluid">
-            <div class="donate-info">
-              <h2>Albert Sluyter</h2>
-              <span class="time d-block mb-3">Donated 4 hours ago</span>
-              <p>Donated <span class="text-success">$1,200</span> <br> <em>for</em> <a href="#" class="link-underline fundraise-item">Need Shelter for Children in Africa</a></p>
-            </div>
-          </div>    
-        </div>
-
-        <div class="col-md-6 col-lg-3 mb-5">
-          <div class="person-donate text-center">
-            <img src="/image/person_4.jpg" alt="Image placeholder" class="img-fluid">
-            <div class="donate-info">
-              <h2>Andrew Holloway</h2>
-              <span class="time d-block mb-3">Donated 9 hours ago</span>
-              <p>Donated <span class="text-success">$100</span> <br> <em>for</em> <a href="#" class="link-underline fundraise-item">Water Is Life. Clean Water In Urban Area</a></p>
-            </div>
-          </div>    
-        </div>
-        
-
-      </div>
-    </div>
-          
-
-				</div>
-			</div>
+        </c:forEach>
+       			</div>
+		</div>
+		</div>
+		</div>
 		</div>
 		
 		
@@ -150,10 +94,11 @@ $(document).ready(function() {
 				</div>
 			</div>
 		</div>
-
+<%-- <c:set var="number" value ="${randomIndexArray}" /> --%>
 <div class="container cate_rank">
 		<div class="container">
 			<div class="row">
+				<c:if test="${null ne AsmrList}">
 				<div class="col-sm-6">
 					<div class="table title"><h3 class="mid-title-thin">ASMR</h3></div>				
 					<table class="table table-sm col-md-3 text-center">
@@ -176,8 +121,8 @@ $(document).ready(function() {
 						
 					</table>
 				</div>
-
-
+				</c:if>
+				<c:if test="${null ne BeautiList}">
 				<div class="col-sm-6">
 				<div class="table title"><h3 class="mid-title-thin">뷰티</h3></div>
 					<table class="table table-sm col-md-3 text-center">
@@ -200,12 +145,9 @@ $(document).ready(function() {
 					</table>
 
 				</div>
-			</div>
-		</div>
-</div>
-<div class="container cate_rank">
-		<div class="container">
-			<div class="row">
+</c:if>
+
+			<c:if test="${null ne GameList}">
 				<div class="col-sm-6"> 
 					<div class="table title"><h3 class="mid-title-thin">게임</h3></div>				
 					<table class="table table-sm col-md-3 text-center">
@@ -228,8 +170,8 @@ $(document).ready(function() {
 						
 					</table>
 				</div>
-
-
+</c:if>
+<c:if test="${null ne MukbangList}">
 				<div class="col-sm-6">
 				<div class="table title"><h3 class="mid-title-thin">먹방</h3></div>
 					<table class="table table-sm col-md-3 text-center">
@@ -241,6 +183,7 @@ $(document).ready(function() {
 							</tr>
 						</thead>
 						<tbody>
+						
 						<c:forEach items="${MukbangList}" var="list">
 							<tr>
 								<th scope="row">${list.categoryMukbangId}</th>
@@ -252,12 +195,9 @@ $(document).ready(function() {
 					</table>
 
 				</div>
-			</div>
-		</div>
-</div>
-<div class="container cate_rank">
-		<div class="container">
-			<div class="row">
+				</c:if>
+
+			<c:if test="${null ne FitnessList}">
 				<div class="col-sm-6">
 					<div class="table title"><h3 class="mid-title-thin">운동</h3></div>				
 					<table class="table table-sm col-md-3 text-center">
@@ -280,8 +220,8 @@ $(document).ready(function() {
 						
 					</table>
 				</div>
-
-
+</c:if>
+<c:if test="${null ne CarList}">
 				<div class="col-sm-6">
 				<div class="table title"><h3 class="mid-title-thin">자동차</h3></div>
 					<table class="table table-sm col-md-3 text-center">
@@ -304,9 +244,8 @@ $(document).ready(function() {
 					</table>
 
 				</div>
-			</div>
-		</div>
-</div>
+				</c:if>
+
 
 	<div class="site-section border-top ssbt_text02">
 		<div class="container">
@@ -319,6 +258,9 @@ $(document).ready(function() {
 			</div>
 		</div>
    </div>
+</div>
+</div>
+</div>
 
 <div class="container cate_rank">
 
@@ -530,44 +472,32 @@ $(document).ready(function() {
       </div>
 
       <div class="row">
+      <c:choose>
+     <c:when test="${not empty CategoryList2}">
+    <c:forEach var="list" items="${CategoryList2}" begin="0" end="2" step="1" varStatus="status"> 
         <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
           <div class="post-entry">
             <a href="blog-single.html" class="mb-3 img-wrap">
-              <img src="/image/img_4.jpg" alt="Image placeholder" class="img-fluid">
+              <img src="${list.categoryUserImage }" alt="Image placeholder" class="img-fluid">
             </a>
-            <h3><a href="#">채널명1</a></h3>
-            <span class="date mb-4 d-block text-muted">구독자수</span>
-<!--             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>-->            <p><a href="#" class="link-underline">Read More</a></p>
-          </div>
+            <h3><a href="#">${list.categoryUserName }</a></h3>
+            <span class="date mb-4 d-block text-muted">${list.categoryUserSubscribe }</span>
+<!--             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>-->            <p><a href="${list.categoryUserSubscribe }" class="link-underline">채널 바로가기</a></p>
+          </div>         
         </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="post-entry">
-            <a href="blog-single.html" class="mb-3 img-wrap">
-              <img src="/image/img_4.jpg" alt="Image placeholder" class="img-fluid">
-            </a>
-            <h3><a href="#">채널명2</a></h3>
-            <span class="date mb-4 d-block text-muted">구독자수</span>
-<!--             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>-->            <p><a href="#" class="link-underline">Read More</a></p>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="post-entry">
-            <a href="blog-single.html" class="mb-3 img-wrap">
-              <img src="/image/img_4.jpg" alt="Image placeholder" class="img-fluid">
-            </a>
-            <h3><a href="#">채널명3</a></h3>
-            <span class="date mb-4 d-block text-muted">구독자수</span>
-<!--             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>-->            <p><a href="#" class="link-underline">Read More</a></p>
-          </div>
-        </div>
+         </c:forEach> 
+        </c:when>
+       <c:when test="${empty CategoryList2}">
+       <h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;로그인해주세욤</h3>
+       </c:when>
 
-
+</c:choose>
       </div>
 
       </div>
     </div>
   </div>
-  
+ 
 
       </div>
  

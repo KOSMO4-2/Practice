@@ -1,5 +1,7 @@
 package com.toyou.project.service.user;
 
+import java.util.List;
+
 //import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.toyou.project.dao.user.UserRepository;
+import com.toyou.project.model.CategoryUser;
 import com.toyou.project.model.User;
 
 @Service
@@ -49,6 +52,13 @@ public class UserServiceImpl implements UserService {
 		});
 		System.out.println("userService - userFind : "+user.getUserId());
 		return user;
+	}
+
+
+	@Override
+	public List<CategoryUser> userFindCategory(String CategoryNum) {
+		List<CategoryUser> CategoryList = userRepository.findByAll(CategoryNum);
+		return CategoryList;
 	}
 	
 	

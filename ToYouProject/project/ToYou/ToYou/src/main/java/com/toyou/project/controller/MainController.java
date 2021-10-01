@@ -7,7 +7,9 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,13 +18,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 import com.toyou.project.model.CategoryAsmr;
 import com.toyou.project.model.CategoryBeauti;
 import com.toyou.project.model.CategoryCar;
 import com.toyou.project.model.CategoryFitness;
 import com.toyou.project.model.CategoryGame;
 import com.toyou.project.model.CategoryMukbang;
+import com.toyou.project.model.CategoryUser;
 import com.toyou.project.model.ChannelOwner;
 import com.toyou.project.model.Community;
 import com.toyou.project.model.Magazine;
@@ -43,6 +45,7 @@ import com.toyou.project.service.loginmain.keyword.KeywordGoogleService;
 import com.toyou.project.service.loginmain.keyword.KeywordTiktokService;
 import com.toyou.project.service.loginmain.keyword.KeywordTwitchService;
 import com.toyou.project.service.loginmain.keyword.KeywordTwitterService;
+import com.toyou.project.service.loginmain.newjoin.NewjoinService;
 import com.toyou.project.service.magazine.MagazineService;
 import com.toyou.project.service.mypage.MypageService;
 import com.toyou.project.service.pay.PayService;
@@ -80,9 +83,10 @@ public class MainController {
 	private PayService payService;
 	@Autowired
 	private MypageService mypageService;
-	
 	@Autowired
 	private MagazineService magazineService;
+	@Autowired
+	private NewjoinService newjoinService;
 	
 	
 	
@@ -103,7 +107,22 @@ public class MainController {
 
 	
 	@GetMapping("/auth/trend")
-	public String trend(Model model) {
+	public String trend(Model model,Authentication authentication) {
+		
+		if(authentication != null && authentication.getPrincipal() != null) {
+			
+			UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+			String username = userDetails.getUsername();
+			User user = userService.userFind(username);
+			List<CategoryUser> CategoryList2 = userService.userFindCategory(user.getUserChannelCategory());
+			model.addAttribute("CategoryList2",CategoryList2);
+		}else {
+			String CategoryList2 = null;
+			model.addAttribute("CategoryList2",CategoryList2);	
+		}
+	    
+	    
+	    
 		List<keywordGoogle> googleList = keywordGoogleService.SelectAllKeywordGoogle();
 		List<keywordTiktok> tiktokList = keywordTiktokService.SelectAllKeywordTiktok();
 		List<keywordTwitch> twitchList = keywordTwitchService.SelectAllKeywordTwitch();
@@ -113,6 +132,7 @@ public class MainController {
 		List<keywordTwitter> twitterFamousList = keywordTwitterService.SelectAllKeywordTwitterKind("famous");
 		List<keywordTwitter> twitterDurationList = keywordTwitterService.SelectAllKeywordTwitterKind("duration");
 		
+		
 		List<CategoryAsmr> AsmrList = categoryAsmrService.SelectAllCategoryAsmr();
 		List<CategoryBeauti> BeautiList = categoryBeautiService.SelectAllCategoryBeauti();
 		List<CategoryCar> CarList = categoryCarService.SelectAllCategoryCar();
@@ -120,7 +140,8 @@ public class MainController {
 		List<CategoryGame> GameList = categoryGameService.SelectAllCategoryGame();
 		List<CategoryMukbang> MukbangList = categoryMukbangService.SelectAllCategoryMukbang();
 		
-		
+		List<User> NewUserList = newjoinService.SelectAllUser();
+			
 		model.addAttribute("googleList", googleList);
 		model.addAttribute("tiktokList", tiktokList);
 		model.addAttribute("twitchList", twitchList);
@@ -130,12 +151,44 @@ public class MainController {
 		model.addAttribute("twitterFamousList", twitterFamousList);
 		model.addAttribute("twitterDurationList", twitterDurationList);
 		
-		model.addAttribute("AsmrList", AsmrList);
-		model.addAttribute("BeautiList",BeautiList);
-		model.addAttribute("CarList",CarList);
-		model.addAttribute("FitnessList",FitnessList);
-		model.addAttribute("GameList",GameList);
-		model.addAttribute("MukbangList",MukbangList);
+		// 난수 4개 추출 1~6
+		Set<Integer> set = new HashSet<>(); 
+		while (set.size() < 4) { 
+			Double d = Math.random() * 6 + 1; 
+			set.add(d.intValue()); 
+			} 
+		List<Integer> list = new ArrayList<>(set); 
+		System.out.println(list);
+		
+		if(list.contains(1)) {
+			model.addAttribute("AsmrList", AsmrList);
+		}
+		if(list.contains(2)) {
+			model.addAttribute("BeautiList", BeautiList);
+		}
+		if(list.contains(3)) {
+			model.addAttribute("FitnessList", FitnessList);
+		}
+		if(list.contains(4)) {
+			model.addAttribute("GameList", GameList);
+		}
+		if(list.contains(5)) {
+			model.addAttribute("MukbangList", MukbangList);
+		}
+		if(list.contains(6)) {
+			model.addAttribute("CarList", CarList);
+		}
+		else {
+			return "trend";
+		}	
+		
+		
+		
+		
+		model.addAttribute("NewUserList",NewUserList);
+		
+		
+		
 		
 		
 		

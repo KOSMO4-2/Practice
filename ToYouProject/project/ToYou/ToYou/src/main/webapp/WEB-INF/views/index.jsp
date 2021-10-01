@@ -27,6 +27,7 @@
 <body>
 <!------Header-------->
 <%@ include file="layout/header.jsp"%>
+<%@ include file="layout/Menu.jsp"%>
 <%-- 
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="true"></jsp:include> --%>
 <!------Header-------->

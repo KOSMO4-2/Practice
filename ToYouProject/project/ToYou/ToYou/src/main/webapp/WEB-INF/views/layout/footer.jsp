@@ -54,7 +54,6 @@
           </div>
         </div> -->
         
-        
         <div class="col-md-6 col-lg-4 fts1">
           <div class="block-23">
             <h3 class="heading-section">Get Connected</h3>
