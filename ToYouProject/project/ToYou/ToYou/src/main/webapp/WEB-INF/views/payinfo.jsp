@@ -87,6 +87,12 @@
 	</div>
 
 
+<form action="/admin_index" method="get">
+	<div class="form-group">
+		<button type="submit" class="btn btn-default">admin_index</button>
+	</div>
+</form>
+
 							
 
 		
