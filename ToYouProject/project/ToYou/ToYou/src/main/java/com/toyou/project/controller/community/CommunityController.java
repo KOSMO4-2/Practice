@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.toyou.project.dto.CountDTO;
+import com.toyou.project.model.ChannelOwner;
 import com.toyou.project.model.Community;
 import com.toyou.project.model.CommunityBoard;
 import com.toyou.project.model.User;
 import com.toyou.project.service.community.CommunityBoardService;
 import com.toyou.project.service.community.CommunityService;
+import com.toyou.project.service.mypage.MypageService;
 import com.toyou.project.service.user.UserService;
 
 @Controller
@@ -33,23 +35,29 @@ public class CommunityController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private MypageService myPageService;
+	
 	
 //	커뮤니티 수정폼 이동
 	@GetMapping("/auth/community/cmModifyForm")
 	public String cmModifyForm(HttpServletRequest request, Model model) {
 		String communityNo = request.getParameter("communityNo");
-		System.out.println("수정할 커뮤니티 번호 : "+communityNo);
 		Community community = communityService.findById(Integer.parseInt(communityNo));
-		System.out.println("커뮤니티 정보 확인 :" + community.getCommunityTitle());
-//		String[] tmp;
-//		List<String> tagVal = null;
-//		if(community.getCommunityTag()!=null) {			
-//			tmp = community.getCommunityTag().split(",");
+//		ArrayList<String> tagVal = new ArrayList<String>();
+//		System.out.println("태그가 가져오는 값 확인 : "+community.getCommunityTag());
+//		System.out.println("태그가 가져오는 값 isempty : "+community.getCommunityTag().isEmpty());
+//		if(!(community.getCommunityTag().isEmpty())) {			
+//			String[] tmp = community.getCommunityTag().trim().split(",");
+//			System.out.println("tmp 사이즈 확인 :" + tmp.length);
 //			for(int i = 0;i<tmp.length; i++	) {
+//				System.out.println("tmp에 담긴 배열 확인 :" + tmp[i]);
 //				tagVal.add(tmp[i].trim());
+//				System.out.println(tagVal.get(i));
 //			}
 //		}
-		
+//		System.out.println("태그가 없나 : " + tagVal.isEmpty());
+//		System.out.println("태그 개수 확인 : " + tagVal.size());
 		model.addAttribute("community", community);
 //		model.addAttribute("tagVal", tagVal);
 //		
@@ -93,6 +101,9 @@ public class CommunityController {
 		int JoinCnt = communityService.countByUserInfo(Integer.parseInt(communityNo));
 		Community community = communityService.findById(Integer.parseInt(communityNo));
 		User user = userService.userfindById(community.getCommunityHostno());
+		ChannelOwner channelInfo = myPageService.findMyChannel(user.getUserNo());
+		
+		model.addAttribute("channelInfo", channelInfo);
 		model.addAttribute("community", community);
 		model.addAttribute("user", user);
 		model.addAttribute("JoinCnt", JoinCnt);
@@ -281,6 +292,7 @@ public class CommunityController {
 	}
 	
 	
+	// 커뮤니티 게시판 상세보기
 	@GetMapping("/auth/community/boardView")
 	public String boardView(HttpServletRequest request, Model model) {
 		String boardNo = request.getParameter("communityBoardNo");
@@ -293,6 +305,13 @@ public class CommunityController {
 		model.addAttribute("board",board);
 		model.addAttribute("user",user);
 		return "community/boardView";
+	}
+	
+	// 커뮤니티 멤버 관리폼 이동
+	@GetMapping("/auth/community/cmUserInfoModifyForm")
+	public String cmUserInfoModifyForm(HttpServletRequest request) {
+		int communityNo = Integer.parseInt(request.getParameter("communityNo"));
+		return "community/cmUserInfoModifyForm";
 	}
 	
 }

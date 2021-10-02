@@ -26,5 +26,12 @@ public interface CommunityService {
 	
 	public List<CountDTO> findByCountCommunityBoard();
 	
+	public void modifyCommuity(int communityNo, Community temp);
+	
+	public void deleteCommunity(int communityNo);
+	
+	public void signUpCm(int userNo, int communityNo);
+	
+	public CommunityUserInfo findByUserInfo(int userNo);
 	
 }

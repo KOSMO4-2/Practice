@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.toyou.project.dao.community.CommunityBoardRepository;
+import com.toyou.project.dao.community.CommunityRepository;
+import com.toyou.project.model.Community;
 import com.toyou.project.model.CommunityBoard;
 
 
@@ -15,6 +17,9 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
 	
 	@Autowired
 	private CommunityBoardRepository boardRepository;
+	
+	@Autowired
+	private CommunityRepository communityRepository;
 	
 
 	// 게시판 작성
@@ -74,6 +79,13 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
 		});
 		boardRepository.delete(board);
 	}
+
+
+	@Transactional
+	public void boardDeleteAll(int communityNo) {
+		List<CommunityBoard> boards = boardRepository.findAllByCommunityNo(communityNo);
+		boardRepository.deleteAll(boards);
+	};
 	
 	
 	
