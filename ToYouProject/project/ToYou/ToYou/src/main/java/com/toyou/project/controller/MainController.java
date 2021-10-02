@@ -15,7 +15,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.toyou.project.model.CategoryAsmr;
 import com.toyou.project.model.CategoryBeauti;
@@ -365,8 +368,9 @@ public class MainController {
 		catch(Exception e) {
 			
 		}
-	    
-	    
+		
+		
+		
 	    // 인철 마이페이지 종료
 	 	//--------------------------------------------------------------------
 	    
@@ -382,6 +386,16 @@ public class MainController {
 		return "mypage";
 	}
 	
+	@RequestMapping(value = "/auth/getUser",method = RequestMethod.GET)
+	@ResponseBody
+	public String getUser(@RequestParam String userNo) {
+
+		ChannelOwner channelOwner = mypageService.findMyChannel(Integer.parseInt(userNo));
+		String chProfile = channelOwner.getChProfile();
+		
+		return chProfile;
+	}
+    
 	
 	
 	@GetMapping("/auth/channelSearch")

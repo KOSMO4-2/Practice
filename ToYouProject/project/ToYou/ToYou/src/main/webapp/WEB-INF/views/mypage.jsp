@@ -1244,6 +1244,6 @@
 
 						})
 	</script>
-
+<%@ include file="layout/Chatting.jsp"%>
 </body>
 </html>
