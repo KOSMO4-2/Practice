@@ -4,10 +4,10 @@
     <div class="container">
       <div class="row mb-5 ft ">
         <div class="col-md-6 col-lg-4 fts1">
-          <h3 class="heading-section">About Us</h3>
-          <p class="lead">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-          <p class="mb-5">Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-          <p><a href="#" class="link-underline">Read  More</a></p>
+          <h3 class="heading-section">About us</h3>
+          <p class="lead">(주)YouToYou</p>
+<!--           <p class="mb-5">사업자등록번호: 0000-1111-9999</p> -->
+<!--           <p><a href="#" class="link-underline">Read  More</a></p> -->
         </div>
 <!--         <div class="col-md-6 col-lg-4">
           <h3 class="heading-section">Recent Blog</h3>
@@ -59,8 +59,8 @@
           <div class="block-23">
             <h3 class="heading-section">Get Connected</h3>
               <ul>
-                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                <li><span class="icon icon-map-marker"></span><span class="text">(153-759) 서울시 금천구 가산동 426-5<br/>월드메르디앙 2차</span></li>
+                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+82 392 3929 210</span></a></li>
                 <li><a href="#"><span class="icon icon-envelope"></span><span class="text">To@yourdomain.com</span></a></li>
               </ul>
             </div>
