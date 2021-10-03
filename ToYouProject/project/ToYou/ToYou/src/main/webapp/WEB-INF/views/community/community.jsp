@@ -37,13 +37,13 @@
 		<div class="owl-carousel loop-block-31">
 			<!-- 추후 배너는 ChannelOwners 에서 가져올 예정 -->
 			<div class="block-30 block-30-sm item"
-				style="background-image: url('${channelInfo.chBanner}');"
+				style="background-image: url('/image/bg_1.jpg');"
 				data-stellar-background-ratio="0.5">
 				<div class="container">
 					<div
 						class="row align-items-center justify-content-center text-center">
 						<div class="col-md-7">
-							<h2 class="heading mb-5">${channelInfo.chTitle}</h2>
+							<h2 class="heading mb-5">커뮤니티</h2>
 							<!-- <p style="display: inline-block;"><a href="https://vimeo.com/channels/staffpicks/93951774"  data-fancybox class="ftco-play-video d-flex"><span class="play-icon-wrap align-self-center mr-4"><span class="ion-ios-play"></span></span> <span class="align-self-center">Watch Video</span></a></p> -->
 							<!-- 메인 중앙 검색창
                <div class="input-group">
@@ -62,25 +62,7 @@
 	
 
 	<div class="container">
-		
 		<div class="row commu">
-			<div class="dropdown event-dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Test<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						
-						<c:choose>
-							<c:when test="${principal.user.userNo == community.communityHostno }">
-									<li><a id="modifyCmBtn" href="#">커뮤니티 수정</a></li>
-									<li><a id="deleteCmBtn" href="#">커뮤니티 삭제</a></li>
-									<li><a id="memberMgtBtn" href="/auth/community/cmUserInfoModifyForm?communityNo=${community.communityNo}">멤버 관리</a></li>
-							</c:when>
-							<c:otherwise>
-									<li><a id="signUpBtn" href="#">가입 신청</a></li>
-							</c:otherwise>
-						</c:choose>
-					</ul>
-			</div>
-			<input type="hidden" value="${principal.user.userNo}" id="userNo">
 			<div class="col-md-8 col-lg-12 mb-5">
 				<div class="commu_title_1 text-center">
 				<input type="hidden" id="communityNo" value="${community.communityNo}">
@@ -109,7 +91,11 @@
 					</div>
 				</div>
 			</div>
-		
+			<div class="float-right">
+				<button class="btn btn-warning" id="modifyCmBtn">커뮤니티 수정</button>
+				<button class="btn btn-warning" id="deleteCmBtn">커뮤니티 삭제</button>
+				<button class="btn btn-warning" id="memberMgtBtn">멤버 관리</button>
+			</div>		
 		</div>
 	</div>
 
@@ -218,75 +204,13 @@
 <%-- <%@ include file="layout/footer.jsp"%> --%>
 
 <jsp:include page="../layout/footer.jsp" flush="true"></jsp:include>
-<%@ include file="../layout/Chatting.jsp"%>
  <script type="text/javascript">
-$(document).ready(function(){
-
-	// 커뮤니티 수정 폼 이동
-	$(document).on("click","#modifyCmBtn",function(){
-		var communityNo = $("#communityNo").val();
-		location.href="/auth/community/cmModifyForm?communityNo="+communityNo
-	})
-	
-// 	// 멤버관리 폼 이동
-// 	$(document).on("click","#memberMgtBtn"),function(){
-// 		var communityNo = $("#communityNo").val();
-// 		location.href="/auth/community/cmUserInfoModifyForm?communityNo="+communityNo
-// 	}
-
-
-	// 게시글 삭제
-	$(document).on("click","#deleteCmBtn",function(){
-		var communityNo = $("#communityNo").val();
-		$.ajax({
-			url:"/auth/community/deleteCommunity/"+communityNo,
-			type:"delete",
-			contentType: "application/json; charset=utf-8",
-			dataType:"json",
-			success: function(result){
-				if(result.status == 500 ){
-					alert("커뮤니티 삭제에 실패하셨습니다.");					
-				}else{
-					alert("커뮤니티가 삭제되었습니다.");					
-					location.href="/auth/communityTotal"
-				}
-			},
-			error: function(){
-				alert("서버에러");
-			}
-		
+	$(document).ready(function(){
+		$(document).on("click","#modifyCmBtn",function(){
+			var communityNo = $("#communityNo").val();
+			location.href="/auth/community/cmModifyForm?communityNo="+communityNo
 		})
-
 	})
-
-	$(document).on("click","#signUpBtn",function(){
-		var userNo = $("#userNo").val();
-		var communityNo = $("#communityNo").val();
-		if(userNo == null || userNo == ""){
-			alert("로그인이 필요한 서비스 입니다.")
-			location.href="/auth/loginForm";
-		}else{
-			$.ajax({
-				url: "/auth/community/signUpCm",
-				type: "post",
-				data: {userNo:userNo,
-					communityNo:communityNo},
-             	success: function(result){
-    				if(result == "0" ){
-    					alert("이미 가입하셨습니다.");					
-    				}else{
-    					alert("가입신청이 완료되었습니다.");					
-    				}
-				},
-				error: function(request,status,error){
-			        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			    }
-			});
-		}
-	})
-
-		
-})
  </script>
   </body>
 </html>

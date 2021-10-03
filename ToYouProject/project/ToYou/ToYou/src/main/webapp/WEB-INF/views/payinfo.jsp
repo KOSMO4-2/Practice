@@ -87,12 +87,6 @@
 	</div>
 
 
-<form action="/admin_index" method="get">
-	<div class="form-group">
-		<button type="submit" class="btn btn-default">admin_index</button>
-	</div>
-</form>
-
 							
 
 		
@@ -284,7 +278,6 @@
         
 <!-- Footer -->
 <%@ include file="layout/footer.jsp"%>
-<%@ include file="layout/Chatting.jsp"%>
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%><!-- Footer -->

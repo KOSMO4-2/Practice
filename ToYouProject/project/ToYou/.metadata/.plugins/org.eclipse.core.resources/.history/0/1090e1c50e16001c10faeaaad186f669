@@ -1,0 +1,9 @@
+package com.toyou.project.model;
+
+public class OauthToken {
+	private String token_type
+	private String access_token;
+	private String refresh_token;
+	private String scope;
+	
+}

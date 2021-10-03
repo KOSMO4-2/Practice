@@ -10,12 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.toyou.project.dto.ResponseDTO;
-import com.toyou.project.model.Community;
 import com.toyou.project.model.CommunityBoard;
-import com.toyou.project.model.CommunityUserInfo;
-import com.toyou.project.model.User;
 import com.toyou.project.service.community.CommunityBoardService;
-import com.toyou.project.service.community.CommunityService;
 import com.toyou.project.service.user.UserService;
 
 @RestController
@@ -23,9 +19,6 @@ public class CommunityApiController {
 	
 	@Autowired
 	private CommunityBoardService boardService;
-	
-	@Autowired
-	private CommunityService communityService;
 	
 	@Autowired
 	private UserService userService;
@@ -51,39 +44,6 @@ public class CommunityApiController {
 	public ResponseDTO<Integer> boardDelete(@PathVariable int communityBoardNo){
 		boardService.boardDelete(communityBoardNo);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
-	}
-	
-	
-	// 커뮤니티 수정
-	@PutMapping("/auth/community/modifyCommuity/{communityNo}")
-	public ResponseDTO<Integer> modifyCommuity(@PathVariable int communityNo, @RequestBody Community temp){
-//			System.out.println("넘버 확인"+communityNo);
-		communityService.modifyCommuity(communityNo,temp);
-		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
-	}
-	
-	// 커뮤니티 삭제
-	@DeleteMapping("/auth/community/deleteCommunity/{communityNo}")
-	public ResponseDTO<Integer> deleteCommunity(@PathVariable int communityNo){
-		boardService.boardDeleteAll(communityNo);
-		communityService.deleteCommunity(communityNo);
-		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
-	}
-	
-	// 커뮤니티 가입 신청
-	@PostMapping("/auth/community/signUpCm")
-	public String signUpCm(User user,Community community){
-		int userNo = user.getUserNo();
-		int communityNo = community.getCommunityNo();
-		CommunityUserInfo userInfo = communityService.findByUserInfo(userNo);
-		
-		int result = 0;
-		if(userInfo.getCommunityUserinfoJoindate() == null) {
-			System.out.println("가입진행");
-			communityService.signUpCm(userNo,communityNo);
-			result = 1;
-		}
-		return Integer.toString(result);
 	}
 	
 

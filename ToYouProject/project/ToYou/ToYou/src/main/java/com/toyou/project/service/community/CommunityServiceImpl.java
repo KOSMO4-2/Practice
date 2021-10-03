@@ -8,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.toyou.project.dao.community.CommunityBoardRepository;
 import com.toyou.project.dao.community.CommunityRepository;
@@ -83,49 +82,9 @@ public class CommunityServiceImpl implements CommunityService{
 		});
 		return community;
 	}
-	
-	// 켜뮤니티 수정
-	@Override
-	@Transactional
-	public void modifyCommuity(int communityNo, Community temp) {
-		Community community = communityRepository.findById(communityNo).orElseThrow(()->{
-			return new IllegalArgumentException("커뮤니티 찾기 실패 : 커뮤니티를 찾을 수 없습니다.");
-		}); 
-		System.out.println(temp.getCommunityTag());
-		community.setCommunityTitle(temp.getCommunityTitle());
-		community.setCommunityDescription(temp.getCommunityDescription());
-		community.setCommunityIspublic(temp.getCommunityIspublic());
-		community.setCommunityTag(temp.getCommunityTag());
-	}
-	
-	// 커뮤니티 삭제
-	@Transactional
-	public void deleteCommunity(int communityNo) {
-		Community community = communityRepository.findById(communityNo).orElseThrow(()->{
-			return new IllegalArgumentException("커뮤니티 찾기 실패 : 커뮤니티를 찾을 수 없습니다.");
-		}); 
-		
-		communityRepository.delete(community);
-	};
 
 	
-	// 커뮤니티 가입 신청
-	public void signUpCm(int userNo,int communityNo) {
-		CommunityUserInfo userInfo = new CommunityUserInfo();
-		userInfo.setCommunityNo(communityNo);
-		userInfo.setUserNo(userNo);
-		communityUserInfoRepository.save(userInfo);
-	}
-	
-	// 커뮤니티 가입 상태 확인
-	public CommunityUserInfo findByUserInfo(int userNo) {
-		CommunityUserInfo userInfo =  communityUserInfoRepository.findByUserNo(userNo).orElseGet(()->{
-			return new CommunityUserInfo();
-		});
-		System.out.println("가입상태 날짜 : "+userInfo.getCommunityUserinfoJoindate());
-		return userInfo;
-	}
-	
+
 	
 	
 	
