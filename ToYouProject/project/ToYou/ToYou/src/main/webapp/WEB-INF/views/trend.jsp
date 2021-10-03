@@ -71,7 +71,7 @@
             <div class="donate-info">
               <h2>${list.userChannelName}</h2>
               <span class="time d-block mb-3">${list.userSubscriber}</span>
-              <a href="${list.userChannelLink}" class="link-underline fundraise-item"> 채널바로가기</a>
+              <a href="${list.userChannelLink}" target='_blank' class="link-underline fundraise-item"> 채널바로가기</a>
             </div>
             
           </div>    
@@ -477,12 +477,12 @@
     <c:forEach var="list" items="${CategoryList2}" begin="0" end="2" step="1" varStatus="status"> 
         <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
           <div class="post-entry">
-            <a href="${list.categoryUserlink }" class="mb-3 img-wrap">
+            <a href="${list.categoryUserlink }" target='_blank' class="mb-3 img-wrap">
               <img src="${list.categoryUserImage }" alt="Image placeholder" class="img-fluid">
             </a>
             <h3><a href="#">${list.categoryUserName }</a></h3>
             <span class="date mb-4 d-block text-muted">${list.categoryUserSubscribe }</span>
-<!--             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>-->            <p><a href="${list.categoryUserlink }" class="link-underline">채널 바로가기</a></p>
+<!--             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>-->            <p><a href="${list.categoryUserlink }" target='_blank' class="link-underline">채널 바로가기</a></p>
           </div>         
         </div>
          </c:forEach> 
