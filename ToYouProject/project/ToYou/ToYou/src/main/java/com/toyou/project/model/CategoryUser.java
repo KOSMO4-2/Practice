@@ -35,5 +35,8 @@ public class CategoryUser {
 	@Column(length = 500)
 	private String CategoryUserImage;
 	
+	@Column(length = 500)
+	private String CategoryUserlink;
+	
 
 }

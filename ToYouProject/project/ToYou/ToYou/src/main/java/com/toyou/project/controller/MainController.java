@@ -17,6 +17,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.toyou.project.model.CategoryAsmr;
 import com.toyou.project.model.CategoryBeauti;
@@ -107,18 +111,29 @@ public class MainController {
 
 	
 	@GetMapping("/auth/trend")
-	public String trend(Model model,Authentication authentication) {
+	public String magazine(Model model,Authentication authentication) {
 		
+//		UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+//	    String username = userDetails.getUsername();
+//	    User user = userService.userFind(username);
+
 		if(authentication != null && authentication.getPrincipal() != null) {
 			
 			UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+			
 			String username = userDetails.getUsername();
+			
 			User user = userService.userFind(username);
+			
+			
+			
 			List<CategoryUser> CategoryList2 = userService.userFindCategory(user.getUserChannelCategory());
 			model.addAttribute("CategoryList2",CategoryList2);
 		}else {
 			String CategoryList2 = null;
-			model.addAttribute("CategoryList2",CategoryList2);	
+			model.addAttribute("CategoryList2",CategoryList2);
+			
+			
 		}
 	    
 	    
@@ -141,7 +156,9 @@ public class MainController {
 		List<CategoryMukbang> MukbangList = categoryMukbangService.SelectAllCategoryMukbang();
 		
 		List<User> NewUserList = newjoinService.SelectAllUser();
-			
+		
+//		List<CategoryUser> CategoryList2 = userService.userFindCategory(user.getUserChannelCategory());
+		
 		model.addAttribute("googleList", googleList);
 		model.addAttribute("tiktokList", tiktokList);
 		model.addAttribute("twitchList", twitchList);
@@ -158,7 +175,7 @@ public class MainController {
 			set.add(d.intValue()); 
 			} 
 		List<Integer> list = new ArrayList<>(set); 
-		System.out.println(list);
+		//System.out.println(list);
 		
 		if(list.contains(1)) {
 			model.addAttribute("AsmrList", AsmrList);
@@ -180,15 +197,15 @@ public class MainController {
 		}
 		else {
 			return "trend";
-		}	
+		}
 		
-		
-		
+//		model.addAttribute("BeautiList",BeautiList);
+//		model.addAttribute("CarList",CarList);
+//		model.addAttribute("FitnessList",FitnessList);
+//		model.addAttribute("GameList",GameList);
+//		model.addAttribute("MukbangList",MukbangList);
 		
 		model.addAttribute("NewUserList",NewUserList);
-		
-		
-		
 		
 		
 		
@@ -418,8 +435,9 @@ public class MainController {
 		catch(Exception e) {
 			
 		}
-	    
-	    
+		
+		
+		
 	    // 인철 마이페이지 종료
 	 	//--------------------------------------------------------------------
 	    
@@ -435,6 +453,16 @@ public class MainController {
 		return "mypage";
 	}
 	
+	@RequestMapping(value = "/auth/getUser",method = RequestMethod.GET)
+	@ResponseBody
+	public String getUser(@RequestParam String userNo) {
+
+		ChannelOwner channelOwner = mypageService.findMyChannel(Integer.parseInt(userNo));
+		String chProfile = channelOwner.getChProfile();
+		
+		return chProfile;
+	}
+    
 	
 	
 	@GetMapping("/auth/channelSearch")

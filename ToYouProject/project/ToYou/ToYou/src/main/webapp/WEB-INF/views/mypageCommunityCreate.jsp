@@ -363,5 +363,6 @@ $(document).ready(function(){
 	
 })
 </script>
+<%@ include file="layout/Chatting.jsp"%>
   </body>
 </html>

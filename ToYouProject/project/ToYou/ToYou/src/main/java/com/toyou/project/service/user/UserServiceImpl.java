@@ -54,7 +54,6 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-
 	@Override
 	public List<CategoryUser> userFindCategory(String CategoryNum) {
 		List<CategoryUser> CategoryList = userRepository.findByAll(CategoryNum);

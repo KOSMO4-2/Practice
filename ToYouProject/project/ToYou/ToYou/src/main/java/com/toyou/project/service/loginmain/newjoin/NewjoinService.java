@@ -8,5 +8,6 @@ public interface NewjoinService {
 	
 	public List<User> SelectAllUser();
 	
+	
 
 }

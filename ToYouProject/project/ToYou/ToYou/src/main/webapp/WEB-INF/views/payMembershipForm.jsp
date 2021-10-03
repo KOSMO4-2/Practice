@@ -294,6 +294,7 @@
         
 <!-- Footer -->
 <%@ include file="layout/footer.jsp"%>
+<%@ include file="layout/Chatting.jsp"%>
 <!-- Footer -->
   </body>
 </html>

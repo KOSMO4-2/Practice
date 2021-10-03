@@ -251,7 +251,7 @@
 		<div class="container">
 			<div class="row mb-3 justify-content-center">
 				<div class="col-md-8 text-center cate_rec_title">
-					<h2 class="title_m"> 한 눈에 확인하는 SNS 트렌드</h2>
+					<h2 class="title_m" id="title2"> 한 눈에 확인하는 SNS 트렌드</h2>
 					<!--      <p class="lead">오늘 가입한 유튜버 채널</p>
           <p class="mb-5"><a href="#" class="link-underline">View All Donations</a></p> -->
 				</div>
@@ -477,12 +477,12 @@
     <c:forEach var="list" items="${CategoryList2}" begin="0" end="2" step="1" varStatus="status"> 
         <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
           <div class="post-entry">
-            <a href="blog-single.html" class="mb-3 img-wrap">
+            <a href="${list.categoryUserlink }" class="mb-3 img-wrap">
               <img src="${list.categoryUserImage }" alt="Image placeholder" class="img-fluid">
             </a>
             <h3><a href="#">${list.categoryUserName }</a></h3>
             <span class="date mb-4 d-block text-muted">${list.categoryUserSubscribe }</span>
-<!--             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>-->            <p><a href="${list.categoryUserSubscribe }" class="link-underline">채널 바로가기</a></p>
+<!--             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>-->            <p><a href="${list.categoryUserlink }" class="link-underline">채널 바로가기</a></p>
           </div>         
         </div>
          </c:forEach> 
@@ -506,6 +506,7 @@
 
 <!-- Footer -->
 <%@ include file="layout/footer.jsp"%>
+
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%><!-- Footer -->
