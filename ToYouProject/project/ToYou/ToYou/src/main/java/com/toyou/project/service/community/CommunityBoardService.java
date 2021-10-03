@@ -2,6 +2,7 @@ package com.toyou.project.service.community;
 
 import java.util.List;
 
+import com.toyou.project.model.Community;
 import com.toyou.project.model.CommunityBoard;
 
 public interface CommunityBoardService {
@@ -17,6 +18,9 @@ public interface CommunityBoardService {
 	public CommunityBoard findById(int boardNo);
 	
 	public void updateByboardViewCnt(int boardNo);
+	
+	public void boardDeleteAll(int communityNo);
+	
 	
 	
 	

@@ -190,6 +190,7 @@ table.type03 td {
 
 <!-- Footer -->
 <%@ include file="layout/footer.jsp"%>
+<%@ include file="layout/Chatting.jsp"%>
 <!-- Footer -->
 
 

@@ -102,7 +102,9 @@
 		    <div class="tr_hashTag_area">
 			    <div class="form-group">
 	                <input type="hidden" value="" name="tag" id="rdTag" />
-	            </div>
+	                <input type="hidden" value="${community.communityNo }" name="communityNo" id="communityNo" />
+					<input type="text" name="pretag" id="preTag" value="${community.communityTag}"/> <!-- 기존 선택된 태그 -->
+	            </div>	                
 	        
 	             
 	                        
@@ -113,11 +115,11 @@
 	            	<input class="form-control" type="text" id="tag" size="7" placeholder="Enter HashTag" />
 	           </div>
 	           <ul id="tag-list">
-<%-- 		           <c:if test="${!empty tagVal}">   태그가 왜 자꾸 널포인트가 뜨는지 모르겠다  --%>
-<%-- 		           	<c:forEach items="${tagVal}" var="tagVal"> --%>
-<!-- 		           		<li style='margin-bottom:10px;margin-right:10px;float: left;border : 0;padding: 0 0 0 0;list-style: none;background-color:"green"' class='tag-item'> -->
-<!-- 		           			<strong>  #${tagVal.get(i)}</strong> -->
-<%-- 		           			<span class='del-btn' idx="${tagVal.index}"> X  </span> --%>
+<%-- 		           <c:if test="${!empty tagVal}">   --%>
+<%-- 		           	<c:forEach items="${tagVal}" var="tagVal" varStatus="status"> --%>
+<!-- 		           		<li style='margin-bottom:10px;margin-right:10px;float: left;border : 0;padding: 0 0 0 0;list-style: none;background-color:"#BEEBFD"' class='tag-item'> -->
+<!-- 		           			<strong>  #${tagVal}</strong> -->
+<%-- 		           			<span class='del-btn' idx="${status.index}"> X  </span> --%>
 <!-- 		           		</li> -->
 <%-- 		           	</c:forEach> --%>
 <%-- 	           	</c:if> --%>
@@ -128,7 +130,7 @@
 		    
 		    
 		    <div class="form-group">
-		        <input type="button" id="createBtn" class="btn btn-primary btn-block" value="Create Community"> 
+		        <input type="button" id="modifyBtn" class="btn btn-primary btn-block" value="Modify Community"> 
 		    </div> <!-- form-group// -->      
 		                                                                    
 		</form>
@@ -159,19 +161,26 @@ and product landing pages</p>   <br>
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%><!-- Footer -->
- 
+ <%@ include file="../layout/Chatting.jsp"%>
  <script type="text/javascript">
-$(document).ready(function(){  
+$(document).ready(function(){
 	var tag = {};
     var counter = 0;
-    var colcount=0;
-    var count=0;
-    var communityOpen=1;
+    var colcount=0; // 컬러 추가를 위한 변수
+    var count=0;    // idx 고유번호 부여하기 위한 변수
+    var communityOpen=1; 
 
+    
+	var preTag = $("#preTag").val();
+	
+	
+
+	
     // 입력한 값을 태그로 생성한다.
     function addTag (value) {
         tag[counter] = value;
         counter++; // del-btn 의 고유 id 가 된다.
+        
     }
 
     // tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
@@ -180,6 +189,34 @@ $(document).ready(function(){
             return word !== "";
         });
     }
+
+    var preTagList = preTag.split(',');
+ 	if(preTagList.length != 0){
+ 		 for(var i=0;i<preTagList.length;i++){
+ 			
+ 			var tagValue = preTagList[i];
+ 			if(colcount%5==0){
+ 				color = '#BEEBFD'
+ 	        }else if(colcount%5==1){
+ 	            color = '#DFD4E4'
+ 	            }else if(colcount%5==2){
+ 	            color = '#FCFFB0'
+ 	            }else if(colcount%5==3){
+ 	            color = '#AFFFBA'
+ 	            }else if(colcount%5==4){
+ 	            color = '#FFAFB0'
+ 	            }
+	          
+ 	        $("#tag-list").append("<li style='margin-bottom:10px;margin-right:10px;float: left;border : 0;padding: 0 0 0 0;list-style: none;background-color:"+color+"' class='tag-item'><strong>&nbsp;&nbsp; #"+tagValue+"</strong><span class='del-btn' idx='"+counter+"'> X&nbsp;&nbsp;</span></li>");
+ 	        addTag(preTagList[i]);
+
+ 	        colcount++;
+ 	        count++;
+ 	        
+ 		}
+ 	 	}
+   
+	
 
     // 서버에 제공
     $("#tag-form").on("submit", function (e) {
@@ -273,7 +310,7 @@ $(document).ready(function(){
 		  
 		   });
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 	var disable = 0;
@@ -303,7 +340,7 @@ $(document).ready(function(){
 							
 	             },success: function(data){
 						if(data == "0"){
-	
+
 							$("#communityNameCheck").attr('value',"수정");
 							$('#communityName').attr("readOnly",true);
 							$('#checkStatus').empty();
@@ -326,21 +363,20 @@ $(document).ready(function(){
 	//////////////////////////////////////////////////////
 
 
-	$(document).on("click","#createBtn",function(){				
-		var communityTitle = $("#communityName").val();
-		var communityDescription = $("#communityDescription").val();
+	$(document).on("click","#modifyBtn",function(){
+		var communityNo = $("#communityNo").val();
+		//alert(communityNo)		
+		var communityTitle = $("#communityName").val().replace(/&/gi, '&amp;').replace(/</gi, '&lt;').replace(/>/gi, '&gt;').replace(/"/gi, '&quot;').replace(/'/gi, '&apos;');;
+		var communityDescription = $("#communityDescription").val().replace(/&/gi, '&amp;').replace(/</gi, '&lt;').replace(/>/gi, '&gt;').replace(/"/gi, '&quot;').replace(/'/gi, '&apos;');;
 		var communityHostno = $("#hostNo").val();
 		var communityIspublic = communityOpen;
 		var value = marginTag(); // return array
         $("#rdTag").val(value); 
 		var communityTag = $("#rdTag").val();
 		// 위의 조건을 다 만족했다면 ajax 로 회원가입 실행
-		
-			
-			alert(communityTag)
 			$.ajax({
-					url: "/auth/createCommunity",
-					type: "post",
+					url: "/auth/community/modifyCommuity/"+communityNo,
+					type: "put",
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify({
 							"communityHostno":communityHostno,
@@ -352,10 +388,10 @@ $(document).ready(function(){
 					dataType:"json", 
 					success: function(result){
 						if(result.status ==500 ){
-							alert("커뮤니티 등록에 실패하셨습니다.");					
+							alert("커뮤니티 수정에 실패하셨습니다.");					
 						}else{
-							alert("커뮤니티 등록이 완료되었습니다.");					
-							location.href = "/auth/mypage";					
+							alert("커뮤니티 수정이 완료되었습니다.");					
+							location.href = "/auth/community/community?communityNo="+communityNo;			
 						}
 					},
 					error: function(request,status,error){

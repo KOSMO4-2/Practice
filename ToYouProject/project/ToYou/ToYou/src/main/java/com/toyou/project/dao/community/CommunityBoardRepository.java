@@ -26,4 +26,6 @@ public interface CommunityBoardRepository extends JpaRepository<CommunityBoard, 
 	@Query(value="update CommunityBoard b set b.communityBoardViewcnt = b.communityBoardViewcnt+1 where b.communityBoardNo = :boardNo")
 	public void updateByboardViewCnt(@Param("boardNo") int boardNo);
 	
+	
+	
 }

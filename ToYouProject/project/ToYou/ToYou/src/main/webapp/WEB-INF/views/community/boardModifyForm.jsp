@@ -108,7 +108,7 @@
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
 <!-- Footer --> --%>
- 
+<%@ include file="../layout/Chatting.jsp"%>
  <script type="text/javascript">
 $(document).ready(function(){
 

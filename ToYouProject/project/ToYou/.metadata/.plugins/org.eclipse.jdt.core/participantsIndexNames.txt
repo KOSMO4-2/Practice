@@ -1,15 +1,9 @@
 INDEX VERSION 1.131
-C:\workTOYOU\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1872494602.index
+C:\Users\kosmo_\Documents\GitHub\ToYou\ToYouProject\project\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2939705174.index
 \ToYou\src\main\java
-C:\Users\kosmo_\Documents\GitHub\Practice\ToYouProject\project\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\555934966.index
+C:\Users\kosmo_\Documents\GitHub\ToYou\ToYouProject\project\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1872494602.index
 \ToYou\src\main\java
-C:\Users\kosmo_\Documents\GitHub\Practice\ToYouProject\project\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3419075295.index
+C:\Users\kosmo_\Documents\GitHub\ToYou\ToYouProject\project\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3005391941.index
 \ToYou\src\main\java
-C:\workTOYOU\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3005391941.index
-\ToYou\src\main\java
-C:\Users\kosmo_\Documents\GitHub\Practice\ToYouProject\project\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1872494602.index
-\ToYou\src\main\java
-C:\workTOYOU\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3419075295.index
-\ToYou\src\main\java
-C:\workTOYOU\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\555934966.index
+C:\Users\kosmo_\Documents\GitHub\ToYou\ToYouProject\project\ToYou\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\555934966.index
 \ToYou\src\main\java
