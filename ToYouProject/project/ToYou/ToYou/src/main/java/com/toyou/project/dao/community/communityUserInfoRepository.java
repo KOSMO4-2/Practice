@@ -23,5 +23,9 @@ public interface communityUserInfoRepository extends JpaRepository<CommunityUser
 	
 	@Query(value = "select userInfo FROM CommunityUserInfo userInfo WHERE userInfo.userNo = :userNo")
 	public Optional<CommunityUserInfo> findByUserNo(@Param("userNo")int userNo);
+	
+	// 내가 만듬
+	@Query(value = "select userInfo FROM CommunityUserInfo userInfo WHERE userInfo.userNo = :userNo")
+	public List<CommunityUserInfo> findByUserNoAll(@Param("userNo")int userNo);
 
 }

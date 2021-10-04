@@ -70,7 +70,6 @@
          </div>
         </form>        
         <ul class="navbar-nav ml-auto"> 
-          <li class="nav-item"><a href="/auth/searchChannel" class="nav-link">채널검색</a></li>
           <li class="nav-item"><a href="/auth/trend" class="nav-link">트랜드 분석</a></li>
           <li class="nav-item"><a href="/auth/magazine" class="nav-link">매거진</a></li>
           <li class="nav-item"><a href="/auth/communityTotal" class="nav-link">커뮤니티</a></li>

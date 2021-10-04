@@ -34,4 +34,5 @@ public interface CommunityService {
 	
 	public CommunityUserInfo findByUserInfo(int userNo);
 	
+	public List<CommunityUserInfo> findByUserInfoAll(int userNo);
 }

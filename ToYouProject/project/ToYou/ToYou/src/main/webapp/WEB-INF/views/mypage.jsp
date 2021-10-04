@@ -152,8 +152,7 @@
 							data-toggle="tab" href="#comm01">채널관리</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
 							href="#comm02">커뮤니티관리</a></li>
-						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#comm03">친구관리</a></li>
+						
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
 							href="#comm04">개인정보관리</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
@@ -351,140 +350,147 @@
 								</div>
 
 								<div class="container">
-									<hr>
-									<br>
-									<h5>내가 만든 커뮤니티 목록</h5>
+								<hr>
+								<br>
+								<h5>내가 만든 커뮤니티 목록</h5>
 									<div class="row">
-
-										<!-- jstl 반복할 곳                  -->
-										<div class="col-md-3"
-											style="border: 2px solid black; background-color: #fcffb0;">
-											<div class="person-donate text-center">
-												<img src="${profile}" alt="Image placeholder"
-													class="img-fluid">
-												<div class="donate-info">
-													<p>
-														<br> <a href="#"
-															class="link-underline fundraise-item"> 커뮤니티명 </a> <br>500
-														명
-													</p>
-													<span class="time d-block mb-3">호스트명</span>
-												</div>
+								
+								<c:choose>
+	
+											<c:when test="${!empty myCommunity}">
+												<c:forEach items="${myCommunity}" var="item" varStatus="status">
+										
+										
+												<div class="card col-5" style="width: 18rem;">
+												<a href='/auth/community/community?communityNo=${myCommunity[status.index].communityNo }'>
+											  <img class="card-img-top mt-3" src="${bannerCommunity[status.index] }" alt="Card image cap">
+											  <div class="card-body">
+											    <h5 class="card-title">${myCommunity[status.index].communityTitle }</h5>
+											    <p class="card-text">${myCommunity[status.index].communityDescription}</p>
+											  </div>
+											  <ul class="list-group list-group-flush">
+											    <li class="list-group-item">${userName}</li>
+											    <li class="list-group-item">${ countCommunity[status.index]+1} 명</li>
+											    <li class="list-group-item">${myCommunity[status.index].communityCreatedate }</li>
+											  </ul>
+											  
+											  	<p>
+											  	<c:forEach items="${tagCommunityList[status.index]}" var="list" varStatus="k">
+											  	<c:choose>
+	
+											<c:when test="${k.index == 0}">
+												<strong style="background-color:#BEEBFD">#${list }</strong>
+											</c:when>
+											<c:when test="${k.index == 1}">
+												<strong style="background-color:#DFD4E4">#${list }</strong>
+											</c:when>
+											<c:when test="${k.index == 2}">
+												<strong style="background-color:#FCFFB0">#${list }</strong>
+											</c:when>
+											<c:when test="${k.index== 3}">
+												<strong style="background-color:#AFFFBA">#${list }</strong>
+											</c:when>
+											<c:when test="${k.index == 4}">
+												<strong style="background-color:#FFAFB0">#${list }</strong>
+											</c:when>
+											</c:choose>
+											  		
+											  	</c:forEach>
+											  	</p>
+											  
+											  <div class="card-body">
+											    <a href="#" class="card-link">${userChannelName}</a>
+											  </div>
+											  </a>
 											</div>
-										</div>
-										<div class="col-md-2" style="border: 2px solid black">
-											<div class="person-donate">
-
-												<div class="donate-info">
-													<p>
-														<br> 오늘 올라온 공지<br> - 개 <br>
-													<hr>
-													오늘 올라온 글<br> - 개
-													<p>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-1"></div>
-
-										<div class="col-md-3"
-											style="border: 2px solid black; background-color: #fcffb0;">
-											<div class="person-donate text-center">
-												<img src="${profile}" alt="Image placeholder"
-													class="img-fluid">
-												<div class="donate-info">
-													<p>
-														<br> <a href="#"
-															class="link-underline fundraise-item"> 커뮤니티명 </a> <br>500
-														명
-													</p>
-													<span class="time d-block mb-3">호스트명</span>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-2" style="border: 2px solid black">
-											<div class="person-donate">
-
-												<div class="donate-info">
-													<p>
-														<br> 오늘 올라온 공지<br> - 개 <br>
-													<hr>
-													오늘 올라온 글<br> - 개
-
-
-												</div>
-											</div>
-										</div>
-										<!-- jstl 반복할 곳                  -->
+											<div class="col-1"></div>
+											
+											</c:forEach>	
+											
+											</c:when>
+											
+								</c:choose>
+									
+																
+									
 
 									</div>
-									<hr>
-									<br>
-									<h5>내가 가입한 커뮤니티 목록</h5>
+									
+									
+									
+							<hr>
+								<br>
+								<h5>내가 가입한 커뮤니티 목록</h5>
 									<div class="row">
-
-										<!-- jstl 반복할 곳                  -->
-										<div class="col-md-3"
-											style="border: 2px solid black; background-color: #fcffb0;">
-											<div class="person-donate text-center">
-												<img src="${profile}" alt="Image placeholder"
-													class="img-fluid">
-												<div class="donate-info">
-													<p>
-														<br> <a href="#"
-															class="link-underline fundraise-item"> 커뮤니티명 </a> <br>500
-														명
-													</p>
-													<span class="time d-block mb-3">호스트명</span>
-												</div>
+								
+								<c:choose>
+	
+											<c:when test="${!empty otherCommunityList}">
+												<c:forEach items="${otherCommunityList}" var="item" varStatus="status">
+													
+										
+												<div class="card col-5" style="width: 18rem;">
+												<a href='/auth/community/community?communityNo=${otherCommunityList[status.index].communityNo }'>
+											  <img class="card-img-top mt-3" src="${otherCommunityHostList[status.index].chBanner }" alt="Card image cap">
+											  <div class="card-body">
+											    <h5 class="card-title">${otherCommunityList[status.index].communityTitle }</h5>
+											    <p class="card-text">${otherCommunityList[status.index].communityDescription}</p>
+											  </div>
+											  <ul class="list-group list-group-flush">
+											    <li class="list-group-item">${otherCommunityHostList[status.index].chTitle}</li>
+											    <li class="list-group-item">${ countOtherCommunity[status.index]+1} 명</li>
+											    <li class="list-group-item">${otherCommunityList[status.index].communityCreatedate }</li>
+											  </ul>
+											  <p>
+											  	<c:forEach items="${tagOtherCommunityList[status.index]}" var="list" varStatus="k">
+											  	<c:choose>
+	
+											<c:when test="${k.index == 0}">
+												<strong style="background-color:#BEEBFD">#${list }</strong>
+											</c:when>
+											<c:when test="${k.index == 1}">
+												<strong style="background-color:#DFD4E4">#${list }</strong>
+											</c:when>
+											<c:when test="${k.index == 2}">
+												<strong style="background-color:#FCFFB0">#${list }</strong>
+											</c:when>
+											<c:when test="${k.index== 3}">
+												<strong style="background-color:#AFFFBA">#${list }</strong>
+											</c:when>
+											<c:when test="${k.index == 4}">
+												<strong style="background-color:#FFAFB0">#${list }</strong>
+											</c:when>
+											</c:choose>
+											  		
+											  	</c:forEach>
+											  	</p>
+											  
+											  <div class="card-body">
+											    <a href="#" class="card-link">${otherCommunityHostList[status.index].chTitle}</a>
+											  </div>
+											  </a>
 											</div>
-										</div>
-										<div class="col-md-2" style="border: 2px solid black">
-											<div class="person-donate">
-
-												<div class="donate-info">
-													<p>
-														<br> 오늘 올라온 공지<br> - 개 <br>
-													<hr>
-													오늘 올라온 글<br> - 개
-
-
-												</div>
-											</div>
-										</div>
-										<!-- jstl 반복할 곳                  -->
+											<div class="col-1"></div>
+											
+											</c:forEach>	
+											
+											</c:when>
+											
+								</c:choose>
+									
+																
+									
 
 									</div>
-
+									</div>
 
 								</div>
 							</div>
 						</div>
-					</div>
 
 					<!-- -- 02 커뮤니티관리 탭 컨텐츠.end -->
 
-					<!-- -- 03 친구관리 탭 컨텐츠.start -->
-					<div class="tab-pane fade" id="comm03">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-12 text-center cate_rec_title">
-									<h4 class="title_m_tx text-left">친구관리</h4>
-									<div class="container">
-										<div class="row">
-											<div class="col-md-6">그래프1</div>
-											<div class="col-md-6">그래프2</div>
-										</div>
-
-										<div class="row">
-											<div class="col-md-6">그래프1</div>
-											<div class="col-md-6">그래프2</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- -- 03 친구관리 탭 컨텐츠.end -->
+					
 
 
 					<!-- -- 04 개인정보관리 탭 컨텐츠.start -->
@@ -520,8 +526,7 @@
 																	<form>
 																		<div class="form-group input-group">
 																			<div class="input-group-prepend">
-																				<span class="input-group-text"> <i
-																					class="fa fa-user"><h5 class="mypageinfotext">ID</h5></i>
+																				<span class="input-group-text"><h5 class="mypageinfotext">ID</h5></i>
 																				</span>
 																			</div>
 																			<input class="form-control" name="userNo" id="userNo"
@@ -532,8 +537,7 @@
 																		<!-- form-group// -->
 																		<div class="form-group input-group">
 																			<div class="input-group-prepend">
-																				<span class="input-group-text"> <i
-																					class="fa fa-lock"><h5 class="mypageinfotext">새로운 비밀번호</h5></i>
+																				<span class="input-group-text"><h5 class="mypageinfotext">새로운 비밀번호</h5></i>
 																				</span>
 																			</div>
 																			<input class="form-control" name="userPassword"
@@ -543,8 +547,7 @@
 																		<!-- form-group// -->
 																		<div class="form-group input-group">
 																			<div class="input-group-prepend">
-																				<span class="input-group-text"> <i
-																					class="fa fa-lock"><h5 class="mypageinfotext">새로운 비밀번호 확인</h5></i>
+																				<span class="input-group-text"><h5 class="mypageinfotext">새로운 비밀번호 확인</h5></i>
 																				</span>
 																			</div>
 																			<input class="form-control" name="passwdCheck"
@@ -554,8 +557,7 @@
 																		<!-- form-group// -->
 																		<div class="form-group input-group">
 																			<div class="input-group-prepend">
-																				<span class="input-group-text"><i
-																					class="fa fa-lock"><h5 class="mypageinfotext">이름</h5></i>
+																				<span class="input-group-text"><h5 class="mypageinfotext">이름</h5></i>
 																				</span>
 																			</div>	
 																			<input class="form-control" name="userName"
@@ -564,8 +566,7 @@
 																		<!-- form-group// -->
 																		<div class="form-group input-group">
 																			<div class="input-group-prepend">
-																				<span class="input-group-text"> <i
-																					class="fa fa-envelope"><h5 class="mypageinfotext">이메일</h5></i>
+																				<span class="input-group-text"><h5 class="mypageinfotext">이메일</h5></i>
 																				</span>
 																			</div>
 																			<input class="form-control" name="userEmail"
@@ -575,16 +576,14 @@
 																		<!-- form-group// -->
 																		<div class="form-group input-group">
 																			<div class="input-group-prepend">
-																				<span class="input-group-text"> <i
-																					class="fa fa-envelope"><h5 class="mypageinfotext">나의 유튜브 채널</h5></i>
+																				<span class="input-group-text"><h5 class="mypageinfotext">나의 유튜브 채널</h5></i>
 																				</span>
 																			</div>
 																			<input class="form-control" id="userChannelName" name="userChannelName" value="${userChannelName }" type="text" readonly>
 																				</div>
 																		<div class="form-group input-group">
 																			<div class="input-group-prepend">
-																				<span class="input-group-text"> <i
-																					class="fa fa-envelope"><h5 class="mypageinfotext">내 채널 변경</h5></i>
+																				<span class="input-group-text"><h5 class="mypageinfotext">내 채널 변경</h5></i>
 																				</span>
 																			</div>
 																			<input class="form-control" name="userChannelLink"
@@ -600,8 +599,7 @@
 																	
 																		<div class="form-group input-group">
 																			<div class="input-group-prepend">
-																				<span class="input-group-text"> <i
-																					class="fa fa-lock"><h5 class="mypageinfotext">유튜브 카테고리</h5></i>
+																				<span class="input-group-text"><h5 class="mypageinfotext">유튜브 카테고리</h5></i>
 																				</span>
 																			</div>
 																			<select id="userChannelCategory">
@@ -628,8 +626,7 @@
 																																				<!-- form-group// -->
 										 								<div class="form-group input-group">
 																			<div class="input-group-prepend">
-																				<span class="input-group-text"> <i
-																					class="fa fa-envelope"><h5 class="mypageinfotext">나의 롤모델</h5></i>
+																				<span class="input-group-text"><h5 class="mypageinfotext">나의 롤모델</h5></i>
 																				</span>
 																			</div>
 																			
@@ -641,8 +638,7 @@
 																		<!-- form-group// -->
 																		<div class="form-group input-group">
 																			<div class="input-group-prepend">
-																				<span class="input-group-text"> <i
-																					class="fa fa-envelope"><h5 class="mypageinfotext">롤모델 변경</h5></i>
+																				<span class="input-group-text"><h5 class="mypageinfotext">롤모델 변경</h5></i>
 																				</span>
 																			</div>
 																			
@@ -945,7 +941,6 @@
 
 
 	<!-- Footer -->
-	<%@ include file="layout/footer.jsp"%>
 	<%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%>
@@ -1245,5 +1240,6 @@
 						})
 	</script>
 <%@ include file="layout/Menu.jsp"%>
+<%@ include file="layout/footer.jsp"%>
 </body>
 </html>

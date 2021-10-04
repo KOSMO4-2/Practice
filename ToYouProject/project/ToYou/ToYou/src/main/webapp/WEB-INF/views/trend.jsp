@@ -31,7 +31,7 @@
 <!------Header-------->
   <div class="block-31" style="position: relative;">
     <div class="owl-carousel loop-block-31 ">
-      <div class="block-30 block-30-sm item" style="background-image: url('/image/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="block-30 block-30-sm item" style="background-image: url('/image/banner_trend.jpg');" data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-7">
@@ -488,9 +488,19 @@
          </c:forEach> 
         </c:when>
        <c:when test="${empty CategoryList2}">
-       <h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;로그인해주세욤</h3>
+       <c:choose>
+       	<c:when test="${empty principal}">
+       	 <h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;로그인이 필요한 기능입니다.</h3>
+       	</c:when>
+       	<c:otherwise>
+		<h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;카테고리를 등록해주세요</h3>
+		
+		</c:otherwise>
+       
+       </c:choose>
+      
        </c:when>
-
+		
 </c:choose>
       </div>
 
@@ -505,8 +515,8 @@
 
 
 <!-- Footer -->
-<%@ include file="layout/footer.jsp"%>
 <%@ include file="layout/Menu.jsp"%>
+<%@ include file="layout/footer.jsp"%>
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%><!-- Footer -->

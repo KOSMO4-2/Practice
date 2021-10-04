@@ -40,7 +40,7 @@
 	<div class="block-31" style="position: relative;">
 		<div class="owl-carousel loop-block-31">
 			<div class="block-30 block-30-sm item"
-				style="background-image: url('/image/bg_1.jpg');"
+				style="background-image: url('/image/banner_payment.jpg');"
 				data-stellar-background-ratio="0.5">
 				<div class="container">
 					<div
@@ -283,8 +283,8 @@
 
         
 <!-- Footer -->
-<%@ include file="layout/footer.jsp"%>
 <%@ include file="layout/Menu.jsp"%>
+<%@ include file="layout/footer.jsp"%>
 
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>

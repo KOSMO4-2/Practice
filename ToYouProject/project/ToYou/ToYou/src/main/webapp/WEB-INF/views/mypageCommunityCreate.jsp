@@ -83,6 +83,9 @@
 		        	
 		        	
 		    </div> <!-- form-group// -->
+		    <div id="idCheck">
+		    
+		    </div>
 		    
 		    <div id="checkStatus"></div>
 		    <div class="form-group input-group">
@@ -101,7 +104,7 @@
 			    <div class="form-group">
 	                <input type="hidden" value="" name="tag" id="rdTag" />
 	            </div>
-	        
+	        	
 	             
 	                        
 	            <div class="form-group input-group">
@@ -111,8 +114,9 @@
 	            	<input class="form-control" type="text" id="tag" size="7" placeholder="Enter HashTag" />
 	           </div>
 	           <ul id="tag-list"></ul>
+	           
            </div>
-           
+           <div id="hashCheck"></div>
            
 		    
 		    
@@ -144,11 +148,11 @@ and product landing pages</p>   <br>
 
 
 <!-- Footer -->
-<%@ include file="./layout/footer.jsp"%>
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%><!-- Footer -->
- 
+ <%@ include file="layout/Menu.jsp"%>
+<%@ include file="layout/footer.jsp"%>
  <script type="text/javascript">
 $(document).ready(function(){  
 	var tag = {};
@@ -214,10 +218,12 @@ $(document).ready(function(){
                     colcount++;
                     count++;
                 } else {
-                    alert("태그값이 중복됩니다.");
+                	 $("#hashCheck").empty()
+                    $("#hashCheck").append("<p class='text-danger'>태그 값이 중복됩니다.</p>")
                 }
             }else{
-                alert("최대 5개 태그만 등록할 수 있습니다.")
+            	$("#hashCheck").empty()
+                $("#hashCheck").append("<p class='text-danger'>최대 5개의 해시 태그만 등록될 수 있습니다.</p>")
 			}
 				
             }
@@ -280,15 +286,18 @@ $(document).ready(function(){
 		}
 		else{
 			if(communityName==""){
-				alert("커뮤니티를 입력해주세요");
+				
+				$('#idCheck').empty();
+				$('#idCheck').append('<p class="text-danger">아이디를 입력해주세요</p>')
 			}else{
+				
 				$.ajax({
 					url: "/auth/communityNameCheck",
 					type: "post",
 					data: {communityName:communityName},
 					 beforeSend: function() {
 						$('#checkStatus').empty();
-						$('#checkStatus').append('<p class="text-warning">중복 검사 체크중입니다...</p>')
+						$('#checkStatus').append('<p class="text-warning">채널을 검색 중입니다...</p>')
 							
 	             },success: function(data){
 						if(data == "0"){
@@ -302,7 +311,10 @@ $(document).ready(function(){
 						}else{
 							$('#checkStatus').empty();
 							$('#checkStatus').append('<p class="text-danger">중복된 커뮤니티 이름입니다.</p>')
+							disable=0;
+							namePass=0;
 						}
+						
 					},
 					error: function(request,status,error){
 				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -324,9 +336,9 @@ $(document).ready(function(){
         $("#rdTag").val(value); 
 		var communityTag = $("#rdTag").val();
 		// 위의 조건을 다 만족했다면 ajax 로 회원가입 실행
-		
+		if(namePass==1 && disable==1){
 			
-			alert(communityTag)
+		
 			$.ajax({
 					url: "/auth/createCommunity",
 					type: "post",
@@ -353,7 +365,10 @@ $(document).ready(function(){
 
 				
 				})
-			
+		}else{
+			$('#checkStatus').empty();
+			$('#checkStatus').append('<p class="text-danger">중복 체크해주세요.</p>')
+			}
 			
 		})
 	
@@ -363,6 +378,6 @@ $(document).ready(function(){
 	
 })
 </script>
-<%@ include file="layout/Menu.jsp"%>
+
   </body>
 </html>

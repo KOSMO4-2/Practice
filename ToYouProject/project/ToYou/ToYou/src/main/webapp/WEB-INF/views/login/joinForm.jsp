@@ -63,7 +63,7 @@
  -->
 
 
-<div class="card bg-light">
+<div class="card bg-light mt-5">
 <article class="card-body mx-auto" style="max-width: 1000px;">
 	<h4 class="card-title mt-3 text-center">Create Account</h4>
 	<p class="text-center">Get started with your free account</p>
@@ -121,7 +121,7 @@
 		    	<div class="input-group-prepend">
 				    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 				</div>
-		        <select id="userChannelCategory">
+		        <select class="custom-select" aria-label="Default select example" id="userChannelCategory" style="width:90%;">
 		        	<option value="0">select category</option>
 		        	<option value="1">영화 & 애니메이션</option>
 		        	<option value="2">자동차 & 오토바이</option>

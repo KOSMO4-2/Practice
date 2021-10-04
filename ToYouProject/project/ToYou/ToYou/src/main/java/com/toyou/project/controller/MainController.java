@@ -31,6 +31,7 @@ import com.toyou.project.model.CategoryMukbang;
 import com.toyou.project.model.CategoryUser;
 import com.toyou.project.model.ChannelOwner;
 import com.toyou.project.model.Community;
+import com.toyou.project.model.CommunityUserInfo;
 import com.toyou.project.model.Magazine;
 import com.toyou.project.model.ProductBuyLog;
 import com.toyou.project.model.User;
@@ -436,6 +437,62 @@ public class MainController {
 			
 		}
 		
+		
+		if(communityService.SelectAllCommunitybyCommunityHostno(user.getUserNo()) != null) {
+			List<Community> myCommunity = communityService.SelectAllCommunitybyCommunityHostno(user.getUserNo());
+			ArrayList<Integer> countCommunity = new ArrayList<Integer>();
+			ArrayList<String> bannerCommunity = new ArrayList<String>();
+			ArrayList<ArrayList<String>> tagCommunityList = new ArrayList<ArrayList<String>>();
+			
+			for(int i=0;i<myCommunity.size();i++) {
+				int communityNo = myCommunity.get(i).getCommunityNo();
+				int count = communityService.countByUserInfo(communityNo);
+				ArrayList<String> tagCommunity = new ArrayList<String>();
+				String banner = mypageService.findMyChannel(userNo).getChBanner();
+				countCommunity.add(count);
+				bannerCommunity.add(banner);
+				
+				String[] temp  = communityService.findById(communityNo).getCommunityTag().split(",");
+				for(int k=0;k<temp.length;k++) {
+					tagCommunity.add(temp[k]);
+				}
+				tagCommunityList.add(tagCommunity);
+			}
+			model.addAttribute("countCommunity", countCommunity);
+			model.addAttribute("myCommunity", myCommunity);
+			model.addAttribute("bannerCommunity", bannerCommunity);
+			model.addAttribute("tagCommunityList", tagCommunityList);
+			
+		}
+		
+		List<CommunityUserInfo> communityUserInfoList = communityService.findByUserInfoAll(userNo);
+		ArrayList<Community> otherCommunityList = new ArrayList<Community>();
+		ArrayList<ChannelOwner> otherCommunityHostList = new ArrayList<ChannelOwner>();
+		ArrayList<Integer> countOtherCommunity = new ArrayList<Integer>();
+		ArrayList<ArrayList<String>> tagOtherCommunityList = new ArrayList<ArrayList<String>>();
+		for(int i=0;i<communityUserInfoList.size();i++) {
+			int communityNo = communityUserInfoList.get(i).getCommunityNo();
+			Community otherCommunity = communityService.findById(communityNo); 
+			otherCommunityList.add(otherCommunity);
+			ArrayList<String> tagOthrerCommunity = new ArrayList<String>();
+			int hostNo = otherCommunity.getCommunityHostno();
+			ChannelOwner hostInfo = mypageService.findMyChannel(hostNo);
+			otherCommunityHostList.add(hostInfo);		
+			
+			int count = communityService.countByUserInfo(communityNo);
+			countOtherCommunity.add(count);
+			
+			String[] temp  = communityService.findById(communityNo).getCommunityTag().split(",");
+			for(int k=0;k<temp.length;k++) {
+				tagOthrerCommunity.add(temp[k]);
+			}
+			tagOtherCommunityList.add(tagOthrerCommunity);
+		}
+		
+		model.addAttribute("otherCommunityList", otherCommunityList);
+		model.addAttribute("otherCommunityHostList", otherCommunityHostList);
+		model.addAttribute("countOtherCommunity", countOtherCommunity);
+		model.addAttribute("tagOtherCommunityList", tagOtherCommunityList);
 		
 		
 	    // 인철 마이페이지 종료

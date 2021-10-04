@@ -18,6 +18,7 @@ public interface CommunityRepository extends JpaRepository<Community, Integer>{
 	
 	@Query(value = "SELECT com FROM Community com WHERE com.communityHostno = :communityHostno")
 	List<Community> findByCommunityHostNoAll(@Param("communityHostno") int communityHostno);
+
 	
 	
 

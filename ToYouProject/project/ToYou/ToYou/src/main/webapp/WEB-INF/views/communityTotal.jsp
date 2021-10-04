@@ -10,7 +10,6 @@
 <title>You To You &mdash; Youtuber Management</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="https://fonts.googleapis.com/css?family=Overpass:300,400,500|Dosis:400,700" rel="stylesheet">
 <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="/css/animate.css">
 <link rel="stylesheet" href="/css/owl.carousel.min.css">
@@ -29,14 +28,13 @@
 <body>
 <!------Header-------->
 <%@ include file="layout/header.jsp"%>
-<%-- 
-<jsp:include page="/WEB-INF/views/include/header.jsp" flush="true"></jsp:include> --%>
+
 <!------Header-------->
 
 	<div class="block-31" style="position: relative;">
 		<div class="owl-carousel loop-block-31">
 			<div class="block-30 block-30-sm item"
-				style="background-image: url('/image/bg_1.jpg');"
+				style="background-image: url('/image/banner_community.jpg');"
 				data-stellar-background-ratio="0.5">
 				<div class="container">
 					<div
@@ -188,14 +186,10 @@
 	</div>
 
 
-
-        
-<!-- Footer -->
-<%-- <%@ include file="layout/footer.jsp"%> --%>
-
-<jsp:include page="layout/footer.jsp" flush="true"></jsp:include>
-
 <%@ include file="layout/Menu.jsp"%>
+<%@ include file="layout/footer.jsp"%>
+
  
   </body>
+
 </html>

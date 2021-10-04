@@ -126,6 +126,14 @@ public class CommunityServiceImpl implements CommunityService{
 		return userInfo;
 	}
 	
+	// 내가 만듬
+	public List<CommunityUserInfo> findByUserInfoAll(int userNo) {
+		List<CommunityUserInfo> userInfoAll =  communityUserInfoRepository.findByUserNoAll(userNo);			
+		return userInfoAll;
+	}
+	
+	
+	
 	
 	
 	

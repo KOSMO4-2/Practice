@@ -37,7 +37,7 @@
 	<div class="block-31" style="position: relative;">
 		<div class="owl-carousel loop-block-31 ">
 			<div class="block-30 block-30-sm item"
-				style="background-image: url('/image/bg_1.jpg');"
+				style="background-image: url('/image/banner_magazine.jpg');"
 				data-stellar-background-ratio="0.5">
 				<div class="container">
 					<div
@@ -69,7 +69,7 @@
 	<!-- .site-section -->
 
 	<div class="site-section" >
-		
+		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<ul class="nav nav-tabs" >
@@ -105,7 +105,7 @@
 						<!-- -- 01 최신 뉴스.start -->
 						<div class="tab-pane fade show active" id="comm01">
 						
-									<div class="site-section fund-raisers" >
+									<div class="site-section fund-raisers"  style="padding: 0px" style="padding:0"  >
 									
 				
 										<div class="container bg-warning">
@@ -118,7 +118,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 70%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -153,7 +153,7 @@
 								
 								<!-- -- 02 영화.start -->
 						<div class="tab-pane fade" id="comm02">
-									<div class="site-section fund-raisers" >
+									<div class="site-section fund-raisers"  style="padding: 0px" style="padding: 0px" >
 										<div class="container bg-warning">
 											<div
 												class="row mb-3 justify-content-center">
@@ -164,7 +164,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 70%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -200,7 +200,7 @@
 								
 								<!-- -- 03 음악.start -->
 						<div class="tab-pane fade" id="comm03">
-									<div class="site-section fund-raisers" >
+									<div class="site-section fund-raisers"  style="padding: 0px" >
 										<div class="container bg-warning">
 											<div
 												class="row mb-3 justify-content-center ">
@@ -211,7 +211,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 70%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -247,7 +247,7 @@
 								
 								<!-- -- 04 TV.start -->
 						<div class="tab-pane fade" id="comm04">
-									<div class="site-section fund-raisers" >
+									<div class="site-section fund-raisers"  style="padding: 0px" >
 										<div class="container bg-warning">
 											<div
 												class="row mb-3 justify-content-center">
@@ -258,7 +258,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 70%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -293,7 +293,7 @@
 								
 								<!-- -- 05 Book.start -->
 						<div class="tab-pane fade" id="comm05">
-									<div class="site-section fund-raisers" >
+									<div class="site-section fund-raisers"  style="padding: 0px" >
 										<div class="container bg-warning">
 											<div
 												class="row mb-3 justify-content-center">
@@ -304,7 +304,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 70%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -339,7 +339,7 @@
 								
 								<!-- -- 06 Art.start -->
 						<div class="tab-pane fade" id="comm06">
-									<div class="site-section fund-raisers" >
+									<div class="site-section fund-raisers"  style="padding: 0px" >
 										<div class="container bg-warning">
 											<div
 												class="row mb-3 justify-content-center">
@@ -350,7 +350,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 70%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -386,7 +386,7 @@
 								
 								<!-- -- 07 Idol.start -->
 						<div class="tab-pane fade" id="comm07">
-									<div class="site-section fund-raisers" >
+									<div class="site-section fund-raisers"  style="padding: 0px" >
 										<div class="container bg-warning">
 											<div
 												class="row mb-3 justify-content-center">
@@ -397,7 +397,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 70%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -437,7 +437,7 @@
 								
 								<!-- -- 08 건강.start -->
 						<div class="tab-pane fade" id="comm08">
-									<div class="site-section fund-raisers" >
+									<div class="site-section fund-raisers"  style="padding: 0px" >
 										<div class="container bg-success">
 											<div
 												class="row mb-3 justify-content-center">
@@ -448,7 +448,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 70%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -484,7 +484,7 @@
 								
 								<!-- -- 09 과학기술.start -->
 						<div class="tab-pane fade" id="comm09">
-									<div class="site-section fund-raisers" >
+									<div class="site-section fund-raisers"  style="padding: 0px" >
 										<div class="container bg-info">
 											<div
 												class="row mb-3 justify-content-center">
@@ -495,7 +495,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 70%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -531,7 +531,7 @@
 								
 								<!-- -- 10 사업.start -->
 						<div class="tab-pane fade" id="comm10">
-									<div class="site-section fund-raisers" >
+									<div class="site-section fund-raisers"  style="padding: 0px" >
 										<div class="container bg-danger">
 											<div
 												class="row mb-3 justify-content-center">
@@ -542,7 +542,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 70%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -578,7 +578,7 @@
 								
 								<!-- -- 11 세계.start -->
 						<div class="tab-pane fade" id="comm11">
-									<div class="site-section fund-raisers" >
+									<div class="site-section fund-raisers"  style="padding: 0px" >
 										<div class="container bg-secondary">
 											<div
 												class="row mb-3 justify-content-center">
@@ -589,7 +589,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 70%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -632,6 +632,7 @@
 					</div>
 				
 			</div>
+			</div>
 
 
 
@@ -640,8 +641,8 @@
 
 
 	<!-- Footer -->
-	<%@ include file="layout/footer.jsp"%>
 	<%@ include file="layout/Menu.jsp"%>
+<%@ include file="layout/footer.jsp"%>
 	<%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%>

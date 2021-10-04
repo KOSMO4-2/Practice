@@ -89,10 +89,11 @@
 										</div>
 									</div>
 										<div class="form-group">
-										<div class="row">
-											<div class="col-lg-12 col-sm-offset-3">
+										<div class="row ml-1 mr-1" style="background:#F7E600">
+										<div class="col-3"></div>
+											<div class="col-lg-6 col-sm-offset-6"">
 											<!-- 카카오 로그인 버튼 -->
-												<a href="https://kauth.kakao.com/oauth/authorize?client_id=9678b56f9afb8f96a880f7b1bdaee036&redirect_uri=http://localhost:8003/auth/kakao/callback&response_type=code"><img src = "/image/kakao_login_medium_wide.png" height="38px" width="330px"></a>
+												<a href="https://kauth.kakao.com/oauth/authorize?client_id=9678b56f9afb8f96a880f7b1bdaee036&redirect_uri=http://localhost:8003/auth/kakao/callback&response_type=code"><img src = "/image/kakao_login_medium_wide.png" height="38px" width="100%"></a>
 											</div>
 										</div>
 									</div>

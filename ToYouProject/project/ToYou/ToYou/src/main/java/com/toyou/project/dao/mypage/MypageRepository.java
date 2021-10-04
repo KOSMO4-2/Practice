@@ -13,4 +13,6 @@ import com.toyou.project.model.ChannelOwner;
 public interface MypageRepository extends JpaRepository<ChannelOwner, Integer>{
 	@Query(value = "SELECT cha FROM ChannelOwner cha WHERE cha.userNo = :userNo")
 	ChannelOwner findByChannelOwnerUserNoAll(@Param("userNo") int userNo);
+	
+	
 }

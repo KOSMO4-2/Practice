@@ -233,11 +233,11 @@ h1 {
   </label>
   
   <a id="atag" href="http://3.35.11.4:5000/chatting.html?name=${principal.user.userName}&" onclick="window.open(this.href, '_blank', 'width=500, height=600'); return false;" class="menu-item"> <i class="fa fa-envelope"></i> </a>
-  <a href="#" class="menu-item"> <i class="fa fa-plus"></i> </a>
-  <a href="#" class="menu-item"> <i class="fa fa-heart"></i> </a>
-  <a href="#" class="menu-item"> <i class="fa fa-bar-chart"></i> </a>
-  <a href="#" class="menu-item"> <i class="fa fa-cog"></i> </a>
-  <a href="#" class="menu-item"> <i class="fa fa-ellipsis-h"></i> </a>
+  <a href="/auth/payinfo" class="menu-item"> <i class="fa fa-plus"></i> </a>
+  <a href="/auth/communityTotal" class="menu-item"> <i class="fa fa-heart"></i> </a>
+  <a href="/auth/trend" class="menu-item"> <i class="fa fa-bar-chart"></i> </a>
+  <a href="/auth/mypage" class="menu-item"> <i class="fa fa-cog"></i> </a>
+  <a href="/" class="menu-item"> <i class="fa fa-ellipsis-h"></i> </a>
   
 </nav>
 

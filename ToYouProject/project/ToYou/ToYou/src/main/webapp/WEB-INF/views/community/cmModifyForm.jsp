@@ -157,11 +157,11 @@ and product landing pages</p>   <br>
 
 
 <!-- Footer -->
+<%@ include file="../layout/Menu.jsp"%>
 <%@ include file="../layout/footer.jsp"%>
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%><!-- Footer -->
-<%@ include file="../layout/Menu.jsp"%>
  <script type="text/javascript">
 $(document).ready(function(){
 	var tag = {};
