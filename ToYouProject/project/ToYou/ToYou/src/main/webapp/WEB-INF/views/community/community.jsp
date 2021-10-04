@@ -218,7 +218,7 @@
 <%-- <%@ include file="layout/footer.jsp"%> --%>
 
 <jsp:include page="../layout/footer.jsp" flush="true"></jsp:include>
-<%@ include file="../layout/Chatting.jsp"%>
+<%@ include file="../layout/Menu.jsp"%>
  <script type="text/javascript">
 $(document).ready(function(){
 

@@ -208,7 +208,7 @@
 
 <!------Header-------->
 <%@ include file="../layout/footer.jsp"%>
-<%@ include file="../layout/Chatting.jsp"%>
+
 <%-- 
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="true"></jsp:include> --%>
 <!------Header-------->
