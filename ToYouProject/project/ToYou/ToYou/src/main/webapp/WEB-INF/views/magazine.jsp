@@ -641,7 +641,7 @@
 
 	<!-- Footer -->
 	<%@ include file="layout/footer.jsp"%>
-	<%@ include file="layout/Chatting.jsp"%>
+	<%@ include file="layout/Menu.jsp"%>
 	<%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%>

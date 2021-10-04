@@ -1,15 +1,13 @@
-<!doctype html>
-<html>
-<head>
-	<meta charset="UTF-8">	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 <style>
-body {
-  background: #fff;
-  color: white;
-  text-align: center;
-}
-
 a {
   color: inherit;
 }
@@ -219,13 +217,14 @@ h1 {
           transform: translate3d(-0.25084px, -104.9997px, 0);
 }
 </style>
+<c:choose>
+	<c:when test="${empty principal}">
 
-</head>
-<body>
-
-
-
-<nav class="menu">
+	</c:when>
+	<c:otherwise>
+		<input type="hidden" id="userNo" value="${principal.user.userNo}">
+		<input type="hidden" id="userName" value="${principal.user.userName}">
+		<nav class="menu">
   <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open"/>
   <label class="menu-open-button" for="menu-open">
     <span class="hamburger hamburger-1"></span>
@@ -233,10 +232,10 @@ h1 {
     <span class="hamburger hamburger-3"></span>
   </label>
   
-  <a href="#" class="menu-item"> <i class="fa fa-bar-chart"></i> </a>
+  <a id="atag" href="http://3.35.11.4:5000/chatting.html?name=${principal.user.userName}&" onclick="window.open(this.href, '_blank', 'width=500, height=600'); return false;" class="menu-item"> <i class="fa fa-envelope"></i> </a>
   <a href="#" class="menu-item"> <i class="fa fa-plus"></i> </a>
   <a href="#" class="menu-item"> <i class="fa fa-heart"></i> </a>
-  <a href="#" class="menu-item"> <i class="fa fa-envelope"></i> </a>
+  <a href="#" class="menu-item"> <i class="fa fa-bar-chart"></i> </a>
   <a href="#" class="menu-item"> <i class="fa fa-cog"></i> </a>
   <a href="#" class="menu-item"> <i class="fa fa-ellipsis-h"></i> </a>
   
@@ -248,6 +247,7 @@ h1 {
     <defs>
       <filter id="shadowed-goo">
           
+        
           <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" ></feGaussianBlur>
           <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" ></feColorMatrix>
           <feGaussianBlur in="goo" stdDeviation="3" result="shadow" ></feGaussianBlur>
@@ -264,5 +264,24 @@ h1 {
     </defs>
 </svg>
 
-</body>
-</html>
+	</c:otherwise>
+</c:choose>
+
+
+
+<script type="text/javascript">
+var user = $('#userNo').val();
+var userName = $('#userName').val();
+	$.ajax({
+	    url: "/auth/getUser",
+	    data: { "userNo" : user },
+	    type : "get",
+	    datatype : "json",
+	    success: function(data) {      
+		             
+	     	$("#atag").prop('href', "http://3.35.11.4:5000/chatting.html?name="+userName+"&profile="+data)
+	    },error: function(request,status,error){
+	       
+	    }
+	});
+</script>

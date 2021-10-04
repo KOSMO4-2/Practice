@@ -35,7 +35,7 @@
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-7">
-              <h2 class="heading mb-5">You To You</h2>
+              <h2 class="heading mb-5">Trend</h2>
         <!-- <p style="display: inline-block;"><a href="https://vimeo.com/channels/staffpicks/93951774"  data-fancybox class="ftco-play-video d-flex"><span class="play-icon-wrap align-self-center mr-4"><span class="ion-ios-play"></span></span> <span class="align-self-center">Watch Video</span></a></p> -->           
         <!-- 메인 중앙 검색창
                <div class="input-group">
@@ -506,7 +506,7 @@
 
 <!-- Footer -->
 <%@ include file="layout/footer.jsp"%>
-
+<%@ include file="layout/Menu.jsp"%>
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%><!-- Footer -->
