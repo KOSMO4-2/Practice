@@ -5727,3 +5727,134 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.ui 2 2 2021-09-21 16:51:07.351
 !MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+!SESSION 2021-10-04 15:34:12.973 -----------------------------------------------
+eclipse.buildId=4.3.1.201907120711-RELEASE
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springframework.boot.ide.branding.sts4
+
+!ENTRY org.eclipse.egit.core 1 0 2021-10-04 15:34:42.016
+!MESSAGE Using Apache MINA sshd as ssh client.
+
+!ENTRY org.eclipse.jface 2 0 2021-10-04 15:34:42.873
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-10-04 15:34:42.873
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@719bb60d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5981f2c6,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2021-10-04 15:34:43.842
+!MESSAGE Unable to retrieve the bundle from the URI: bundleclass://com.genuitec.eclipse.meexplorer/com.genuitec.eclipse.meexplorer.breadcrumb.e4.BreadCrumbContainer
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:50.151
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.eclipse.egit.ui 2 0 2021-10-04 15:34:50.208
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\kosmo_'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:50.251
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@3509197c[org.springframework.tooling.boot.ls:1.9.0.201907120625(id=624)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:50.269
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:50.509
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-10-04 15:34:50.539
+!MESSAGE Removing part descriptor with the 'org.eclipse.fx.ide.ui.preview' id and the 'JavaFX Preview' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-10-04 15:34:50.542
+!MESSAGE Removing part descriptor with the 'org.eclipse.xtend.ide.view.DerivedSourceView' id and the 'Generated Code' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-10-04 15:34:50.544
+!MESSAGE Removing part descriptor with the 'org.eclipse.xtext.ui.XtextCallHierarchy' id and the 'Call Hierarchy' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2021-10-04 15:34:50.547
+!MESSAGE Removing part descriptor with the 'org.eclipse.xtext.xtext.ui.graph.view' id and the 'Xtext Syntax Graph' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.370
+!MESSAGE Boot LS startup time from start to initialized: 5036ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.403
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.ECTNqnpvisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.404
+!MESSAGE subscribing to classpath changes: sts4.classpath.ECTNqnpv isBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.408
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.412
+!MESSAGE subsribers = {sts4.classpath.ECTNqnpv=Send Classpath Notifications(80)}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.413
+!MESSAGE Sending initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.468
+!MESSAGE project ToYou ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.471
+!MESSAGE Sending initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.472
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.ECTNqnpv => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.473
+!MESSAGE Preparing classpath changed notification ToYou
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.473
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.481
+!MESSAGE classpath=130 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.485
+!MESSAGE buffering callback sts4.classpath.ECTNqnpv ToYou false 130
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.511
+!MESSAGE executing callback sts4.classpath.ECTNqnpv 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:34:55.536
+!MESSAGE executing callback sts4.classpath.ECTNqnpv SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:35:03.453
+!MESSAGE Preparing classpath changed notification ToYou
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:35:03.454
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:35:03.461
+!MESSAGE classpath=174 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:35:03.467
+!MESSAGE buffering callback sts4.classpath.ECTNqnpv ToYou false 174
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:35:03.467
+!MESSAGE executing callback sts4.classpath.ECTNqnpv 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-10-04 15:35:03.487
+!MESSAGE executing callback sts4.classpath.ECTNqnpv SUCCESS [done]
+
+!ENTRY org.eclipse.ui 2 2 2021-10-04 15:36:47.852
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
