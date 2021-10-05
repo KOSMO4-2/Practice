@@ -40,6 +40,12 @@
           			</c:choose>
           		</c:otherwise>
           	</c:choose>
+          	<!-- 성연추가) 관리자페이지 접속 -->
+          	<!-- 로그인 된 userId가 test1234 일 경우에만 관리자페이지 접속 가능 -->
+ 			<c:if test="${principal.user.userId == 'test1234'}">
+ 				<li class="nav-item"><a href="/admin_index" class="nav-link">관리자페이지</a></li>
+ 			</c:if>
+          	<!-- 성연추가) 관리자페이지 접속 -->
           </ul>
 	    </div>
       <a class="navbar-brand" href="/">You To You</a>

@@ -42,6 +42,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.toyou.project.controller.user.api.UserApiController;
 import com.toyou.project.dto.ResponseDTO;
 
 @RestController
@@ -60,7 +61,7 @@ public class ElasticSearchTestController {
 	// 어플리케이션에서 요청 시 getBean() 마다 새로운 인스턴스 생성
 	@Scope("prototype")
 	public RestHighLevelClient restHighLevelClient() {
-		return new RestHighLevelClient(RestClient.builder(new HttpHost("192.168.56.101",9200,"http")));
+		return new RestHighLevelClient(RestClient.builder(new HttpHost("192.168.56.105",9200,"http")));
 	}
 	
 	// ElasticSearch 포트 오픈 / 닫기 종료
@@ -154,8 +155,6 @@ public class ElasticSearchTestController {
 
 	
 	
-	
-	
 	//-----------------------------------------	
 	// word 필드에 대하여 같은 값에 대하여 그룹핑을 하고, 그 갯수를 출력해주는 기능
 	// ELK Dev Tools 에서 아래와 같이 검색했을 때 나오는 결과값을 가져온다.
@@ -203,20 +202,20 @@ GET /20210925test44/_search
 	
 	
 	//-----------------------------------------	
-	// communitytag, communitytitle  필드에서 내가 검색하기 원하는 입력값을 받았을 때 해당 검색값이 있는 것을 출력해준다.
+	// communitytag, communitytitle, communitydescription  필드에서 내가 검색하기 원하는 입력값을 받았을 때 해당 검색값이 있는 것을 출력해준다.
 
-	
+/*	
 	// Ajax 커뮤티니목록 검색 (다중필드에서 검색)
 	@PostMapping(value = "/elasticSearchPrefix")
 	public ResponseEntity elasticSearchPrefix(String searhValue) throws IOException {
 		
 		// 필드 지정(communitytitle 필드에서 검색할 것), 검색할 내용
-		QueryBuilder matchQueryBuilder = QueryBuilders.multiMatchQuery(searhValue, "communitytag", "communitytitle").type(MatchQuery.Type.PHRASE_PREFIX);
+		QueryBuilder matchQueryBuilder = QueryBuilders.multiMatchQuery(searhValue, "communitytag", "communitytitle", "communitydescription").type(MatchQuery.Type.PHRASE_PREFIX);
 		
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		sourceBuilder.query(matchQueryBuilder);
 		sourceBuilder.from(0);
-		sourceBuilder.size(50);
+		sourceBuilder.size(100);
 
 		// 검색할 인덱스 요청
 		SearchRequest searchRequest = new SearchRequest("communityprefix");
@@ -227,15 +226,55 @@ GET /20210925test44/_search
 		JSONObject json = new JSONObject(searchResponse.toString());
 		
 		// 가져온 값 콘솔에 출력
-//		System.out.println(json);
-//		System.out.println(json.toMap());
+		System.out.println(json);
+		System.out.println(json.toMap());
 		
 		return new ResponseEntity<>(json.toMap(), HttpStatus.OK);		
 	}	
+
+*/
 	
 	
-	
-	
+	// Ajax 커뮤티니목록 검색 (다중필드에서 검색)
+	@PostMapping(value = "/elasticSearchPrefix")
+	public ResponseEntity elasticSearchPrefix(String searhValue) throws IOException {
+		
+		System.out.println("1");
+		
+		// 필드 지정(communitytitle 필드에서 검색할 것), 검색할 내용
+		QueryBuilder matchQueryBuilder = QueryBuilders.multiMatchQuery(searhValue, "communitytag", "communitytitle").type(MatchQuery.Type.PHRASE_PREFIX);
+		
+		System.out.println("2");
+		
+		
+		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+		sourceBuilder.query(matchQueryBuilder);
+		sourceBuilder.from(0);
+		sourceBuilder.size(50);
+		
+		System.out.println("3");
+
+		// 검색할 인덱스 요청
+		SearchRequest searchRequest = new SearchRequest("communityprefix");
+		searchRequest.source(sourceBuilder);
+		SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+		
+		System.out.println("4");
+		
+		
+		// json 으로 값 가져오기
+		JSONObject json = new JSONObject(searchResponse.toString());
+		
+		// 가져온 값 콘솔에 출력
+		System.out.println("************");
+		System.out.println(json);
+		System.out.println("------------");
+		System.out.println(json.toMap());
+		System.out.println("************");
+		
+		
+		return new ResponseEntity<>(json.toMap(), HttpStatus.OK);		
+	}	
 	
 	
 }

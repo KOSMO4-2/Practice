@@ -859,10 +859,7 @@
 													<tbody>
 														<tr>
 															<td scope="row">
-															<iframe src="http://192.168.56.101:5601/app/dashboards#/create?embed=true&_g=(filters:!(),query:(language:kuery,query:''),refreshInterval:(pause:!t,value:0),time:(from:now%2Fd,to:now%2Fd))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:true,useMargins:true),panels:!((embeddableConfig:(),gridData:(h:10,i:c74a181b-29f0-4389-beee-db25b0fb0241,w:50,x:0,y:0),id:'921196d0-2343-11ec-8638-318090305b3a',panelIndex:c74a181b-29f0-4389-beee-db25b0fb0241,type:lens,version:'7.10.2')),query:(language:kuery,query:''),timeRestore:!f,title:'',viewMode:edit)&hide-filter-bar=true" height="300" width="300" frameborder="0"></iframe>
-															
-															
-															
+																<iframe src="http://192.168.56.105:5601/app/dashboards#/view/a1a6e000-258c-11ec-9509-533be27e5eec?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(description:%EA%B5%AC%EB%8F%85%EC%9E%90%ED%98%84%ED%99%A9,filters:!(),fullScreenMode:!f,options:(hidePanelTitles:true,useMargins:!t),query:(language:kuery,query:''),timeRestore:!t,title:%EA%B5%AC%EB%8F%85%EC%9E%90%ED%98%84%ED%99%A9,viewMode:view)&hide-filter-bar=true" height="330" width="330" frameborder="0"></iframe>
 															</td>
 														</tr>
 													</tbody>

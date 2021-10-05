@@ -42,17 +42,24 @@
 						<div class="col-md-7">
 							<h2 class="heading mb-5">Toyou 커뮤니티</h2>
 							
-							
-							
-							
-							<!-- <p style="display: inline-block;"><a href="https://vimeo.com/channels/staffpicks/93951774"  data-fancybox class="ftco-play-video d-flex"><span class="play-icon-wrap align-self-center mr-4"><span class="ion-ios-play"></span></span> <span class="align-self-center">Watch Video</span></a></p> -->
-							
-               <div class="input-group">
-                   <input type="text" class="form-control" placeholder="커뮤니티 검색">
-                   <span class="input-group-btn">
-                   <button class="btn btn-secondary" type="button">검색</button>
-                   </span>
-              </div> 
+								<!---------------------------------->
+								<!---------------------------------->
+								<!---- 성연추가 ELK 자동완성검색---->		
+								<form action="/elasticSearchPrefix" method="post">		
+					               <div class="input-group">
+					                   <input type="text" id="searchKeyword" name="searhValue" list="elastielist" class="form-control" placeholder="커뮤니티 검색">
+											<datalist id="elastielist" class="searchResult">
+												<!-- ajax -->
+											</datalist>
+					                   <span class="input-group-btn">
+					                   <button class="btn btn-secondary" id="searchKeywordButton" type="button">검색</button>
+					                   </span>
+					               </div> 
+					            </form>
+								<!---- 성연추가 ELK 자동완성검색---->
+								<!---------------------------------->
+								<!---------------------------------->	
+
 						</div>
 					</div>
 				</div>
@@ -186,10 +193,67 @@
 	</div>
 
 
-<%@ include file="layout/Menu.jsp"%>
-<%@ include file="layout/footer.jsp"%>
+
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+<!---- 성연추가 ELK 자동완성검색---->	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+	
+	//------------------------------------
+	// 성연추가 ELK 커뮤니티 검색 자동완성
+	// Ajax 커뮤티니목록 검색 시작
+	$('#searchKeyword').keyup(function(event){
+
+		alert($('#searchKeyword').val())
+              	
+
+		$.ajax({
+             url: "/elasticSearchPrefix",
+             type: "POST",
+             dataType: "JSON",
+             data: { "searhValue" : $('#searchKeyword').val()},
 
  
+ 			
+             success: function(data) {                 
+
+              	test = data['hits']
+             	test2 = test['hits']
+
+             	// alert("test : ", test)
+             	
+             	event.preventDefault();
+         		event.stopPropagation();
+
+          		$('.communitytitle').remove();
+          		
+            	for(var i=0; i<test2.length; i++){
+             		$(".searchResult").append("<option class ='communitytitle'>" + test2[i]['_source']['communitytitle'] +"</option>" );
+             	}
+
+             }
+
+             
+		});
+             	
+		
+	});
+	// Ajax 커뮤티니목록 검색 종료
+	//------------------------------------
+		
+
+</script> 
+<!---- 성연추가 ELK 자동완성검색---->	
+<!---------------------------------->
+<!---------------------------------->
+<!---------------------------------->
+ 
+<%@ include file="layout/Menu.jsp"%>
+<%@ include file="layout/footer.jsp"%>
   </body>
 
 </html>

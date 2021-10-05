@@ -87,16 +87,6 @@
 	</div>
 
 
-<form action="/admin_index" method="get">
-	<div class="form-group">
-		<button type="submit" class="btn btn-default">admin_index</button>
-	</div>
-</form>
-
-							
-
-		
-
 		
 <!-- ==================================================================================== -->
 <!-- 멤버쉽 요금안내 시작 -->

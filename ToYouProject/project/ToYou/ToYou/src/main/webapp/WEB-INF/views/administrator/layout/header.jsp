@@ -16,7 +16,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/admin_index"><i class="fa fa-gear"></i> <strong>YouToYou</strong></a>
+                <a class="navbar-brand" href="/"><i class="fa fa-gear"></i> <strong>YouToYou</strong></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
