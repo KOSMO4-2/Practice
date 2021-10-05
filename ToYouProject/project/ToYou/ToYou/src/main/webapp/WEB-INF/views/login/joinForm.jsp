@@ -83,31 +83,40 @@
 		  	    	<input class="form-control" name="userId" id="userId"  placeholder="ID" type="text">
 		        	<input type="button" class="btn btn-primary btn-block" value="확인" id="idCheck"  style="width: 50px;"/>
 		    </div> <!-- form-group// -->
+		    <div id="idConfirmText">
+		    </div>
 		    <div class="form-group input-group">
 		    	<div class="input-group-prepend">
 				    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 				</div>
 		        <input class="form-control" name="userPassword" id="userPassword"  placeholder="Create password" type="password">
+		    </div>
+		    <div id="pwConfirmText">
 		    </div> <!-- form-group// -->
 		    <div class="form-group input-group">
 		    	<div class="input-group-prepend">
 				    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 				</div>
 		        <input class="form-control" name="passwdCheck" id="passwdCheck"  placeholder="Repeat password" type="password">
+		    </div>
+		    <div id="pwConfirmText2">
 		    </div> <!-- form-group// -->                                      
 		    <div class="form-group input-group">
 		    	<div class="input-group-prepend">
 				    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
 				</div>
 		        <input class="form-control" name="userName" id="userName"  placeholder="Name" type="text">
-		    </div> <!-- form-group// -->                                      
+		    </div> 
+		     <div id="userNameConfirmText">
+		    </div>                                     
 		    <div class="form-group input-group">
 		    	<div class="input-group-prepend">
 				    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 				 </div>
 		        <input class="form-control" name="userEmail" id="userEmail" placeholder="Email address" type="email">
 		    </div>
-		    <!-- form-group// -->
+		     <div id="userEmailConfirmText">
+		    </div>
 		    <div class="form-group input-group">
 		    	<div class="input-group-prepend">
 				    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
@@ -336,68 +345,99 @@ $(document).ready(function(){
 			
 			
 			if(userId==""){
-				alert("아이디을 입력해주세요");
+				$('#idConfirmText').empty();
+				$('#idConfirmText').append('<p class="text-danger"><small>아이디를 입력해주세요<small></p>')
 				return false;
-			}
+			}else{$('#idConfirmText').empty();}
+			
 			if(!userIdCheck.test(userId)){
-				alert("(아이디 양식 오류) [아이디는 영문, 숫자로만 입력해주세요],[8~20 자리]")
+				$('#idConfirmText').empty();
+				$('#idConfirmText').append('<p class="text-danger"><small>아이디는 영문, 숫자로만 입력해주세요 [8~20 자리]<small></p>')
 				return false;
-			}
+			}else{ $('#idConfirmText').empty();}
+
+			if (idCheck>0) {
+				if(tmpId != userId){
+					$('#idConfirmText').empty();
+					$('#idConfirmText').append('<p class="text-danger"><small>아이디 중복을 체크해주세요<small></p>')
+					return false;
+				}
+			}else{$('#idConfirmText').empty();}
+
+			if (idCheck==0) {
+				if(tmpId != userId){
+					$('#idConfirmText').empty();
+					$('#idConfirmText').append('<p class="text-danger"><small>아이디 중복을 체크해주세요<small></p>')
+					return false;
+				}
+			}else{$('#idConfirmText').empty();}		
+	
 			if(userPassword==""){
-				alert("패스워드를 입력해주세요");
+				$('#pwConfirmText').empty();
+				$('#pwConfirmText').append('<p class="text-danger"><small>패스워드를 입력해주세요<small></p>')
 				return false;
-			}
+			}else{$('#pwConfirmText').empty();}
+			
 			if(!userPwCheck.test(userPassword)){
-				alert("(패스워드 양식 오류) - [영어 소문자, 숫자와 특수기호 필히 입력],[8~20 자리]")
+				$('#pwConfirmText').empty();
+				$('#pwConfirmText').append('<p class="text-danger"><small>영어 소문자, 숫자와 특수기호 필히 입력 [8~20 자리]<small></p>')
 				return false;
-			}
+			}else{$('#pwConfirmText').empty();}
 			
 			if(passwdCheck==""){
-				alert("패스워드 확인을 입력해주세요");
+				$('#pwConfirmText2').empty();
+				$('#pwConfirmText2').append('<p class="text-danger"><small>패스워드 확인을 입력해주세요<small></p>')
 				return false;
-			}
+			}else{$('#pwConfirmText2').empty();}
 			if(passwdCheck != userPassword){
-				alert("(패스워드가 동일하지 않습니다.")
+				$('#pwConfirmText2').empty();
+				$('#pwConfirmText2').append('<p class="text-danger"><small>패스워드가 일치하지 않습니다<small></p>')
 				return false;
-			}
+			}else{$('#pwConfirmText2').empty();}
+			
 			if(userName==""){
-				alert("이름을 입력하세요");
+				$('#userNameConfirmText').empty();
+				$('#userNameConfirmText').append('<p class="text-danger"><small>이름을 입력해주세요<small></p>')
 				return false;
-			}
+			}else{$('#userNameConfirmText').empty();}
+			
 			if(!userNameCheck.test(userName)){
-				alert("(이름 양식 오류) - [한글/영어로 된 이름을 입력하세요]");
+				$('#userNameConfirmText').empty();
+				$('#userNameConfirmText').append('<p class="text-danger"><small>한글/영어로 된 이름을 입력하세요<small></p>')
 				return false;
-			}
+			}else{$('#userNameConfirmText').empty(); }
+			
 			if(userEmail==""){
-				alert("이메일을 입력해주세요")
+				$('#userEmailConfirmText').empty();
+				$('#userEmailConfirmText').append('<p class="text-danger"><small>이메일을 입력해주세요<small></p>')
 				return false;
-			}
+			}else{$('#userEmailConfirmText').empty();}
+			
 			if(chSearchCheck!=1){
-				alert("채널을 선택해주세요")
+				$('#chResult').empty();
+				$('#chResult').append('<p class="text-danger"><small>채널을 등록해주세요<small></p>')
 				return false;
-			}
+			}else{$('#chResult').empty();}
+			
 			if(chRoleSelectCheck!=1){
-				alert("롤모델을 선택해주세요")
+				$('#chRoleResult').empty();
+				$('#chRoleResult').append('<p class="text-danger"><small>롤모델을 등록해주세요<small></p>')
 				return false;
-			}
+			}else{$('#chRoleResult').empty();}
 			
 			
 			if(!(typeof userChannelLink=="undefined"&& typeof userRolemodelLink=="undefined")){
 				if(userChannelLink==userRolemodelLink){
-					alert("본인 채널과 롤모델을 다르게 선택하세요");
+					$('#chRoleResult').empty();
+					$('#chRoleResult').append('<p class="text-danger"><small>본인 채널과 롤모델을 다르게 선택해주세요<small></p>')
 					chRoleSelectCheck=0;
 					return false
 				}
-			}
+			}else{$('#chRoleResult').empty();}
 			
 			
 
-			if (idCheck>0) {
-				if(tmpId != userId){
-					alert("아이디 중복체크를 해주세요.");
-					return false;
-				}
-			}
+			
 			return true;	
 			
 		}
@@ -409,7 +449,8 @@ $(document).ready(function(){
 		var userChannelLink = $("#userChannelLink").val()
 		$("#chResult").empty()
 		if(userChannelLink == "" || userChannelLink == null){
-			alert("검색어를 입력해주세요")
+			$('#chResult').empty();
+			$('#chResult').append('<p class="text-danger">검색어를 입력하세요</p>')
 		}else{
 			$.ajax({
 				url: "/auth/user/searchChannel",
@@ -417,7 +458,7 @@ $(document).ready(function(){
 				data: {keyword:userChannelLink}, 
 				beforeSend: function() {
 					$('#chResult').empty();
-					$('#chResult').append('<p class="text-warning">중복 검사 체크중입니다...</p>')
+					$('#chResult').append('<p class="text-warning">채널 검색 중입니다...</p>')
 						
              },
 				success: function(contents){ // 채널을 리스트로 받아옴
@@ -436,11 +477,13 @@ $(document).ready(function(){
 						$('#chResult').empty();
 						$('#chResult').append(str);
 					}else{
-						alert('검색결과가 없습니다.');
+						$('#chResult').empty();
+						$('#chResult').append('<p class="text-danger">검색 결과가 없습니다.</p>')
 					}
 				},
 				error: function(){
-					alert("서버에러");
+					$('#chResult').empty();
+					$('#chResult').append('<p class="text-danger">서버 에러</p>')
 				}
 			});
 		}
@@ -452,12 +495,18 @@ $(document).ready(function(){
 		var userRolemodelLink = $("#userRolemodelLink").val()
 		$("#chRoleResult").empty()
 		if(userRolemodelLink == "" || userRolemodelLink == null){
-			alert("검색어를 입력해주세요")
+			$('#chRoleResult').empty();
+			$('#chRoleResult').append('<p class="text-danger"><small>검색어를 입력해주세요<small></p>')
 		}else{
 			$.ajax({
 				url: "/auth/user/searchChannel",
 				type: "get",
-				data: {keyword:userRolemodelLink}, 
+				data: {keyword:userRolemodelLink},
+				beforeSend: function() {
+					$('#chRoleResult').empty();
+					$('#chRoleResult').append('<p class="text-warning">채널 검색 중입니다...</p>')
+						
+             }, 
 				success: function(contents){ // 채널을 리스트로 받아옴
 					chRoleSelectCheck = 0;
 					
@@ -474,11 +523,13 @@ $(document).ready(function(){
 						str +='</table>';
 						$('#chRoleResult').append(str);
 					}else{
-						alert('검색결과가 없습니다.');
+						$('#chRoleResult').empty();
+						$('#chRoleResult').append('<p class="text-danger"><small>검색결과가 없습니다<small></p>')
 					}
 				},
 				error: function(){
-					alert("서버에러");
+					$('#chRoleResult').empty();
+					$('#chRoleResult').append('<p class="text-danger"><small>서버 에러<small></p>')
 				}
 			});
 		}
@@ -526,10 +577,13 @@ $(document).ready(function(){
 		var userIdCheck = RegExp(/^[A-Za-z0-9]{8,20}$/);	
 		var userId = $('#userId').val();
 		if(userId==""){
-			alert("아이디을 입력해주세요");
+			$('#idConfirmText').empty();
+			$('#idConfirmText').append('<p class="text-danger"><small>아이디를 입력해주세요<small></p>')
 		}
 		else if(!userIdCheck.test(userId)){
-			alert("(아이디 양식 오류) [아이디는 영문, 숫자로만 입력해주세요],[8~20 자리]")
+			$('#idConfirmText').empty();
+			$('#idConfirmText').append('<p class="text-danger"><small>아이디는 영문, 숫자로만 입력해주세요 [8~20 자리]<small></p>')
+			
 		}
 		else{
 			$.ajax({
@@ -541,13 +595,16 @@ $(document).ready(function(){
 						$('#idCheck').attr("readonly",true);
 						idCheck++
 						tmpId = userId;
-						alert('사용가능한 아이디입니다!');
+						$('#idConfirmText').empty();
+						$('#idConfirmText').append('<p class="text-success"><small>사용 가능한 아이디입니다<small></p>')
 					}else{
-						alert('중복된 아이디입니다.');
+						$('#idConfirmText').empty();
+						$('#idConfirmText').append('<p class="text-danger"><small>중복된 아이디입니다<small></p>')
 					}
 				},
 				error: function(){
-					alert("서버에러");
+					$('#idConfirmText').empty();
+					$('#idConfirmText').append('<p class="text-danger"><small>서버 에러<small></p>')
 				}
 			});
 		}

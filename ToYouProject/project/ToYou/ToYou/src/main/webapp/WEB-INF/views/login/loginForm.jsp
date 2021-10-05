@@ -78,9 +78,11 @@
 									<div class="form-group">
 										<input type="text" name="userId" id="userId" tabindex="1" class="form-control" placeholder="UserId">
 									</div>
+									<div id="idConfirmText"></div>
 									<div class="form-group">
 										<input type="password" name="userPassword" id="userPassword" tabindex="2" class="form-control" placeholder="Password">
 									</div>
+									<div id="pwConfirmText"></div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-lg-12 col-sm-offset-3">
@@ -220,9 +222,13 @@ $(document).ready(function(){
 			userId = $("#userId").val().trim();
 			userPassword = $("#userPassword").val().trim();
 			if(userId == null || userId =="" ){
-				alert("아이디를 입력해주세요")
+				$('#idConfirmText').empty();
+				$('#idConfirmText').append('<p class="text-danger"><small>아이디를 입력해주세요<small></p>')
+				alert('아이디를 입력해주세요')
 			}else if(userPassword==null || userPassword==""){
-				alert("비밀번호를 입력해주세요")
+				$('#idConfirmText').empty();
+				$('#pwConfirmText').append('<p class="text-danger"><small>비밀번호를 입력해주세요<small></p>')
+				alert('패스워드를 입력해주세요')
 			}else{
 				$("#loginFrm").attr("action","/auth/user/loginProc")
 				$("#loginFrm").submit();
