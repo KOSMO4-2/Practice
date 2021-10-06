@@ -41,24 +41,40 @@
 						class="row align-items-center justify-content-center text-center">
 						<div class="col-md-7">
 							<h2 class="heading mb-5">Toyou 커뮤니티</h2>
+			
+							
+							
 							
 								<!---------------------------------->
 								<!---------------------------------->
-								<!---- 성연추가 ELK 자동완성검색---->		
-								<form action="/elasticSearchPrefix" method="post">		
-					               <div class="input-group">
-					                   <input type="text" id="searchKeyword" name="searhValue" list="elastielist" class="form-control" placeholder="커뮤니티 검색">
+								<!---- 성연추가 ELK 자동완성검색---->
+
+								
+								
+								
+								<form id="formId" action="/auth/communityTotal" method="get">		
+
+					               <div class="input-group" id="searchCommunity">
+					               		<!-- 선택창 -->
+					               	   <select style="text-align:center;" class="form-control" id="selectSearchMethod">
+					               	   		<option selected value="comm_name" class="comm_name">커뮤니티 이름</option>
+					               	   		<option value="comm_tag" class="commu_tag">커뮤니티 태그</option>
+					               	   </select>
+					               	   <!-- 검색창 -->
+					                   <input type="text" id="searchKeyword" name="searhValue" list="elastielist" style="text-align:center;" class="form-control" placeholder="커뮤니티 검색">
 											<datalist id="elastielist" class="searchResult">
 												<!-- ajax -->
 											</datalist>
+					                   <!-- 버튼 -->
 					                   <span class="input-group-btn">
-					                   <button class="btn btn-secondary" id="searchKeywordButton" type="button">검색</button>
+					                   		<button class="btn btn-secondary" id="searchKeywordButton" type="submit">검색</button>
 					                   </span>
 					               </div> 
 					            </form>
 								<!---- 성연추가 ELK 자동완성검색---->
 								<!---------------------------------->
-								<!---------------------------------->	
+								<!---------------------------------->
+			
 
 						</div>
 					</div>
@@ -200,52 +216,63 @@
 <!---- 성연추가 ELK 자동완성검색---->	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-
-
 	
 	//------------------------------------
 	// 성연추가 ELK 커뮤니티 검색 자동완성
 	// Ajax 커뮤티니목록 검색 시작
 	$('#searchKeyword').keyup(function(event){
+		
 
-		alert($('#searchKeyword').val())
-              	
+		// 커뮤니티 이름으로 검색
+		if ( $(this).parents("#searchCommunity").find("#selectSearchMethod").val() == "comm_name" ){
+			$.ajax({
+	             url: "/auth/esPrefixTitle",
+	             type: "POST",
+	             dataType: "JSON",
+	             data: { "searhValue" : $('#searchKeyword').val()},
+	             success: function(data) {                 
+	              	test = data['hits']
+	             	test2 = test['hits']
+	             	event.preventDefault();
+	         		event.stopPropagation();
+	        	  	$('.communitytitle').remove();
+	            	for(var i=0; i<test2.length; i++){
+	             		$(".searchResult").append("<option class ='communitytitle'>" + test2[i]['_source']['communitytitle'] +"</option>" );
+	             		$("#formId").attr("action", "/auth/community/community?communityNo="+ test2[i]['_source']['communityno']);
+	             	}
+	             }
+			});
+		}
 
-		$.ajax({
-             url: "/elasticSearchPrefix",
-             type: "POST",
-             dataType: "JSON",
-             data: { "searhValue" : $('#searchKeyword').val()},
+		
+		// 커뮤니티 태그로 검색
+		if ( $(this).parents("#searchCommunity").find("#selectSearchMethod").val() == "comm_tag" ){
+			$.ajax({
+	             url: "/auth/esPrefixTag",
+	             type: "POST",
+	             dataType: "JSON",
+	             data: { "searhValue" : $('#searchKeyword').val()},
+	             success: function(data) {                 
+	              	test = data['hits']
+	             	test2 = test['hits']
+	             	event.preventDefault();
+	         		event.stopPropagation();
+		          	$('.communitytag').remove();
+	            	for(var i=0; i<test2.length; i++){
+	             		$(".searchResult").append("<option class ='communitytag'>" + test2[i]['_source']['communitytag'] +"</option>" );
+	             		$("#formId").attr("action", "/auth/community/community?communityNo="+ test2[i]['_source']['communityno']);
+						
+	             	}
+	             }
+			});				
+		}
 
- 
- 			
-             success: function(data) {                 
-
-              	test = data['hits']
-             	test2 = test['hits']
-
-             	// alert("test : ", test)
-             	
-             	event.preventDefault();
-         		event.stopPropagation();
-
-          		$('.communitytitle').remove();
-          		
-            	for(var i=0; i<test2.length; i++){
-             		$(".searchResult").append("<option class ='communitytitle'>" + test2[i]['_source']['communitytitle'] +"</option>" );
-             	}
-
-             }
-
-             
-		});
-             	
 		
 	});
 	// Ajax 커뮤티니목록 검색 종료
 	//------------------------------------
-		
-
+	
+	
 </script> 
 <!---- 성연추가 ELK 자동완성검색---->	
 <!---------------------------------->

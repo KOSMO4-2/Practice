@@ -67,9 +67,83 @@ public class ElasticSearchTestController {
 	// ElasticSearch 포트 오픈 / 닫기 종료
 	//-----------------------------------------
 
+
+	//-----------------------------------------
+	// Ajax 커뮤티니목록_타이틀 검색 시작
+	@PostMapping(value = "/auth/esPrefixTitle")
+	public ResponseEntity esPrefixTitle(String searhValue) throws IOException {
+		
+		// 필드 지정(communitytitle 필드에서 검색할 것), 검색할 내용
+		QueryBuilder matchQueryBuilder = QueryBuilders.prefixQuery("communitytitle", searhValue);
+		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+		sourceBuilder.query(matchQueryBuilder);
+		sourceBuilder.from(0);
+		sourceBuilder.size(50);
+		
+		// 검색할 인덱스 요청
+		SearchRequest searchRequest = new SearchRequest("communityprefix");
+		searchRequest.source(sourceBuilder);
+		SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+		
+		// json 으로 값 가져오기
+		JSONObject json = new JSONObject(searchResponse.toString());
+		
+		// 가져온 값 콘솔에 출력
+		System.out.println("커뮤니티_타이틀" + json.toMap());
+		
+		return new ResponseEntity<>(json.toMap(), HttpStatus.OK);		
+	}
+	// Ajax 커뮤티니목록_타이틀 검색 종료
+	//-----------------------------------------
+	
+	
+	//-----------------------------------------
+	// Ajax 커뮤티니목록_태그 검색 시작
+	@PostMapping(value = "/auth/esPrefixTag")
+	public ResponseEntity esPrefixTag(String searhValue) throws IOException {
+		
+		// 필드 지정(communitytitle 필드에서 검색할 것), 검색할 내용
+		QueryBuilder matchQueryBuilder = QueryBuilders.prefixQuery("communitytag", searhValue);
+		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+		sourceBuilder.query(matchQueryBuilder);
+		sourceBuilder.from(0);
+		sourceBuilder.size(50);
+		
+		// 검색할 인덱스 요청
+		SearchRequest searchRequest = new SearchRequest("communityprefix");
+		searchRequest.source(sourceBuilder);
+		SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+		
+		// json 으로 값 가져오기
+		JSONObject json = new JSONObject(searchResponse.toString());
+		
+		// 가져온 값 콘솔에 출력
+		System.out.println("커뮤니티_태그" + json.toMap());
+		
+		return new ResponseEntity<>(json.toMap(), HttpStatus.OK);		
+	}
+	// Ajax 커뮤티니목록_태그 검색 종료
+	//-----------------------------------------
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//-----------------------------------------	
+	//-----------------------------------------	
+	//-----------------------------------------		
 	//-----------------------------------------
 	// 인덱스 생성 (필드 세개) (mapping에서 설정한 형식으로 생성된다.)
 	// (인덱스 생성한 후에, 딱 한번만 192.168.56.101:5601 에서 인덱싱 추가해주는 작업 해주면 됩니다. 그래야 kibana랑 연동됩니다.)
@@ -201,48 +275,19 @@ GET /20210925test44/_search
 	
 	
 	
+	// 쓰지 않는다.
 	//-----------------------------------------	
+	// 커뮤니티 검색 > 커뮤니티 상세페이지로 이동
 	// communitytag, communitytitle, communitydescription  필드에서 내가 검색하기 원하는 입력값을 받았을 때 해당 검색값이 있는 것을 출력해준다.
-
-/*	
-	// Ajax 커뮤티니목록 검색 (다중필드에서 검색)
-	@PostMapping(value = "/elasticSearchPrefix")
-	public ResponseEntity elasticSearchPrefix(String searhValue) throws IOException {
-		
-		// 필드 지정(communitytitle 필드에서 검색할 것), 검색할 내용
-		QueryBuilder matchQueryBuilder = QueryBuilders.multiMatchQuery(searhValue, "communitytag", "communitytitle", "communitydescription").type(MatchQuery.Type.PHRASE_PREFIX);
-		
-		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-		sourceBuilder.query(matchQueryBuilder);
-		sourceBuilder.from(0);
-		sourceBuilder.size(100);
-
-		// 검색할 인덱스 요청
-		SearchRequest searchRequest = new SearchRequest("communityprefix");
-		searchRequest.source(sourceBuilder);
-		SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
-		
-		// json 으로 값 가져오기
-		JSONObject json = new JSONObject(searchResponse.toString());
-		
-		// 가져온 값 콘솔에 출력
-		System.out.println(json);
-		System.out.println(json.toMap());
-		
-		return new ResponseEntity<>(json.toMap(), HttpStatus.OK);		
-	}	
-
-*/
-	
 	
 	// Ajax 커뮤티니목록 검색 (다중필드에서 검색)
-	@PostMapping(value = "/elasticSearchPrefix")
+	@PostMapping(value = "/auth/elasticSearchPrefix")
 	public ResponseEntity elasticSearchPrefix(String searhValue) throws IOException {
 		
 		System.out.println("1");
 		
 		// 필드 지정(communitytitle 필드에서 검색할 것), 검색할 내용
-		QueryBuilder matchQueryBuilder = QueryBuilders.multiMatchQuery(searhValue, "communitytag", "communitytitle").type(MatchQuery.Type.PHRASE_PREFIX);
+		QueryBuilder matchQueryBuilder = QueryBuilders.multiMatchQuery(searhValue, "communitytag", "communitytitle", "communitydescription").type(MatchQuery.Type.PHRASE_PREFIX);
 		
 		System.out.println("2");
 		
@@ -273,7 +318,8 @@ GET /20210925test44/_search
 		System.out.println("************");
 		
 		
-		return new ResponseEntity<>(json.toMap(), HttpStatus.OK);		
+		// return new ResponseEntity<>(json.toMap(), HttpStatus.OK);		
+		return new ResponseEntity<>(json.toMap(), HttpStatus.OK);
 	}	
 	
 	
