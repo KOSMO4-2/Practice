@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.toyou.project.dto.CountDTO;
 import com.toyou.project.model.CommunityBoard;
+import com.toyou.project.model.CommunityUserInfo;
 
 public interface CommunityBoardRepository extends JpaRepository<CommunityBoard, Integer>{
 
@@ -21,8 +22,12 @@ public interface CommunityBoardRepository extends JpaRepository<CommunityBoard, 
 //	커뮤니티번호로 게시글 리스트 페이징 조회
 	@Query(value="SELECT board FROM CommunityBoard board WHERE communityNo = :communityNo" )
 	public Page<CommunityBoard> findAllByCommunityNo(@Param("communityNo") int communityNo,Pageable pageable);
+//	커뮤니티번호로 게시글 리스트 페이징 조회
+	@Query(value = "SELECT board FROM CommunityBoard board WHERE board.communityNo = :communityNo")
+	public List<CommunityBoard> findByCommunityNo(@Param("communityNo") int communityNo);
+		
 
-	//	커뮤니티번호로 게시글 리스트 조회 // 오버로딩
+//	커뮤니티번호로 게시글 리스트 조회 // 오버로딩
 	@Query(value="SELECT board FROM CommunityBoard board WHERE communityNo = :communityNo" )
 	public List<CommunityBoard> findAllByCommunityNo(@Param("communityNo") int communityNo);
 
@@ -31,6 +36,10 @@ public interface CommunityBoardRepository extends JpaRepository<CommunityBoard, 
 	@Query(value="update CommunityBoard b set b.communityBoardViewcnt = b.communityBoardViewcnt+1 where b.communityBoardNo = :boardNo")
 	public void updateByboardViewCnt(@Param("boardNo") int boardNo);
 	
+// 	커뮤니티 안의 게시판 전체 삭제 == 커뮤니티 삭제시 커뮤니티 내 전체 게시글 삭제
+	@Modifying
+	@Query(value = "DELETE FROM CommunityBoard board WHERE board.communityNo = :communityNo")
+	public void deleteByCommunityNo(@Param("communityNo") int communityNo);
 	
 	
 }

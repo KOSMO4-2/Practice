@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -32,6 +33,11 @@ public interface communityUserInfoRepository extends JpaRepository<CommunityUser
 	// 커뮤니티 회원관리 위한 커뮤니티 가입 유저 리스트 추출
 	@Query(value = "SELECT userInfo FROM CommunityUserInfo userInfo WHERE userInfo.communityNo = :communityNo")
 	public List<CommunityUserInfo> findByCommunityNo(@Param("communityNo") int communityNo);
+	
+	// 커뮤니티 가입자 전체 삭제
+	@Modifying
+	@Query(value = "DELETE FROM CommunityUserInfo userInfo WHERE userInfo.communityNo = :communityNo")
+	public void deleteByCommunityNo(@Param("communityNo") int communityNo);
 
 	
 	// 내가 만듬

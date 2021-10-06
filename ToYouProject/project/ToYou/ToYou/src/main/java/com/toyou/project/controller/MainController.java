@@ -271,7 +271,7 @@ public class MainController {
 	// 개발 마무리 단계에서 /auth 삭제할 예정
 	@GetMapping("/auth/mypage")
 	public String myPage(ProductBuyLog productBuyLog, Authentication authentication, Model model) {
-		
+		System.out.println("ㅎㅇ");
 		UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 	    String username = userDetails.getUsername();
 	    User user = userService.userFind(username);
@@ -437,7 +437,6 @@ public class MainController {
 			
 		}
 		
-		
 		if(communityService.SelectAllCommunitybyCommunityHostno(user.getUserNo()) != null) {
 			List<Community> myCommunity = communityService.SelectAllCommunitybyCommunityHostno(user.getUserNo());
 			ArrayList<Integer> countCommunity = new ArrayList<Integer>();
@@ -464,7 +463,6 @@ public class MainController {
 			model.addAttribute("tagCommunityList", tagCommunityList);
 			
 		}
-		
 		List<CommunityUserInfo> communityUserInfoList = communityService.findByUserInfoAll(userNo);
 		ArrayList<Community> otherCommunityList = new ArrayList<Community>();
 		ArrayList<ChannelOwner> otherCommunityHostList = new ArrayList<ChannelOwner>();
@@ -479,9 +477,10 @@ public class MainController {
 			ChannelOwner hostInfo = mypageService.findMyChannel(hostNo);
 			otherCommunityHostList.add(hostInfo);		
 			
-			int count = communityService.countByUserInfo(communityNo);
+			int count = communityService.countByUserInfo(communityNo);	
 			countOtherCommunity.add(count);
-			
+			// 여기서 에러가 나는데
+			System.out.println("여기서 나는지 확인");
 			String[] temp  = communityService.findById(communityNo).getCommunityTag().split(",");
 			for(int k=0;k<temp.length;k++) {
 				tagOthrerCommunity.add(temp[k]);
