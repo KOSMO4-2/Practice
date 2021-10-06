@@ -1,22 +1,29 @@
 package com.toyou.project.controller.community;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.toyou.project.dto.CountDTO;
 import com.toyou.project.model.ChannelOwner;
 import com.toyou.project.model.Community;
 import com.toyou.project.model.CommunityBoard;
+import com.toyou.project.model.CommunityBoardReply;
+import com.toyou.project.model.CommunityUserInfo;
 import com.toyou.project.model.User;
 import com.toyou.project.service.community.CommunityBoardService;
 import com.toyou.project.service.community.CommunityService;
@@ -40,29 +47,18 @@ public class CommunityController {
 	
 	
 //	커뮤니티 수정폼 이동
-	@GetMapping("/auth/community/cmModifyForm")
+	@RequestMapping("/auth/community/cmModifyForm")
 	public String cmModifyForm(HttpServletRequest request, Model model) {
 		String communityNo = request.getParameter("communityNo");
 		Community community = communityService.findById(Integer.parseInt(communityNo));
-//		ArrayList<String> tagVal = new ArrayList<String>();
-//		System.out.println("태그가 가져오는 값 확인 : "+community.getCommunityTag());
-//		System.out.println("태그가 가져오는 값 isempty : "+community.getCommunityTag().isEmpty());
-//		if(!(community.getCommunityTag().isEmpty())) {			
-//			String[] tmp = community.getCommunityTag().trim().split(",");
-//			System.out.println("tmp 사이즈 확인 :" + tmp.length);
-//			for(int i = 0;i<tmp.length; i++	) {
-//				System.out.println("tmp에 담긴 배열 확인 :" + tmp[i]);
-//				tagVal.add(tmp[i].trim());
-//				System.out.println(tagVal.get(i));
-//			}
-//		}
-//		System.out.println("태그가 없나 : " + tagVal.isEmpty());
-//		System.out.println("태그 개수 확인 : " + tagVal.size());
+		User user = userService.userfindById(community.getCommunityHostno());
+		ChannelOwner channelInfo = myPageService.findMyChannel(user.getUserNo());
+		model.addAttribute("channelInfo", channelInfo);
 		model.addAttribute("community", community);
-//		model.addAttribute("tagVal", tagVal);
 //		
 		return "community/cmModifyForm";
 	}
+	
 	
 	
 	
@@ -70,6 +66,10 @@ public class CommunityController {
 	@GetMapping("/auth/community/cmBoardWriteForm")
 	public String communityForm(HttpServletRequest request, Model model) {
 		String communityNo = request.getParameter("communityNo");
+		Community community = communityService.findById(Integer.parseInt(communityNo));
+		User user = userService.userfindById(community.getCommunityHostno());
+		ChannelOwner channelInfo = myPageService.findMyChannel(user.getUserNo());
+		model.addAttribute("channelInfo", channelInfo);
 		model.addAttribute("communityNo", communityNo);
 //		
 		return "community/cmBoardWriteForm";
@@ -82,42 +82,70 @@ public class CommunityController {
 		String boardNo = request.getParameter("communityBoardNo");
 		CommunityBoard board = boardService.findById(Integer.parseInt(boardNo));
 		Community community = communityService.findById(board.getCommunityNo());
-				
+		User user = userService.userfindById(community.getCommunityHostno());
+		ChannelOwner channelInfo = myPageService.findMyChannel(user.getUserNo());
+		
+		model.addAttribute("channelInfo",channelInfo);
 		model.addAttribute("board", board);
 		model.addAttribute("community", community);
 		
 		return "community/boardModifyForm";
-		
 	}
 	
 	
 	
 //  커뮤니티 상세보기 페이지 이동	
 	@RequestMapping("/auth/community/community")
-	public String community(HttpServletRequest request, Model model) {
+	public String community(HttpServletRequest request, Model model,
+							@PageableDefault(size = 10, sort = "communityBoardNo", direction = Sort.Direction.DESC) Pageable pageable
+							) {
+
 		// ==================================================================================
 		// 커뮤니티 호스트 정보 
-		String communityNo = request.getParameter("communityNo");
-		int JoinCnt = communityService.countByUserInfo(Integer.parseInt(communityNo));
-		Community community = communityService.findById(Integer.parseInt(communityNo));
-		User user = userService.userfindById(community.getCommunityHostno());
-		ChannelOwner channelInfo = myPageService.findMyChannel(user.getUserNo());
-		
+		String communityNoSt = request.getParameter("communityNo");
+		int communityNo = Integer.parseInt(communityNoSt);
+		int JoinCnt = communityService.countByUserInfo(communityNo);
+		Community community = communityService.findById(communityNo);
+		// 커뮤니티 회원정보 리스트
+		List<CommunityUserInfo> userInfoList = communityService.findByCommunityNo(communityNo);
+		ChannelOwner channelInfo = myPageService.findMyChannel(community.getCommunityHostno());
+		ArrayList<ChannelOwner> joinChannels = new ArrayList<ChannelOwner>();
+		for(CommunityUserInfo userInfo : userInfoList) {
+			if(myPageService.findMyChannel(userInfo.getUserNo())!=null){
+				ChannelOwner joinChannel = myPageService.findMyChannel(userInfo.getUserNo());
+				if(joinChannel != null) {
+					joinChannels.add(joinChannel);
+				}
+			}
+		}
+		model.addAttribute("joinChannels", joinChannels);
 		model.addAttribute("channelInfo", channelInfo);
+		model.addAttribute("userInfoList", userInfoList);
 		model.addAttribute("community", community);
-		model.addAttribute("user", user);
 		model.addAttribute("JoinCnt", JoinCnt);
 		
 		
 		//====================================================================================
 		// 커뮤니티 게시판 정보
-		List<CommunityBoard> boards = boardService.findByCmNo(Integer.parseInt(communityNo));
+		Page<CommunityBoard> boardsP = boardService.findByCmNo(communityNo,pageable);
+//		System.out.println("게시글 가져오는지 확인 : "+boardsP.getContent().get(0).getCommunityBoardContent());
+		List<CommunityBoard> boards = boardsP.getContent();
+//		System.out.println("보드 사이즈 확인"+boards.size());
 		List<User> boardWriter = new ArrayList<User>();
-		for(CommunityBoard board : boards) {
-			int userNo = board.getUserNo();
-			User userB = userService.userfindById(userNo);
-			boardWriter.add(userB);
+		for(int i = 0; i<boards.size();i++ ) {
+//			System.out.println("게시글 내용 반복문 출력 : "+boards.get(i).getCommunityBoardContent());
+			if(boards.get(i).getCommunityBoardContent() != null) {
+				if(boards.get(i).getUserNo()!=0) {
+					int userNo = boards.get(i).getUserNo();
+//					System.out.println("게시글 작성한 유저 번호 : "+userNo);
+					User userB = userService.userfindById(userNo);
+					boardWriter.add(userB);
+//					System.out.println(userB.getUserId());
+				}
+			}	
 		}
+			
+		
 		model.addAttribute("boards", boards);
 		model.addAttribute("boardWriter", boardWriter);
 		
@@ -126,7 +154,7 @@ public class CommunityController {
 
 	
 //	커뮤니티 종합 페이지 이동
-	@GetMapping("/auth/communityTotal")
+	@RequestMapping("/auth/communityTotal")
 	public String cmTotalList(Model model,Pageable pageable) {		
 
 		// **************************************************************************************************
@@ -287,30 +315,79 @@ public class CommunityController {
 				
 			}
 
-	    
 		return "communityTotal";
 	}
 	
 	
 	// 커뮤니티 게시판 상세보기
-	@GetMapping("/auth/community/boardView")
-	public String boardView(HttpServletRequest request, Model model) {
-		String boardNo = request.getParameter("communityBoardNo");
+	@RequestMapping("/auth/community/boardView")
+	public String boardView(HttpServletRequest request, Model model, @PageableDefault(size = 2, sort = "communityBoardNo", direction = Sort.Direction.DESC) Pageable pageable){
+		// 게시판 리스트 가져오기
+		String communityBoardNo = request.getParameter("communityBoardNo");
 		String communityNo = request.getParameter("communityNo");
 		Community community = communityService.findById(Integer.parseInt(communityNo));
-		CommunityBoard board =  boardService.findById(Integer.parseInt(boardNo));
+		CommunityBoard board =  boardService.findById(Integer.parseInt(communityBoardNo));
 		boardService.updateByboardViewCnt(board.getCommunityBoardNo());
 		User user = userService.userfindById(board.getUserNo());
+		ChannelOwner channelInfo = myPageService.findMyChannel(user.getUserNo());
+		
+		model.addAttribute("channelInfo",channelInfo);
 		model.addAttribute("community",community);
 		model.addAttribute("board",board);
 		model.addAttribute("user",user);
+
+		// 댓글 리스트 가져오기
+		Page<CommunityBoardReply> boardReplyPage = boardService.findReplyAll(Integer.parseInt(communityBoardNo),pageable);
+		List<User> replyWriter = new ArrayList<User>();
+		List<String> times = new ArrayList<String>();
+		List<String> profiles = new ArrayList<String>();
+		for(int i = 0; i<boardReplyPage.getContent().size();i++ ) {
+			if(boardReplyPage.getContent().get(i).getCommunityBoardReplyContent()!=null) {
+				if(boardReplyPage.getContent().get(i).getUserNo()!=0) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm", Locale.KOREA );
+					String time = sdf.format(boardReplyPage.getContent().get(i).getCommunityBoardReplyWritedate());
+					times.add(time);
+					int userNo = boardReplyPage.getContent().get(i).getUserNo();
+					User userB = userService.userfindById(userNo);
+					replyWriter.add(userB);
+					// 유저 프로필 가져오기
+					if(myPageService.findMyChannel(userNo)!=null) {
+						String profile = myPageService.findMyChannel(userNo).getChProfile();
+						profiles.add(profile);
+					}else {
+						String profile = "https://i.imgur.com/hczKIze.jpg";
+						profiles.add(profile);
+					}
+				}
+			}
+		}
+		model.addAttribute("times", times);
+		model.addAttribute("replyWriter", replyWriter);
+		model.addAttribute("profiles", profiles);
+		model.addAttribute("boardReplyPage", boardReplyPage);
+		
 		return "community/boardView";
 	}
-	
+
 	// 커뮤니티 멤버 관리폼 이동
-	@GetMapping("/auth/community/cmUserInfoModifyForm")
-	public String cmUserInfoModifyForm(HttpServletRequest request) {
+	@RequestMapping("/auth/community/cmUserInfoModifyForm")
+	public String cmUserInfoModifyForm(HttpServletRequest request, Model model) {
 		int communityNo = Integer.parseInt(request.getParameter("communityNo"));
+		Community community = communityService.findById(communityNo);
+		User Hostuser = userService.userfindById(community.getCommunityHostno());
+		ChannelOwner channelInfo = myPageService.findMyChannel(Hostuser.getUserNo());
+		List<CommunityUserInfo> cmUserInfo = communityService.findByCommunityNo(communityNo);
+		ArrayList<User> userList= new ArrayList<User>();
+		for(CommunityUserInfo cmUserInfoTmp : cmUserInfo) {
+			User user = userService.userfindById(cmUserInfoTmp.getUserNo());
+			userList.add(user);
+		}
+		
+		model.addAttribute("userList",userList);
+		model.addAttribute("community",community);
+		model.addAttribute("cmUserInfo",cmUserInfo);
+		model.addAttribute("channelInfo",channelInfo);
+		
 		return "community/cmUserInfoModifyForm";
 	}
 	

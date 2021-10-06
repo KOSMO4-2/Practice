@@ -34,7 +34,7 @@
 
   <div class="block-31" style="position: relative;">
     <div class="owl-carousel loop-block-31 ">
-      <div class="block-30 block-30-sm item" style="background-image: url('/image/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="block-30 block-30-sm item" style="background-image: url('${channelInfo.chBanner}');" data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-7">
@@ -69,7 +69,7 @@
 <article class="card-body mx-auto" style="min-width:800px;max-width: 1000px;">
 	<h4 class="card-title mt-3 text-center">Create Community</h4>
 	<p class="text-center">Community Host : ${principal.user.userName} </p>
-	<input id="hostNo" value='${principal.user.userNo}' type="hidden">
+	<input id="hostNo" value='${community.communityHostno}' type="hidden">
 	
 	
     <form>
@@ -77,7 +77,7 @@
     <br>
 			<div class="form-group input-group">
 				<div class="input-group-prepend">
-				    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+				    <span class="input-group-text"></span>
 				</div>
 		  	    	<input class="form-control" name="communityName" id="communityName"  placeholder="Community Name" type="text" value="${community.communityTitle}">
 		        	<input type="button" class="btn btn-primary btn-block" value="확인" id="communityNameCheck"  style="width: 50px;"/>
@@ -103,14 +103,14 @@
 			    <div class="form-group">
 	                <input type="hidden" value="" name="tag" id="rdTag" />
 	                <input type="hidden" value="${community.communityNo }" name="communityNo" id="communityNo" />
-					<input type="text" name="pretag" id="preTag" value="${community.communityTag}"/> <!-- 기존 선택된 태그 -->
+					<input type="hidden" name="pretag" id="preTag" value="${community.communityTag}"/> <!-- 기존 선택된 태그 -->
 	            </div>	                
 	        
 	             
 	                        
 	            <div class="form-group input-group">
 	            <div class="input-group-prepend">
-				    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+				    <span class="input-group-text"></span>
 				</div>
 	            	<input class="form-control" type="text" id="tag" size="7" placeholder="Enter HashTag" />
 	           </div>
@@ -157,11 +157,11 @@ and product landing pages</p>   <br>
 
 
 <!-- Footer -->
-<%@ include file="../layout/Menu.jsp"%>
 <%@ include file="../layout/footer.jsp"%>
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%><!-- Footer -->
+<%@ include file="../layout/Menu.jsp"%>
  <script type="text/javascript">
 $(document).ready(function(){
 	var tag = {};
@@ -169,12 +169,7 @@ $(document).ready(function(){
     var colcount=0; // 컬러 추가를 위한 변수
     var count=0;    // idx 고유번호 부여하기 위한 변수
     var communityOpen=1; 
-
-    
 	var preTag = $("#preTag").val();
-	
-	
-
 	
     // 입력한 값을 태그로 생성한다.
     function addTag (value) {
@@ -190,32 +185,33 @@ $(document).ready(function(){
         });
     }
 
-    var preTagList = preTag.split(',');
- 	if(preTagList.length != 0){
- 		 for(var i=0;i<preTagList.length;i++){
- 			
- 			var tagValue = preTagList[i];
- 			if(colcount%5==0){
- 				color = '#BEEBFD'
- 	        }else if(colcount%5==1){
- 	            color = '#DFD4E4'
- 	            }else if(colcount%5==2){
- 	            color = '#FCFFB0'
- 	            }else if(colcount%5==3){
- 	            color = '#AFFFBA'
- 	            }else if(colcount%5==4){
- 	            color = '#FFAFB0'
- 	            }
-	          
- 	        $("#tag-list").append("<li style='margin-bottom:10px;margin-right:10px;float: left;border : 0;padding: 0 0 0 0;list-style: none;background-color:"+color+"' class='tag-item'><strong>&nbsp;&nbsp; #"+tagValue+"</strong><span class='del-btn' idx='"+counter+"'> X&nbsp;&nbsp;</span></li>");
- 	        addTag(preTagList[i]);
-
- 	        colcount++;
- 	        count++;
- 	        
- 		}
- 	 	}
-   
+	if(preTag !=="" && preTag !==" "){
+	    var preTagList = preTag.trim().split(',');
+	 	if(preTagList.length != 0){
+	 		 for(var i=0;i<preTagList.length;i++){
+	 			
+	 			var tagValue = preTagList[i];
+	 			if(colcount%5==0){
+	 				color = '#BEEBFD'
+	 	        }else if(colcount%5==1){
+	 	            color = '#DFD4E4'
+	 	            }else if(colcount%5==2){
+	 	            color = '#FCFFB0'
+	 	            }else if(colcount%5==3){
+	 	            color = '#AFFFBA'
+	 	            }else if(colcount%5==4){
+	 	            color = '#FFAFB0'
+	 	            }
+		          
+	 	        $("#tag-list").append("<li style='margin-bottom:10px;margin-right:10px;float: left;border : 0;padding: 0 0 0 0;list-style: none;background-color:"+color+"' class='tag-item'><strong>&nbsp;&nbsp; #"+tagValue+"</strong><span class='del-btn' idx='"+counter+"'> X&nbsp;&nbsp;</span></li>");
+	 	        addTag(preTagList[i]);
+	
+	 	        colcount++;
+	 	        count++;
+	 	        
+	 		}
+		}
+	}
 	
 
     // 서버에 제공

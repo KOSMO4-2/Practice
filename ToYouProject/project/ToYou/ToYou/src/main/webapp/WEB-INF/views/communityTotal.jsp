@@ -100,7 +100,7 @@
 													class="img-left">
 												<div class="donate-info">
 													<span>${channelName.get(i)}</span>
-													<span class="time d-block mb-3 text-danger">가입자 : ${userJoinCnt.get(i)}명</span>
+													<span class="time d-block mb-3 text-danger">가입자 : ${userJoinCnt.get(i)+1}명</span>
 													<h2>${cmTitle.get(i)}</h2>
 													<p>
 														${cmDescription.get(i)}
@@ -137,7 +137,7 @@
 											class="img-left">
 										<div class="donate-info">
 											<span>${bigchannelName.get(i)}</span>
-											<span class="time d-block mb-3 text-danger">가입자 : ${biguserJoinCnt.get(i)}명</span>
+											<span class="time d-block mb-3 text-danger">가입자 : ${biguserJoinCnt.get(i)+1}명</span>
 											<h2>${bigcmTitle.get(i)}</h2>
 											<p>
 												${bigcmDescription.get(i)}
@@ -174,7 +174,7 @@
 													class="img-left">
 												<div class="donate-info">
 													<span>${hotchannelName.get(i)}</span>
-													<span class="time d-block mb-3 text-danger">가입자 : ${hotuserJoinCnt.get(i)}명</span>
+													<span class="time d-block mb-3 text-danger">가입자 : ${hotuserJoinCnt.get(i)+1}명</span>
 													<h2>${hotcmTitle.get(i)}</h2>
 													<p>
 														${hotcmDescription.get(i)}

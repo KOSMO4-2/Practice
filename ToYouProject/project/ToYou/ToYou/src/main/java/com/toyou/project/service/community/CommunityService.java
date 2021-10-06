@@ -32,7 +32,13 @@ public interface CommunityService {
 	
 	public void signUpCm(int userNo, int communityNo);
 	
-	public CommunityUserInfo findByUserInfo(int userNo);
+	public CommunityUserInfo findByUserInfoAndCommunityNo(int userNo,int communityNo);
+	
+	public List<CommunityUserInfo> findByCommunityNo(int communityNo);
+	
+	public void modifyCmUserInfo(int communityNo,int userNo,CommunityUserInfo tmp);
+	
+//	public CommunityUserInfo findByUserInfo(int userNo);
 	
 	public List<CommunityUserInfo> findByUserInfoAll(int userNo);
 }

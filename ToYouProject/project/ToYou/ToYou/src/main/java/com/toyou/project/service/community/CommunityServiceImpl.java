@@ -108,6 +108,7 @@ public class CommunityServiceImpl implements CommunityService{
 		communityRepository.delete(community);
 	};
 
+
 	
 	// 커뮤니티 가입 신청
 	public void signUpCm(int userNo,int communityNo) {
@@ -118,12 +119,31 @@ public class CommunityServiceImpl implements CommunityService{
 	}
 	
 	// 커뮤니티 가입 상태 확인
-	public CommunityUserInfo findByUserInfo(int userNo) {
-		CommunityUserInfo userInfo =  communityUserInfoRepository.findByUserNo(userNo).orElseGet(()->{
+	public CommunityUserInfo findByUserInfoAndCommunityNo(int userNo,int communityNo) {
+		CommunityUserInfo userInfo =  communityUserInfoRepository.findByUserInfoAndCommunityNo(userNo,communityNo).orElseGet(()->{
 			return new CommunityUserInfo();
 		});
 		System.out.println("가입상태 날짜 : "+userInfo.getCommunityUserinfoJoindate());
 		return userInfo;
+	}
+	
+	// 커뮤니티 회원관리 유저 리스트
+	@Override
+	public List<CommunityUserInfo> findByCommunityNo(int communityNo) {
+		List<CommunityUserInfo> userInfo = communityUserInfoRepository.findByCommunityNo(communityNo);
+		return userInfo;
+	}
+	
+	// 커뮤니티 회원 정보 수정
+	@Override
+	@Transactional
+	public void modifyCmUserInfo(int communityNo, int userNo, CommunityUserInfo tmp) {
+		CommunityUserInfo userInfo = communityUserInfoRepository.findByUserInfoAndCommunityNo(userNo,communityNo).orElseThrow(()->{
+			return new IllegalArgumentException("커뮤니티 회원 정보 찾기 실패 : 커뮤니티 회원의 정보를 찾을 수 없습니다.");
+		});
+		System.out.println("변경할 권한 : "+ tmp.getCommunityUserinfoAuthority());
+		System.out.println("CommunityUserInfo 영속화 완료");
+		userInfo.setCommunityUserinfoAuthority(tmp.getCommunityUserinfoAuthority());
 	}
 	
 	// 내가 만듬
@@ -131,6 +151,8 @@ public class CommunityServiceImpl implements CommunityService{
 		List<CommunityUserInfo> userInfoAll =  communityUserInfoRepository.findByUserNoAll(userNo);			
 		return userInfoAll;
 	}
+
+
 	
 	
 	

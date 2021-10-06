@@ -25,6 +25,10 @@
 <link rel="stylesheet" href="/css/fancybox.min.css">
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/style.css">
+<style type="text/css">
+.block-11 .owl-nav{position: relative;}
+.owl-next .owl-prev{position: absolute;}
+</style>
 </head>
 <body>
 <!------Header-------->
@@ -44,33 +48,23 @@
 						class="row align-items-center justify-content-center text-center">
 						<div class="col-md-7">
 							<h2 class="heading mb-5">${channelInfo.chTitle}</h2>
-							<!-- <p style="display: inline-block;"><a href="https://vimeo.com/channels/staffpicks/93951774"  data-fancybox class="ftco-play-video d-flex"><span class="play-icon-wrap align-self-center mr-4"><span class="ion-ios-play"></span></span> <span class="align-self-center">Watch Video</span></a></p> -->
-							<!-- 메인 중앙 검색창
-               <div class="input-group">
-                   <input type="text" class="form-control" placeholder="검색어를 입력하세요">
-                   <span class="input-group-btn">
-                   <button class="btn btn-secondary" type="button">검색</button>
-                   </span>
-              </div> END 메인 중앙 검색창 -->
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	
 
 	<div class="container">
-		
 		<div class="row commu">
 			<div class="dropdown event-dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Test<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						
 						<c:choose>
-							<c:when test="${principal.user.userNo == community.communityHostno }">
-									<li><a id="modifyCmBtn" href="#">커뮤니티 수정</a></li>
+							<c:when test="${principal.user.userNo == community.communityHostno}">
+									<li><a id="modifyCmBtn" href="/auth/community/cmModifyForm?communityNo=${community.communityNo}">커뮤니티 수정</a></li>
 									<li><a id="deleteCmBtn" href="#">커뮤니티 삭제</a></li>
 									<li><a id="memberMgtBtn" href="/auth/community/cmUserInfoModifyForm?communityNo=${community.communityNo}">멤버 관리</a></li>
 							</c:when>
@@ -78,6 +72,11 @@
 									<li><a id="signUpBtn" href="#">가입 신청</a></li>
 							</c:otherwise>
 						</c:choose>
+							<c:forEach var="userInfoList" items="${userInfoList}">
+								<c:if test="${ principal.user.userNo == userInfoList.userNo && userInfoList.communityUserinfoAuthority == 2}">
+									<li><a id="memberMgtBtn" href="/auth/community/cmUserInfoModifyForm?communityNo=${community.communityNo}">멤버 관리</a></li>
+								</c:if>
+							</c:forEach>
 					</ul>
 			</div>
 			<input type="hidden" value="${principal.user.userNo}" id="userNo">
@@ -88,15 +87,16 @@
 					<hr>
 				</div>
 				<div class="row">
-				<div class="col-2"></div>
-					<div class="person-donate text-left col-3">
-						<img src="${user.userChannelImg}" alt="Image placeholder"
+				<div class="col-1"></div>
+					<div class="person-donate text-left">
+						<img src="${channelInfo.chProfile}" alt="Image placeholder"
 							class="img-left">
 						<div class="donate-info">
-							<h4>${user.userChannelName }</h4>
-							<span class="time d-block mb-3 text-danger">가입자 : ${JoinCnt} 명</span>
+							<h4>${channelInfo.chTitle }</h4>
+							<span class="time d-block mb-3 text-danger">가입자 : ${JoinCnt+1} 명</span>
 						</div>
 					</div>
+					<div class="col-1"></div>
 					<div class="person-donate text-left col-7">
 					<div class="commu_title_1">
 						<h2>커뮤니티 소개</h2>
@@ -113,55 +113,12 @@
 		</div>
 	</div>
 
-
-
-
-	<div class="site-section border-top">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="commu_title_2">
-						<h3>커뮤니티 가입 채널</h3>
-					</div>
-					<div class="person-donate2">
-						<img src="/image/person_1.jpg" alt="Image placeholder"
-							class="img-left">
-						<div class="text_ch">
-							<a href="#">[채널명]</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="site-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="commu_title_3">
-						<h3>커뮤니티 가입 신청 채널</h3>
-					</div>
-					<div class="person-donate2">
-						<img src="/image/person_1.jpg" alt="Image placeholder"
-							class="img-left">
-						<div class="text_ch">
-							<a href="#">[채널명]</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
 	<div class="site-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="title_m_tx text-left ">
 						<h3>커뮤니티 게시판</h3>
-				
 					</div>
 						<table class="table table-striped commu_board">
 						<thead>
@@ -174,26 +131,26 @@
 							</tr>
 						</thead>
 						<tbody id="boardList" class="text-center">
-						<c:if test="${fn:length(boards)-1 >= 0}">
-							<c:forEach var="i" begin="0" end="${fn:length(boards)-1}">
+						<c:if test="${!empty boards }">
+							<c:forEach var="boards" items="${boards}" varStatus="status">
 								<tr>
 									<!-- 작성자, 커뮤니티 호스트 가 아니면 공개글만 노출 -->
 									<c:choose>
-										<c:when test="${principal.user.userNo != boardWriter.get(i).userNo && principal.user.userNo != community.communityHostno}">
-											<c:if test="${boards.get(i).communityBoardIspublic == 1 }">
-												<td>${i}</td>
-												<td><a style="color:black" href='/auth/community/boardView?communityBoardNo=${boards.get(i).communityBoardNo}&communityNo=${community.communityNo}'>${boards.get(i).communityBoardTitle}</a></td>
-												<td>${boardWriter.get(i).userName}</td>
-												<td>${boards.get(i).communityBoardViewcnt}</td>
-												<td>${boards.get(i).communityBoardWritedate}</td>
+										<c:when test="${principal.user.userNo != boardWriter.get(status.index).userNo && principal.user.userNo != community.communityHostno}">
+											<c:if test="${boards.communityBoardIspublic == 1 }">
+												<td>${status.index+1}</td>
+												<td><a style="color:black" href='/auth/community/boardView?communityBoardNo=${boards.communityBoardNo}&communityNo=${community.communityNo}'>${boards.communityBoardTitle}</a></td>
+												<td>${boardWriter.get(status.index).userName}</td>
+												<td>${boards.communityBoardViewcnt}</td>
+												<td>${boards.communityBoardWritedate}</td>
 											</c:if>
 										</c:when>
 										<c:otherwise>
-												<td>${i}</td>
-												<td><a style="color:black" href='/auth/community/boardView?communityBoardNo=${boards.get(i).communityBoardNo}&communityNo=${community.communityNo}'>${boards.get(i).communityBoardTitle}</a></td>
-												<td>${boardWriter.get(i).userName}</td>
-												<td>${boards.get(i).communityBoardViewcnt}</td>
-												<td>${boards.get(i).communityBoardWritedate}</td>
+												<td>${status.index+1}</td>
+												<td><a style="color:black" href='/auth/community/boardView?communityBoardNo=${boards.communityBoardNo}&communityNo=${community.communityNo}'>${boards.communityBoardTitle}</a></td>
+												<td>${boardWriter.get(status.index).userName}</td>
+												<td>${boards.communityBoardViewcnt}</td>
+												<td>${boards.communityBoardWritedate}</td>
 										</c:otherwise>
 									</c:choose>
 								</tr>
@@ -212,21 +169,67 @@
 	</div>
 
 
+	<div class="site-section border-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="commu_title_2">
+						<h3>커뮤니티 가입 유튜버</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 block-11">
+					<div class="nonloop-block-11 owl-carousel owl-loaded owl-drag" style="text-align:center">
+						<!-- 가입채널 반복문 실행 -->
+						<c:forEach var="joinChannels" items="${joinChannels}">
+						<div class="person-donate2 .owl-item" style="width:150px; height:150px;">
+			            	<img src="${joinChannels.chProfile}" alt="Image placeholder" class="img-center hi">
+			            	<div class="text-center">
+			            		<a href="${joinChannels.chLink}">${joinChannels.chTitle}</a>
+			            	</div>
+			        	</div>
+			        	</c:forEach>
+			   		</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- <div class="container"> -->
+<!-- 	<div class="col-md-12 block-11"> -->
+<!-- 		<div class="nonloop-block-11 owl-carousel owl-loaded owl-drag"> -->
+<!-- 			<div class="person-donate2" style="width:150px; height:150px;"> -->
+<!--             	<img src="/image/person_1.jpg" alt="Image placeholder" class="img-left hi"> -->
+<!--             	<div class="text_ch text-center"> -->
+<!--             		<a href="#">[채널명]</a> -->
+<!--             	</div> -->
+<!--         	</div> -->
+<!--    		 </div> -->
+<!-- 	</div>  -->
+<!-- </div>  -->
+
+
+
+
+
+
+
 
         
 <!-- Footer -->
-<%-- <%@ include file="layout/footer.jsp"%> --%>
-
-<%@ include file="../layout/Menu.jsp"%>
 <%@ include file="../layout/footer.jsp"%>
+<%@ include file="../layout/Menu.jsp"%>
+
  <script type="text/javascript">
 $(document).ready(function(){
 
-	// 커뮤니티 수정 폼 이동
-	$(document).on("click","#modifyCmBtn",function(){
-		var communityNo = $("#communityNo").val();
-		location.href="/auth/community/cmModifyForm?communityNo="+communityNo
-	})
+// 	// 커뮤니티 수정 폼 이동
+// 	$(document).on("click","#modifyCmBtn",function(){
+// 		var communityNo = $("#communityNo").val();
+// 		location.href="/auth/community/cmModifyForm?communityNo="+communityNo
+// 	})
 	
 // 	// 멤버관리 폼 이동
 // 	$(document).on("click","#memberMgtBtn"),function(){
@@ -235,7 +238,7 @@ $(document).ready(function(){
 // 	}
 
 
-	// 게시글 삭제
+	// 커뮤니티 삭제
 	$(document).on("click","#deleteCmBtn",function(){
 		var communityNo = $("#communityNo").val();
 		$.ajax({
@@ -259,6 +262,7 @@ $(document).ready(function(){
 
 	})
 
+	// 커뮤니티 가입 신청 클릭 시
 	$(document).on("click","#signUpBtn",function(){
 		var userNo = $("#userNo").val();
 		var communityNo = $("#communityNo").val();
@@ -266,22 +270,24 @@ $(document).ready(function(){
 			alert("로그인이 필요한 서비스 입니다.")
 			location.href="/auth/loginForm";
 		}else{
-			$.ajax({
-				url: "/auth/community/signUpCm",
-				type: "post",
-				data: {userNo:userNo,
-					communityNo:communityNo},
-             	success: function(result){
-    				if(result == "0" ){
-    					alert("이미 가입하셨습니다.");					
-    				}else{
-    					alert("가입신청이 완료되었습니다.");					
-    				}
-				},
-				error: function(request,status,error){
-			        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			    }
-			});
+			if(confirm("가입 신청하시겠습니까?")){
+				$.ajax({
+					url: "/auth/community/signUpCm",
+					type: "post",
+					data: {userNo:userNo,
+						communityNo:communityNo},
+	             	success: function(result){
+	    				if(result == "0" ){
+	    					alert("이미 가입하셨습니다.");					
+	    				}else{
+	    					alert("가입신청이 완료되었습니다.");					
+	    				}
+					},
+					error: function(request,status,error){
+				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				    }
+				});
+			}
 		}
 	})
 

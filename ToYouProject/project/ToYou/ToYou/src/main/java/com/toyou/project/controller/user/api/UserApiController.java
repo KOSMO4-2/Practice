@@ -36,13 +36,10 @@ public class UserApiController {
 	@PostMapping("/auth/user/idCheck")
 	public String idCheck(String userId) {
 //		String userId = request.getParameter("userId");
-		System.out.println("중복확인 할 아이디 :"+userId);
 		int result = 0; 
 		if(userService.userFind(userId).getUserId() != null) {
 			result = 1;
 		}
-		System.out.println("아이디 조회 결과 : "+result);
-		System.out.println(result);
 		return Integer.toString(result);
 	}
 	
@@ -85,7 +82,7 @@ public class UserApiController {
 		try (Socket client = new Socket()) {
 			
 			// 소켓에 접속하기 위한 접속 정보를 선언한다.
-			InetSocketAddress ipep = new InetSocketAddress("3.37.127.187", 9999);
+			InetSocketAddress ipep = new InetSocketAddress("54.180.95.120", 9999);
 			// 소켓 접속!
 			
 			client.connect(ipep);

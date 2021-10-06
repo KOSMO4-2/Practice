@@ -22,6 +22,17 @@
 <link rel="stylesheet" href="/css/fancybox.min.css">
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/style.css">
+<style type="text/css">
+.singleline-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap:break-word; 
+    line-height: 1.2em;
+}
+</style>
 </head>
 <body>
 <!------Header-------->
@@ -32,19 +43,11 @@
 
   <div class="block-31" style="position: relative;">
     <div class="owl-carousel loop-block-31 ">
-      <div class="block-30 block-30-sm item" style="background-image: url('/image/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="block-30 block-30-sm item" style="background-image: url('${channelInfo.chBanner}');" data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-7">
               <h2 class="heading mb-5">게시글</h2>
-        <!-- <p style="display: inline-block;"><a href="https://vimeo.com/channels/staffpicks/93951774"  data-fancybox class="ftco-play-video d-flex"><span class="play-icon-wrap align-self-center mr-4"><span class="ion-ios-play"></span></span> <span class="align-self-center">Watch Video</span></a></p> -->           
-        <!-- 메인 중앙 검색창
-               <div class="input-group">
-                   <input type="text" class="form-control" placeholder="검색어를 입력하세요">
-                   <span class="input-group-btn">
-                   <button class="btn btn-secondary" type="button">검색</button>
-                   </span>
-              </div> END 메인 중앙 검색창 -->
              </div>
           </div>
         </div>
@@ -53,78 +56,175 @@
     </div>
   </div>
   
-  
+  <br>
+  <br>
+  <hr>
 
 
-<div class="container">
-<div class="card bg-light">
-<article class="card-body mx-auto" style="width: 1000px;">
-		 <form>
-		    <input class="form-control" name="communityNo" id="communityNo" type="hidden" value="${community.communityNo}">
-					<div class="form-group input-group" style="width: 500px;">
-						<div class="input-group-prepend">
-						    <span class="input-group-text"><strong>Title</strong><i class="fa fa-user"></i> </span>
+		<div class="container">
+			<div class="card bg-light">
+				<article class="card-body" >
+						 <form>
+						    <input class="form-control" name="communityNo" id="communityNo" type="hidden" value="${community.communityNo}">
+									<div class="form-group input-group" style="width:50%;">
+										<div class="input-group-prepend">
+										    <span class="input-group-text"><strong>Title</strong></span>
+										</div>
+								  	    	<input class="form-control" name="communityBoardTitle" id="communityBoardTitle" value="${board.communityBoardTitle}"  placeholder="Title" type="text" disabled="disabled">
+								  	</div>
+								  	 <div id="titleWarning">
+						    		 </div>
+								  	
+									<div class="form-group input-group" style="width:40%;" >
+										<div class="input-group-prepend">
+										    <span class="input-group-text"><strong>Writer</strong></span>
+										</div>
+								  	    	<input class="form-control" value="${user.userNo}" type="hidden" disabled="disabled" id="userNo" name="userNo">
+								  	    	<input class="form-control" value="${board.communityBoardNo}" type="hidden" disabled="disabled" id="boardNo" name="boardNo">
+								  	    	<input class="form-control" value="${user.userName}" type="text" disabled="disabled" id="userName" name="userName">
+								  	</div>
+								  	
+								  	
+								    <div class="form-group input-group">
+								    	<div class="input-group-prepend">
+										    <span class="input-group-text"><strong>Content</strong></span>
+										</div>
+								        <textarea class="form-control" name="communityBoardContent" id="communityBoardContent" disabled="disabled" rows="15">${board.communityBoardContent }</textarea>
+								    </div> <!-- form-group// -->
+								    
+								    <c:choose>
+								    	<c:when test="${user.userNo == principal.user.userNo}">
+										    <div class="form-row float-right">
+										        <input type="button" id="modifyBtn" class="btn btn-default" value="Modify Board" style="color:black" > 
+										        <input type="button" id="deleteBtn" class="btn btn-danger" value="Delete Board" style="color:black"> 
+										        <input type="button" id="returnBtn" class="btn btn-default" value="return"> 
+										    </div> <!-- form-group// -->      
+									    </c:when>
+									    <c:when test="${community.communityHostno == principal.user.userNo}">
+									    	<div class="form-row float-right">
+										        <input type="button" id="deleteBtn" class="btn btn-danger" value="Delete Board" style="color:black">
+										        <input type="button" id="returnBtn" class="btn btn-default" value="return" style="color:black">  
+										    </div> <!-- form-group// --> 
+									    </c:when>
+									    <c:otherwise>
+									    	<div class="form-row float-right">
+										        <input type="button" id="returnBtn" class="btn btn-default" value="return" style="color:black">  
+										    </div> <!-- form-group// --> 
+									    </c:otherwise>      
+						            </c:choose>                                                        
+						</form>
+							<br>
+							<hr>
+						<div class="row" id="tabs-3">
+					<!-- 댓글 목록 불러오기 ----------------------------------------- -->
+							<div id="boardReplyList" class="w-75">
+							<!-- 반복문 시작 -->
+								<c:forEach items="${boardReplyPage.content}" var="boardReply" varStatus="status">
+									<div class="card p-3 mb-2 w-100">
+										<div class="d-flex justify-content-between align-items-center singleline-ellipsis">
+	 									<input type="hidden" value="${replyWriter.get(status.index).userNo}" id="replyUserNo">
+	 									<input type="hidden" value="${boardReply.communityBoardReplyNo}" id="communityBoardReplyNo">
+				 							<div class="user d-flex flex-row align-items-center w-100">
+				 								<img src="${profiles.get(status.index)}" width="40"class="user-img rounded-circle mr-2">
+												<div class="container">
+													<div class="row">
+														<div class="col-4">
+															<span class="text-primary"><strong>${replyWriter.get(status.index).userName}</strong></span>
+														</div>
+														<div class="col-4"></div>
+														<div class="col-4 float-right" style="text-align:right;padding:0px;">
+															<span>${times.get(status.index)}</span><br>
+														</div>
+														<c:choose>
+															<c:when test="${principal.user.userNo == replyWriter.get(status.index).userNo }">
+																<textarea class="w-75 ml-3" id="communityBoardReplyContent">${boardReply.communityBoardReplyContent}</textarea>
+																
+															</c:when>
+															<c:otherwise>
+																<textarea class="w-75 ml-3"disabled="disabled" id="communityBoardReplyContent">${boardReply.communityBoardReplyContent}</textarea>
+															</c:otherwise>
+														</c:choose>
+													</div>
+													<br>
+													<div id="replyWarningForm"></div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-8" style="height:1px"></div>
+											<div class="col-4">
+												<c:if test="${principal.user.userNo == replyWriter.get(status.index).userNo }">
+													<a class="replyDelete float-right text-danger" href="#">Delete<span class="dots"></span></a>
+		 											<span class="float-right" style="color:black;"> / <span class="dots"></span></span>
+													<a class="replyModify float-right text-warning"  href="#">Modify<span class="dots"></span></a>
+												</c:if>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
 						</div>
-				  	    	<input class="form-control" name="communityBoardTitle" id="communityBoardTitle" value="${board.communityBoardTitle}"  placeholder="Title" type="text" disabled="disabled">
-				  	</div>
-				  	 <div id="titleWarning">
-		    		 </div>
-				  	
-					<div class="form-group input-group" style="width: 300px;">
-						<div class="input-group-prepend">
-						    <span class="input-group-text"><strong>Writer</strong><i class="fa fa-user"></i> </span>
-						</div>
-				  	    	<input class="form-control" value="${user.userNo}" type="hidden" disabled="disabled" id="userNo" name="userNo">
-				  	    	<input class="form-control" value="${board.communityBoardNo}" type="hidden" disabled="disabled" id="boardNo" name="boardNo">
-				  	    	<input class="form-control" value="${user.userName}" type="text" disabled="disabled" id="userName" name="userName">
-				  	</div>
-				  	
-				  	
-				    <div class="form-group input-group">
-				    	<div class="input-group-prepend">
-						    <span class="input-group-text"><strong>Content</strong><i class="fa fa-lock"></i> </span>
-						</div>
-				        <textarea class="form-control" name="communityBoardContent" id="communityBoardContent" disabled="disabled" rows="15">${board.communityBoardContent }</textarea>
-				    </div> <!-- form-group// -->
-				    <hr>
-				    
-				    <c:choose>
-				    	<c:when test="${user.userNo == principal.user.userNo}">
-						    <div class="form-row float-right">
-						        <input type="button" id="modifyBtn" class="btn btn-default" value="Modify Board" > 
-						        <input type="button" id="deleteBtn" class="btn btn-danger" value="Delete Board"> 
-						        <input type="button" id="returnBtn" class="btn btn-default" value="return"> 
-						    </div> <!-- form-group// -->      
-					    </c:when>
-					    <c:when test="${community.communityHostno == principal.user.userNo}">
-					    	<div class="form-row float-right">
-						        <input type="button" id="deleteBtn" class="btn btn-danger" value="Delete Board">
-						        <input type="button" id="returnBtn" class="btn btn-default" value="return">  
-						    </div> <!-- form-group// --> 
-					    </c:when>
-					    <c:otherwise>
-					    	<div class="form-row float-right">
-						        <input type="button" id="returnBtn" class="btn btn-default" value="return">  
-						    </div> <!-- form-group// --> 
-					    </c:otherwise>      
-		            </c:choose>                                                        
-		</form>
+						<ul class="pagination w-75 justify-content-center" id="pagination" style="float:center;">
+							<c:choose>
+								<c:when test="${boardReplyPage.first}">
+									<li class="page-item disabled"><a class="page-link" href="?communityBoardNo=${board.communityBoardNo}&communityNo=${community.communityNo}&page=${boardReplyPage.number-1}">Previous</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link" href="?communityBoardNo=${board.communityBoardNo}&communityNo=${community.communityNo}&page=${boardReplyPage.number-1}">Previous</a></li>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${boardReplyPage.last}">
+									<li class="page-item disabled"><a class="page-link" href="?communityBoardNo=${board.communityBoardNo}&communityNo=${community.communityNo}&page=${boardReplyPage.number+1}">Next</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link" href="?communityBoardNo=${board.communityBoardNo}&communityNo=${community.communityNo}&page=${boardReplyPage.number+1}">Next</a></li>
+								</c:otherwise>
+							</c:choose>
+						</ul>
+				</article>
+			</div> 
+		</div>
 		
-</article>
-</div> <!-- card.// -->
+		<br><br><hr>
 
-</div> 
-<!--container end.//-->
-
-<br><br>
+		<!-- 댓글 입력 폼.// -->
+		<c:if test="${!empty principal}">
+		<div class="container">
+			<input type="hidden" value="${principal.user.userNo }" id="prinUserNo">
+			<div class="card">
+					<div class="card mb-2 col-lg-12">
+						<div class="card-header bg-light">
+							<i class="fa fa-comment fa"></i>REPLY
+						</div>
+						<div class="card-body">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<div class="form-inline mb-2">
+										<label for="replyId"><i	class="fa fa-user-circle-o fa-2x"></i></label>
+											<input type="text" class="form-control" placeholder="ID" value="${principal.user.userName }" id="boardReplyWriter" name="boardReplyWriter" disabled="disabled">
+									</div> 
+									<textarea class="form-control" id="BoardReplyContent" name="BoardReplyContent" rows="3"></textarea>
+									<div id="replyWarning">
+									</div>
+											
+									<button type="button"
+										class="btn btn-success mt-3 float-right" id="createReplyBtn" style="z-index:500;">답글 달기</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+			</div>
+		</div>
+		</c:if>
+		<!-- 댓글 입력 폼.end// -->
+		<br><br>
 
 <!-- Footer -->
-<%@ include file="../layout/Menu.jsp"%>
 <%@ include file="../layout/footer.jsp"%>
-<%-- 
-<jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
-<!-- Footer --> --%>
- <script type="text/javascript">
+<%-- <%@ include file="../layout/Menu.jsp"%> --%>
+
+<script type="text/javascript">
 $(document).ready(function(){
 
 	// 바이트 계산 함수 왜 안되냐  //onkeyup="javascript:fnChkByte(this,'2048')"//
@@ -217,6 +317,151 @@ $(document).ready(function(){
 		})
 		
 	})
+
+	
+	//=============================================================================================================
+	// 댓글 관련 자바스크립트
+	// 댓글 작성
+	$(document).on("click","#createReplyBtn",function(){
+		var boardNo = $("#boardNo").val();
+		var userNo = $("#prinUserNo").val(); // 작성자 == 로그인 유저 no
+		var replyContent = $("#BoardReplyContent").val();
+		if(userNo == null || userNo == 0){
+			if(confirm("로그인이 필요한 페이지 입니다.<br> 이동하시겠습니까?")){
+				location.href="/login/loginForm";
+			}else{
+				window.reload();
+			}
+		}else if(replyContent==""){
+			var str = '<span style="color:red">'
+			str += "댓글을 입력해 주세요";
+			str += "</span>"
+			$("#replyWarning").append(str)
+		}else if(replyContent.length>=2048){
+			alert(replyContent.length)
+		}else{
+			$.ajax({
+				url: "/auth/community/boardReplyWrite",
+				type: "post",
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify({
+						"communityBoardNo":boardNo,
+						"userNo":userNo,
+						"communityBoardReplyContent":replyContent
+					}),
+				dataType:"json", 
+				success: function(result){
+					if(result.status ==500 ){
+						alert("댓글작성 에 실패하셨습니다.");					
+					}else{
+						location.reload();
+					}
+				},
+				error: function(){
+					alert("서버에러");
+				}
+			})
+		}
+	})
+	// 댓글 end
+	
+	// 댓글 리스트 출력
+// 	function selectReplyAll(){
+// 		var communityBoardNo = $("#boardNo").val();
+// 		var communityNo = $("#communityNo").val();
+// 		$.ajax({
+// 			url:"/auth/community/findReplyAll/"+communityBoardNo,
+// 			type:"get",
+// 			contentType: "application/json; charset=utf-8",
+// 			dataType:"json",
+// 			success: function(data){
+// 				$("#boardReplyList").empty();
+// 				for(var i=0; i<data.boardReplyPage.content.length; i++){
+// 					$("#boardReplyList").append('<div class="card p-3 mb-2 w-100"><div class="d-flex justify-content-between align-items-center singleline-ellipsis">'+
+// 							'<input type="hidden" value="'+data.replyWriter[i].userNo+'" id="replyUserNo">'+
+// 							'<div class="user d-flex flex-row align-items-center w-100"><img src="'+data.profiles[i]+'" width="40"class="user-img rounded-circle mr-2">'+
+// 							'<div class="container"><div class="row"><div class="col-4"><span class="text-primary"><strong>'+data.replyWriter[i].userName+'</strong></span></div><div class="col-4">'+
+// 							'</div><div class="col-4 float-right" style="text-align:right;padding:0px;"><span>'+data.times[i]+'</span><br></div>'+
+// 							'<textarea class="w-75 ml-3" disabled="disabled">'+data.boardReplyPage.content[i].communityBoardReplyContent+'</textarea></div></div></div></div>'+
+// 							'<div class="row"><div class="col-8" style="height:1px"></div><div class="col-4">'+
+// 							'<a class="replyDelete float-right text-danger" " href="#">Delete<span class="dots"></span></a>'+
+// 							'<span class="float-right" style="color:black;"> / <span class="dots"></span></span>'+
+// 							'<a class="replyModify float-right text-warning"  href="#">Modify<span class="dots"></span></a></div></div></div>');
+// 				}
+// 			},
+// 			error: function(request, status, error){
+// 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 			}
+// 		})
+// 	}
+// 	selectReplyAll()
+	
+	
+	// 댓글 수정
+	$(document).on("click",".replyModify",function(){
+		var communityBoardReplyNo = $(this).parent().parent().parent().find("#communityBoardReplyNo").val();
+		var communityBoardReplyContent = $(this).parent().parent().parent().find("#communityBoardReplyContent").val().replace(/&/gi, '&amp;').replace(/</gi, '&lt;').replace(/>/gi, '&gt;').replace(/"/gi, '&quot;').replace(/'/gi, '&apos;');
+		var replyWarningForm = $(this).parent().parent().parent().find("#replyWarningForm")
+		
+		// 댓글 수정 유효성 검사
+		if(communityBoardReplyContent == ""){
+			replyWarningForm.empty();
+			replyWarningForm.append('<p class="text-danger">내용을 입력해주세요</p>');
+// 			communityBoardReplyContent.focus();
+		}else{
+			if((confirm("댓글을 수정하시겠습니까?"))){
+				$.ajax({
+					url: "/auth/community/replyModify/"+communityBoardReplyNo,
+					type: "put",
+					contentType: "application/json; charset=utf-8",
+					data: JSON.stringify({
+							"communityBoardReplyContent":communityBoardReplyContent
+						}),
+					dataType:"json", 
+					success: function(result){
+						if(result.status == 500 ){
+							alert("댓글 수정에 실패하셨습니다.");					
+						}else{
+							location.reload();	
+						}
+					},
+					error: function(request, status, error){
+		 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+	
+				})
+			}
+		}
+	})
+	
+	// 댓글 삭제
+	$(document).on("click",".replyDelete",function(){
+		var communityBoardReplyNo = $(this).parent().parent().parent().find("#communityBoardReplyNo").val();
+		if((confirm("댓글을 수정하시겠습니까?"))){
+			$.ajax({
+				url: "/auth/community/deleteModify/"+communityBoardReplyNo,
+				type: "delete",
+				contentType: "application/json; charset=utf-8",
+				dataType:"json", 
+				success: function(result){
+					if(result.status == 500 ){
+						alert("댓글 삭제를 실패하셨습니다.");					
+					}else{
+						location.reload();
+					}
+				},
+				error: function(request, status, error){
+	 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+
+			})
+		}
+		
+	})
+	
+	
+	
+	//=================================================================================================================================
 
 	
 	

@@ -32,7 +32,7 @@
 
   <div class="block-31" style="position: relative;">
     <div class="owl-carousel loop-block-31 ">
-      <div class="block-30 block-30-sm item" style="background-image: url('/image/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="block-30 block-30-sm item" style="background-image: url('${channelInfo.chBanner}');" data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-7">
@@ -62,7 +62,7 @@
 		 <form>
 					<div class="form-group input-group" style="width: 500px;">
 						<div class="input-group-prepend">
-						    <span class="input-group-text"><strong>Title</strong><i class="fa fa-user"></i> </span>
+						    <span class="input-group-text"><strong>Title</strong></span>
 						</div>
 				  	    	<input class="form-control" name="communityBoardTitle" id="communityBoardTitle" value="${board.communityBoardTitle}"  placeholder="Title" type="text">
 				  	</div>
@@ -71,7 +71,7 @@
 				  	
 					<div class="form-group input-group" style="width: 300px;">
 						<div class="input-group-prepend">
-						    <span class="input-group-text"><strong>Writer</strong><i class="fa fa-user"></i> </span>
+						    <span class="input-group-text"><strong>Writer</strong></span>
 						</div>
 				  	    	<input class="form-control" value="${principal.user.userNo}" type="hidden" disabled="disabled" id="userNo" name="userNo">
 				  	    	<input class="form-control" value="${board.communityBoardNo}" type="hidden" disabled="disabled" id="boardNo" name="boardNo">
@@ -85,7 +85,7 @@
 				  	
 				    <div class="form-group input-group">
 				    	<div class="input-group-prepend">
-						    <span class="input-group-text"><strong>Content</strong><i class="fa fa-lock"></i> </span>
+						    <span class="input-group-text"><strong>Content</strong></span>
 						</div>
 				        <textarea class="form-control" name="communityBoardContent" id="communityBoardContent" rows="15">${board.communityBoardContent }</textarea>
 				    </div> <!-- form-group// -->
@@ -104,11 +104,11 @@
 <br><br>
 
 <!-- Footer -->
-<%@ include file="../layout/Menu.jsp"%>
 <%@ include file="../layout/footer.jsp"%>
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
 <!-- Footer --> --%>
+<%@ include file="../layout/Menu.jsp"%>
  <script type="text/javascript">
 $(document).ready(function(){
 
@@ -171,7 +171,7 @@ $(document).ready(function(){
 		var communityBoardTitle = $("#communityBoardTitle").val().replace(/&/gi, '&amp;').replace(/</gi, '&lt;').replace(/>/gi, '&gt;').replace(/"/gi, '&quot;').replace(/'/gi, '&apos;');
 		var communityBoardContent = $("#communityBoardContent").val().replace(/&/gi, '&amp;').replace(/</gi, '&lt;').replace(/>/gi, '&gt;').replace(/"/gi, '&quot;').replace(/'/gi, '&apos;');
 		var communityBoardIspublic = $("#communityBoardIspublic").val();
-		if(checkFrm()){
+		if(checkFrm("게시글을 수정하시겠습니까?")){
 			$.ajax({
 				url: "/auth/community/boardModify/"+communityBoardNo,
 				type: "put",

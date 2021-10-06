@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.toyou.project.dto.ResponseDTO;
 import com.toyou.project.model.Community;
 import com.toyou.project.model.CommunityBoard;
+import com.toyou.project.model.CommunityBoardReply;
 import com.toyou.project.model.CommunityUserInfo;
 import com.toyou.project.model.User;
 import com.toyou.project.service.community.CommunityBoardService;
 import com.toyou.project.service.community.CommunityService;
+import com.toyou.project.service.mypage.MypageService;
 import com.toyou.project.service.user.UserService;
 
 @RestController
@@ -29,6 +31,9 @@ public class CommunityApiController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private MypageService myPageService;
 	
 	
 	// 게시판 글 등록
@@ -74,10 +79,13 @@ public class CommunityApiController {
 	@PostMapping("/auth/community/signUpCm")
 	public String signUpCm(User user,Community community){
 		int userNo = user.getUserNo();
+		System.out.println("유저넘버 확인 : "+userNo);
 		int communityNo = community.getCommunityNo();
-		CommunityUserInfo userInfo = communityService.findByUserInfo(userNo);
+		System.out.println(communityNo);
+		CommunityUserInfo userInfo = communityService.findByUserInfoAndCommunityNo(userNo,communityNo);
 		
 		int result = 0;
+		System.out.println("가입 날짜 :" +userInfo.getCommunityUserinfoJoindate() );
 		if(userInfo.getCommunityUserinfoJoindate() == null) {
 			System.out.println("가입진행");
 			communityService.signUpCm(userNo,communityNo);
@@ -86,6 +94,42 @@ public class CommunityApiController {
 		return Integer.toString(result);
 	}
 	
+	
+	//커뮤니티 회원 정보 수정
+	@PutMapping("/auth/community/cmUserInfoModify/{communityNo}/{userNo}")
+	public ResponseDTO<Integer> modifyCmUserInfo(@PathVariable int communityNo,@PathVariable int userNo,@RequestBody CommunityUserInfo tmp){
+		System.out.println("회원 정보를 변경할 커뮤니티 번호 :" + communityNo);
+		System.out.println("회원 정보를 변경할 회원 번호 :"+ userNo);
+		System.out.println("변경할 권한 확인" + tmp.getCommunityUserinfoAuthority());
+		communityService.modifyCmUserInfo(communityNo,userNo,tmp);
+		
+		
+		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
+
+	// 게시판 댓글 작성
+	@PostMapping("/auth/community/boardReplyWrite")
+	public ResponseDTO<Integer> boardReplyWrite(@RequestBody CommunityBoardReply boardReply) {
+		boardService.boardReplyWrite(boardReply);
+		
+		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
+	}
+		
+	
+	// 게시판 댓글 수정
+	@PutMapping("/auth/community/replyModify/{communityBoardReplyNo}")
+	public ResponseDTO<Integer> replyModify(@PathVariable int communityBoardReplyNo, @RequestBody CommunityBoardReply temp){
+		boardService.replyModify(communityBoardReplyNo,temp);
+		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
+	// 게시판 댓글 삭제
+	@DeleteMapping("/auth/community/deleteModify/{communityBoardReplyNo}")
+	public ResponseDTO<Integer> deleteModify(@PathVariable int communityBoardReplyNo){
+		boardService.deleteModify(communityBoardReplyNo);
+		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
+	}
 
 	
 	

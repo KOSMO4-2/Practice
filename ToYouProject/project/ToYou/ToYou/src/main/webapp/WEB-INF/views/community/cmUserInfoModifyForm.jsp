@@ -22,6 +22,9 @@
 <link rel="stylesheet" href="/css/fancybox.min.css">
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/style.css">
+<style type="text/css">
+
+</style>
 </head>
 <body>
 <!------Header-------->
@@ -31,7 +34,7 @@
 <!------Header-------->
  <div class="block-31" style="position: relative;">
     <div class="owl-carousel loop-block-31 ">
-      <div class="block-30 block-30-sm item" style="background-image: url('/image/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="block-30 block-30-sm item" style="background-image: url('${channelInfo.chBanner}');" data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-7">
@@ -61,19 +64,60 @@
 							<h3>커뮤니티 멤버 관리</h3>
 					
 						</div>
-							<table class="table table-striped commu_board">
+						<div class="table-responsive" >
+							<table class="table text-center">
 							<thead>
-								<tr class="text-center">
-									<th>회원번호</th>
+								<tr >
+									<th>번호</th>
 			 						<th>아이디</th>
-			 			 			<th>가입상태</th>
+			 						<th>이름</th>
+			 						<th>채널명</th>
+			 						<th>채널링크</th>
+			 			 			<th>등급 변경</th>
 			 						<th>기능</th>
 								</tr>
 							</thead>
-								<tbody id="userInfoList" class="text-center">
-				
+								<tbody id="userInfoList" >
+									<c:choose>
+									<c:when test="${!empty cmUserInfo}">
+										<c:forEach var="cmUserInfo" items="${cmUserInfo}" varStatus="status">
+											<tr>
+												<td>${status.index+1}<input id="userNo" type="hidden" value="${cmUserInfo.userNo}">
+																	<input id="communityNo" type="hidden" value="${community.communityNo}"></td>
+												<td id="userId">${userList.get(status.index).userId}</td>
+												<td id="userName">${userList.get(status.index).userName}</td>
+												<c:choose>
+													<c:when test="${!empty userList.get(status.index).userChannelLink}">
+														<td id="userChName"><a>${userList.get(status.index).userChannelName }</a></td>
+														<td id="userChLink"><a href="${userList.get(status.index).userChannelLink}">${userList.get(status.index).userChannelLink}</a></td>
+													</c:when>
+													<c:otherwise>
+														<td id="userChLink"><span style="color:red;">채널 미등록</span></td>
+														<td id="userChName">-</td>
+														
+													</c:otherwise>
+												</c:choose>
+												<td>
+												<select id="userAuth" class="custom-select">
+													<option value="0" <c:if test="${cmUserInfo.communityUserinfoAuthority == 0}">selected</c:if>>가입 대기중</option>
+													<option value="1" <c:if test="${cmUserInfo.communityUserinfoAuthority == 1}">selected</c:if>>일반 멤버</option>
+													<option value="2" <c:if test="${cmUserInfo.communityUserinfoAuthority == 2}">selected</c:if>>매니저</option>
+												</select>
+												</td>
+												<td><button class="btn btn-warning modifyBtn" style="color:black;">수정</button>
+													<button class="btn btn-danger deleteBtn" style="color:black;">삭제</button></td>
+											</tr>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<tr>
+											<td colspan=6 class="text-center"><strong>커뮤니티에 가입한 유저가 없습니다.</strong></td>
+										</tr>
+									</c:otherwise>
+									</c:choose>
 								</tbody>
 							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -86,8 +130,8 @@
 <br><br>
 
 <!-- Footer -->
-<%@ include file="../layout/Menu.jsp"%>
 <%@ include file="../layout/footer.jsp"%>
+<%@ include file="../layout/Menu.jsp"%>
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
 <!-- Footer --> --%>
@@ -95,6 +139,42 @@
  <script type="text/javascript">
 $(document).ready(function(){
 
+	var auth = document.getElementById("userAuth");
+	var slelectedAuth =  auth.options[auth.selectedIndex].text;
+	if(slelectedAuth != null ){
+		$("#selectedAuth").text(slelectedAuth);
+	}
+
+	$(document).on("click",".modifyBtn",function(){
+		userNo = $(this).parent().parent().find("#userNo").val();
+		userAuth = $(this).parent().parent().find("#userAuth").val();
+		alert("변경할 권한 : "+userAuth)
+		communityNo = $("#communityNo").val();
+		
+		if(confirm('정말 수정하시겠습니까?')){ //확인 누르면 true, 취소 누르면 false 
+			$.ajax({
+				url: "/auth/community/cmUserInfoModify/"+communityNo+"/"+userNo,
+				type: "put",
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify({
+						"communityUserinfoAuthority":userAuth,
+					}),
+				dataType:"json", 
+				success: function(result){
+					if(result.status == 500 ){
+						alert("수정에 실패하셨습니다.");					
+					}else{
+						location.reload();
+					}
+				},
+				error: function(){
+					alert("서버에러");
+				}
+			})
+	
+			
+		}
+	});
 	
 })
 </script>

@@ -108,7 +108,6 @@ public class UserController {
 		HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest = new HttpEntity<>(headers2);
 		// Http 요청하기 - Post방식으로 - 그리고 response 변수의 응답받음
 		ResponseEntity<String> response2 = rt2.exchange("https://kapi.kakao.com/v2/user/me",HttpMethod.POST,kakaoProfileRequest,String.class);
-		System.out.println(response2.getBody());
 		
 		ObjectMapper objectMapper2 = new ObjectMapper();
 		KakaoProfile kakaoProfile = null;
@@ -119,9 +118,6 @@ public class UserController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		System.out.println("카카오아아디(번호)"+kakaoProfile.getKakao_account());
-		System.out.println("카카오이메일"+kakaoProfile.getKakao_account().getEmail());
-		System.out.println("카카오이메일"+kakaoProfile.getKakao_account().getProfile().getNickname());
 
 //	    인증받은 카카오 유저 정보를 User(import 조심 VO로 임포트해야함)에 저장 
 		String kakaoLoginId = "kakao"+kakaoProfile.getId().toString();
@@ -137,11 +133,8 @@ public class UserController {
 		
 //		카카오유저의 아이디로 회원가입정보 조회
 		User originUser = userService.userFind(kakaoUser.getUserId());
-		System.out.println(originUser);
 //		가입이안되어 있다면 카카오 유저 정보로 회원가입 진행
 		if(originUser.getUserId() == null) {
-			System.out.println("카카오정보로 회원가입 진행");
-			System.out.println("카카오정보로 회원가입할 아이디 :" + kakaoUser.getUserId());
 			model.addAttribute("kakaoUser", kakaoUser);
 			
 //			userService.userJoin(kakaoUser);

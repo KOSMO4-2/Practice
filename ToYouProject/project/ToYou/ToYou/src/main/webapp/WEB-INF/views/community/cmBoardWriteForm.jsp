@@ -32,7 +32,7 @@
 
   <div class="block-31" style="position: relative;">
     <div class="owl-carousel loop-block-31 ">
-      <div class="block-30 block-30-sm item" style="background-image: url('/image/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="block-30 block-30-sm item" style="background-image: url('${channelInfo.chBanner}');" data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-7">
@@ -66,7 +66,7 @@
 			<input class="form-control" name="userNo" id="userNo" type="hidden" value="${principal.user.userNo}">
 					<div class="form-group input-group" style="width: 500px;">
 						<div class="input-group-prepend">
-						    <span class="input-group-text"><strong>Title</strong><i class="fa fa-user"></i> </span>
+						    <span class="input-group-text"><strong>Title</strong> </span>
 						</div>
 				  	    	<input class="form-control" name="communityBoardTitle" id="communityBoardTitle"  placeholder="Title" type="text">
 				  	</div>
@@ -75,7 +75,7 @@
 				  	
 					<div class="form-group input-group" style="width: 300px;">
 						<div class="input-group-prepend">
-						    <span class="input-group-text"><strong>Writer</strong><i class="fa fa-user"></i> </span>
+						    <span class="input-group-text"><strong>Writer</strong> </span>
 						</div>
 				  	    	<input class="form-control" value="${principal.user.userName}" type="text" disabled="disabled">
 				  	    	<select id="communityBoardIspublic">
@@ -87,7 +87,7 @@
 				  	
 				    <div class="form-group input-group">
 				    	<div class="input-group-prepend">
-						    <span class="input-group-text"><strong>Content</strong><i class="fa fa-lock"></i> </span>
+						    <span class="input-group-text"><strong>Content</strong></i> </span>
 						</div>
 				        <textarea class="form-control" name="communityBoardContent" id="communityBoardContent"  placeholder="Content"  rows="10"></textarea>
 				    </div> <!-- form-group// -->
@@ -95,13 +95,7 @@
 				     <div id="contentWarning">
 		    		 </div>
 				    <hr>
-				    <div class="form-group input-group">
-						<div class="input-group-prepend">
-						    <span class="input-group-text"><strong>file upload</strong><i class="fa fa-user"></i> </span>
-						</div>
-				  	    	<input class="form-control" name="communityBoardImgname" id="communityBoardImgname" type="file">
-				  	</div>
-				    
+				 
 				    <div class="form-group">
 				        <input type="button" id="createBtn" class="btn btn-primary btn-block" value="Create Board"> 
 				    </div> <!-- form-group// -->      
@@ -117,8 +111,8 @@
 <br><br>
 
 <!-- Footer -->
-<%@ include file="../layout/Menu.jsp"%>
 <%@ include file="../layout/footer.jsp"%>
+<%@ include file="../layout/Menu.jsp"%>
 <%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
 <!-- Footer --> --%>
@@ -178,7 +172,7 @@ $(document).ready(function(){
 	}
 
 
-	
+	// 커뮤니티 게시판 생성버튼 클릭시
 	$(document).on("click","#createBtn",function(){
 		var userNo = $("#userNo").val();
 		var communityNo = $("#communityNo").val();
@@ -212,7 +206,8 @@ $(document).ready(function(){
 
 			})
 		}
-	})
+	});
+	// ----- 생성 end -----
 	
 })
 </script>
