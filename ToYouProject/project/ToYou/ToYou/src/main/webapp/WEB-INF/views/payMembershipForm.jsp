@@ -133,11 +133,7 @@
 								</thead>
 								<tbody>
 									<tr>
-										<th scope="row">
-											<c:if test='${gradeOfSubscriber == "STANDARD"}'>월 29,000원</c:if>
-											<c:if test='${gradeOfSubscriber == "STARTUP"}'>월 59,000원</c:if>
-											<c:if test='${gradeOfSubscriber == "PROFESSIONAL"}'>월 99,000원</c:if>
-										</th>
+										<th scope="row">${priceOfSubscriber}</th>
 									</tr>
 								</tbody>
 							</table>
@@ -182,11 +178,11 @@
 									<tr>
 										<th scope="row">
 											<!-- 숫자만 입력가능한 옵션 추가 -->
-											<input type="text" required maxlength="4" size="3.5" style = "text-align:center;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">-
-											<input type="text" required maxlength="4" size="3.5" style = "text-align:center;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">-
+											<input type="text" required maxlength="4" size="3" style = "text-align:center;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">-
+											<input type="text" required maxlength="4" size="3" style = "text-align:center;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">-
 											<!-- 비밀번호 자동 완성기능 해제 옵션 추가 -->
-											<input type="password" required maxlength="4" size="3.5" style = "text-align:center;" autocomplete="new-password" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">-
-											<input type="text" required maxlength="4" size="3.5" style = "text-align:center;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+											<input type="password" required maxlength="4" size="2.5" style = "text-align:center;" autocomplete="new-password" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">-
+											<input type="text" required maxlength="4" size="3" style = "text-align:center;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
 										</th>
 									</tr>
 								</tbody>
@@ -267,17 +263,23 @@
 			 						<tr>
 										<td class="text-center">
 	        								<div class="form-group">
-		        								<c:if test='${gradeOfSubscriber == "STANDARD"}'>
+	        									
+		        								<c:if test='${gradeOfSubscriber == Name1}'>
 		        									<input type="hidden" name="productNo" value="1" onchange="this.value = parseInt(this.value);">
 		        								</c:if>
-												<c:if test='${gradeOfSubscriber == "STARTUP"}'>
+												<c:if test='${gradeOfSubscriber == Name2}'>
 													<input type="hidden" name="productNo" value="2" onchange="this.value = parseInt(this.value);">
 												</c:if>
-												<c:if test='${gradeOfSubscriber == "PROFESSIONAL"}'>
+												<c:if test='${gradeOfSubscriber == Name3}'>
 													<input type="hidden" name="productNo" value="3" onchange="this.value = parseInt(this.value);">
 												</c:if>
+												
+												<input type="hidden" value="${gradeOfSubscriber}" name="gradeOfSubscriber">
+												<input type="hidden" value="${priceOfSubscriber}" name="priceOfSubscriber">
+	        								
 	        									<input type="hidden" name="userNo" value="${principal.user.userNo}" onchange="this.value = parseInt(this.value);">
 	        									<button type="submit" class="btn btn-default">결제하기</button>
+	        								
 	        								</div>
 			       						</td>
 									</tr>

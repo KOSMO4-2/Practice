@@ -814,8 +814,7 @@
 
 									<br>
 
-									<h4 class="title_m_tx text-center">${principal.user.userName}님의
-										결제 대시보드</h4>
+									<h4 class="title_m_tx text-center">${principal.user.userName}님의 결제 대시보드</h4>
 
 									<br>
 									<div class="container">
@@ -833,15 +832,20 @@
 													</thead>
 													<tbody>
 														<tr>
-															<td scope="row"><c:if test="${payInfo == 0}">
+															<td scope="row">
+																<c:if test="${payInfo == 0}">
 																	<h1>BASIC</h1>
-																</c:if> <c:if test="${payInfo == 1}">
+																</c:if> 
+																<c:if test="${payInfo == 1}">
 																	<h1>STANDARD</h1>
-																</c:if> <c:if test="${payInfo == 2}">
+																</c:if> 
+																<c:if test="${payInfo == 2}">
 																	<h1>STARTUP</h1>
-																</c:if> <c:if test="${payInfo == 3}">
+																</c:if> 
+																<c:if test="${payInfo == 3}">
 																	<h1>PROFESSIONAL</h1>
-																</c:if></td>
+																</c:if>
+															</td>
 														</tr>
 													</tbody>
 												</table>
@@ -887,24 +891,29 @@
 													</thead>
 													<tbody id="hungryList">
 
-
 														<c:forEach items="${productBuyLogList}" var="list">
 
 															<tr>
 																<th scope="row">${list.productBuyLogNo}</th>
-																<td><c:set var="TextValue"
-																		value="${list.productBuyLogDate }" />
-																	${fn:substring(TextValue,2,4) }년
-																	${fn:substring(TextValue,5,7) }월&nbsp; <span
-																	style="color: red"> <c:if
-																			test='${list.productNo == "1"}'>STANDARD</c:if> <c:if
-																			test='${list.productNo == "2"}'>STARTUP</c:if> <c:if
-																			test='${list.productNo == "3"}'>PROFESSIONAL</c:if>
-																</span>&nbsp; 1개월</td>
-																<td><c:if test='${list.productNo == "1"}'>29,000원</c:if>
-																	<c:if test='${list.productNo == "2"}'>59,000원</c:if> <c:if
-																		test='${list.productNo == "3"}'>99,000원</c:if></td>
-																<td>${list.productBuyLogDate}</td>
+																<td>
+																	<c:set var="TextValue" value="${list.productBuyLogDate }" />
+																		${fn:substring(TextValue,2,4) }년
+																		${fn:substring(TextValue,5,7) }월&nbsp; 
+																	<span style="color: red"> 
+																		<c:if test='${list.productNo == "1"}'>${Name1 }</c:if> 
+																		<c:if test='${list.productNo == "2"}'>${Name2 }</c:if> 
+																		<c:if test='${list.productNo == "3"}'>${Name3 }</c:if>
+																	</span>&nbsp; 1개월
+																</td>
+																<td>
+																	<c:set var="Price1Value" value="${Price1 }" />
+																	<c:set var="Price2Value" value="${Price2 }" />
+																	<c:set var="Price3Value" value="${Price3 }" />
+																	<c:if test='${list.productNo == "1"}'>${fn:substring(Price1Value,0,2)},${fn:substring(Price1Value,2,5)}원</c:if>
+																	<c:if test='${list.productNo == "2"}'>${fn:substring(Price2Value,0,2)},${fn:substring(Price2Value,2,5)}원</c:if>
+																	<c:if test='${list.productNo == "3"}'>${fn:substring(Price3Value,0,2)},${fn:substring(Price3Value,2,5)}원</c:if>
+																</td>
+																<td>${fn:substring(TextValue,0,16) }</td>
 																<td>Done</td>
 															</tr>
 														</c:forEach>

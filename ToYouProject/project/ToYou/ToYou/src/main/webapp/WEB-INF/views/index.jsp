@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<!-- 성연추가) jstl 문자열 자르기 -->
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!-- 성연추가) jstl 문자열 자르기 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +62,7 @@
         <div class="col-md-6 pr-5">
           <div class="block-48">
               <span class="block-48-text-1">유튜유를 </br>이용중인 사람들</span>
-              <div class="block-48-counter ftco-number" data-number="1300182">0</div>
+              <div class="block-48-counter ftco-number" data-number="${allUserNum }">0</div>
               <span class="block-48-text-1 mb-4 d-block"></span>
               <p class="mb-0"><a href="/auth/joinForm" class="btn btn-white px-3 py-2">가입하기</a></p>
             </div>
@@ -230,11 +232,29 @@
                 <div class="col-12">
                 <span class="donation-time mb-3 d-block" style="color:#f7ca44;">무료 제공 솔루션</span> 
                 <span class="fund-raised d-block price">FREE</span>
-                    <form action="/auth/joinForm">
-		         		<div class="form-group">
-		         		<button type="submit" class="btn pay">회원가입시 무료제공</button>
-		         		</div>
-     		        </form>  
+                
+                 
+
+	                <!-- 로그인 되어있지 않으면 회원가입 페이지로 이동-->
+	                <c:if test="${empty principal}">
+	                    <form action="/auth/joinForm">
+			         		<div class="form-group">
+			         			<button type="submit" class="btn pay">회원가입시 무료제공</button>
+			         		</div>
+	     		        </form>  
+	                </c:if>
+	                
+	                <!-- 로그인 되어있으면 마이페이지 페이지로 이동-->
+	                <c:if test="${!empty principal}">
+	                    <form action="/auth/mypage">
+			         		<div class="form-group">
+			         			<button type="submit" class="btn pay">기본제공</button>
+			         		</div>
+	     		        </form>  
+	     		    </c:if>
+
+     		        
+     		        
                 <div class="emptybox"></div>                
                 <p class="card-text"><i class="fas fa-check"></i>  데이터 분석조회<br/>
           							 <i class="fas fa-check"></i>  채널분석 5회<br/>
@@ -259,7 +279,8 @@
                 <div class="row">
                 <div class="col-12">
                 <span class="donation-time mb-3 d-block" style="color:#f7ca44;">광고 제안의 첫걸음</span> 
-                <span class="fund-raised d-block price">월 29,000원</span>
+                <c:set var="Price1Value" value="${Price1 }" />
+                <span class="fund-raised d-block price">월 ${fn:substring(Price1Value,0,2)},${fn:substring(Price1Value,2,5)}원</span>
                     <form action="/payMembershipForm">
 					   <input type="hidden" value="STANDARD" name="gradeOfSubscriber">
 		         		<div class="form-group">
@@ -289,7 +310,8 @@
                 <div class="row">
                 <div class="col-12">
                 <span class="donation-time mb-3 d-block" style="color:#f7ca44;">유튜버 매칭을 위한 솔루션</span> 
-                <span class="fund-raised d-block price">월 59,000원</span>
+                <c:set var="Price2Value" value="${Price2 }" />
+                <span class="fund-raised d-block price">월 ${fn:substring(Price2Value,0,2)},${fn:substring(Price2Value,2,5)}원</span>
                     <form action="/payMembershipForm">
 					   <input type="hidden" value="STARTUP" name="gradeOfSubscriber">
 		         		<div class="form-group">
@@ -320,7 +342,8 @@
                 <div class="row">
                 <div class="col-12">
                 <span class="donation-time mb-3 d-block" style="color:#f7ca44;">효율적인 마케팅을 위한 솔루션</span> 
-                <span class="fund-raised d-block price">월 99,000원</span>
+                <c:set var="Price3Value" value="${Price3 }" />
+                <span class="fund-raised d-block price">월 ${fn:substring(Price3Value,0,2)},${fn:substring(Price3Value,2,5)}원</span>
                 
                 <form action="/payMembershipForm">
 					<input type="hidden" value="PROFESSIONAL" name="gradeOfSubscriber">

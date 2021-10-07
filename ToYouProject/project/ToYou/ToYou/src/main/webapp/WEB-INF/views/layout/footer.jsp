@@ -7,7 +7,7 @@
           <h3 class="heading-section">About us</h3>
           <p class="lead">KOSMO 86th. Team ToYou</p>
           <p  class="lead"> Project Team Member</p>
-          <p> 강성연 - </p>
+          <p> SungYeon Kang - tyugh7963@naver.com</p>
           <p> 김민주 - </p>
           <p> InCheol Kim - rdc6087@naver.com</p>
           <p> 남영미 - </p>

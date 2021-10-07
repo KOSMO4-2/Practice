@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- 성연추가) jstl 문자열 자르기 -->
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!-- 성연추가) jstl 문자열 자르기 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,21 +123,25 @@
 									</tr>
 									<tr>
 										<td class="text-center">
-										<%---------------------------------%>
-										<!---------------------------------->
-										<!---------------------------------->
-										<!-----------/auth 지우기----------->
-										<!---------------------------------->
-											<form action="/auth/mypage">
-										<!---------------------------------->
-										<!-----------/auth 지우기----------->
-										<!---------------------------------->
-										<!---------------------------------->
-										<%---------------------------------%>
-		         								<div class="form-group">
-		         									<button type="submit" class="btn btn-default">&#x2764;FREE&#x2764;</button>
-		         								</div>
-		        							</form>     
+							                
+							                <!-- 로그인 되어있지 않으면 회원가입 페이지로 이동-->
+							                <c:if test="${empty principal}">
+							                    <form action="/auth/joinForm">
+									         		<div class="form-group">
+									         			<button type="submit" class="btn btn-default">회원가입</button>
+									         		</div>
+							     		        </form>  
+							                </c:if>
+							                
+							                <!-- 로그인 되어있으면 마이페이지 페이지로 이동-->
+							                <c:if test="${!empty principal}">
+							                    <form action="/auth/mypage">
+									         		<div class="form-group">
+									         			<button type="submit" class="btn btn-default">&#x2764;FREE&#x2764;</button>
+									         		</div>
+							     		        </form>  
+							     		    </c:if>
+							     		    	        		
 		        						</td>
 									</tr>
 								</tbody>
@@ -150,12 +156,13 @@
 							<table class="table table-sm col-md-1 text-center">
 								<thead class="thead-dark">
 									<tr>
-										<th scope="col">STANDARD</th>
+										<th scope="col">${Name1}</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<th scope="row">월 29,000원</th>
+										<c:set var="Price1Value" value="${Price1 }" />
+										<th scope="row">월 ${fn:substring(Price1Value,0,2)},${fn:substring(Price1Value,2,5)}원</th>
 									</tr>
 									<tr>
 										<td>
@@ -170,7 +177,8 @@
 									<tr>
 										<td class="text-center">
 											<form action="/payMembershipForm">
-												<input type="hidden" value="STANDARD" name="gradeOfSubscriber">
+												<input type="hidden" value="${Name1}" name="gradeOfSubscriber">
+												<input type="hidden" value="${Price1}" name="priceOfSubscriber">
 		         								<div class="form-group">
 		         									<button type="submit" class="btn btn-default">구독신청!</button>
 		         								</div>
@@ -189,12 +197,13 @@
 							<table class="table table-sm col-md-1 text-center">
 								<thead class="thead-dark">
 									<tr>
-										<th scope="col">STARTUP</th>
+										<th scope="col">${Name2}</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<th scope="row">월 59,000원</th>
+										<c:set var="Price2Value" value="${Price2 }" />
+										<th scope="row">월 ${fn:substring(Price2Value,0,2)},${fn:substring(Price2Value,2,5)}원</th>
 									</tr>
 									<tr>
 										<td>
@@ -209,7 +218,8 @@
 									<tr>
 										<td class="text-center">
 											<form action="/payMembershipForm">
-												<input type="hidden" value="STARTUP" name="gradeOfSubscriber">
+												<input type="hidden" value="${Name2}" name="gradeOfSubscriber">
+												<input type="hidden" value="${Price2}" name="priceOfSubscriber">
 		         								<div class="form-group">
 		         									<button type="submit" class="btn btn-default">구독신청!</button>
 		         								</div>
@@ -228,12 +238,13 @@
 							<table class="table table-sm col-md-1 text-center">
 								<thead class="thead-dark">
 									<tr>
-										<th scope="col">PROFESSIONAL</th>
+										<th scope="col">${Name3}</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<th scope="row">월 99,000원</th>
+										<c:set var="Price3Value" value="${Price3 }" />
+										<th scope="row">월 ${fn:substring(Price3Value,0,2)},${fn:substring(Price3Value,2,5)}원</th>
 									</tr>
 									<tr>
 										<td>
@@ -249,7 +260,8 @@
 									<tr>
 										<td class="text-center">
 											<form action="/payMembershipForm">
-												<input type="hidden" value="PROFESSIONAL" name="gradeOfSubscriber">
+												<input type="hidden" value="${Name3}" name="gradeOfSubscriber">
+												<input type="hidden" value="${Price3}" name="priceOfSubscriber">
 		         								<div class="form-group">
 		         									<button type="submit" class="btn btn-default">구독신청!</button>
 		         								</div>

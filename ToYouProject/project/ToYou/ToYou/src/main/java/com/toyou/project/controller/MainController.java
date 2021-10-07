@@ -33,12 +33,14 @@ import com.toyou.project.model.ChannelOwner;
 import com.toyou.project.model.Community;
 import com.toyou.project.model.CommunityUserInfo;
 import com.toyou.project.model.Magazine;
+import com.toyou.project.model.Product;
 import com.toyou.project.model.ProductBuyLog;
 import com.toyou.project.model.User;
 import com.toyou.project.model.keywordGoogle;
 import com.toyou.project.model.keywordTiktok;
 import com.toyou.project.model.keywordTwitch;
 import com.toyou.project.model.keywordTwitter;
+import com.toyou.project.service.admin.AdminService;
 import com.toyou.project.service.community.CommunityService;
 import com.toyou.project.service.loginmain.category.CategoryAsmrService;
 import com.toyou.project.service.loginmain.category.CategoryBeautiService;
@@ -92,13 +94,24 @@ public class MainController {
 	private MagazineService magazineService;
 	@Autowired
 	private NewjoinService newjoinService;
-	
+	@Autowired
+	private AdminService adminService;
 	
 	
 	// 
 	@GetMapping({"/",""})
-	public String home() {
-		
+	public String home(Model model) {
+		//--------------------------------------------------------------------
+		// 성연추가) 구독정보
+		List<Product> productList = payService.SelectAllProductList();
+		model.addAttribute("Price1", productList.get(0).getProductPrice());
+		model.addAttribute("Price2", productList.get(1).getProductPrice());
+		model.addAttribute("Price3", productList.get(2).getProductPrice());
+		// 성연추가) 전체회원수
+		List<User> userList = adminService.SelectAllUserList();
+	    int allUserNum = userList.size();
+	    model.addAttribute("allUserNum", allUserNum);
+		//--------------------------------------------------------------------
 		return "index";
 	}
 	
@@ -212,14 +225,7 @@ public class MainController {
 		
 		return "trend";
 	}
-	
-	@GetMapping("/auth/payinfo")
-	public String payinfo() {
-		
-		
-		return "payinfo";
-	}
-	
+
 
 	
 
@@ -503,6 +509,13 @@ public class MainController {
 	    List<ProductBuyLog> productBuyLogList = payService.SelectAllProductBuyLogUserNo(userNo);		
 	    model.addAttribute("payInfo", user.getUserIspayment());
 		model.addAttribute("productBuyLogList", productBuyLogList);
+		List<Product> productList = payService.SelectAllProductList();
+		model.addAttribute("Name1", productList.get(0).getProductName());
+		model.addAttribute("Name2", productList.get(1).getProductName());
+		model.addAttribute("Name3", productList.get(2).getProductName());
+		model.addAttribute("Price1", productList.get(0).getProductPrice());
+		model.addAttribute("Price2", productList.get(1).getProductPrice());
+		model.addAttribute("Price3", productList.get(2).getProductPrice());
 		// 성연 마이페이지 종료
 		//--------------------------------------------------------------------
 		

@@ -136,9 +136,12 @@ table.type03 td {
 								${fn:substring(TextValue,2,4) }년
 								${fn:substring(TextValue,5,7) }월&nbsp;
 								<span style="color:red">
-								<c:if test='${productNo == "1"}'>STANDARD</c:if>
-								<c:if test='${productNo == "2"}'>STARTUP</c:if>
-								<c:if test='${productNo == "3"}'>PROFESSIONAL</c:if>
+									${gradeOfSubscriber}
+									<%-- 
+									<c:if test='${productNo == "1"}'>STANDARD</c:if>
+									<c:if test='${productNo == "2"}'>STARTUP</c:if>
+									<c:if test='${productNo == "3"}'>PROFESSIONAL</c:if>
+									--%>
 								</span>&nbsp;
 								1개월
 							</td>
@@ -146,9 +149,12 @@ table.type03 td {
 						<tr>
 							<th scope="row">결제금액</th>
 							<td>
+								${priceOfSubscriber}
+								<%-- 
 								<c:if test='${productNo == "1"}'>29,000원</c:if>
 								<c:if test='${productNo == "2"}'>59,000원</c:if>
 								<c:if test='${productNo == "3"}'>99,000원</c:if>
+								--%>
 							</td>
 						</tr>
 						<tr>

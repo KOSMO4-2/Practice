@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.toyou.project.dao.pay.PayRepository;
 import com.toyou.project.dao.user.UserRepository;
+import com.toyou.project.model.Product;
 import com.toyou.project.model.ProductBuyLog;
 import com.toyou.project.model.User;
 
@@ -18,6 +19,12 @@ public class PayServiceImpl implements PayService {
 	private PayRepository payRepository;
 	@Autowired
 	private UserRepository userRepository;
+	
+	
+	public List<Product> SelectAllProductList(){
+		List<Product> SelectAllProductList = payRepository.productList();
+		return SelectAllProductList;
+	};
 	
 	
 	public List<ProductBuyLog> SelectAllProductBuyLogUserNo(int userNo){
