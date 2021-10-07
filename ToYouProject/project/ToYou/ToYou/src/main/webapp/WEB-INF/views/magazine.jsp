@@ -74,27 +74,27 @@
 				<div class="col-lg-12">
 					<ul class="nav nav-tabs" >
 						<!-- tab.start -->
-						<li class="nav-item bg-warning border  "><a class="nav-link active text-dark"
+						<li class="nav-item    "><a class="nav-link active text-dark"
 							data-toggle="tab" href="#comm01"><ion-icon name="newspaper-outline"></ion-icon>&nbsp;최신 뉴스</a></li>
-						<li class="nav-item bg-warning border "><a class="nav-link text-dark" data-toggle="tab"
+						<li class="nav-item   "><a class="nav-link text-dark" data-toggle="tab"
 							href="#comm02"><ion-icon name="videocam-outline"></ion-icon>&nbsp;영화</a></li>
-						<li class="nav-item bg-warning border "><a class="nav-link text-dark" data-toggle="tab"
+						<li class="nav-item   "><a class="nav-link text-dark" data-toggle="tab"
 							href="#comm03"><ion-icon name="musical-notes-outline"></ion-icon>&nbsp;음악</a></li>
-						<li class="nav-item bg-warning border "><a class="nav-link text-dark" data-toggle="tab"
+						<li class="nav-item   "><a class="nav-link text-dark" data-toggle="tab"
 							href="#comm04"><ion-icon name="tv-outline"></ion-icon>&nbsp;TV</a></li>
-						<li class="nav-item bg-warning border "><a class="nav-link text-dark" data-toggle="tab"
+						<li class="nav-item   "><a class="nav-link text-dark" data-toggle="tab"
 							href="#comm05"><ion-icon name="library-outline"></ion-icon>&nbsp;도서</a></li>
-						<li class="nav-item bg-warning border "><a class="nav-link text-dark" data-toggle="tab"
+						<li class="nav-item   "><a class="nav-link text-dark" data-toggle="tab"
 							href="#comm06"><ion-icon name="brush-outline"></ion-icon>&nbsp;예술</a></li>
-						<li class="nav-item bg-warning border "><a class="nav-link text-dark" data-toggle="tab"
+						<li class="nav-item   "><a class="nav-link text-dark" data-toggle="tab"
 							href="#comm07"><ion-icon name="body-outline"></ion-icon>&nbsp;연예</a></li>
-						<li class="nav-item bg-success border "><a class="nav-link text-dark" data-toggle="tab"
+						<li class="nav-item   "><a class="nav-link text-dark" data-toggle="tab"
 							href="#comm08"><ion-icon name="barbell-outline"></ion-icon>&nbsp;건강</a></li>
-						<li class="nav-item bg-info border "><a class="nav-link text-dark" data-toggle="tab"
+						<li class="nav-item   "><a class="nav-link text-dark" data-toggle="tab"
 							href="#comm09"><ion-icon name="flask-outline"></ion-icon>&nbsp;과학기술</a></li>
-						<li class="nav-item bg-danger border "><a class="nav-link text-dark" data-toggle="tab"
+						<li class="nav-item   "><a class="nav-link text-dark" data-toggle="tab"
 							href="#comm10"><ion-icon name="stats-chart-outline"></ion-icon>&nbsp;비지니스</a></li>
-						<li class="nav-item bg-secondary border "><a class="nav-link text-dark" data-toggle="tab"
+						<li class="nav-item   "><a class="nav-link text-dark" data-toggle="tab"
 							href="#comm11"><ion-icon name="globe-outline"></ion-icon> &nbsp;세계</a></li>
 					</ul>
 					<!-- tab.end -->
@@ -105,10 +105,10 @@
 						<!-- -- 01 최신 뉴스.start -->
 						<div class="tab-pane fade show active" id="comm01">
 						
-									<div class="site-section fund-raisers"  style="padding: 0px" style="padding:0"  >
+									<div class="site-section fund-raisers bg-light"  style="padding: 0px" style="padding:0"  >
 									
 				
-										<div class="container bg-warning">
+										<div class="container ">
 											<div
 												class="row mb-3 justify-content-center ">
 												<div class="col-md-8 text-center">
@@ -118,7 +118,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%;">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -153,8 +153,8 @@
 								
 								<!-- -- 02 영화.start -->
 						<div class="tab-pane fade" id="comm02">
-									<div class="site-section fund-raisers"  style="padding: 0px" style="padding: 0px" >
-										<div class="container bg-warning">
+									<div class="site-section fund-raisers bg-light"  style="padding: 0px" style="padding: 0px" >
+										<div class="container ">
 											<div
 												class="row mb-3 justify-content-center">
 												<div class="col-md-8 text-center">
@@ -164,7 +164,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%;">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -200,8 +200,8 @@
 								
 								<!-- -- 03 음악.start -->
 						<div class="tab-pane fade" id="comm03">
-									<div class="site-section fund-raisers"  style="padding: 0px" >
-										<div class="container bg-warning">
+									<div class="site-section fund-raisers bg-light"  style="padding: 0px" >
+										<div class="container ">
 											<div
 												class="row mb-3 justify-content-center ">
 												<div class="col-md-8 text-center">
@@ -211,7 +211,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%;">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -247,8 +247,8 @@
 								
 								<!-- -- 04 TV.start -->
 						<div class="tab-pane fade" id="comm04">
-									<div class="site-section fund-raisers"  style="padding: 0px" >
-										<div class="container bg-warning">
+									<div class="site-section fund-raisers bg-light"  style="padding: 0px" >
+										<div class="container ">
 											<div
 												class="row mb-3 justify-content-center">
 												<div class="col-md-8 text-center">
@@ -258,7 +258,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%;">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -293,8 +293,8 @@
 								
 								<!-- -- 05 Book.start -->
 						<div class="tab-pane fade" id="comm05">
-									<div class="site-section fund-raisers"  style="padding: 0px" >
-										<div class="container bg-warning">
+									<div class="site-section fund-raisers bg-light"  style="padding: 0px" >
+										<div class="container ">
 											<div
 												class="row mb-3 justify-content-center">
 												<div class="col-md-8 text-center">
@@ -304,7 +304,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%;">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -339,8 +339,8 @@
 								
 								<!-- -- 06 Art.start -->
 						<div class="tab-pane fade" id="comm06">
-									<div class="site-section fund-raisers"  style="padding: 0px" >
-										<div class="container bg-warning">
+									<div class="site-section fund-raisers bg-light"  style="padding: 0px" >
+										<div class="container ">
 											<div
 												class="row mb-3 justify-content-center">
 												<div class="col-md-8 text-center">
@@ -350,7 +350,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%;">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -386,8 +386,8 @@
 								
 								<!-- -- 07 Idol.start -->
 						<div class="tab-pane fade" id="comm07">
-									<div class="site-section fund-raisers"  style="padding: 0px" >
-										<div class="container bg-warning">
+									<div class="site-section fund-raisers bg-light"  style="padding: 0px" >
+										<div class="container ">
 											<div
 												class="row mb-3 justify-content-center">
 												<div class="col-md-8 text-center">
@@ -397,7 +397,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%;">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -437,8 +437,8 @@
 								
 								<!-- -- 08 건강.start -->
 						<div class="tab-pane fade" id="comm08">
-									<div class="site-section fund-raisers"  style="padding: 0px" >
-										<div class="container bg-success">
+									<div class="site-section fund-raisers bg-light"  style="padding: 0px" >
+										<div class="container ">
 											<div
 												class="row mb-3 justify-content-center">
 												<div class="col-md-8 text-center">
@@ -448,7 +448,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%;">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -484,8 +484,8 @@
 								
 								<!-- -- 09 과학기술.start -->
 						<div class="tab-pane fade" id="comm09">
-									<div class="site-section fund-raisers"  style="padding: 0px" >
-										<div class="container bg-info">
+									<div class="site-section fund-raisers bg-light"  style="padding: 0px" >
+										<div class="container ">
 											<div
 												class="row mb-3 justify-content-center">
 												<div class="col-md-8 text-center">
@@ -495,7 +495,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%;">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -531,8 +531,8 @@
 								
 								<!-- -- 10 사업.start -->
 						<div class="tab-pane fade" id="comm10">
-									<div class="site-section fund-raisers"  style="padding: 0px" >
-										<div class="container bg-danger">
+									<div class="site-section fund-raisers bg-light"  style="padding: 0px" >
+										<div class="container ">
 											<div
 												class="row mb-3 justify-content-center">
 												<div class="col-md-8 text-center">
@@ -542,7 +542,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%;">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -578,8 +578,8 @@
 								
 								<!-- -- 11 세계.start -->
 						<div class="tab-pane fade" id="comm11">
-									<div class="site-section fund-raisers"  style="padding: 0px" >
-										<div class="container bg-secondary">
+									<div class="site-section fund-raisers bg-light"  style="padding: 0px" >
+										<div class="container ">
 											<div
 												class="row mb-3 justify-content-center">
 												<div class="col-md-8 text-center">
@@ -589,7 +589,7 @@
 											</div>
 										</div>
 										<div class="container-fluid border-dark box-dashed"
-											style="width: 100%; height: 50%; border-style: dashed; border-width: 10px; background-color: black">
+											style="width: 100%; height: 50%;">
 											<div style="position: fixed; left: 200px; top: 100px">
 												<p>Test</p>
 											</div>
@@ -641,6 +641,7 @@
 
 
 	<!-- Footer -->
+	
 	<%@ include file="layout/Menu.jsp"%>
 <%@ include file="layout/footer.jsp"%>
 	<%-- 
