@@ -393,7 +393,7 @@
 							<c:forEach items="${twitterFamousList}" var="list">
 							   
 							   <tr>
-								<th scope="row">${list.keywordTwitterNo }</th>
+								<th scope="row">${list.keywordTwitterNo -10}</th>
 								<td style="text-overflow:ellipsis; overflow:visible; white-space:pre;"><a href="${list.keywordTwitterLink}">${list.keywordTwitterName }</a></td>
 								
 								</tr>
@@ -423,7 +423,7 @@
 							<c:forEach items="${twitterDurationList}" var="list">
 							   
 							   <tr>
-								<th scope="row">${list.keywordTwitterNo }</th>
+								<th scope="row">${list.keywordTwitterNo -20}</th>
 								<td style="text-overflow:ellipsis; overflow:visible; white-space:pre;"><a href="${list.keywordTwitterLink}">${list.keywordTwitterName }</a></td>
 								
 								</tr>
