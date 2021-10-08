@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.toyou.project.dao.admin.AdminRepository;
+import com.toyou.project.model.AdminReportLog;
 import com.toyou.project.model.Community;
 import com.toyou.project.model.CommunityBoard;
 import com.toyou.project.model.ProductBuyLog;
@@ -36,4 +38,17 @@ public class AdminServiceImpl implements AdminService {
 		List<User> SelectAllUserList = adminRepository.userList();
 		return SelectAllUserList;
 	};
+	
+	public List<AdminReportLog> SelectAllAdminReportLog(){
+		List<AdminReportLog> SelectAllAdminReportLog = adminRepository.adminReportLogList();
+		return SelectAllAdminReportLog;
+		
+	};
+	
+	@Transactional
+	public void memo(AdminReportLog adminReportLog) {
+		adminRepository.save(adminReportLog);
+		
+	};
+	
 }

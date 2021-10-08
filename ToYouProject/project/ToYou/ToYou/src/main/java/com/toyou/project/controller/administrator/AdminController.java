@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import com.toyou.project.model.AdminReportLog;
 import com.toyou.project.model.Community;
 import com.toyou.project.model.CommunityBoard;
 import com.toyou.project.model.ProductBuyLog;
@@ -199,21 +201,56 @@ public class AdminController {
 
 	
 	
+	
+	//-----------------------------------------
+	// 관리자 사이트관리페이지 시작
+	  //회원목록조회
 	@GetMapping("/admin_table")
-	public String admin_table() {
+	public String admin_table(Model model) {
+	    List<User> userList = adminService.SelectAllUserList();
+		model.addAttribute("userList", userList);
+
 		return "administrator/admin_table";
 	}
+	
+	// 관리자 사이트관리페이지 종료
+	//-----------------------------------------
 
 	
-	
+	//-----------------------------------------
+	// 관리자 메모 페이지 시작
 	@GetMapping("/admin_ui-elements")
-	public String admin_ui_elements() {
-		return "administrator/admin_ui-elements";
-	}
+	public String admin_ui_elements(Model model) {
 
+		List<AdminReportLog> logList = adminService.SelectAllAdminReportLog();
+		model.addAttribute("reportLogContent", logList);
 	
-
-
-
+		return "administrator/admin_ui-elements";		
+	}
+	
+	
+	@PostMapping("/memo")
+	public String memo(Model model ,String reportLogContent, String reportLogTitle, String userNo, AdminReportLog adminReportLog) {
+		
+		List<AdminReportLog> logList = adminService.SelectAllAdminReportLog();
+		model.addAttribute("reportLogContent", logList);
+		
+		System.out.println("1 : " + reportLogContent);
+		System.out.println("2 : " + reportLogTitle);
+		System.out.println("3 : " + userNo);
+		
+		
+		
+		if(!reportLogContent.equals("")) {
+			adminService.memo(adminReportLog);				
+		}
+		return "administrator/admin_ui-elements";	
+		
+		
+		
+	}
+	
+	// 관리자 메모페이지 종료
+	//-----------------------------------------
 
 }

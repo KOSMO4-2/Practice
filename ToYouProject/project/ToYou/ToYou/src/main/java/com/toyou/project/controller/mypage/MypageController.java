@@ -98,20 +98,30 @@ public class MypageController {
   }
 
 	
- // 회원정보 탈퇴
-	@ResponseBody
-	@DeleteMapping("/auth/mypage/deleteUser")
-	public ResponseDTO<Integer> deleteUser(){
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(principal!=null) {
-			UserDetails userD = (UserDetails)principal;
-			String userId = userD.getUsername();
-			
-			User user = userService.userFind(userId);
-			mypageService.deleteUser(user); 			
-		}
-	   return new ResponseDTO<Integer>(HttpStatus.OK.value(),1);
-	  }
 
 	
+// 회원정보 탈퇴
+ @ResponseBody
+ @DeleteMapping("/auth/mypage/deleteUser")
+ public ResponseDTO<Integer> deleteUser(){
+	 //세션값 가져오기
+	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	 //회원정보+커뮤니티삭제삭제
+	 if(principal!=null) {
+	    UserDetails userD = (UserDetails)principal;
+	    String userId = userD.getUsername();
+	         
+	    User user = userService.userFind(userId);
+
+	    List<Community> communitys = communityService.SelectAllCommunitybyCommunityHostno(user.getUserNo());
+	    for(int i=0; i<communitys.size(); i++) {
+	       communityService.deleteCommunity(communitys.get(i).getCommunityNo());
+	    }
+	         
+     mypageService.deleteUser(user);          
+     }
+	return new ResponseDTO<Integer>(HttpStatus.OK.value(),1);
+   }
+	   
+	   
 }

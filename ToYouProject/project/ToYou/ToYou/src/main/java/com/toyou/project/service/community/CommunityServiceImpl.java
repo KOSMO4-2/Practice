@@ -121,20 +121,14 @@ public class CommunityServiceImpl implements CommunityService{
 		System.out.println("게시판 및 댓글 삭제 시작");
 		System.out.println(communityNo);
 		if(boardRepository.findByCommunityNoList(communityNo) != null) {
-			System.out.println("삭제할 보드리스트 출력");
 			List<CommunityBoard> boards = boardRepository.findByCommunityNoList(communityNo);
-			System.out.println(boards.size());
 			for(CommunityBoard board : boards) {
-				System.out.println("삭제할 보드리스트에서 보드 넘버 추출");
 				int CommunityBoardNo = board.getCommunityBoardNo();
-				System.out.println("리플 삭제할 게시판 번호 : " + CommunityBoardNo);
 				boardReplyRepository.deleteByCommunityBoardNo(CommunityBoardNo);
 			}
-			System.out.println("게시판 전체 삭제");
 			boardRepository.deleteByCommunityNo(communityNo);
 		}
 		communityRepository.delete(community);
-		System.out.println("삭제 완료");
 	};
 
 

@@ -6,13 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.toyou.project.model.AdminReportLog;
 import com.toyou.project.model.Community;
 import com.toyou.project.model.CommunityBoard;
 import com.toyou.project.model.ProductBuyLog;
 import com.toyou.project.model.User;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Community, Integer> {
+public interface AdminRepository extends JpaRepository<AdminReportLog, Integer> {
 
 	
 	@Query(value = "SELECT com FROM ProductBuyLog com" )
@@ -26,4 +27,9 @@ public interface AdminRepository extends JpaRepository<Community, Integer> {
 	
 	@Query(value = "SELECT com FROM User com" )
 	List<User> userList();
+	
+	@Query(value = "SELECT com FROM AdminReportLog com ORDER BY com.reportLogNo DESC" )
+	List<AdminReportLog> adminReportLogList();
+
+	
 }

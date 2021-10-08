@@ -19,7 +19,7 @@
                 <a class="navbar-brand" href="/"><i class="fa fa-gear"></i> <strong>YouToYou</strong></a>
             </div>
 
-            <ul class="nav navbar-top-links navbar-right">
+          <!--   <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -68,10 +68,10 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-messages -->
-                </li>
+                    /.dropdown-messages
+                </li> -->
                 <!-- /.dropdown -->
-                <li class="dropdown">
+<!--                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -147,10 +147,10 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-tasks -->
-                </li>
+                    /.dropdown-tasks
+                </li> -->
                 <!-- /.dropdown -->
-                <li class="dropdown">
+               <!--  <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -207,10 +207,10 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-alerts -->
-                </li>
+                    /.dropdown-alerts
+                </li> -->
                 <!-- /.dropdown -->
-                <li class="dropdown">
+               <!--  <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -223,8 +223,8 @@
                         <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-user -->
-                </li>
+                    /.dropdown-user
+                </li> -->
                 <!-- /.dropdown -->
             </ul>
         </nav>
@@ -232,27 +232,28 @@
         <nav class="navbar-default navbar-side" role="navigation">
 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
             <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
+               <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu" href="/admin_index"><i class="fa fa-dashboard"></i> 대시보드</a>
+                        <a href="/admin_index"><i class="fa fa-dashboard "></i> 대시보드</a>
                     </li>
                     <li>
-                        <a href="/admin_ui-elements"><i class="fa fa-desktop"></i> 사이트관리</a> <!-- UI Elements -->
+                        <a href="/admin_table"><i class="fa fa-table"></i> 사이트관리</a> <!-- - Responsible tables -->
                     </li>
- 					<li>
+                    <li>
+                        <a href="/admin_ui-elements"><i class="fa fa-desktop"></i> 관리자메모</a> <!-- UI Elements -->
+                    </li>
+<!--  					<li>
                         <a href="/admin_chart"><i class="fa fa-bar-chart-o"></i> Charts</a>
-                    </li> 
-                    <li>
+                    </li>  -->
+<!--                     <li>
                         <a href="/admin_tab-panel"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
                     </li>
-                    
-                    <li>
-                        <a href="/admin_table"><i class="fa fa-table"></i> 회원관리</a> <!-- - Responsible tables -->
-                    </li>
-                    <li>
+                     -->
+
+<!--                     <li>
                         <a href="/admin_form"><i class="fa fa-edit"></i> Forms </a>
-                    </li>
+                    </li> -->
 
 
                 <!--     <li>

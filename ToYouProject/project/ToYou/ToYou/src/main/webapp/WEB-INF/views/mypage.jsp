@@ -945,8 +945,9 @@
 
 
 
-
-	<!-- Footer -->
+<%@ include file="layout/footer.jsp"%>
+<%@ include file="layout/Menu.jsp"%>
+<!-- Footer -->
 	<%-- 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="true"></jsp:include>
  --%>
@@ -1223,6 +1224,8 @@
 
 								// 회원탈퇴
 								$(document).on("click","#deleteBtn",function() {
+
+									alert("정말로 탈퇴를 진행하시겠습니까?");		
 									$.ajax({
 										url : "/auth/mypage/deleteUser",
 										type : "delete",
@@ -1245,7 +1248,7 @@
 
 						})
 	</script>
-<%@ include file="layout/Menu.jsp"%>
-<%@ include file="layout/footer.jsp"%>
+
+
 </body>
 </html>
