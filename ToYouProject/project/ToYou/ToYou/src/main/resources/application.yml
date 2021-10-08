@@ -27,7 +27,7 @@ spring:
       max-lifetime: 1000
       auto-commit: true     
   jpa:
-    open-in-view: true  
+    open-in-view: false  
     hibernate:
       ddl-auto: update
       naming:

@@ -70,7 +70,6 @@ public class CommunityApiController {
 	// 커뮤니티 삭제
 	@DeleteMapping("/auth/community/deleteCommunity/{communityNo}")
 	public ResponseDTO<Integer> deleteCommunity(@PathVariable int communityNo){
-		boardService.boardDeleteAll(communityNo);
 		communityService.deleteCommunity(communityNo);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
 	}

@@ -111,36 +111,28 @@ public class CommunityServiceImpl implements CommunityService{
 		Community community = communityRepository.findById(communityNo).orElseThrow(()->{
 			return new IllegalArgumentException("커뮤니티 찾기 실패 : 커뮤니티를 찾을 수 없습니다.");
 		});
-		
-		System.out.println("커뮤니티 가입자 정보 삭제 시작");
 		if(communityUserInfoRepository.findByCommunityNo(communityNo) != null) {
-			List<CommunityUserInfo> cmUserInfos = communityUserInfoRepository.findByCommunityNo(communityNo);
-			for(int i = 0; i<cmUserInfos.size();i++) {
-				communityUserInfoRepository.deleteByCommunityNo(communityNo);
-			}
+			System.out.println("커뮤니티 가입자 정보 삭제 시작");
+			communityUserInfoRepository.deleteByCommunityNo(communityNo);
 		}
-		
 		// 1.커뮤니티 게시판 조회 
 		// 2.댓글정보 삭제
 		// 3.게시판 삭제
 		System.out.println("게시판 및 댓글 삭제 시작");
-		if(boardRepository.findByCommunityNo(communityNo) != null) {
-			List<CommunityBoard> boards = boardRepository.findByCommunityNo(communityNo);
-			for(int i = 0; i<boards.size();i++) {
-				int CommunityBoardNo = boards.get(i).getCommunityBoardNo();
-				if(boardReplyRepository.findAllByCommunityBoardNo(CommunityBoardNo) != null) {
-					List<CommunityBoardReply> replys = boardReplyRepository.findAllByCommunityBoardNo(CommunityBoardNo);
-					for(int j = 0; j<replys.size();i++) {
-						CommunityBoardNo = replys.get(j).getCommunityBoardNo();
-						System.out.println("리플 삭제할 번호 : " + CommunityBoardNo);
-						boardReplyRepository.deleteByCommunityBoardNo(CommunityBoardNo);
-					}
-				}
+		System.out.println(communityNo);
+		if(boardRepository.findByCommunityNoList(communityNo) != null) {
+			System.out.println("삭제할 보드리스트 출력");
+			List<CommunityBoard> boards = boardRepository.findByCommunityNoList(communityNo);
+			System.out.println(boards.size());
+			for(CommunityBoard board : boards) {
+				System.out.println("삭제할 보드리스트에서 보드 넘버 추출");
+				int CommunityBoardNo = board.getCommunityBoardNo();
+				System.out.println("리플 삭제할 게시판 번호 : " + CommunityBoardNo);
+				boardReplyRepository.deleteByCommunityBoardNo(CommunityBoardNo);
 			}
 			System.out.println("게시판 전체 삭제");
 			boardRepository.deleteByCommunityNo(communityNo);
 		}
-		
 		communityRepository.delete(community);
 		System.out.println("삭제 완료");
 	};

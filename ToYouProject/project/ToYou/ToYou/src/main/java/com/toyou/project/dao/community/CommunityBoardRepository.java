@@ -22,13 +22,14 @@ public interface CommunityBoardRepository extends JpaRepository<CommunityBoard, 
 //	커뮤니티번호로 게시글 리스트 페이징 조회
 	@Query(value="SELECT board FROM CommunityBoard board WHERE communityNo = :communityNo" )
 	public Page<CommunityBoard> findAllByCommunityNo(@Param("communityNo") int communityNo,Pageable pageable);
-//	커뮤니티번호로 게시글 리스트 페이징 조회
+	
+////	커뮤니티번호로 게시글 리스트 페이징 조회
 	@Query(value = "SELECT board FROM CommunityBoard board WHERE board.communityNo = :communityNo")
-	public List<CommunityBoard> findByCommunityNo(@Param("communityNo") int communityNo);
-		
+	public List<CommunityBoard> findByCommunityNoList(@Param("communityNo") int communityNo);
+//		
 
-//	커뮤니티번호로 게시글 리스트 조회 // 오버로딩
-	@Query(value="SELECT board FROM CommunityBoard board WHERE communityNo = :communityNo" )
+////	커뮤니티번호로 게시글 리스트 조회 // 오버로딩
+	@Query(value="SELECT board FROM CommunityBoard board WHERE board.communityNo = :communityNo" )
 	public List<CommunityBoard> findAllByCommunityNo(@Param("communityNo") int communityNo);
 
 //	게시판 상세보기 실행 시 조회수 업데이트

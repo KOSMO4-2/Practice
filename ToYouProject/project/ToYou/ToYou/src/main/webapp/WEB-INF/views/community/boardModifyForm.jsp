@@ -87,7 +87,7 @@
 				    	<div class="input-group-prepend">
 						    <span class="input-group-text"><strong>Content</strong></span>
 						</div>
-				        <textarea class="form-control" name="communityBoardContent" id="communityBoardContent" rows="15">${board.communityBoardContent }</textarea>
+				        <textarea class="form-control" onkeyup="javascript:fnChkByte(this,'2048')" name="communityBoardContent" id="communityBoardContent" rows="15">${board.communityBoardContent }</textarea>
 				    </div> <!-- form-group// -->
 				    <hr>
 				    
@@ -112,36 +112,6 @@
  <script type="text/javascript">
 $(document).ready(function(){
 
-	// 바이트 계산 함수 왜 안되냐  //onkeyup="javascript:fnChkByte(this,'2048')"//
-	/* function fnChkByte(obj, maxByte){
-	    var str = obj.value;
-	    var str_len = str.length;
-	    var rbyte = 0;
-	    var rlen = 0;
-	    var one_char = "";
-	    var str2 = "";
-	    for(var i=0; i<str_len; i++){
-	        one_char = str.charAt(i);
-	        if(escape(one_char).length > 4) {
-	            rbyte += 2;                                         //한글2Byte
-	        }else{
-	            rbyte++;                                            //영문 등 나머지 1Byte
-	        }
-	        if(rbyte <= maxByte){
-	            rlen = i+1;                                          //return할 문자열 갯수
-	        }
-	     }
-	     if(rbyte > maxByte){
-	        // alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
-	        alert("메세지는 최대 " + maxByte + "byte를 초과할 수 없습니다.")
-	        str2 = str.substr(0,rlen);                                  //문자열 자르기
-	        obj.value = str2;
-	        fnChkByte(obj, maxByte);
-	     }
-	     else{
-	        document.getElementById('byteInfo').innerText = rbyte;
-	     }
-	} */
 
 	//**************************************************************************
 	// 게시글 작성 유효성 검사 양식

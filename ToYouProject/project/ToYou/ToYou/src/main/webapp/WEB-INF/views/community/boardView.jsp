@@ -55,12 +55,9 @@
       
     </div>
   </div>
-  
   <br>
   <br>
   <hr>
-
-
 		<div class="container">
 			<div class="card bg-light">
 				<article class="card-body" >
@@ -89,7 +86,7 @@
 								    	<div class="input-group-prepend">
 										    <span class="input-group-text"><strong>Content</strong></span>
 										</div>
-								        <textarea class="form-control" name="communityBoardContent" id="communityBoardContent" disabled="disabled" rows="15">${board.communityBoardContent }</textarea>
+								        <textarea class="form-control"  name="communityBoardContent" id="communityBoardContent" disabled="disabled" rows="15">${board.communityBoardContent }</textarea>
 								    </div> <!-- form-group// -->
 								    
 								    <c:choose>
@@ -137,7 +134,7 @@
 														</div>
 														<c:choose>
 															<c:when test="${principal.user.userNo == replyWriter.get(status.index).userNo }">
-																<textarea class="w-75 ml-3" id="communityBoardReplyContent">${boardReply.communityBoardReplyContent}</textarea>
+																<textarea class="w-75 ml-3" onkeyup="javascript:checkModifyReplyContent(this)" id="communityBoardReplyContent">${boardReply.communityBoardReplyContent}</textarea>
 																
 															</c:when>
 															<c:otherwise>
@@ -154,9 +151,9 @@
 											<div class="col-8" style="height:1px"></div>
 											<div class="col-4">
 												<c:if test="${principal.user.userNo == replyWriter.get(status.index).userNo }">
-													<a class="replyDelete float-right text-danger" href="#">Delete<span class="dots"></span></a>
+													<a class="replyDelete float-right text-danger">Delete<span class="dots"></span></a>
 		 											<span class="float-right" style="color:black;"> / <span class="dots"></span></span>
-													<a class="replyModify float-right text-warning"  href="#">Modify<span class="dots"></span></a>
+													<a class="replyModify float-right text-warning">Modify<span class="dots"></span></a>
 												</c:if>
 											</div>
 										</div>
@@ -400,14 +397,14 @@ $(document).ready(function(){
 	// 댓글 수정
 	$(document).on("click",".replyModify",function(){
 		var communityBoardReplyNo = $(this).parent().parent().parent().find("#communityBoardReplyNo").val();
-		var communityBoardReplyContent = $(this).parent().parent().parent().find("#communityBoardReplyContent").val().replace(/&/gi, '&amp;').replace(/</gi, '&lt;').replace(/>/gi, '&gt;').replace(/"/gi, '&quot;').replace(/'/gi, '&apos;');
-		var replyWarningForm = $(this).parent().parent().parent().find("#replyWarningForm")
-		
+		var communityBoardReplyContentForm = $(this).parent().parent().parent().find("#communityBoardReplyContent");
+		var replyWarningForm = $(this).parent().parent().parent().find("#replyWarningForm");
+		var communityBoardReplyContent = $(this).parent().parent().parent().find("#communityBoardReplyContent").val();
 		// 댓글 수정 유효성 검사
 		if(communityBoardReplyContent == ""){
 			replyWarningForm.empty();
 			replyWarningForm.append('<p class="text-danger">내용을 입력해주세요</p>');
-// 			communityBoardReplyContent.focus();
+			communityBoardReplyContentForm.focus();
 		}else{
 			if((confirm("댓글을 수정하시겠습니까?"))){
 				$.ajax({
@@ -415,7 +412,7 @@ $(document).ready(function(){
 					type: "put",
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify({
-							"communityBoardReplyContent":communityBoardReplyContent
+							"communityBoardReplyContent":communityBoardReplyContent.replace(/&/gi, '&amp;').replace(/</gi, '&lt;').replace(/>/gi, '&gt;').replace(/"/gi, '&quot;').replace(/'/gi, '&apos;')
 						}),
 					dataType:"json", 
 					success: function(result){
@@ -434,6 +431,7 @@ $(document).ready(function(){
 		}
 	})
 	
+
 	// 댓글 삭제
 	$(document).on("click",".replyDelete",function(){
 		var communityBoardReplyNo = $(this).parent().parent().parent().find("#communityBoardReplyNo").val();
