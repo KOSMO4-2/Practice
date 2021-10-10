@@ -82,7 +82,7 @@ public class UserApiController {
 		try (Socket client = new Socket()) {
 			
 			// 소켓에 접속하기 위한 접속 정보를 선언한다.
-			InetSocketAddress ipep = new InetSocketAddress("54.180.95.120", 9999);
+			InetSocketAddress ipep = new InetSocketAddress("13.125.219.2", 9999);
 			// 소켓 접속!
 			
 			client.connect(ipep);

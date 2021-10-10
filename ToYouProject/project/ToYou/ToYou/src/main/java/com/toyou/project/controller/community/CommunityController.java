@@ -97,12 +97,13 @@ public class CommunityController {
 							@PageableDefault(size = 10, sort = "communityBoardNo", direction = Sort.Direction.DESC) Pageable pageable){
 		// ==================================================================================
 		// 커뮤니티 호스트 정보 
-		String communityNoSt = request.getParameter("communityNo");
-		int communityNo = Integer.parseInt(communityNoSt);
-		int JoinCnt = communityService.countByUserInfo(communityNo);
-		Community community = communityService.findById(communityNo);
+		String communityNoSt = request.getParameter("communityNo"); 
+		int communityNo = Integer.parseInt(communityNoSt); 
+		int JoinCnt = communityService.countByUserInfo(communityNo); // 채널 가입자 카운트
+		Community community = communityService.findById(communityNo); // 커뮤니티 정보 조회
 		// 커뮤니티 회원정보 리스트
-		List<CommunityUserInfo> userInfoList = communityService.findByCommunityNo(communityNo);
+		List<CommunityUserInfo> userInfoList = communityService.findByCommunityNo(communityNo); // 가입자 리스트 출력 
+		System.out.println(userInfoList.size());
 		ChannelOwner channelInfo = myPageService.findMyChannel(community.getCommunityHostno());
 		ArrayList<ChannelOwner> joinChannels = new ArrayList<ChannelOwner>();
 		for(CommunityUserInfo userInfo : userInfoList) {
@@ -113,6 +114,7 @@ public class CommunityController {
 				}
 			}
 		}
+		System.out.println("가입채널 수 :" +joinChannels.size());
 		model.addAttribute("joinChannels", joinChannels);
 		model.addAttribute("channelInfo", channelInfo);
 		model.addAttribute("userInfoList", userInfoList);

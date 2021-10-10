@@ -163,13 +163,18 @@
 							<c:when test="${!empty userInfoList}">
 								<c:forEach var="userInfoList" items="${userInfoList}">
 									<c:if test="${!empty principal}">
-										<c:if test="${userInfoList.userNo == principal.user.userNo || community.communityHostno == principal.user.userNo}">
+										<c:if test="${userInfoList.userNo == principal.user.userNo}">
 											<div class="form-row float-right">
 												<button class="btn btn-default" onclick="location.href='/auth/community/cmBoardWriteForm?communityNo=${community.communityNo}'">게시글 작성</button>
 											</div>
 										</c:if>
 									</c:if>
 								</c:forEach>
+								<c:if test="${community.communityHostno == principal.user.userNo}">
+											<div class="form-row float-right">
+												<button class="btn btn-default" onclick="location.href='/auth/community/cmBoardWriteForm?communityNo=${community.communityNo}'">게시글 작성</button>
+											</div>
+								</c:if>
 							</c:when>
 							<c:otherwise>
 								<c:if test="${community.communityHostno == principal.user.userNo}">

@@ -144,6 +144,8 @@ $(document).ready(function(){
 	if(slelectedAuth != null ){
 		$("#selectedAuth").text(slelectedAuth);
 	}
+
+	// 수정버튼 클릭 이벤트
 	$(document).on("click",".modifyBtn",function(){
 		userNo = $(this).parent().parent().find("#userNo").val();
 		userAuth = $(this).parent().parent().find("#userAuth").val();
@@ -170,6 +172,8 @@ $(document).ready(function(){
 			})
 		}
 	});
+
+	// 삭제버튼 클릭 이벤트
 	$(document).on("click",".deleteBtn",function(){
 		userNo = $(this).parent().parent().find("#userNo").val();
 		communityNo = $("#communityNo").val();

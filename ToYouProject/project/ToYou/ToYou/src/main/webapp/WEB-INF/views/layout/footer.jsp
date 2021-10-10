@@ -8,10 +8,10 @@
           <p class="lead">KOSMO 86th. Team ToYou</p>
           <p  class="lead"> Project Team Member</p>
           <p> SungYeon Kang - tyugh7963@naver.com</p>
-          <p> 김민주 - </p>
+          <p> Minju kim - minju5470@naver.com</p>
           <p> InCheol Kim - rdc6087@naver.com</p>
-          <p> 남영미 - </p>
-          <p> 장영석 - </p>
+          <p> youngmi Nam - nym606@naver.com</p>
+          <p> youngseok Jang - fnk9954@naver.com</p>
 <!--           <p class="mb-5">사업자등록번호: 0000-1111-9999</p> -->
 <!--           <p><a href="#" class="link-underline">Read  More</a></p> -->
         </div>
