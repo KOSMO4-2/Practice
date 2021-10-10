@@ -58,8 +58,6 @@ public class CommunityServiceImpl implements CommunityService{
 	//*************************************************************************************************
 	// 커뮤티니 토탈 리스트 
 	public Page<Community> cmTotlaList(Pageable pageable){
-		Sort sort1 = Sort.by("communityNo").descending();
-		pageable = PageRequest.of(0, 4,sort1);
         return communityRepository.findAll(pageable);
     }
 	
@@ -98,7 +96,6 @@ public class CommunityServiceImpl implements CommunityService{
 		Community community = communityRepository.findById(communityNo).orElseThrow(()->{
 			return new IllegalArgumentException("커뮤니티 찾기 실패 : 커뮤니티를 찾을 수 없습니다.");
 		}); 
-		System.out.println(temp.getCommunityTag());
 		community.setCommunityTitle(temp.getCommunityTitle());
 		community.setCommunityDescription(temp.getCommunityDescription());
 		community.setCommunityIspublic(temp.getCommunityIspublic());
@@ -112,14 +109,11 @@ public class CommunityServiceImpl implements CommunityService{
 			return new IllegalArgumentException("커뮤니티 찾기 실패 : 커뮤니티를 찾을 수 없습니다.");
 		});
 		if(communityUserInfoRepository.findByCommunityNo(communityNo) != null) {
-			System.out.println("커뮤니티 가입자 정보 삭제 시작");
 			communityUserInfoRepository.deleteByCommunityNo(communityNo);
 		}
 		// 1.커뮤니티 게시판 조회 
 		// 2.댓글정보 삭제
 		// 3.게시판 삭제
-		System.out.println("게시판 및 댓글 삭제 시작");
-		System.out.println(communityNo);
 		if(boardRepository.findByCommunityNoList(communityNo) != null) {
 			List<CommunityBoard> boards = boardRepository.findByCommunityNoList(communityNo);
 			for(CommunityBoard board : boards) {
@@ -146,7 +140,6 @@ public class CommunityServiceImpl implements CommunityService{
 		CommunityUserInfo userInfo =  communityUserInfoRepository.findByUserInfoAndCommunityNo(userNo,communityNo).orElseGet(()->{
 			return new CommunityUserInfo();
 		});
-		System.out.println("가입상태 날짜 : "+userInfo.getCommunityUserinfoJoindate());
 		return userInfo;
 	}
 	
@@ -164,9 +157,16 @@ public class CommunityServiceImpl implements CommunityService{
 		CommunityUserInfo userInfo = communityUserInfoRepository.findByUserInfoAndCommunityNo(userNo,communityNo).orElseThrow(()->{
 			return new IllegalArgumentException("커뮤니티 회원 정보 찾기 실패 : 커뮤니티 회원의 정보를 찾을 수 없습니다.");
 		});
-		System.out.println("변경할 권한 : "+ tmp.getCommunityUserinfoAuthority());
-		System.out.println("CommunityUserInfo 영속화 완료");
 		userInfo.setCommunityUserinfoAuthority(tmp.getCommunityUserinfoAuthority());
+	}
+	// 커뮤니티 회원 정보 삭제
+	@Override
+	@Transactional
+	public void deleteCmUserInfo(int communityNo, int userNo) {
+		CommunityUserInfo userInfo = communityUserInfoRepository.findByUserInfoAndCommunityNo(userNo,communityNo).orElseThrow(()->{
+			return new IllegalArgumentException("커뮤니티 회원 정보 찾기 실패 : 커뮤니티 회원의 정보를 찾을 수 없습니다.");
+		});
+		communityUserInfoRepository.delete(userInfo);
 	}
 	
 	// 내가 만듬

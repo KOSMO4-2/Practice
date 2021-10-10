@@ -35,13 +35,10 @@ public class CommunityController {
 
 	@Autowired
 	private CommunityService communityService;
-	
 	@Autowired
 	private CommunityBoardService boardService;
-	
 	@Autowired
 	private UserService userService;
-	
 	@Autowired
 	private MypageService myPageService;
 	
@@ -97,9 +94,7 @@ public class CommunityController {
 //  커뮤니티 상세보기 페이지 이동	
 	@RequestMapping("/auth/community/community")
 	public String community(HttpServletRequest request, Model model,
-							@PageableDefault(size = 10, sort = "communityBoardNo", direction = Sort.Direction.DESC) Pageable pageable
-							) {
-
+							@PageableDefault(size = 10, sort = "communityBoardNo", direction = Sort.Direction.DESC) Pageable pageable){
 		// ==================================================================================
 		// 커뮤니티 호스트 정보 
 		String communityNoSt = request.getParameter("communityNo");
@@ -123,8 +118,6 @@ public class CommunityController {
 		model.addAttribute("userInfoList", userInfoList);
 		model.addAttribute("community", community);
 		model.addAttribute("JoinCnt", JoinCnt);
-		
-		
 		//====================================================================================
 		// 커뮤니티 게시판 정보
 		Page<CommunityBoard> boardsP = boardService.findByCmNo(communityNo,pageable);
@@ -144,18 +137,15 @@ public class CommunityController {
 				}
 			}	
 		}
-			
-		
 		model.addAttribute("boards", boards);
 		model.addAttribute("boardWriter", boardWriter);
-		
 		return "/community/community";
 	}
 
 	
 //	커뮤니티 종합 페이지 이동
 	@RequestMapping("/auth/communityTotal")
-	public String cmTotalList(Model model,Pageable pageable) {		
+	public String cmTotalList(Model model,@PageableDefault(size = 4, sort = "communityNo", direction = Sort.Direction.DESC) Pageable pageable) {		
 
 		// **************************************************************************************************
 		// big 커뮤니티 리스트
@@ -166,7 +156,7 @@ public class CommunityController {
 		List<String> bigcmDescription = new ArrayList<String>();
 		List<String> biguserJoinCnt = new ArrayList<String>();
 		List<CountDTO> cntUserInfo = communityService.findByCountCommunityUserInfo();
-		if(cntUserInfo.size() > 0) {
+		if(cntUserInfo.size() > 0 && cntUserInfo.size() < 4) {
 //			System.out.println("전체 커뮤니티 리스트 받아옴 : " + cmTotalList.getSize());
 			// 설명 ,채널명, 채널이미지, 가입자 수 
 			for(int i=0; i<cntUserInfo.size(); i++) {
@@ -189,8 +179,8 @@ public class CommunityController {
 			model.addAttribute("bigcmDescription", bigcmDescription);
 			model.addAttribute("biguserJoinCnt", biguserJoinCnt);
 			
-		}else if(cntUserInfo.size() <= 4) {
-			for(int i=0; i<cntUserInfo.size(); i++) {
+		}else if(cntUserInfo.size() > 4) {
+			for(int i=0; i<4; i++) {
 				System.out.println("big커뮤니티 리스트 조회 시작");
 				bigcommunityNo.add(Integer.toString(cntUserInfo.get(i).getCommunityNo()));
 				biguserJoinCnt.add(Integer.toString(cntUserInfo.get(i).getCnt()));
@@ -275,33 +265,24 @@ public class CommunityController {
 			List<String> userJoinCnt = new ArrayList<String>();
 			Page<Community> cmTotalList = communityService.cmTotlaList(pageable);
 			List<Community> community = cmTotalList.getContent();
-			int totalPage = cmTotalList.getTotalPages();
 			if(community.size() > 0) {
 				System.out.println("new 커뮤니티 리스트 조회 시작");
 				// 설명 ,채널명, 채널이미지, 가입자 수 
 				for(int i=0; i<community.size(); i++) {
 					Community tmpCm = community.get(i);
 					communityNo.add(Integer.toString(tmpCm.getCommunityNo()));
-//					System.out.println("1 :"+community.getCommunityNo());
 					cmDescription.add(tmpCm.getCommunityDescription());
-//					System.out.println("2 :"+community.getCommunityDescription());
 					cmTitle.add(tmpCm.getCommunityTitle());
-//					System.out.println("3 :"+community.getCommunityTitle());
 					User user = userService.userfindById(tmpCm.getCommunityHostno());
 					channelName.add(user.getUserChannelName());
-//					System.out.println("4 :"+user.getUserChannelName());
 					channelImg.add(user.getUserChannelImg());
-//					System.out.println("5 :"+user.getUserChannelImg());
 					int cmUserInfo = communityService.countByUserInfo(tmpCm.getCommunityNo());
 					if(cmUserInfo==0) {
 						userJoinCnt.add("0");
-//						System.out.println("가입자 없을경우 들어오는");
 					}else {
 						userJoinCnt.add(Integer.toString(cmUserInfo));
-//						System.out.println("가입자 있을경우 들어오는");
 					}
 				}
-//				System.out.println("for 문 빠져나오는지 확인");
 				// 총 페이지수
 				model.addAttribute("communityNo", communityNo);
 				model.addAttribute("channelName", channelName);
@@ -309,12 +290,8 @@ public class CommunityController {
 				model.addAttribute("channelImg", channelImg);
 				model.addAttribute("cmDescription", cmDescription);
 				model.addAttribute("userJoinCnt", userJoinCnt);
-				model.addAttribute("totalPage", totalPage);
-				model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-				model.addAttribute("next", pageable.next().getPageNumber());	
-				
+				model.addAttribute("cmTotalList", cmTotalList);
 			}
-
 		return "communityTotal";
 	}
 	
@@ -325,12 +302,14 @@ public class CommunityController {
 		// 게시판 리스트 가져오기
 		String communityBoardNo = request.getParameter("communityBoardNo");
 		String communityNo = request.getParameter("communityNo");
+		List<CommunityUserInfo> userInfoList = communityService.findByCommunityNo(Integer.parseInt(communityNo));
 		Community community = communityService.findById(Integer.parseInt(communityNo));
 		CommunityBoard board =  boardService.findById(Integer.parseInt(communityBoardNo));
 		boardService.updateByboardViewCnt(board.getCommunityBoardNo());
 		User user = userService.userfindById(board.getUserNo());
 		ChannelOwner channelInfo = myPageService.findMyChannel(user.getUserNo());
 		
+		model.addAttribute("userInfoList",userInfoList);
 		model.addAttribute("channelInfo",channelInfo);
 		model.addAttribute("community",community);
 		model.addAttribute("board",board);
@@ -382,7 +361,6 @@ public class CommunityController {
 			User user = userService.userfindById(cmUserInfoTmp.getUserNo());
 			userList.add(user);
 		}
-		
 		model.addAttribute("userList",userList);
 		model.addAttribute("community",community);
 		model.addAttribute("cmUserInfo",cmUserInfo);

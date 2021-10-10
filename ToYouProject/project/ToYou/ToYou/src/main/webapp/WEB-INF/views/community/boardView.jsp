@@ -87,7 +87,7 @@
 										    <span class="input-group-text"><strong>Content</strong></span>
 										</div>
 								        <textarea class="form-control"  name="communityBoardContent" id="communityBoardContent" disabled="disabled" rows="15">${board.communityBoardContent }</textarea>
-								    </div> <!-- form-group// -->
+								    </div> 
 								    
 								    <c:choose>
 								    	<c:when test="${user.userNo == principal.user.userNo}">
@@ -95,7 +95,7 @@
 										        <input type="button" id="modifyBtn" class="btn btn-default" value="Modify Board" style="color:black" > 
 										        <input type="button" id="deleteBtn" class="btn btn-danger" value="Delete Board" style="color:black"> 
 										        <input type="button" id="returnBtn" class="btn btn-default" value="return"> 
-										    </div> <!-- form-group// -->      
+										    </div>      
 									    </c:when>
 									    <c:when test="${community.communityHostno == principal.user.userNo}">
 									    	<div class="form-row float-right">
@@ -106,7 +106,7 @@
 									    <c:otherwise>
 									    	<div class="form-row float-right">
 										        <input type="button" id="returnBtn" class="btn btn-default" value="return" style="color:black">  
-										    </div> <!-- form-group// --> 
+										    </div> 
 									    </c:otherwise>      
 						            </c:choose>                                                        
 						</form>
@@ -184,77 +184,81 @@
 		</div>
 		
 		<br><br><hr>
-
-		<!-- 댓글 입력 폼.// -->
-		<c:if test="${!empty principal}">
-		<div class="container">
-			<input type="hidden" value="${principal.user.userNo }" id="prinUserNo">
-			<div class="card">
-					<div class="card mb-2 col-lg-12">
-						<div class="card-header bg-light">
-							<i class="fa fa-comment fa"></i>REPLY
-						</div>
-						<div class="card-body">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">
-									<div class="form-inline mb-2">
-										<label for="replyId"><i	class="fa fa-user-circle-o fa-2x"></i></label>
-											<input type="text" class="form-control" placeholder="ID" value="${principal.user.userName }" id="boardReplyWriter" name="boardReplyWriter" disabled="disabled">
-									</div> 
-									<textarea class="form-control" id="BoardReplyContent" name="BoardReplyContent" rows="3"></textarea>
-									<div id="replyWarning">
+		
+		<c:choose>
+			<c:when test="${!empty userInfoList}">
+				<c:forEach var="userInfoList" items="${userInfoList}">
+					<c:if test="${!empty principal}">
+						<c:if test="${userInfoList.userNo == principal.user.userNo || community.communityHostno == principal.user.userNo}">
+							<div class="container">
+								<input type="hidden" value="${principal.user.userNo }" id="prinUserNo">
+								<div class="card">
+									<div class="card mb-2 col-lg-12">
+										<div class="card-header bg-light">
+											<i class="fa fa-comment fa"></i>REPLY
+										</div>
+										<div class="card-body">
+											<ul class="list-group list-group-flush">
+												<li class="list-group-item">
+													<div class="form-inline mb-2">
+														<label for="replyId"><i
+															class="fa fa-user-circle-o fa-2x"></i></label> <input type="text"
+															class="form-control" placeholder="ID"
+															value="${principal.user.userName }" id="boardReplyWriter"
+															name="boardReplyWriter" disabled="disabled">
+													</div> <textarea class="form-control" id="BoardReplyContent"
+														name="BoardReplyContent" rows="3"></textarea>
+													<div id="replyWarning"></div>
+													<button type="button" class="btn btn-success mt-3 float-right"
+														id="createReplyBtn" style="z-index: 500;">답글 달기</button>
+												</li>
+											</ul>
+										</div>
 									</div>
-											
-									<button type="button"
-										class="btn btn-success mt-3 float-right" id="createReplyBtn" style="z-index:500;">답글 달기</button>
-								</li>
-							</ul>
+								</div>
+							</div>
+						</c:if>
+					</c:if>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<c:if test="${community.communityHostno == principal.user.userNo}">
+					<div class="container">
+						<input type="hidden" value="${principal.user.userNo }" id="prinUserNo">
+						<div class="card">
+							<div class="card mb-2 col-lg-12">
+								<div class="card-header bg-light">
+									<i class="fa fa-comment fa"></i>REPLY
+								</div>
+								<div class="card-body">
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item">
+											<div class="form-inline mb-2">
+												<label for="replyId"><i
+													class="fa fa-user-circle-o fa-2x"></i></label> <input type="text"
+													class="form-control" placeholder="ID"
+													value="${principal.user.userName }" id="boardReplyWriter"
+													name="boardReplyWriter" disabled="disabled">
+											</div> <textarea class="form-control" id="BoardReplyContent"
+												name="BoardReplyContent" rows="3"></textarea>
+											<div id="replyWarning"></div>
+											<button type="button" class="btn btn-success mt-3 float-right"
+												id="createReplyBtn" style="z-index: 500;">답글 달기</button>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
-			</div>
-		</div>
-		</c:if>
-		<!-- 댓글 입력 폼.end// -->
+				</c:if>
+			</c:otherwise>
+		</c:choose>
 		<br><br>
 
-<!-- Footer -->
 <%@ include file="../layout/footer.jsp"%>
-<%-- <%@ include file="../layout/Menu.jsp"%> --%>
 
 <script type="text/javascript">
 $(document).ready(function(){
-
-	// 바이트 계산 함수 왜 안되냐  //onkeyup="javascript:fnChkByte(this,'2048')"//
-	/* function fnChkByte(obj, maxByte){
-	    var str = obj.value;
-	    var str_len = str.length;
-	    var rbyte = 0;
-	    var rlen = 0;
-	    var one_char = "";
-	    var str2 = "";
-	    for(var i=0; i<str_len; i++){
-	        one_char = str.charAt(i);
-	        if(escape(one_char).length > 4) {
-	            rbyte += 2;                                         //한글2Byte
-	        }else{
-	            rbyte++;                                            //영문 등 나머지 1Byte
-	        }
-	        if(rbyte <= maxByte){
-	            rlen = i+1;                                          //return할 문자열 갯수
-	        }
-	     }
-	     if(rbyte > maxByte){
-	        // alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
-	        alert("메세지는 최대 " + maxByte + "byte를 초과할 수 없습니다.")
-	        str2 = str.substr(0,rlen);                                  //문자열 자르기
-	        obj.value = str2;
-	        fnChkByte(obj, maxByte);
-	     }
-	     else{
-	        document.getElementById('byteInfo').innerText = rbyte;
-	     }
-	} */
-
 	//**************************************************************************
 	// 게시글 작성 유효성 검사 양식
 	function checkFrm(){
@@ -274,7 +278,6 @@ $(document).ready(function(){
 		}
 		return true;	
 	}
-
 
 	// 수정버튼 클릭 시 수정페이지로 넘어감
 	$(document).on("click","#modifyBtn",function(){
@@ -314,7 +317,6 @@ $(document).ready(function(){
 		})
 		
 	})
-
 	
 	//=============================================================================================================
 	// 댓글 관련 자바스크립트
@@ -362,38 +364,6 @@ $(document).ready(function(){
 	})
 	// 댓글 end
 	
-	// 댓글 리스트 출력
-// 	function selectReplyAll(){
-// 		var communityBoardNo = $("#boardNo").val();
-// 		var communityNo = $("#communityNo").val();
-// 		$.ajax({
-// 			url:"/auth/community/findReplyAll/"+communityBoardNo,
-// 			type:"get",
-// 			contentType: "application/json; charset=utf-8",
-// 			dataType:"json",
-// 			success: function(data){
-// 				$("#boardReplyList").empty();
-// 				for(var i=0; i<data.boardReplyPage.content.length; i++){
-// 					$("#boardReplyList").append('<div class="card p-3 mb-2 w-100"><div class="d-flex justify-content-between align-items-center singleline-ellipsis">'+
-// 							'<input type="hidden" value="'+data.replyWriter[i].userNo+'" id="replyUserNo">'+
-// 							'<div class="user d-flex flex-row align-items-center w-100"><img src="'+data.profiles[i]+'" width="40"class="user-img rounded-circle mr-2">'+
-// 							'<div class="container"><div class="row"><div class="col-4"><span class="text-primary"><strong>'+data.replyWriter[i].userName+'</strong></span></div><div class="col-4">'+
-// 							'</div><div class="col-4 float-right" style="text-align:right;padding:0px;"><span>'+data.times[i]+'</span><br></div>'+
-// 							'<textarea class="w-75 ml-3" disabled="disabled">'+data.boardReplyPage.content[i].communityBoardReplyContent+'</textarea></div></div></div></div>'+
-// 							'<div class="row"><div class="col-8" style="height:1px"></div><div class="col-4">'+
-// 							'<a class="replyDelete float-right text-danger" " href="#">Delete<span class="dots"></span></a>'+
-// 							'<span class="float-right" style="color:black;"> / <span class="dots"></span></span>'+
-// 							'<a class="replyModify float-right text-warning"  href="#">Modify<span class="dots"></span></a></div></div></div>');
-// 				}
-// 			},
-// 			error: function(request, status, error){
-// 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// 			}
-// 		})
-// 	}
-// 	selectReplyAll()
-	
-	
 	// 댓글 수정
 	$(document).on("click",".replyModify",function(){
 		var communityBoardReplyNo = $(this).parent().parent().parent().find("#communityBoardReplyNo").val();
@@ -430,7 +400,6 @@ $(document).ready(function(){
 			}
 		}
 	})
-	
 
 	// 댓글 삭제
 	$(document).on("click",".replyDelete",function(){

@@ -20,9 +20,7 @@ public class PrincipalDetail implements UserDetails{
 	
 	public PrincipalDetail(User user) {
 		this.user=user;
-//		System.out.println(user.getUserName());
 	}
-	
 
 	@Override
 	public String getPassword() {
@@ -35,42 +33,34 @@ public class PrincipalDetail implements UserDetails{
 		return user.getUserId();
 	}
 
-	
 	// 계정이 만료되지 않았는지 리턴한다( true : 만료 안됨)
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	// 비밀번호가 만료되지 않았는지 리턴 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	// 계정 활성화가 되어 있는지 리턴
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
-	
 	
 	// 계정의 권한 리턴
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
 		Collection<GrantedAuthority> collectors = new ArrayList<>();
 		collectors.add(()->{ return "ROLE_"+user.getUserRole();});
-		
 		return collectors;
 	}
 	

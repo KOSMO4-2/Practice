@@ -158,11 +158,27 @@
 						</c:if>
 						</tbody>
 						</table>
-						<c:if test="${!empty principal}">
-						<div class="form-row float-right">
-							<button class="btn btn-default" onclick="location.href='/auth/community/cmBoardWriteForm?communityNo=${community.communityNo}'">게시글 작성</button>
-						</div>
-						</c:if>
+						<!-- 커뮤니티 호스트, 가입자만 게시글 작성 가능 -->
+						<c:choose>
+							<c:when test="${!empty userInfoList}">
+								<c:forEach var="userInfoList" items="${userInfoList}">
+									<c:if test="${!empty principal}">
+										<c:if test="${userInfoList.userNo == principal.user.userNo || community.communityHostno == principal.user.userNo}">
+											<div class="form-row float-right">
+												<button class="btn btn-default" onclick="location.href='/auth/community/cmBoardWriteForm?communityNo=${community.communityNo}'">게시글 작성</button>
+											</div>
+										</c:if>
+									</c:if>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${community.communityHostno == principal.user.userNo}">
+									<div class="form-row float-right">
+										<button class="btn btn-default" onclick="location.href='/auth/community/cmBoardWriteForm?communityNo=${community.communityNo}'">게시글 작성</button>
+									</div>
+								</c:if>
+							</c:otherwise>
+						</c:choose>
 				</div>
 			</div>
 		</div>

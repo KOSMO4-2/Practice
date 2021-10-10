@@ -23,13 +23,10 @@
 	<dependencies>
 	<!-- 추가 라이브러리 시작 -->
 	<!-- 시큐리티 태그 라이브러리 -->
-	
 	<dependency>
 	  <groupId>org.springframework.security</groupId>
 	  <artifactId>spring-security-taglibs</artifactId>
 	</dependency>
-	 
-	
 	<!-- JSP 템플릿 엔진 -->
 	<dependency>
 	  <groupId>org.apache.tomcat</groupId>
@@ -55,8 +52,6 @@
       <artifactId>json</artifactId>
       <version>20180813</version>
 	</dependency>
-
-	
 	
 	<!-- 추가 라이브러리 종료 -->
 		
@@ -86,13 +81,11 @@
 			<optional>true</optional>
 		</dependency>
 		
-		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
 		 
 		<dependency>
 			<groupId>org.projectlombok</groupId>

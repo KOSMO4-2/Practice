@@ -341,8 +341,6 @@ $(document).ready(function(){
 			var userEmail = $("#userEmail").val();
 			var userChannelLink = $(".chSelect").attr("data");
 			var userRolemodelLink = $(".chRoleSelect").attr("data");
-
-			
 			
 			if(userId==""){
 				$('#idConfirmText').empty();
@@ -425,7 +423,6 @@ $(document).ready(function(){
 				return false;
 			}else{$('#chRoleResult').empty();}
 			
-			
 			if(!(typeof userChannelLink=="undefined"&& typeof userRolemodelLink=="undefined")){
 				if(userChannelLink==userRolemodelLink){
 					$('#chRoleResult').empty();
@@ -435,11 +432,7 @@ $(document).ready(function(){
 				}
 			}else{$('#chRoleResult').empty();}
 			
-			
-
-			
 			return true;	
-			
 		}
 
 	

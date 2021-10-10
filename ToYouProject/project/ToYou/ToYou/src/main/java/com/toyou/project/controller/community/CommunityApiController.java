@@ -97,12 +97,13 @@ public class CommunityApiController {
 	//커뮤니티 회원 정보 수정
 	@PutMapping("/auth/community/cmUserInfoModify/{communityNo}/{userNo}")
 	public ResponseDTO<Integer> modifyCmUserInfo(@PathVariable int communityNo,@PathVariable int userNo,@RequestBody CommunityUserInfo tmp){
-		System.out.println("회원 정보를 변경할 커뮤니티 번호 :" + communityNo);
-		System.out.println("회원 정보를 변경할 회원 번호 :"+ userNo);
-		System.out.println("변경할 권한 확인" + tmp.getCommunityUserinfoAuthority());
 		communityService.modifyCmUserInfo(communityNo,userNo,tmp);
-		
-		
+		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
+	}
+	//커뮤니티 회원  삭제
+	@DeleteMapping("/auth/community/cmUserInfoDelete/{communityNo}/{userNo}")
+	public ResponseDTO<Integer> deleteCmUserInfo(@PathVariable int communityNo,@PathVariable int userNo){
+		communityService.deleteCmUserInfo(communityNo,userNo);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
 	}
 	

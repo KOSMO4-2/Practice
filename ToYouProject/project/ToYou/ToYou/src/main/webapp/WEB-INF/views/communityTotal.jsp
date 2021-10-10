@@ -111,9 +111,23 @@
 								</div>
 							</c:forEach>
 							<div class="col-md-12 col-lg-12 md-5">
-								<ul class="pagination justify-content-center">
-							    <li class="page-item"><a class="page-link" href="?page=${previous}">Previous</a></li>
-							    <li class="page-item"><a class="page-link" href="?page=${next}">Next</a></li>           
+							<ul class="pagination justify-content-center" id="pagination">
+								<c:choose>
+									<c:when test="${cmTotalList.first}">
+										<li class="page-item disabled"><a class="page-link" href="?page=${cmTotalList.number-1}">Previous</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="?page=${cmTotalList.number-1}">Previous</a></li>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${cmTotalList.last}">
+										<li class="page-item disabled"><a class="page-link" href="?page=${cmTotalList.number+1}">Next</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="?page=${cmTotalList.number+1}">Next</a></li>
+									</c:otherwise>
+								</c:choose>
 							</ul>
 							</div>
 					</c:when>

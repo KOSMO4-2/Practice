@@ -25,10 +25,7 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
 	private CommunityBoardReplyRepository boardReplyRepository;
 	
 
-	// 게시판 작성
-	public void boardWrite(CommunityBoard board) {
-		boardRepository.save(board);
-	}
+
 
 	//***********************************************************************************************************
 	// 게시판 리스트 조회 (페이징)
@@ -49,14 +46,16 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
 	}
 	// 게시판 리스트 end
 	//**********************************************************************************************************
-
 	// 게시판 조회수 업데이트 
 	@Override
 	@Transactional
 	public void updateByboardViewCnt(int boardNo) {
 		boardRepository.updateByboardViewCnt(boardNo);
 	}
-
+	// 게시판 작성
+	public void boardWrite(CommunityBoard board) {
+		boardRepository.save(board);
+	}
 	// 게시판 글 수정
 	@Override
 	@Transactional
@@ -64,16 +63,11 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
 		CommunityBoard board = boardRepository.findById(communityBoardNo).orElseThrow(()->{
 			return new IllegalArgumentException("글 찾기 실패 : 게시글을 찾을 수 없습니다.");
 		}); // 영속화 완료
-		
 		board.setCommunityBoardTitle(temp.getCommunityBoardTitle());
 		board.setCommunityBoardContent(temp.getCommunityBoardContent());
 		board.setCommunityBoardImgname(temp.getCommunityBoardImgname());
 		board.setCommunityBoardIspublic(temp.getCommunityBoardIspublic());
-		
-		
 	}
-
-
 	// 게시판 글 삭제
 	@Override
 	@Transactional
@@ -81,21 +75,19 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
 		CommunityBoard board = boardRepository.findById(communityBoardNo).orElseThrow(()->{
 			return new IllegalArgumentException("글 찾기 실패 : 게시글을 찾을 수 없습니다.");
 		});
+		if(board!=null) {
+			boardReplyRepository.deleteByCommunityBoardNo(board.getCommunityBoardNo());
+		}
 		boardRepository.delete(board);
 	}
-
-	
 	// 커뮤니티 안의 게시판 전체 삭제
 	@Transactional
 	public void boardDeleteAll(int communityNo) {
 		List<CommunityBoard> boards = boardRepository.findAllByCommunityNo(communityNo);
 		boardRepository.deleteAll(boards);
 	}
-
-	
 	//==============================================================================================
 	//게시판 서비스 시작
-	
 	// 게시판 댓글 등록
 	@Transactional
 	public void boardReplyWrite(CommunityBoardReply boardReply) {

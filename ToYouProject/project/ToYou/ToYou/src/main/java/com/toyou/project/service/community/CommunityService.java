@@ -38,6 +38,8 @@ public interface CommunityService {
 	
 	public void modifyCmUserInfo(int communityNo,int userNo,CommunityUserInfo tmp);
 	
+	public void deleteCmUserInfo(int communityNo,int userNo);
+	
 //	public CommunityUserInfo findByUserInfo(int userNo);
 	
 	public List<CommunityUserInfo> findByUserInfoAll(int userNo);

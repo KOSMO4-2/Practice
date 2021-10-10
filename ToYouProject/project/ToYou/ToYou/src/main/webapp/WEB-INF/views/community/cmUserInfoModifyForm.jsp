@@ -144,13 +144,10 @@ $(document).ready(function(){
 	if(slelectedAuth != null ){
 		$("#selectedAuth").text(slelectedAuth);
 	}
-
 	$(document).on("click",".modifyBtn",function(){
 		userNo = $(this).parent().parent().find("#userNo").val();
 		userAuth = $(this).parent().parent().find("#userAuth").val();
-		alert("변경할 권한 : "+userAuth)
 		communityNo = $("#communityNo").val();
-		
 		if(confirm('정말 수정하시겠습니까?')){ //확인 누르면 true, 취소 누르면 false 
 			$.ajax({
 				url: "/auth/community/cmUserInfoModify/"+communityNo+"/"+userNo,
@@ -171,8 +168,31 @@ $(document).ready(function(){
 					alert("서버에러");
 				}
 			})
-	
-			
+		}
+	});
+	$(document).on("click",".deleteBtn",function(){
+		userNo = $(this).parent().parent().find("#userNo").val();
+		communityNo = $("#communityNo").val();
+		if(confirm('정말 삭제하시겠습니까?')){ //확인 누르면 true, 취소 누르면 false 
+			$.ajax({
+				url: "/auth/community/cmUserInfoDelete/"+communityNo+"/"+userNo,
+				type: "delete",
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify({
+						"communityUserinfoAuthority":userAuth,
+					}),
+				dataType:"json", 
+				success: function(result){
+					if(result.status == 500 ){
+						alert("삭제에 실패하셨습니다.");					
+					}else{
+						location.reload();
+					}
+				},
+				error: function(){
+					alert("서버에러");
+				}
+			})
 		}
 	});
 	
