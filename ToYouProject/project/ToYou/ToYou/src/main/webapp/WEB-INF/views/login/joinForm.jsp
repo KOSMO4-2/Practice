@@ -334,6 +334,9 @@ $(document).ready(function(){
 			var userIdCheck = RegExp(/^[A-Za-z0-9]{8,20}$/);
 			var userPwCheck = RegExp(/^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,20}$/);
 			var userNameCheck = RegExp(/^[ㄱ-ㅎ가-힣a-zA-Z]{1,10}$/);
+			var userEmailCheck =RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);
+										
+
 			/*  RegExp(/^[A-Za-z0-9]{8,20}$/); */
 			var userId = $('#userId').val();
 			var userPassword = $("#userPassword").val();
@@ -411,6 +414,10 @@ $(document).ready(function(){
 				$('#userEmailConfirmText').append('<p class="text-danger"><small>이메일을 입력해주세요<small></p>')
 				return false;
 			}else{$('#userEmailConfirmText').empty();}
+			if(!userEmailCheck.test(userEmail)){
+				$('#userEmailConfirmText').append('<p class="text-danger"><small>올바른 이메일을 입력해주세요<small></p>')
+				return false;
+			}
 			
 			if(chSearchCheck!=1){
 				$('#chResult').empty();

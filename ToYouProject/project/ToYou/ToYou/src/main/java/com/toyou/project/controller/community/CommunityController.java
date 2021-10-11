@@ -44,7 +44,7 @@ public class CommunityController {
 	
 	
 //	커뮤니티 수정폼 이동
-	@RequestMapping("/auth/community/cmModifyForm")
+	@RequestMapping("/community/cmModifyForm")
 	public String cmModifyForm(HttpServletRequest request, Model model) {
 		String communityNo = request.getParameter("communityNo");
 		Community community = communityService.findById(Integer.parseInt(communityNo));
@@ -60,7 +60,7 @@ public class CommunityController {
 	
 	
 //	게시글 작성폼 이동
-	@GetMapping("/auth/community/cmBoardWriteForm")
+	@GetMapping("/community/cmBoardWriteForm")
 	public String communityForm(HttpServletRequest request, Model model) {
 		String communityNo = request.getParameter("communityNo");
 		Community community = communityService.findById(Integer.parseInt(communityNo));
@@ -74,7 +74,7 @@ public class CommunityController {
 	}
 	
 //	게시글 수정폼 이동
-	@GetMapping("/auth/community/boardModifyForm")
+	@GetMapping("/community/boardModifyForm")
 	public String boardModifyForm(HttpServletRequest request, Model model) {
 		String boardNo = request.getParameter("communityBoardNo");
 		CommunityBoard board = boardService.findById(Integer.parseInt(boardNo));
@@ -351,7 +351,7 @@ public class CommunityController {
 	}
 
 	// 커뮤니티 멤버 관리폼 이동
-	@RequestMapping("/auth/community/cmUserInfoModifyForm")
+	@RequestMapping("/community/cmUserInfoModifyForm")
 	public String cmUserInfoModifyForm(HttpServletRequest request, Model model) {
 		int communityNo = Integer.parseInt(request.getParameter("communityNo"));
 		Community community = communityService.findById(communityNo);

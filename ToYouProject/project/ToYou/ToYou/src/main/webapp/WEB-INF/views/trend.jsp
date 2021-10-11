@@ -67,7 +67,9 @@
       <c:forEach var="list" items="${NewUserList}" begin="0" end="3" step="1" varStatus="status">
         <div class="col-md-6 col-lg-3 mb-5">
           <div class="person-donate text-center">
-            <img src=${list.userChannelImg } alt="Image placeholder" class="img-fluid">
+          	<a href="/auth/channelSearch?keyword=${ list.userChannelName}">
+            	<img src=${list.userChannelImg } alt="Image placeholder" class="img-fluid">
+            </a>
             <div class="donate-info">
               <h2>${list.userChannelName}</h2>
               <span class="time d-block mb-3">${list.userSubscriber}</span>

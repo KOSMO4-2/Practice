@@ -235,8 +235,6 @@
 	// 성연추가 ELK 커뮤니티 검색 자동완성
 	// Ajax 커뮤티니목록 검색 시작
 	$('#searchKeyword').keyup(function(event){
-		
-
 		// 커뮤니티 이름으로 검색
 		if ( $(this).parents("#searchCommunity").find("#selectSearchMethod").val() == "comm_name" ){
 			$.ajax({

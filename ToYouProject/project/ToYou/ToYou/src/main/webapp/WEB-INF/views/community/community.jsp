@@ -64,9 +64,9 @@
 						
 						<c:choose>
 							<c:when test="${principal.user.userNo == community.communityHostno}">
-									<li><a id="modifyCmBtn" href="/auth/community/cmModifyForm?communityNo=${community.communityNo}">커뮤니티 수정</a></li>
+									<li><a id="modifyCmBtn" href="/community/cmModifyForm?communityNo=${community.communityNo}">커뮤니티 수정</a></li>
 									<li><a id="deleteCmBtn" href="#">커뮤니티 삭제</a></li>
-									<li><a id="memberMgtBtn" href="/auth/community/cmUserInfoModifyForm?communityNo=${community.communityNo}">멤버 관리</a></li>
+									<li><a id="memberMgtBtn" href="/community/cmUserInfoModifyForm?communityNo=${community.communityNo}">멤버 관리</a></li>
 							</c:when>
 							<c:otherwise>
 									<li><a id="signUpBtn" href="#">가입 신청</a></li>
@@ -74,7 +74,7 @@
 						</c:choose>
 							<c:forEach var="userInfoList" items="${userInfoList}">
 								<c:if test="${ principal.user.userNo == userInfoList.userNo && userInfoList.communityUserinfoAuthority == 2}">
-									<li><a id="memberMgtBtn" href="/auth/community/cmUserInfoModifyForm?communityNo=${community.communityNo}">멤버 관리</a></li>
+									<li><a id="memberMgtBtn" href="/community/cmUserInfoModifyForm?communityNo=${community.communityNo}">멤버 관리</a></li>
 								</c:if>
 							</c:forEach>
 					</ul>
@@ -165,21 +165,21 @@
 									<c:if test="${!empty principal}">
 										<c:if test="${userInfoList.userNo == principal.user.userNo}">
 											<div class="form-row float-right">
-												<button class="btn btn-default" onclick="location.href='/auth/community/cmBoardWriteForm?communityNo=${community.communityNo}'">게시글 작성</button>
+												<button class="btn btn-default" onclick="location.href='/community/cmBoardWriteForm?communityNo=${community.communityNo}'">게시글 작성</button>
 											</div>
 										</c:if>
 									</c:if>
 								</c:forEach>
 								<c:if test="${community.communityHostno == principal.user.userNo}">
 											<div class="form-row float-right">
-												<button class="btn btn-default" onclick="location.href='/auth/community/cmBoardWriteForm?communityNo=${community.communityNo}'">게시글 작성</button>
+												<button class="btn btn-default" onclick="location.href='/community/cmBoardWriteForm?communityNo=${community.communityNo}'">게시글 작성</button>
 											</div>
 								</c:if>
 							</c:when>
 							<c:otherwise>
 								<c:if test="${community.communityHostno == principal.user.userNo}">
 									<div class="form-row float-right">
-										<button class="btn btn-default" onclick="location.href='/auth/community/cmBoardWriteForm?communityNo=${community.communityNo}'">게시글 작성</button>
+										<button class="btn btn-default" onclick="location.href='/community/cmBoardWriteForm?communityNo=${community.communityNo}'">게시글 작성</button>
 									</div>
 								</c:if>
 							</c:otherwise>
@@ -207,7 +207,9 @@
 						<!-- 가입채널 반복문 실행 -->
 						<c:forEach var="joinChannels" items="${joinChannels}">
 						<div class="person-donate2 .owl-item" style="width:150px; height:150px;">
-			            	<img src="${joinChannels.chProfile}" alt="Image placeholder" class="img-center hi">
+							<a href="/auth/channelSearch?keyword=${ joinChannels.chTitle}">
+				            	<img src="${joinChannels.chProfile}" alt="Image placeholder" class="img-center hi">
+							</a>
 			            	<div class="text-center">
 			            		<a href="${joinChannels.chLink}">${joinChannels.chTitle}</a>
 			            	</div>
@@ -263,7 +265,7 @@ $(document).ready(function(){
 	$(document).on("click","#deleteCmBtn",function(){
 		var communityNo = $("#communityNo").val();
 		$.ajax({
-			url:"/auth/community/deleteCommunity/"+communityNo,
+			url:"/community/deleteCommunity/"+communityNo,
 			type:"delete",
 			contentType: "application/json; charset=utf-8",
 			dataType:"json",
@@ -293,7 +295,7 @@ $(document).ready(function(){
 		}else{
 			if(confirm("가입 신청하시겠습니까?")){
 				$.ajax({
-					url: "/auth/community/signUpCm",
+					url: "/community/signUpCm",
 					type: "post",
 					data: {userNo:userNo,
 						communityNo:communityNo},

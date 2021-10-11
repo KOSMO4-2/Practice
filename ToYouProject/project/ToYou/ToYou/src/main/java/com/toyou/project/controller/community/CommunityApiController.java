@@ -37,14 +37,14 @@ public class CommunityApiController {
 	
 	
 	// 게시판 글 등록
-	@PostMapping("/auth/community/boardWrite")
+	@PostMapping("/community/boardWrite")
 	public ResponseDTO<Integer> boardWrite(@RequestBody CommunityBoard board) { // username, password, email
 		boardService.boardWrite(board);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1); // 자바오브젝트를 JSON으로 변환해서 리턴 (Jackson)
 	}
 	
 	// 게시판 수정
-	@PutMapping("/auth/community/boardModify/{communityBoardNo}")
+	@PutMapping("/community/boardModify/{communityBoardNo}")
 	public ResponseDTO<Integer> modifyBoard(@PathVariable int communityBoardNo, @RequestBody CommunityBoard temp){
 		
 		boardService.modifyBoard(communityBoardNo,temp);
@@ -52,7 +52,7 @@ public class CommunityApiController {
 	}
 	
 	// 게시판 삭제
-	@DeleteMapping("/auth/community/boardDelete/{communityBoardNo}")
+	@DeleteMapping("/community/boardDelete/{communityBoardNo}")
 	public ResponseDTO<Integer> boardDelete(@PathVariable int communityBoardNo){
 		boardService.boardDelete(communityBoardNo);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
@@ -60,7 +60,7 @@ public class CommunityApiController {
 	
 	
 	// 커뮤니티 수정
-	@PutMapping("/auth/community/modifyCommuity/{communityNo}")
+	@PutMapping("/community/modifyCommuity/{communityNo}")
 	public ResponseDTO<Integer> modifyCommuity(@PathVariable int communityNo, @RequestBody Community temp){
 //			System.out.println("넘버 확인"+communityNo);
 		communityService.modifyCommuity(communityNo,temp);
@@ -68,14 +68,14 @@ public class CommunityApiController {
 	}
 	
 	// 커뮤니티 삭제
-	@DeleteMapping("/auth/community/deleteCommunity/{communityNo}")
+	@DeleteMapping("/community/deleteCommunity/{communityNo}")
 	public ResponseDTO<Integer> deleteCommunity(@PathVariable int communityNo){
 		communityService.deleteCommunity(communityNo);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
 	// 커뮤니티 가입 신청
-	@PostMapping("/auth/community/signUpCm")
+	@PostMapping("/community/signUpCm")
 	public String signUpCm(User user,Community community){
 		int userNo = user.getUserNo();
 		System.out.println("유저넘버 확인 : "+userNo);
@@ -95,13 +95,13 @@ public class CommunityApiController {
 	
 	
 	//커뮤니티 회원 정보 수정
-	@PutMapping("/auth/community/cmUserInfoModify/{communityNo}/{userNo}")
+	@PutMapping("/community/cmUserInfoModify/{communityNo}/{userNo}")
 	public ResponseDTO<Integer> modifyCmUserInfo(@PathVariable int communityNo,@PathVariable int userNo,@RequestBody CommunityUserInfo tmp){
 		communityService.modifyCmUserInfo(communityNo,userNo,tmp);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
 	}
 	//커뮤니티 회원  삭제
-	@DeleteMapping("/auth/community/cmUserInfoDelete/{communityNo}/{userNo}")
+	@DeleteMapping("/community/cmUserInfoDelete/{communityNo}/{userNo}")
 	public ResponseDTO<Integer> deleteCmUserInfo(@PathVariable int communityNo,@PathVariable int userNo){
 		communityService.deleteCmUserInfo(communityNo,userNo);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
@@ -109,7 +109,7 @@ public class CommunityApiController {
 	
 
 	// 게시판 댓글 작성
-	@PostMapping("/auth/community/boardReplyWrite")
+	@PostMapping("/community/boardReplyWrite")
 	public ResponseDTO<Integer> boardReplyWrite(@RequestBody CommunityBoardReply boardReply) {
 		boardService.boardReplyWrite(boardReply);
 		
@@ -118,14 +118,14 @@ public class CommunityApiController {
 		
 	
 	// 게시판 댓글 수정
-	@PutMapping("/auth/community/replyModify/{communityBoardReplyNo}")
+	@PutMapping("/community/replyModify/{communityBoardReplyNo}")
 	public ResponseDTO<Integer> replyModify(@PathVariable int communityBoardReplyNo, @RequestBody CommunityBoardReply temp){
 		boardService.replyModify(communityBoardReplyNo,temp);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
 	// 게시판 댓글 삭제
-	@DeleteMapping("/auth/community/deleteModify/{communityBoardReplyNo}")
+	@DeleteMapping("/community/deleteModify/{communityBoardReplyNo}")
 	public ResponseDTO<Integer> deleteModify(@PathVariable int communityBoardReplyNo){
 		boardService.deleteModify(communityBoardReplyNo);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);

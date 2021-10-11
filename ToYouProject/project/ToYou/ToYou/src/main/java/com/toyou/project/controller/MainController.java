@@ -182,6 +182,7 @@ public class MainController {
 		model.addAttribute("twitterFamousList", twitterFamousList);
 		model.addAttribute("twitterDurationList", twitterDurationList);
 		
+		model.addAttribute("NewUserList",NewUserList);
 		// 난수 4개 추출 1~6
 		Set<Integer> set = new HashSet<>(); 
 		while (set.size() < 4) { 
@@ -219,7 +220,7 @@ public class MainController {
 //		model.addAttribute("GameList",GameList);
 //		model.addAttribute("MukbangList",MukbangList);
 		
-		model.addAttribute("NewUserList",NewUserList);
+	
 		
 		
 		
@@ -268,14 +269,14 @@ public class MainController {
 		return "magazine";
 	}
 	
-	@GetMapping("/auth/mypageLoading")
+	@GetMapping("/mypageLoading")
 	public String mypageLoading() {
 		return "mypageLoading";
 	}
 	
 	
 	// 개발 마무리 단계에서 /auth 삭제할 예정
-	@GetMapping("/auth/mypage")
+	@GetMapping("/mypage")
 	public String myPage(ProductBuyLog productBuyLog, Authentication authentication, Model model) {
 		System.out.println("ㅎㅇ");
 		UserDetails userDetails = (UserDetails)authentication.getPrincipal();

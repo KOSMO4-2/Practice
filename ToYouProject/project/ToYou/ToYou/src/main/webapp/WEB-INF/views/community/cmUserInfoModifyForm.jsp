@@ -152,7 +152,7 @@ $(document).ready(function(){
 		communityNo = $("#communityNo").val();
 		if(confirm('정말 수정하시겠습니까?')){ //확인 누르면 true, 취소 누르면 false 
 			$.ajax({
-				url: "/auth/community/cmUserInfoModify/"+communityNo+"/"+userNo,
+				url: "/community/cmUserInfoModify/"+communityNo+"/"+userNo,
 				type: "put",
 				contentType: "application/json; charset=utf-8",
 				data: JSON.stringify({
@@ -179,7 +179,7 @@ $(document).ready(function(){
 		communityNo = $("#communityNo").val();
 		if(confirm('정말 삭제하시겠습니까?')){ //확인 누르면 true, 취소 누르면 false 
 			$.ajax({
-				url: "/auth/community/cmUserInfoDelete/"+communityNo+"/"+userNo,
+				url: "/community/cmUserInfoDelete/"+communityNo+"/"+userNo,
 				type: "delete",
 				contentType: "application/json; charset=utf-8",
 				data: JSON.stringify({

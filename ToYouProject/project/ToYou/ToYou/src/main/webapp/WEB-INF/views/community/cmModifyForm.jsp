@@ -327,7 +327,7 @@ $(document).ready(function(){
 				alert("커뮤니티를 입력해주세요");
 			}else{
 				$.ajax({
-					url: "/auth/communityNameCheck",
+					url: "/communityNameCheck",
 					type: "post",
 					data: {communityName:communityName},
 					 beforeSend: function() {
@@ -371,7 +371,7 @@ $(document).ready(function(){
 		var communityTag = $("#rdTag").val();
 		// 위의 조건을 다 만족했다면 ajax 로 회원가입 실행
 			$.ajax({
-					url: "/auth/community/modifyCommuity/"+communityNo,
+					url: "/community/modifyCommuity/"+communityNo,
 					type: "put",
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify({

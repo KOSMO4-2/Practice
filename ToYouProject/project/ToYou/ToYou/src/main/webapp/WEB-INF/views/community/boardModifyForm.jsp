@@ -143,7 +143,7 @@ $(document).ready(function(){
 		var communityBoardIspublic = $("#communityBoardIspublic").val();
 		if(checkFrm("게시글을 수정하시겠습니까?")){
 			$.ajax({
-				url: "/auth/community/boardModify/"+communityBoardNo,
+				url: "/community/boardModify/"+communityBoardNo,
 				type: "put",
 				contentType: "application/json; charset=utf-8",
 				data: JSON.stringify({

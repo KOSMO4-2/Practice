@@ -135,7 +135,7 @@
 							                
 							                <!-- 로그인 되어있으면 마이페이지 페이지로 이동-->
 							                <c:if test="${!empty principal}">
-							                    <form action="/auth/mypage">
+							                    <form action="/mypage">
 									         		<div class="form-group">
 									         			<button type="submit" class="btn btn-default">&#x2764;FREE&#x2764;</button>
 									         		</div>

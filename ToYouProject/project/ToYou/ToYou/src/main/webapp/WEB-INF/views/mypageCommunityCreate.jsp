@@ -292,7 +292,7 @@ $(document).ready(function(){
 			}else{
 				
 				$.ajax({
-					url: "/auth/communityNameCheck",
+					url: "/communityNameCheck",
 					type: "post",
 					data: {communityName:communityName},
 					 beforeSend: function() {
@@ -340,7 +340,7 @@ $(document).ready(function(){
 			
 		
 			$.ajax({
-					url: "/auth/createCommunity",
+					url: "/createCommunity",
 					type: "post",
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify({
@@ -356,7 +356,7 @@ $(document).ready(function(){
 							alert("커뮤니티 등록에 실패하셨습니다.");					
 						}else{
 							alert("커뮤니티 등록이 완료되었습니다.");					
-							location.href = "/auth/mypage";					
+							location.href = "/mypage";					
 						}
 					},
 					error: function(request,status,error){

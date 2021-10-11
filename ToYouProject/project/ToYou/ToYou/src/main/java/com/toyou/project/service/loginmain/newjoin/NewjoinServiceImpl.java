@@ -15,10 +15,8 @@ public class NewjoinServiceImpl implements NewjoinService{
 	private UserRepository userRepository;
 
 	@Override
-	@Query(value ="SELECT u FROM User u WHERE NOT u.userChannelLink is NULL ORDER BY u.userNo")
-	public List<User> SelectAllUser() {
-//		List<User> UserList = userRepository.findAll(Sort.by(Sort.Direction.DESC,"UserNo"));
-		List<User> UserList = userRepository.findAll();
+	public List<User> SelectAllUser(){
+		List<User> UserList = userRepository.findByuserChannelLink();
 		return UserList;	
 	}
 	

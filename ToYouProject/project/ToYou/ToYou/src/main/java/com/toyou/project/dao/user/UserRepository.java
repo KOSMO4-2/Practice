@@ -19,5 +19,8 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	@Query(value = "SELECT c FROM CategoryUser c WHERE c.userChannelCategory = :CategoryNum")
 	List<CategoryUser> findByAll(String CategoryNum);
 	
+	@Query(value ="SELECT u FROM User u WHERE NOT u.userChannelLink is NULL ORDER BY u.userNo DESC")
+	List<User> findByuserChannelLink();
+	
 	
 }

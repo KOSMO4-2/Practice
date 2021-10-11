@@ -35,6 +35,7 @@ public class UserApiController {
 	// 아이디 중복체크
 	@PostMapping("/auth/user/idCheck")
 	public String idCheck(String userId) {
+		System.out.println("중복체크 확인");
 //		String userId = request.getParameter("userId");
 		int result = 0; 
 		if(userService.userFind(userId).getUserId() != null) {

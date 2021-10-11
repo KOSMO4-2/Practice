@@ -283,7 +283,7 @@ $(document).ready(function(){
 	$(document).on("click","#modifyBtn",function(){
 		var boardNo = $("#boardNo").val();
 		var communityNo = $("#communityNo").val();
-		location.href="/auth/community/boardModifyForm?communityBoardNo="+boardNo+"&communityNo="+communityNo
+		location.href="/community/boardModifyForm?communityBoardNo="+boardNo+"&communityNo="+communityNo
 				
 	})
 
@@ -299,7 +299,7 @@ $(document).ready(function(){
 		var boardNo = $("#boardNo").val();
 		var communityNo = $("#communityNo").val();
 		$.ajax({
-			url:"/auth/community/boardDelete/"+boardNo,
+			url:"/community/boardDelete/"+boardNo,
 			type:"delete",
 			contentType: "application/json; charset=utf-8",
 			dataType:"json",
@@ -340,7 +340,7 @@ $(document).ready(function(){
 			alert(replyContent.length)
 		}else{
 			$.ajax({
-				url: "/auth/community/boardReplyWrite",
+				url: "/community/boardReplyWrite",
 				type: "post",
 				contentType: "application/json; charset=utf-8",
 				data: JSON.stringify({
@@ -378,7 +378,7 @@ $(document).ready(function(){
 		}else{
 			if((confirm("댓글을 수정하시겠습니까?"))){
 				$.ajax({
-					url: "/auth/community/replyModify/"+communityBoardReplyNo,
+					url: "/community/replyModify/"+communityBoardReplyNo,
 					type: "put",
 					contentType: "application/json; charset=utf-8",
 					data: JSON.stringify({
@@ -406,7 +406,7 @@ $(document).ready(function(){
 		var communityBoardReplyNo = $(this).parent().parent().parent().find("#communityBoardReplyNo").val();
 		if((confirm("댓글을 수정하시겠습니까?"))){
 			$.ajax({
-				url: "/auth/community/deleteModify/"+communityBoardReplyNo,
+				url: "/community/deleteModify/"+communityBoardReplyNo,
 				type: "delete",
 				contentType: "application/json; charset=utf-8",
 				dataType:"json", 

@@ -150,7 +150,7 @@ $(document).ready(function(){
 		var communityBoardIspublic = $("#communityBoardIspublic").val();
 		if(checkFrm()){
 			$.ajax({
-				url: "/auth/community/boardWrite",
+				url: "/community/boardWrite",
 				type: "post",
 				contentType: "application/json; charset=utf-8",
 				data: JSON.stringify({

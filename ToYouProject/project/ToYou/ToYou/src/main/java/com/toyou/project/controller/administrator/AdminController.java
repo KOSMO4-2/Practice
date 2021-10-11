@@ -79,7 +79,7 @@ public class AdminController {
 	    model.addAttribute("sumOfTodayCommunity", sumOfTodayCommunity);
 	    // 오늘 생성 커뮤니티 수 종료
 	    //-----------------------------------------
-	    
+	   
 	    //-----------------------------------------
 	    // 오늘 가입자 수 시작
 	    // 오늘 가입자 수 담을 변수 생성
@@ -103,7 +103,6 @@ public class AdminController {
 	    model.addAttribute("allUserNum", allUserNum);
 	    // 전체 회원수 종료
 	    //-----------------------------------------
-	    
 	    
 	    //-----------------------------------------
 	    // 전체 회원 중 구독가입률 시작
@@ -147,7 +146,6 @@ public class AdminController {
 	    model.addAttribute("commBoardPercentage", commBoardPercentage);	    
 	    // 전체 커뮤니티 중 게시판 생성률 종료	    
 	    //-----------------------------------------
-
 	    
 	    //-----------------------------------------
 	    // 채널보유회원률 시작

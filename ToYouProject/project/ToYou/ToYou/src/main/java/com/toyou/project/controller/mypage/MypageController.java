@@ -42,13 +42,13 @@ public class MypageController {
 	@Autowired
 	private CommunityService communityService;
 
-	@GetMapping("/auth/communityCreate")
+	@GetMapping("/communityCreate")
 	public String communityCreate() {
 		return "mypageCommunityCreate";
 	}
 
 	// 커뮤니티 중복체크
-	@RequestMapping(value = "/auth/communityNameCheck",method = RequestMethod.POST)
+	@RequestMapping(value = "/communityNameCheck",method = RequestMethod.POST)
 	@ResponseBody
 	public String communityNameCheck(String communityName) {
 		System.out.println("중복확인 할 커뮤니티 :"+communityName);
@@ -62,7 +62,7 @@ public class MypageController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/auth/createCommunity",method = RequestMethod.POST)
+	@RequestMapping(value = "/createCommunity",method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseDTO<Integer> createCommunity(@RequestBody Community community) {
 		System.out.println("태그 검사 타이틀 : " +community.getCommunityTitle());
@@ -102,7 +102,7 @@ public class MypageController {
 	
 // 회원정보 탈퇴
  @ResponseBody
- @DeleteMapping("/auth/mypage/deleteUser")
+ @DeleteMapping("/mypage/deleteUser")
  public ResponseDTO<Integer> deleteUser(){
 	 //세션값 가져오기
 	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
