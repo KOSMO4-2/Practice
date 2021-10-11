@@ -52,7 +52,7 @@
 								
 								
 								
-								<form id="formId" action="/auth/communityTotal" method="get">		
+								<form id="formId" action="#" method="post">		
 
 					               <div class="input-group" id="searchCommunity">
 					               		<!-- 선택창 -->
@@ -252,6 +252,7 @@
 	        	  	$('.communitytitle').remove();
 	            	for(var i=0; i<test2.length; i++){
 	             		$(".searchResult").append("<option class ='communitytitle'>" + test2[i]['_source']['communitytitle'] +"</option>" );
+	             		// alert(test2[i]['_source']['communityno'])
 	             		$("#formId").attr("action", "/auth/community/community?communityNo="+ test2[i]['_source']['communityno']);
 	             	}
 	             }
@@ -274,8 +275,8 @@
 		          	$('.communitytag').remove();
 	            	for(var i=0; i<test2.length; i++){
 	             		$(".searchResult").append("<option class ='communitytag'>" + test2[i]['_source']['communitytag'] +"</option>" );
+	             		// alert(test2[i]['_source']['communityno'])
 	             		$("#formId").attr("action", "/auth/community/community?communityNo="+ test2[i]['_source']['communityno']);
-						
 	             	}
 	             }
 			});				

@@ -261,14 +261,14 @@
 
 
 
-
+<%-- 
 
 
 				<br>
 				<h1>끝?</h1>
 				<br>
 
-<%-- 
+
 
 				<div class="row">
 					<div class="col-md-9 col-sm-12 col-xs-12">
