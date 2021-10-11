@@ -58,13 +58,14 @@
 
 <div class="container">
 <div class="card bg-light">
-<article class="card-body mx-auto" style="width: 1000px;">
-		 <form>
+<article class="card-body w-100">
+<div class="row">
+		 <form class="col-12">
 		    <h4 class="text-left">커뮤니티 게시판 등록</h4>
 		    <br>
 		    <input class="form-control" name="communityNo" id="communityNo" type="hidden" value="${communityNo}">
 			<input class="form-control" name="userNo" id="userNo" type="hidden" value="${principal.user.userNo}">
-					<div class="form-group input-group" style="width: 500px;">
+					<div class="form-group input-group w-50">
 						<div class="input-group-prepend">
 						    <span class="input-group-text"><strong>Title</strong> </span>
 						</div>
@@ -73,7 +74,7 @@
 				  	 <div id="titleWarning">
 		    		 </div>
 				  	
-					<div class="form-group input-group" style="width: 300px;">
+					<div class="form-group input-group w-50">
 						<div class="input-group-prepend">
 						    <span class="input-group-text"><strong>Writer</strong> </span>
 						</div>
@@ -98,7 +99,7 @@
 				    </div> <!-- form-group// -->      
 		                                                                    
 		</form>
-		
+</div>
 </article>
 </div> <!-- card.// -->
 

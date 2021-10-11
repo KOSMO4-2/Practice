@@ -195,6 +195,7 @@
 	
 	<c:otherwise>
 		<form>
+		<input type="hidden" value="${kakaoUser.oauth }" id="oauth" name="oauth">
 			<div class="form-group input-group">
 				<div class="input-group-prepend">
 				    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -616,6 +617,7 @@ $(document).ready(function(){
 		var userRolemodelLink = $(".chRoleSelect").attr("data");
 		var userChannelImg = $("#userChannelImg").attr("src")
 		var userChannelName = $("#userChannelName").text();
+		var oauth = $("oauth").val();
 		
 		// 위의 조건을 다 만족했다면 ajax 로 회원가입 실행
 		if(checkform()){
@@ -634,7 +636,9 @@ $(document).ready(function(){
 							"userChannelCategory": userChannelCategory,
 							"userChannelImg":userChannelImg,
 							"userSubscriber":userSubscriber,
-							"userRolemodelLink":userRolemodelLink
+							"userRolemodelLink":userRolemodelLink,
+							"oauth":oauth
+							
 						}),
 					dataType:"json", 
 					success: function(result){

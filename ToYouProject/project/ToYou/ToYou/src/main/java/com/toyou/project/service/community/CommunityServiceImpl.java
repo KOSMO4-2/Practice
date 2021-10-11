@@ -159,6 +159,8 @@ public class CommunityServiceImpl implements CommunityService{
 		});
 		userInfo.setCommunityUserinfoAuthority(tmp.getCommunityUserinfoAuthority());
 	}
+	
+	
 	// 커뮤니티 회원 정보 삭제
 	@Override
 	@Transactional
