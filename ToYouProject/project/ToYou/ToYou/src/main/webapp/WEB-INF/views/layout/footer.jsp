@@ -112,4 +112,21 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="/js/common/google-map.js"></script>
   <script src="/js/common/main.js"></script>
+  
+  <script type="text/javascript">
+var user = $('#userNo').val();
+var userName = $('#userName').val();
+	$.ajax({
+	    url: "/auth/getUser",
+	    data: { "userNo" : user },
+	    type : "get",
+	    datatype : "json",
+	    success: function(data) {      
+		             
+	     	$("#atag").prop('href', "http://3.35.11.4:5000/chatting.html?name="+userName+"&profile="+data)
+	    },error: function(request,status,error){
+	       
+	    }
+	});
+</script>
     
